@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link href='fonts.googleapis.com/css?family=Roboto:700'>
+    <style>
+        body {
+            margin: 0px;
+        }
+        .datesinside {
+            display: grid;
+            grid-template-columns: repeat(7, 50px);
+            grid-template-rows: 50px repeat(6, minmax(50px, 50px));
+            align-items: center;
+            justify-items: center;
+            margin: 0 auto;
+        }
+
+        button {
+            background-color: transparent;
+            border: 0px;
+            transition: .2s;
+        }
+
+        button:hover {
+            background-color: #1a73e8;
+            cursor: pointer;
+            color: white;
+        }
+
+        * {
+            font-family: 'Roboto', sans-serif;
+            outline: 0px solid transparent;
+        }
+
+        .datecontainer {
+            text-align: left !important;
+            margin-left: 20px;
+            text-transform: uppercase;
+        }
+
+        .datesinside>p {
+            width: 10%;
+            height: 10%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px;
+            padding: 20px;
+            line-height: 1;
+            border: 0px solid;
+            border-radius: 100px;
+            transition: .2s;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .transparent {
+            background-color: transparent;
+            color: transparent;
+        }
+
+        .transparent:hover {
+            background-color: transparent !important;
+            color: transparent !important;
+            cursor: context-menu;
+        }
+
+        .datesinside>p:hover {
+            background-color: lightgrey;
+            transition: .2s;
+        }
+
+        .datesinside>.nohover:hover {
+            background-color: #0d4185;
+        }
+
+        .dates {
+            border-radius: 0px !important;
+        }
+
+        .today {
+            background-color: #1a73e8;
+            color: white;
+        }
+
+        .navigation {
+            padding: 10px;
+            text-align: center;
+            transition: 100000s !important;
+        }
+
+        .year,
+        .month,
+        .date,
+        .navigation {
+            text-align: center;
+            display: inline-block;
+            text-align: left !important;
+        }
+
+        .date {
+            width: 150px;
+        }
+
+        .dates {
+            flex-grow: 1;
+        }
+
+        .calendardates {
+            display: flex;
+            width: 350px;
+            margin-left: 10px;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        [data-title] {
+            position: relative;
+        }
+
+        [data-title]:hover::before {
+            text-transform: capitalize;
+            content: attr(data-title);
+            position: absolute;
+            bottom: -46px;
+            display: inline-block;
+            padding: 3px 6px;
+            border-radius: 2px;
+            background: #000;
+            color: #fff;
+            font-size: 14px;
+            font-family: sans-serif;
+            white-space: nowrap;
+        }
+
+        [data-title]:hover::after {
+            text-transform: capitalize;
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: 8px;
+            display: inline-block;
+            color: #fff;
+            border: 8px solid transparent;
+            border-bottom: 8px solid #000;
+        }
+
+        .todaybutton {
+            border: 1px solid;
+            background-color: transparent;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="datecontainer">
+        <div class="date">
+            <span class="month"></span>
+            <span class="year"></span>
+        </div>
+        <div class="navigation">
+            <button class="prev" data-title=""><i class="fas fa-angle-double-left"></i></button>
+            <button class="next" data-title=""><i class="fas fa-angle-double-right"></i></button>
+            <!-- <button class="todaybutton">TODAY</button> -->
+        </div>
+    </div>
+    <section class="calendar">
+        <div class="calendardates">
+            <p class="dates">Su</p>
+            <p class="dates">Mo</p>
+            <p class="dates">Tu</p>
+            <p class="dates">We</p>
+            <p class="dates">Th</p>
+            <p class="dates">Fr</p>
+            <p class="dates">Sa</p>
+        </div>
+        <dates class="datesinside">
+        </dates>
+    </section>
+    <script>
+        function getFirstDayOfMonth() {
+            const temp = new Date(this);
+            temp.setDate(1);
+            return temp.getDay();
+        }
+        Date.prototype.getFirstDayOfMonth = getFirstDayOfMonth;
+
+        let date = new Date();
+        let todayDate = new Date(date);
+        const datesinside = document.querySelector(".datesinside");
+        const next = document.querySelector(".next");
+        const prev = document.querySelector(".prev");
+        const domDateMonth = document.querySelector(".month");
+        const domDateYear = document.querySelector(".year");
+        function getDayMarkUp(day = "", isToday = false) {
+            return `<p class="day ${isToday ? "today nohover" : ""}" ${isToday ? "style='font-size:12px;text-align: center;'" : ""}>${day}${isToday ? "<br>Today" : ""}</p>`;
+        }
+
+        next.addEventListener("click", handleNextMonthClick);
+        prev.addEventListener("click", handlePrevMonthClick);
+        function fillFirstDaysAsEmpty(days) {
+            for (let i = 0; i < days; i++) {
+                datesinside.insertAdjacentHTML("beforeend", `<p class="day transparent"></p>`);
+            }
+        }
+        function fillRestOfTheDays() {
+            const currentMonth = date.getMonth();
+            const currentYear = date.getFullYear();
+            date.setDate(1);
+            while (currentMonth === date.getMonth()) {
+                const currentDate = date.getDate();
+                const isToday =
+                    todayDate.getDate() === currentDate &&
+                    currentMonth === todayDate.getMonth() &&
+                    currentYear === todayDate.getFullYear();
+                datesinside.insertAdjacentHTML(
+                    "beforeend",
+                    getDayMarkUp(currentDate, isToday)
+                );
+                date.setDate(currentDate + 1);
+            }
+        }
+
+        function handleNextMonthClick() {
+            render();
+        }
+
+        function handlePrevMonthClick() {
+            date.setDate(1);
+            date.setMonth(date.getMonth() - 2);
+            render();
+        }
+
+        function clearDays() {
+            const days = [...(document.querySelectorAll(".day") ?? [])] ?? [];
+            days.forEach((day) => {
+                day.remove();
+            });
+        }
+
+        function fillDOMDate() {
+            let month = "";
+            switch (date.getMonth()) {
+                case 0:
+                    month = "jan";
+                    break;
+                case 1:
+                    month = "feb";
+                    break;
+                case 2:
+                    month = "mar";
+                    break;
+                case 3:
+                    month = "apr";
+                    break;
+                case 4:
+                    month = "may";
+                    break;
+                case 5:
+                    month = "jun";
+                    break;
+                case 6:
+                    month = "jul";
+                    break;
+                case 7:
+                    month = "aug";
+                    break;
+                case 8:
+                    month = "sep";
+                    break;
+                case 9:
+                    month = "oct";
+                    break;
+                case 10:
+                    month = "nov";
+                    break;
+                case 11:
+                    month = "dec";
+            }
+            domDateYear.textContent = date.getFullYear();
+            domDateMonth.textContent = month;
+        }
+
+        render();
+
+        function render() {
+            clearDays();
+            fillDOMDate();
+            fillFirstDaysAsEmpty(date.getFirstDayOfMonth());
+            fillRestOfTheDays();
+            nextTooltipMonth(next);
+            prevTooltipMonth(prev);
+        }
+        function nextTooltipMonth(next) {
+            let monthNamed;
+            switch (domDateMonth.innerHTML) {
+                case 'jan':
+                    monthNamed = "feb";
+                    break;
+                case "feb":
+                    monthNamed = "mar";
+                    break;
+                case 'mar':
+                    monthNamed = "apr";
+                    break;
+                case 'apr':
+                    monthNamed = "may";
+                    break;
+                case 'may':
+                    monthNamed = "jun";
+                    break;
+                case "jun":
+                    monthNamed = "jul";
+                    break;
+                case "jul":
+                    monthNamed = "aug";
+                    break;
+                case 'aug':
+                    monthNamed = "sep";
+                    break;
+                case 'sep':
+                    monthNamed = "oct";
+                    break;
+                case 'oct':
+                    monthNamed = "nov";
+                    break;
+                case 'nov':
+                    monthNamed = "dec";
+                    break;
+                case 'dec':
+                    monthNamed = "jan";
+            }
+            next.setAttribute("data-title", monthNamed);
+        }
+        function prevTooltipMonth(prev) {
+            let monthNamed;
+            switch (domDateMonth.innerHTML) {
+                case 'jan':
+                    monthNamed = "dec";
+                    break;
+                case "feb":
+                    monthNamed = "jan";
+                    break;
+                case 'mar':
+                    monthNamed = "feb";
+                    break;
+                case 'apr':
+                    monthNamed = "mar";
+                    break;
+                case 'may':
+                    monthNamed = "apr";
+                    break;
+                case "jun":
+                    monthNamed = "may";
+                    break;
+                case "jul":
+                    monthNamed = "jun";
+                    break;
+                case 'aug':
+                    monthNamed = "jul";
+                    break;
+                case 'sep':
+                    monthNamed = "aug";
+                    break;
+                case 'oct':
+                    monthNamed = "sep";
+                    break;
+                case 'nov':
+                    monthNamed = "oct";
+                    break;
+                case 'dec':
+                    monthNamed = "nov";
+            }
+            prev.setAttribute("data-title", monthNamed);
+        }
+    </script>
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Fibonacci</title>
+    <style>
+        * {
+            outline: 0px;
+            margin: 0px;
+        }
+
+        input[type='number'] {
+            color: blue;
+            border: 2px solid black;
+            width: 99.58vw;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='myDiv' style='color: white;background-color: blue;'>Numbers Here</div>
+    <input type='number' id='input1' oninput='fibonacciProgram(this.value)' placeholder='Type Some Numbers Here'>
+    <script>
+        function fibonacciProgram(numberCount) {
+            let resultElement = document.getElementById('myDiv');
+            resultElement.innerHTML = ' ';
+            if (isNaN(numberCount) || numberCount <= 0) {
+                resultElement.innerHTML = 'please enter a number';
+                return;
+            }
+            let firstBox = 0;
+            let secondBox = 1;
+            let swichBox;
+            let entries = [];
+            entries.push(secondBox);
+            while (numberCount > 1) {
+                swichBox = firstBox + secondBox;
+                entries.push(swichBox);
+                firstBox = secondBox;
+                secondBox = swichBox;
+                numberCount--;
+            }
+            resultElement.innerHTML = entries.join(', ');
+        }
+    </script>
+</body>
+
+</html>

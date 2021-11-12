@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Odd or Even</title>
+    <style>
+        input[type=number] {
+            color: black;
+            border: 10px solid grey;
+            background-color: blue;
+            color: white;
+            font-size: 30px;
+        }
+
+        input[type=button] {
+            border: 10px solid grey;
+            background-color: blue;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        input[type=button]:focus {
+            border: 10px solid #d4d4d4;
+            background-color: white;
+            color: blue;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        span {
+            border: 10px solid grey;
+            background-color: blue;
+            color: white;
+            font-size: 30px;
+            padding: 10px;
+            display: none;
+        }
+
+        input[type=number]:focus {
+            border: 10px solid #d4d4d4;
+            background-color: white;
+            color: blue;
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        function Calculate() {
+            let firstInput = parseInt(document.getElementById('Input1').value);
+
+            if (firstInput % 2 === 0) {
+                alert('this is a Even number!');
+            }
+            else if (firstInput % 2 === 1) {
+                alert('this is a Odd number!');
+            }
+            else {
+                alert('this is a not a number!');
+            }
+
+        }
+    </script>
+    <input type='number' id='Input1' max='10' value='5'>
+    <input type='button' value='Calculate!' onclick='Calculate()'>
+</body>
+
+</html>

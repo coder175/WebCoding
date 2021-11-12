@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Seconds To Minutes</title>
+</head>
+
+<body>
+    <h3>minutes to seconds</h3>
+    <input id='minutesToSeconds'>
+    <input type='button' value='convert' onclick='MTS()'>
+    <h6 id='answer' style='font-size:30px;'>answer</h6>
+    
+    <h3>seconds to minutes</h3>
+    <input id='SecondsToMinutes'>
+    <input type='button' value='convert' onclick='STM()'>
+    <h6 style='font-size:30px;' id='answer1'>answer</h6>
+
+    <script>
+        function MTS() {
+            let x = document.getElementById('minutesToSeconds').value;
+            let y = x * 60;
+            document.getElementById('answer').innerText = y + ' seconds';
+        }
+        function STM() {
+            let x = document.getElementById('SecondsToMinutes').value;
+            let y = x / 60;
+            document.getElementById('answer1').innerText = y + ' minutes';
+        }
+    </script>
+</body>
+
+</html>

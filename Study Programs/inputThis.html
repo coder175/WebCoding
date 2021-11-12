@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Input This</title>
+    <style>
+        button {
+            background-color: #bbffa0;
+            color: grey;
+            border: 2px solid grey;
+            cursor: pointer;
+            outline: 0px;
+            font-size: 50px;
+            border-radius: 100px;
+            padding: 40px;
+        }
+    </style>
+</head>
+
+<body onload='checkLocalStorage()'>
+    <button id='button'>Click To Choose Your Name</button>
+    <script>
+        function checkLocalStorage() {
+            let name = localStorage.getItem('Name');
+            let button = document.querySelector('button').innerText = 'Your Name is ' + name + '!';
+            if (document.getElementById('button').innerText == 'Your Name is null!') {
+                document.getElementById('button').innerText = 'Click To Choose Your Name';
+            }
+        }
+        let button = document.querySelector('button');
+        button.addEventListener('click', ChooseName);
+        function ChooseName() {
+            let userEnteredText = prompt('Enter Your Name:');
+            if (userEnteredText.length > 0) {
+                button.innerText = 'Your Name is ' + userEnteredText + '!';
+                localStorage.setItem('Name', userEnteredText);
+            } else {
+                button.innerText = 'Please Enter Somthing!!';
+            }
+        }
+    </script>
+</body>
+
+</html>

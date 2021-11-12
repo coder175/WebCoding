@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rounding</title>
+    <style>
+        body {
+            margin: 0px;
+        }
+
+        * {
+            outline: 0px;
+        }
+
+        select,
+        input[type=button] {
+            cursor: pointer;
+        }
+
+        select {
+            border: 0px solid;
+            background-color: #ff9885;
+        }
+
+        option {
+            border: 0px solid;
+        }
+
+        span {
+            margin: 20px;
+            font-size: 500px;
+        }
+
+        input[type=number] {
+            border: 2px solid grey;
+            width: 185px;
+        }
+
+        input[type=button] {
+            border: 0px solid;
+            background-color: tomato;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="Number" id="Rounding" placeholder="Type in a number to Round!">
+    <select id="roundInSelect">
+    </select>
+    <input type="button" value="Check" onclick="rounding(Rounding.value)">
+    <br>
+    <span id="answer"></span>
+    <script>
+        function rounding(val) {
+            let roundInSelect = document.getElementById("roundInSelect").value;
+            document.querySelector('#answer').innerHTML = Math.round(val / roundInSelect) * roundInSelect;
+            let text = "";
+            let zeros = '0';
+            for (let i = 0; i < 10; i++) {
+                text += '<option value="' + '1' + zeros + '">' + 'Round By: 1' + zeros + "</option>";
+                zeros += '0';
+            }
+            document.getElementById("roundInSelect").innerHTML = text;
+        }
+        let text = "";
+        let zeros = '0';
+        for (let i = 0; i < 10; i++) {
+            text += '<option value="' + 1 + zeros + '">' + 'Round By: 1' + zeros + "</option>";
+            zeros += '0';
+        }
+        document.getElementById("roundInSelect").innerHTML = text;
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>How Many Words</title>
+    <style>
+        body {
+            padding-top: 70px;
+            margin: 0px;
+        }
+
+        input {
+            border: 0px;
+            background-color: grey;
+            color: white;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div style='text-align: center;'>
+        <input type='text' name='text1' id='text1' oninput='text1()'>
+        <ol id='answer' style='width: 5px;'>1. </ol>
+    </div>
+    <script>
+        function text1() {
+            let x = document.getElementById('text1').value;
+            let answer = document.getElementById('answer');
+            let myArray = x.split(' ');
+            let myString = myArray.join('</li><li>');
+            answer.innerHTML = '<li>' + myString + '</li>';
+        }
+    </script>
+</body>
+
+</html>

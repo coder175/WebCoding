@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Event Listener</title>
+</head>
+
+<body>
+    <p id="paragraph">This is is a paragraph!! <b>This is in a B tag!!</b> <span>This is in a span tag!!!</span></p>
+    <input type="button" value="See InnerHTML" id="MyInnerHTML">
+    <input type="button" value="See InnerText" id="MyInnerText">
+    <input type="button" value="See TextContent" id="MyTextContent">
+    <script>
+        document.querySelector('#MyInnerHTML').addEventListener('click', MyInnerHTML);
+        document.querySelector('#MyInnerText').addEventListener('click', MyInnerText);
+        document.querySelector('#MyTextContent').addEventListener('click', MyTextContent);
+        function MyInnerHTML() {
+            alert(paragraph.innerHTML);
+        }
+        function MyInnerText() {
+            alert(paragraph.innerText);
+        }
+        function MyTextContent() {
+            alert(paragraph.textContent);
+        }
+    </script>
+</body>
+
+</html>

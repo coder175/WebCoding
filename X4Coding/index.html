@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>X4Coding - Learn To code</title>
+	<!-- Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Inter&family=Rubik&display=swap" rel="stylesheet">
+	<!-- Icons: -->
+	<link
+		href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+		rel="stylesheet">
+	<link rel="stylesheet" href="./X4Coding.css">
+</head>
+
+<body>
+
+	<div class="container">
+		<!-- code here -->
+		<div class="menu">
+			<ul class="menu-list">
+				<li class="menu-item"><button class="menu-button">Share</button></li>
+				<li class="menu-item"><button class="menu-button">Rename</button></li>
+			</ul>
+			<ul class="menu-list">
+				<li class="menu-item"><button class="menu-button menu-button--black">No status</button>
+					<ul class="menu-sub-list">
+						<li class="menu-item"><button class="menu-button menu-button--orange">Needs review</button></li>
+						<li class="menu-item"><button class="menu-button menu-button--purple">In progress</button></li>
+						<li class="menu-item"><button class="menu-button menu-button--green">Approved</button></li>
+						<li class="menu-item"><button class="menu-button menu-button--black menu-button--checked">No
+								status</button></li>
+					</ul>
+				</li>
+				<li class="menu-item"><button class="menu-button">Copy Link Address</button></li>
+				<li class="menu-item"><button class="menu-button">Move to</button></li>
+				<li class="menu-item"><button class="menu-button">Copy to</button></li>
+				<li class="menu-item"><button class="menu-button">Make Private</button></li>
+				<li class="menu-item"><button class="menu-button">Download</button></li>
+			</ul>
+			<ul class="menu-list">
+				<li class="menu-item"><button class="menu-button menu-button--delete">Delete</button></li>
+			</ul>
+		</div>
+	</div>
+	<div class="icon-bar-1">
+		<div class="icon-bar">
+			<a class="icon-in-bar" id="Home">
+				X4Coding
+			</a>
+			<a class="icon-in-bar menu1 tooltip" onclick="showIconRight()"><span class="tooltiptext">Menu</span><span
+					class="material-icons">
+					menu
+				</span>
+			</a>
+			<div class="icon-right">
+				<a id="Language" class="icon-in-bar icon">
+					Language
+				</a>
+
+				<a id="Login" class="icon-in-bar icon tooltip">
+					Account
+				</a>
+				<a id="Search" class="icon-in-bar icon btn tooltip">
+					Search
+				</a>
+				<div class="dropdown">
+					<a id="Tutorials" class="dropbtn icon-in-bar icon drop" href="javascript:void(0)"
+						onclick="Tutorials();">
+						Tutorials
+						<span class="material-icons" id="arrowExercises">
+							arrow_drop_down
+						</span>
+					</a>
+					<div class="dropdown-content" id="dropdownContent1">
+						<div class="header">
+							<h2 class="header">
+								Tutorials
+								<span class="closeIcon" onclick="close1();"></span>
+							</h2>
+						</div>
+						<div class="row">
+							<div class="column">
+								<h3>HyperText Markup Language (HTML)</h3>
+								<a href="#">Link 1</a>
+								<a href="#">Link 2</a>
+								<a href="#">Link 3</a>
+							</div>
+							<div class="column">
+								<h3>Cascading Style Sheets (CSS)</h3>
+								<a href="#">Link 1</a>
+								<a href="#">Link 2</a>
+								<a href="#">Link 3</a>
+							</div>
+							<div class="column">
+								<h3>JavaScript (JS)</h3>
+								<a href="#">Link 1</a>
+								<a href="#">Link 2</a>
+								<a href="#">Link 3</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="dropdown">
+					<a id="Exercises" class="dropbtn icon-in-bar icon drop1" onclick="Exercises();">
+						Exercises
+						<span class="material-icons" id="arrowExercises1">
+							arrow_drop_down
+						</span>
+					</a>
+					<div class="dropdown-content" id="dropdownContent">
+						<div class="header">
+							<h2 class="header">
+								Exercises
+								<span class="closeIcon" onclick="close();"></span>
+							</h2>
+						</div>
+						<div class="row">
+							<div class="column">
+								<h3>HyperText Markup Language (HTML)</h3>
+								<a href="#">Link 1</a>
+								<a href="#">Link 2</a>
+								<a href="#">Link 3</a>
+							</div>
+							<div class="column">
+								<h3>Cascading Style Sheets (CSS)</h3>
+								<a href="#">Link 1</a>
+								<a href="#">Link 2</a>
+								<a href="#">Link 3</a>
+							</div>
+							<div class="column">
+								<h3>JavaScript (JS)</h3>
+								<a href="#">Link 1</a>
+								<a href="#">Link 2</a>
+								<a href="#">Link 3</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<span class="scroll"></span>
+	</div>
+
+	<div class="main-content">
+		<wrappers id="MAIN">
+			<div class="top-page">
+				<header class="hero" data-animation="fadeIn">
+					<h1>
+						<div class="heros title" data-animation="slideInUp" data-animation-delay="600ms">
+							<b>Learn To Create Your Program With X4Coding</b>
+						</div>
+						<div class="heros subtitle" data-animation="slideInUp" data-animation-delay="1000ms">
+							Advance your programming skills faster using X4Coding.
+						</div>
+						<div class="heros subtitle" data-animation="slideInUp" data-animation-delay="1400ms">
+							<div class="arrowCaret bounce">
+								<span class="material-icons-outlined arrow_down_scrolldown">
+									keyboard_arrow_down
+								</span>
+							</div>
+						</div>
+					</h1>
+					<!-- small screens -->
+
+					<h1 class="smallscreen">
+						<div class="title smallscreeners0" data-animation="slideInUp" data-animation-delay="600ms">
+							<b>Learn To Create Your Program With X4Coding</b>
+						</div>
+						<div class="subtitle smallscreeners1" data-animation="slideInUp" data-animation-delay="1000ms">
+							Advance your programming skills faster using X4Coding.
+						</div>
+					</h1>
+				</header>
+			</div>
+			<wrappers id="HTML">
+				<div class="Otherpages">
+					<header class="hero" data-animation="fadeIn">
+						<h1>
+							<div class="title" data-animation="slideInUp" data-animation-delay="200ms">
+								<b>Try Our Live editors</b>
+							</div>
+							<div class="subtitle" data-animation="slideInUp" data-animation-delay="600ms">
+								We made our editors fast and easy to use
+							</div>
+						</h1>
+					</header>
+				</div>
+			</wrappers>
+			<wrappers id="CSS">
+				<div class="Otherpages">
+					<header class="hero" data-animation="fadeIn">
+						<h1>
+							<div class="title" data-animation="slideInUp" data-animation-delay="200ms">
+								<b></b>
+							</div>
+							<div class="subtitle" data-animation="slideInUp" data-animation-delay="600ms">
+
+							</div>
+						</h1>
+					</header>
+				</div>
+			</wrappers>
+			<wrappers id="JS">
+				<div class="Otherpages">
+					<header class="hero" data-animation="fadeIn">
+						<h1>
+							<div class="title" data-animation="slideInUp" data-animation-delay="200ms">
+								<b>Finally, Our Website is Ad and money Free</b>
+							</div>
+							<div class="subtitle" data-animation="slideInUp" data-animation-delay="600ms">
+								You can use our website without any disturbances
+							</div>
+						</h1>
+					</header>
+				</div>
+	</div>
+	</wrappers>
+	<script src="./X4Coding.js"></script>
+</body>
+
+</html>

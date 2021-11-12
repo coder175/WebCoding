@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Prime Number Calculation</title>
+    <style>
+        * {
+            outline: none;
+        }
+
+        input[type=number] {
+            color: black;
+            border: 10px solid grey;
+            background-color: blue;
+            color: white;
+            font-size: 30px;
+        }
+
+        input[type=button] {
+            border: 10px solid grey;
+            background-color: blue;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        input[type=button]:focus {
+            border: 10px solid #d4d4d4;
+            background-color: white;
+            color: blue;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        span {
+            border: 10px solid grey;
+            background-color: blue;
+            color: white;
+            font-size: 30px;
+            padding: 10px;
+            display: none;
+        }
+
+        input[type=number]:focus {
+            border: 10px solid #d4d4d4;
+            background-color: white;
+            color: blue;
+            font-size: 30px;
+        }
+
+        body {
+            margin: 0px;
+        }
+    </style>
+</head>
+
+<body>
+<div style='text-align: center;'>
+    <input type='number' name='primeN' id='primeN' onkeyup='primeN()'>
+    <br>
+    <span style='text-transform: uppercase;' id='Results'></span>
+</div>
+    <script>
+        function primeN() {
+            let inputN = parseInt(document.getElementById('primeN').value);
+            let isPrime = true;
+            let Results = document.getElementById('Results');
+            for (let y = 2; inputN > y; y++) {
+                if (inputN % y == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+            if (inputN == '1') {
+                Results.innerHTML = 'This is prime nor composite!';
+                Results.style.display = "block";
+                document.body.style.backgroundColor = '#C1A145';
+            }
+            else if (isPrime) {
+                Results.innerHTML = 'This is prime!';
+                Results.style.display = "block";
+                document.body.style.backgroundColor = '#86eb86';
+            } else {
+                Results.innerHTML = 'This is not prime!';
+                Results.style.display = "block";
+                document.body.style.backgroundColor = '#fc5603';
+            }
+            if (inputN == '') {
+                Results.innerHTML = 'Please enter a Number';
+                Results.style.display = "block";
+                document.body.style.backgroundColor = 'transparent';
+            }
+        }
+    </script>
+</body>
+
+</html>
