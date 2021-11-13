@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,19 +10,51 @@
         * {
             font-family: 'Mochiy Pop P One', sans-serif;
         }
-        span {
+
+        .words {
             background-color: black;
             color: white;
             padding: 5px;
         }
-        .plane {
-            transform: rotate(180);
+
+        .container {
+            position: absolute;
+            animation: mymove 20s linear;
+        }
+
+        @keyframes mymove {
+            from {
+                top: 0px;
+            }
+
+            to {
+                top: 100vh;
+            }
         }
     </style>
     <title>Typing Game</title>
 </head>
+
 <body>
-    <img class="plane" src="https://thumbs.dreamstime.com/b/fighter-plane-transport-top-view-vector-icon-defense-weapon-combat-attack-military-warplane-illustration-above-146751014.jpg" alt="plane" width="50">
-    <span>to</span>
+    <span class="container">
+        <svg width="40" height="40">
+            <circle cx="22.5" cy="22.5" r="5" stroke="grey" stroke-width="3" fill="white" />
+            <line x1="10" y1="10" x2="10" y2="20" style="stroke:#2ea2f0;stroke-width:3;stroke-linecap: round;" />
+            <line x1="10" y1="10" x2="20" y2="10" style="stroke:#2ea2f0;stroke-width:3;stroke-linecap: round;" />
+
+            <line x1="35" y1="10" x2="25" y2="10" style="stroke:#2ea2f0;stroke-width:3;stroke-linecap: round;" />
+            <line x1="35" y1="10" x2="35" y2="20" style="stroke:#2ea2f0;stroke-width:3;stroke-linecap: round;" />
+
+            <line x1="10" y1="25" x2="10" y2="35" style="stroke:#2ea2f0;stroke-width:3;stroke-linecap: round;" />
+            <line x1="10" y1="35" x2="20" y2="35" style="stroke:#2ea2f0;stroke-width:3;stroke-linecap: round;" />
+
+            <line x1="35" y1="35" x2="25" y2="35" style="stroke:#2ea2f0;stroke-width:3;stroke-linecap: round;" />
+            <line x1="35" y1="25" x2="35" y2="35" style="stroke:#2ea2f0;stroke-width:3;stroke-linecap: round;" />
+        </svg>
+        <br>
+        <span class="words">The quick brown fox jumped over the lazy dogs.</span>
+    </span>
+
 </body>
+
 </html>
