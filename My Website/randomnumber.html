@@ -34,7 +34,11 @@
             color: white;
         }
 
-        .yes, .no, .smaller, .bigger, .away {
+        .yes,
+        .no,
+        .smaller,
+        .bigger,
+        .away {
             display: none;
         }
     </style>
@@ -62,10 +66,12 @@
         }
         function check() {
             let max = document.getElementById("max");
-            if (document.getElementById("guess").value == random) { 
+            if (document.getElementById("guess").value == random) {
                 document.querySelector('.yes').style.display = "block";
                 document.querySelector('.away').style.display = "block";
-                location.reload();
+                setTimeout(function () {
+                    location.reload();
+                }, 10000);
             } else {
                 document.querySelector('.no').style.display = "block";
                 document.querySelector('.away').style.display = "block";
