@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href='https://fonts.googleapis.com/css?family=ABeeZee' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Number</title>
+    <style>
+        * {
+            font-family: 'ABeeZee';
+        }
+
+        #max {
+            width: 70px;
+        }
+
+        input {
+            border: 1px solid;
+            border-radius: 0px;
+            outline: none;
+        }
+
+        input[type=button] {
+            background-color: black;
+            color: white;
+        }
+
+        input[type=button]:active {
+            background-color: grey;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div>Random Number 1 through <input type="number" id="max"></div>
+    <input type="button" value="Randomize" onclick="randomize()">
+    <div>My Guess:</div>
+    <input type="number" id="guess">
+    <script>
+        function randomize() {
+            let max = document.getElementById("max");
+            var random = Math.floor(Math.random() * max.value) + 1;
+            console.log(random);
+            if (document.getElementById("guess").value == random) {
+                alert("yes!");
+            } else {
+                alert("no!");
+            }
+        }
+    </script>
+</body>
+
+</html>
