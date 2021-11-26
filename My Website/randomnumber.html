@@ -10,6 +10,7 @@
     <style>
         * {
             font-family: 'ABeeZee';
+            text-align: center;
         }
 
         #max {
@@ -25,30 +26,65 @@
         input[type=button] {
             background-color: black;
             color: white;
+            text-align: center;
         }
 
         input[type=button]:active {
             background-color: grey;
             color: white;
         }
+
+        .yes, .no, .smaller, .bigger, .away {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
+    <h1>Random Number Guessing Challenge</h1>
     <div>Random Number 1 through <input type="number" id="max"></div>
     <input type="button" value="Randomize" onclick="randomize()">
-    <div>My Guess:</div>
+    <br>
+    <span>My Guess:</span>
     <input type="number" id="guess">
+    <br>
+    <input type="button" value="Check" onclick="check()">
+    <h1 class="yes">Yes!</h1>
+    <h1 class="no">No.</h1>
+    <h1 class="smaller">Your number should be smaller.</h1>
+    <h1 class="bigger">Your number should be greater.</h1>
+    <input type="button" value="OK!" onclick="goAway()" class="away">
     <script>
+        var random = {};
         function randomize() {
             let max = document.getElementById("max");
-            var random = Math.floor(Math.random() * max.value) + 1;
-            console.log(random);
+            random = Math.floor(Math.random() * max.value) + 1;
+        }
+        function check() {
+            let max = document.getElementById("max");
             if (document.getElementById("guess").value == random) { 
-                alert("yes!");
+                document.querySelector('.yes').style.display = "block";
+                document.querySelector('.away').style.display = "block";
+                location.reload();
             } else {
-                alert("no!");
+                document.querySelector('.no').style.display = "block";
+                document.querySelector('.away').style.display = "block";
+                if (document.getElementById("guess").value > random) {
+                    document.querySelector('.smaller').style.display = "block";
+                    document.querySelector('.away').style.display = "block";
+                } else if (document.getElementById("guess").value < random) {
+                    document.querySelector('.bigger').style.display = "block";
+                    document.querySelector('.away').style.display = "block";
+                }
             }
+        }
+
+        function goAway() {
+            document.querySelector('.yes').style.display = "none";
+            document.querySelector('.no').style.display = "none";
+            document.querySelector('.smaller').style.display = "none";
+            document.querySelector('.bigger').style.display = "none";
+            document.querySelector('.away').style.display = "none";
         }
     </script>
 </body>
