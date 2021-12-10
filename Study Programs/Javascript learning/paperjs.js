@@ -26,7 +26,3 @@ text.fillColor = 'white';
 text.fontSize = "25";
 text.fontFamily = "Trebuchet MS";
 text.content = 'Hello, World!';
-
-setInterval(function () {
-    location.reload();
-}, 10000);
