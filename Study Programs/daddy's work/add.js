@@ -16,8 +16,13 @@ setInterval(() => {
     let nowHours = currentdate.getHours();
     let nowMinutes = currentdate.getMinutes();
     let nowSeconds = currentdate.getSeconds();
+    let nowMiliSeconds = currentdate.getMilliseconds();
     if (parseInt(nowHours) > 12) {
-        parseInt(nowHours) - "12";
+        nowHours = parseInt(nowHours) - 12;
     }
-    document.getElementById('time').innerText = nowHours + ':' + nowMinutes + ':' + nowSeconds; 
+
+    if (parseInt(nowMinutes) <  10) {
+        nowMinutes = "0" + nowMinutes;
+    }
+    document.getElementById('time').innerText = nowHours + ':' + nowMinutes + ':' + nowSeconds + ':'+ nowMiliSeconds; 
 }, 1);

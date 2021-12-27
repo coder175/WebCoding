@@ -16,6 +16,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
         .clock-container {
@@ -25,15 +26,13 @@
             border-radius: 5px;
             padding: 60px 20px;
             box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.15), 0 15px 90px 30px rgba(0, 0, 0, 0.25);
-            display: flex;
         }
 
         .clock-col {
             text-align: center;
-            margin-right: 40px;
-            margin-left: 40px;
+            margin-right: 20px;
+            margin-left: 20px;
             min-width: 50px;
-            position: relative;
         }
 
         .clock-timer {
@@ -66,59 +65,86 @@
                 display: none !important;
             }
         }
+
+        .colen {
+            font-size: 40px;
+            margin-bottom: 35px;
+            color: white;
+        }
+        .slash {
+            font-size: 90px;
+            margin-bottom: 35px;
+            color: white;
+        }
+        .theLine {
+            width: 10px;
+            height: 2000px;
+            background-color: white;
+            top: -50px;
+            position: relative;
+        }
+
+        .block {
+position: absolute;
+width: 70vw;
+height: 40vh;
+background-color: black;
+top: 0px;
+z-index: -1;
+        }
     </style>
 </head>
 
 <body>
 
     <body>
-        <div class="clock-container">
-            <div>
-                <div class="clock-col">
-                    <p class="clock-day clock-timer" id="mo">
-                    </p>
-                    <p class="clock-label">
-                        Month
-                    </p>
-                </div>
-                <div class="clock-col">
-                    <p class="clock-day clock-timer" id="d">
-                    </p>
-                    <p class="clock-label">
-                        Day
-                    </p>
-                </div>
-                <div class="clock-col">
-                    <p class="clock-day clock-timer" id="y">
-                    </p>
-                    <p class="clock-label">
-                        Year
-                    </p>
-                </div>
-            </div>
-            <div>
-                <div class="clock-col">
-                    <p class="clock-hours clock-timer" id="h">
-                    </p>
-                    <p class="clock-label">
-                        Hour
-                    </p>
-                </div>
-                <div class="clock-col">
-                    <p class="clock-minutes clock-timer" id="m">
-                    </p>
-                    <p class="clock-label">
-                        Minute
-                    </p>
-                </div>
-                <div class="clock-col">
-                    <p class="clock-seconds clock-timer" id="s">
-                    </p>
-                    <p class="clock-label">
-                        Second
-                    </p>
-                </div>
-            </div>
+        <div class="block"></div>
+        <div class="clock-col">
+            <p class="clock-hours clock-timer" id="h">
+            </p>
+            <p class="clock-label">
+                Hour
+            </p>
+        </div>
+        <span class="colen">:</span>
+        <div class="clock-col">
+            <p class="clock-minutes clock-timer" id="m">
+            </p>
+            <p class="clock-label">
+                Minute
+            </p>
+        </div>
+        <span class="colen">:</span>
+        <div class="clock-col">
+            <p class="clock-seconds clock-timer" id="s">
+            </p>
+            <p class="clock-label">
+                Second
+            </p>
+        </div>
+        <span class="theLine"></span>
+        <div class="clock-col">
+            <p class="clock-day clock-timer" id="mo">
+            </p>
+            <p class="clock-label">
+                Month
+            </p>
+        </div>
+        <span class="slash">/</span>
+        <div class="clock-col">
+            <p class="clock-day clock-timer" id="d">
+            </p>
+            <p class="clock-label">
+                Day
+            </p>
+        </div>
+        <span class="slash">/</span>
+        <div class="clock-col">
+            <p class="clock-day clock-timer" id="y">
+            </p>
+            <p class="clock-label">
+                Year
+            </p>
         </div>
         <script>
 
@@ -140,6 +166,9 @@
                 let ho = t.getHours();
                 let mi = t.getMinutes();
                 let se = t.getSeconds();
+                if (parseInt(ho) > 12) {
+                    ho = parseInt(ho) - 12;
+                }
                 year.innerHTML = (ye);
                 month.innerHTML = months[mo];
                 day.innerHTML = ("0" + da).substr(-2);
