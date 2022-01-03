@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Color</title>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Work Sans', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <p id="para">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+        aliqua. Sed viverra tellus in hac habitasse platea dictumst vestibulum. Pulvinar mattis nunc sed blandit libero
+        volutpat sed. Eu feugiat pretium nibh ipsum consequat nisl vel. Pretium lectus quam id leo in vitae. Lacus luctus
+        accumsan tortor posuere ac. Vel quam elementum pulvinar etiam non. Lacus vel facilisis volutpat est velit egestas.
+        Libero justo laoreet sit amet cursus sit amet dictum sit. Euismod quis viverra nibh cras pulvinar mattis nunc sed.
+        Nunc consequat interdum varius sit amet.
+    </p>
+    <input type="button" value="Random Color" id="RandomizeText">
+    <div id="rgb"></div>
+    <script>
+        document.getElementById("RandomizeText").addEventListener("click", changeColor);
+        function changeColor() {
+            let rgbNumber = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
+            // let rgbNumber = "rgb(" + Math.floor(Math.random() * 255) + ", " + Math.floor(Math.random() * 255) + ', ' + Math.floor(Math.random() * 255) + ")";
+            document.getElementById('para').style.backgroundColor = rgbNumber;
+            document.getElementById('rgb').innerText = rgbNumber;
+
+        }
+    </script>
+</body>
+
+</html>
