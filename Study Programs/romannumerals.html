@@ -9,38 +9,44 @@
     <title>Roman Numerals Converter</title>
     <style>
         * {
+            outline: none;
+            color: #7F2122;
             font-family: 'Gideon Roman', cursive;
         }
 
         #numeralInput {
-            border: 2px solid black;
+            border: 2px solid #7F2122;
 
+        }
+        #check {
+            border: 2px solid #7F2122;
+            background-color: #CAC198;
         }
     </style>
 </head>
 
 <body>
-    <h1>Roman Numerals from 1 - 99 Converter</h1>
+    <h1>Roman Numerals from 1 - 9999 Converter</h1>
     <input type="number" id="numeralInput">
-    <input type="button" value="Change to Roman Numerals" onclick="Convertion()">
+    <input type="button" value="Change to Roman Numerals" id="check" onclick="Convertion()">
     <h1 id="output">Roman Numerals will appear here</h1>
     <script>
         function Convertion() {
+            const numerals = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', '', 'X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC', '', 'C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM' , '', 'M', 'MM', 'MMM', 'I̅V̅', 'V̅', 'V̅I̅', 'V̅I̅I̅', 'V̅I̅I̅I̅', 'M̅X̅'];
             let input = document.getElementById('numeralInput').value;
-            if (input < 1 || input > 99) {
-                document.getElementById('output').innerText = 'Please Use a real Roman numeral';
-            } else if (input < 11) {
-                const FirstTenNumerals = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
-                let convertedNumeral = FirstTenNumerals[input];
-                document.getElementById('output').innerText = convertedNumeral;
-            } else if (input < 100) {
-                const FirstTenNumerals = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
-                const tenNumerals = ['', 'X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC'];
-                let splitstring = input.split('');
-                let lastChar = splitstring.slice(-1);
-                let firstChar = splitstring.slice(0,1);
-                let convertedNumeralTens = tenNumerals[firstChar] + FirstTenNumerals[lastChar];
-                document.getElementById('output').innerText = convertedNumeralTens;
+            if (input < 1 || input > 9999) {
+                document.getElementById('output').innerText = 'That is not a roman numeral.';
+            } else {
+                let splitstring = input.split('').reverse();
+                let romanNumeral = '';
+                for (let index = 0; index < splitstring.length; index++) {
+                    const element = splitstring[index];
+                    let round = index * 10 + parseInt(splitstring[index]);
+                    let correctNumerals = numerals[round].split("").reverse().join("");
+                    romanNumeral = romanNumeral + correctNumerals;
+                }
+                romanNumeral = romanNumeral.split("").reverse().join("");
+                document.getElementById('output').innerText = romanNumeral;
             }
         }
 
