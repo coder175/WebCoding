@@ -4,18 +4,23 @@
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
     <title>Odd or Even</title>
     <style>
+        * {
+            font-family: 'Work Sans', sans-serif;
+            outline: none;
+        }
         input[type=number] {
             color: black;
-            border: 10px solid grey;
+            border: 3px solid black;
             background-color: blue;
             color: white;
             font-size: 30px;
         }
 
         input[type=button] {
-            border: 10px solid grey;
+            border: 3px solid black;
             background-color: blue;
             color: white;
             font-size: 30px;
@@ -23,7 +28,7 @@
         }
 
         input[type=button]:focus {
-            border: 10px solid #d4d4d4;
+            border: 3px solid #d4d4d4;
             background-color: white;
             color: blue;
             font-size: 30px;
@@ -31,7 +36,7 @@
         }
 
         span {
-            border: 10px solid grey;
+            border: 3px solid black;
             background-color: blue;
             color: white;
             font-size: 30px;
@@ -40,7 +45,7 @@
         }
 
         input[type=number]:focus {
-            border: 10px solid #d4d4d4;
+            border: 3px solid #d4d4d4;
             background-color: white;
             color: blue;
             font-size: 30px;
@@ -54,19 +59,19 @@
             let firstInput = parseInt(document.getElementById('Input1').value);
 
             if (firstInput % 2 === 0) {
-                alert('this is a Even number!');
+                document.getElementById('output').innerText = "This is a even number!";
             }
             else if (firstInput % 2 === 1) {
-                alert('this is a Odd number!');
+                document.getElementById('output').innerText = "This is a odd number!";
             }
             else {
-                alert('this is a not a number!');
+                document.getElementById('output').innerText = "This is not a number!";
             }
 
         }
     </script>
-    <input type='number' id='Input1' max='10' value='5'>
-    <input type='button' value='Calculate!' onclick='Calculate()'>
+    <input type='number' id='Input1' max='10' value='5' onkeyup="Calculate()">
+    <div id="output"></div>
 </body>
 
 </html>
