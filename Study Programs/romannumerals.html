@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Gideon+Roman&display=swap" rel="stylesheet">
+    <title>Roman Numerals Converter</title>
+    <style>
+        * {
+            font-family: 'Gideon Roman', cursive;
+        }
+
+        #numeralInput {
+            border: 2px solid black;
+
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Roman Numerals from 1 - 99 Converter</h1>
+    <input type="number" id="numeralInput">
+    <input type="button" value="Change to Roman Numerals" onclick="Convertion()">
+    <h1 id="output">Roman Numerals will appear here</h1>
+    <script>
+        function Convertion() {
+            let input = document.getElementById('numeralInput').value;
+            if (input < 1 || input > 99) {
+                document.getElementById('output').innerText = 'Please Use a real Roman numeral';
+            } else if (input < 11) {
+                const FirstTenNumerals = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+                let convertedNumeral = FirstTenNumerals[input];
+                document.getElementById('output').innerText = convertedNumeral;
+            } else if (input < 100) {
+                const FirstTenNumerals = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+                const tenNumerals = ['', 'X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC'];
+                let splitstring = input.split('');
+                let lastChar = splitstring.slice(-1);
+                let firstChar = splitstring.slice(0,1);
+                let convertedNumeralTens = tenNumerals[firstChar] + FirstTenNumerals[lastChar];
+                document.getElementById('output').innerText = convertedNumeralTens;
+            }
+        }
+
+    </script>
+</body>
+
+</html>
