@@ -1,12 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Round" rel="stylesheet">
 	<title>X4Coding</title>
+	<style>
+		* {
+			font-family: 'Work Sans', sans-serif;
+			transition: 0.2s;
+		}
+
+		body {
+			margin: 0px;
+			height: 2000px;
+		}
+
+		:root {
+			--main-color: #228b22;
+			--main-color-dark: #1d681d;
+		}
+
+		/* Computer */
+		@media screen and (min-width: 900px),
+		(min-height: 600px) {
+			.left {
+				position: absolute;
+				left: 0;
+			}
+			.nav {
+				position: absolute;
+				top: 0px;
+				display: flex;
+				width: 100%;
+				height: 50px;
+				border-bottom: 2px solid var(--main-color);
+				justify-content: flex-end;
+			}
+
+			.navItem {
+				height: 50px;
+				width: 100px;
+				text-align: center;
+				vertical-align: middle;
+				line-height: 50px;
+			}
+
+			.Icon {
+				line-height: 62px;
+			}
+
+			.navItem:hover {
+				color: white;
+				background-color: var(--main-color);
+			}
+		}
+
+		/* Tablet */
+		@media screen and (max-width: 900px),
+		(max-height: 600px) {}
+
+		/* Iphone */
+		@media screen and (max-width: 400px),
+		(max-height: 600px) {}
+	</style>
 </head>
+
 <body>
-	Starting...
+	<div class="nav">
+		<div class="navItem Icon left">
+			<span class="material-icons-round">
+				home
+			</span>
+		</div>
+		<div class="navItem">Search</div>
+	</div>
 </body>
+
 </html>
