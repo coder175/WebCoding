@@ -57,11 +57,11 @@
 </head>
 
 <body>
-<div style='text-align: center;'>
-    <input type='number' name='primeN' id='primeN' onkeyup='primeN()'>
-    <br>
-    <span style='text-transform: uppercase;' id='Results'></span>
-</div>
+    <div style='text-align: center;'>
+        <input type='number' name='primeN' id='primeN' onkeyup='primeN()'>
+        <br>
+        <span style='text-transform: uppercase;' id='Results'></span>
+    </div>
     <script>
         function primeN() {
             let inputN = parseInt(document.getElementById('primeN').value);
@@ -72,8 +72,12 @@
                     isPrime = false;
                     break;
                 }
-            }
-            if (inputN == '1') {
+            } console.log(inputN); 
+            if (isNaN(inputN) || inputN == '0') {
+                Results.innerHTML = 'Please enter a Number';
+                Results.style.display = "block";
+                document.body.style.backgroundColor = 'transparent';
+            } else if (inputN == '1') {
                 Results.innerHTML = 'This is prime nor composite!';
                 Results.style.display = "block";
                 document.body.style.backgroundColor = '#C1A145';
@@ -82,15 +86,10 @@
                 Results.innerHTML = 'This is prime!';
                 Results.style.display = "block";
                 document.body.style.backgroundColor = '#86eb86';
-            } else {
+            } else if (isPrime == false) {
                 Results.innerHTML = 'This is not prime!';
                 Results.style.display = "block";
                 document.body.style.backgroundColor = '#fc5603';
-            }
-            if (inputN == '') {
-                Results.innerHTML = 'Please enter a Number';
-                Results.style.display = "block";
-                document.body.style.backgroundColor = 'transparent';
             }
         }
     </script>
