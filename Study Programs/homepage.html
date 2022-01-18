@@ -20,6 +20,12 @@
         li {
             padding: 10px;
         }
+        a {
+            color: black;
+        }
+        body {
+            background-color: #19b0f3;
+        }
     </style>
 </head>
 
@@ -43,12 +49,6 @@
         <li> <a href="./time.html" target="_blank">Check the time</a></li>
     </ol>
     <script>
-        function changeColor() {
-            let rgbNumber = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
-            document.getElementById('para').style.backgroundColor = rgbNumber;
-            document.querySelector('input').style.backgroundColor = rgbNumber;
-            document.getElementById('rgb').innerText = rgbNumber;
-        }
     </script>
 </body>
 
