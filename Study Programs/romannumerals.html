@@ -18,9 +18,20 @@
             border: 2px solid #7F2122;
 
         }
+
+        #numeralInput:active {
+            border: 2px solid #7F2122;
+
+        }
+
         #check {
             border: 2px solid #7F2122;
             background-color: #CAC198;
+        }
+
+        #check:active {
+            background-color: #7F2122;
+            color: white;
         }
     </style>
 </head>
@@ -32,7 +43,7 @@
     <h1 id="output">Roman Numerals will appear here</h1>
     <script>
         function Convertion() {
-            const numerals = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', '', 'X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC', '', 'C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM' , '', 'M', 'MM', 'MMM', 'I̅V̅', 'V̅', 'V̅I̅', 'V̅I̅I̅', 'V̅I̅I̅I̅', 'M̅X̅'];
+            const numerals = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', '', 'X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC', '', 'C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM', '', 'M', 'MM', 'MMM', 'I̅V̅', 'V̅', 'V̅I̅', 'V̅I̅I̅', 'V̅I̅I̅I̅', 'M̅X̅'];
             let input = document.getElementById('numeralInput').value;
             if (input < 1 || input > 9999) {
                 document.getElementById('output').innerText = 'That is not a roman numeral.';
