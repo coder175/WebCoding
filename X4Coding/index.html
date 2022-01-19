@@ -1,17 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Round" rel="stylesheet">
+	<meta charset='UTF-8'>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+	<link href='https://fonts.googleapis.com/css2?family=Outfit:wght@400&display=swap' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Round' rel='stylesheet'>
 	<title>X4Coding</title>
 	<style>
 		* {
-			font-family: 'Work Sans', sans-serif;
-			transition: 0.2s;
+			font-family: 'Outfit', sans-serif;
 		}
 
 		body {
@@ -20,37 +19,56 @@
 		}
 
 		:root {
+			--main-color-light: #189c18;
 			--main-color: #228b22;
 			--main-color-dark: #1d681d;
 		}
 
 		/* Computer */
-		@media screen and (min-width: 900px),
-		(min-height: 600px) {
-			.left {
-				position: absolute;
-				left: 0;
+		@media screen and (min-width: 600px) {
+			.right {
+				display: flex;
 			}
+
+			.container {
+				display: flex;
+			}
+
+			.Menu {
+				display: none;
+			}
+
 			.nav {
 				position: absolute;
 				top: 0px;
-				display: flex;
 				width: 100%;
 				height: 50px;
 				border-bottom: 2px solid var(--main-color);
-				justify-content: flex-end;
+				display: flex;
 			}
 
 			.navItem {
 				height: 50px;
-				width: 100px;
+				width: 120px;
 				text-align: center;
 				vertical-align: middle;
 				line-height: 50px;
+				transition: 0.2s;
 			}
 
 			.Icon {
 				line-height: 62px;
+				width: 80px;
+			}
+
+			.nav div:nth-child(3) {
+				margin-left: auto;
+			}
+
+			.arrow {
+				vertical-align: middle;
+				margin-bottom: 5px;
+				margin-left: -7px;
 			}
 
 			.navItem:hover {
@@ -60,24 +78,175 @@
 		}
 
 		/* Tablet */
-		@media screen and (max-width: 900px),
-		(max-height: 600px) {}
+		@media screen and (min-width: 620px) {
+			.right {
+				display: flex;
+			}
+
+			.container {
+				display: flex;
+			}
+
+			.Menu {
+				display: none;
+			}
+
+			.nav {
+				position: absolute;
+				top: 0px;
+				width: 100%;
+				height: 50px;
+				border-bottom: 2px solid var(--main-color);
+				display: flex;
+			}
+
+			.navItem {
+				height: 50px;
+				width: 120px;
+				text-align: center;
+				vertical-align: middle;
+				line-height: 50px;
+				transition: 0.2s;
+			}
+
+			.Icon {
+				line-height: 62px;
+				width: 80px;
+			}
+
+			.nav div:nth-child(3) {
+				margin-left: auto;
+			}
+
+			.arrow {
+				vertical-align: middle;
+				margin-bottom: 5px;
+				margin-left: -7px;
+			}
+
+			.navItem:hover {
+				color: white;
+				background-color: var(--main-color);
+			}
+		}
 
 		/* Iphone */
-		@media screen and (max-width: 400px),
-		(max-height: 600px) {}
+		@media screen and (max-width: 620px) {
+			.right {
+				display: flex;
+				margin-left: auto;
+			}
+
+			.container {
+				width: 200px;
+				height: 500px;
+				margin-top: 50px;
+				margin-left: -70px;
+			}
+
+			.nav {
+				position: absolute;
+				top: 0px;
+				width: 100%;
+				height: 50px;
+				border-bottom: 2px solid var(--main-color);
+				display: flex;
+			}
+
+			.navItem {
+				height: 50px;
+				width: 120px;
+				text-align: center;
+				vertical-align: middle;
+				line-height: 50px;
+			}
+
+			.navItem:not(.Menu) {
+				display: none;
+			}
+
+			.Icon {
+				line-height: 62px;
+				width: 60px;
+			}
+
+			.arrow {
+				vertical-align: middle;
+				margin-bottom: 5px;
+				margin-left: -7px;
+			}
+
+			.navItem:hover {
+				color: white;
+				background-color: var(--main-color);
+			}
+		}
+
+		.displayBlock {
+			display: block !important;
+		}
+
+		.displayNone {
+			display: none !important;
+		}
 	</style>
 </head>
 
 <body>
-	<div class="nav">
-		<div class="navItem Icon left">
-			<span class="material-icons-round">
-				home
-			</span>
+	<div class='nav'>
+		<div class='navItem Icon Menu'>
+			<span class='material-icons-round menuIcon'>menu</span>
 		</div>
-		<div class="navItem">Search</div>
+		<div class="container">
+			<div class='navItem dropdown'>
+				Courses
+				<span class='material-icons-round arrow'>
+					arrow_drop_down
+				</span>
+			</div>
+			<div class='navItem dropdown'>
+				Tutorials
+				<span class='material-icons-round arrow'>
+					arrow_drop_down
+				</span>
+			</div>
+			<div class='navItem dropdown'>
+				Exercises
+				<span class='material-icons-round arrow'>
+					arrow_drop_down
+				</span>
+			</div>
+		</div>
+		<div class="right">
+			<div class='navItem Icon'>
+				<span class='material-icons-round'>
+					brightness_4
+				</span>
+			</div>
+			<div class='navItem Icon'>
+				<span class='material-icons-round'>
+					translate
+				</span>
+			</div>
+			<div class='navItem Icon'>
+				<span class='material-icons-round'>
+					search
+				</span>
+			</div>
+		</div>
 	</div>
+	<script>
+		var check = 1;
+		document.querySelector('.Menu').addEventListener('click', () => {
+			if (check == 1) {
+				check++;
+				document.querySelectorAll('.navItem').forEach(display => display.classList.add('displayBlock'));
+			} else {
+				check--;
+				document.querySelectorAll('.navItem').forEach(display => display.classList.remove('displayBlock'));
+			}
+		});
+	</script>
 </body>
 
 </html>
