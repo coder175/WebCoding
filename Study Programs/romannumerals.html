@@ -38,7 +38,7 @@
 
 <body>
     <h1>Roman Numerals from 1 - 9999 Converter</h1>
-    <input type="number" id="numeralInput">
+    <input type="number" id="numeralInput" onkeypress="KeyPress(event)">
     <input type="button" value="Change to Roman Numerals" id="check" onclick="Convertion()">
     <h1 id="output">Roman Numerals will appear here</h1>
     <script>
@@ -60,6 +60,13 @@
                 document.getElementById('output').innerText = romanNumeral;
             }
         }
+
+        function KeyPress(event) {
+            var x = event.charCode || event.keyCode;
+            if (x == 13) {
+                Convertion();
+            }
+        };
 
     </script>
 </body>
