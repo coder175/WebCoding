@@ -40,7 +40,7 @@
 			margin-left: -7px;
 		}
 
-		.navItem:hover {
+		.navItem:not(.container):hover {
 			color: white;
 			background-color: var(--main-color);
 		}
@@ -146,11 +146,15 @@
 			}
 
 			.container {
-				width: 200px;
-				height: 500px;
+				color: black;
+				background-color: white;
+				width: 120px;
+				height: 150px;
 				margin-top: 50px;
 				left: 0;
 				position: absolute;
+				border-right: var(--main-color);
+				border-bottom: var(--main-color);
 			}
 
 			.navItem {
@@ -178,7 +182,7 @@
 		<div class='navItem Icon Menu'>
 			<span class='material-icons-round menuIcon'>menu</span>
 		</div>
-		<div class="container">
+		<div class="container navItem">
 			<div class='navItem dropdown'>
 				Courses
 				<span class='material-icons-round arrow'>
