@@ -54,13 +54,14 @@
 		}
 
 		/* Computer */
-		@media screen and (min-width: 600px) {
+		@media screen and (min-width: 700px) {
 			.header {
 				padding-top: 70px;
 				font-size: 90px;
 				vertical-align: middle;
 				text-align: center;
 			}
+
 			.text {
 				font-size: 30px;
 				vertical-align: middle;
@@ -76,47 +77,15 @@
 
 			.right {
 				display: flex;
-			}
-
-			.container {
-				display: flex;
-			}
-
-			.Menu {
-				display: none;
-			}
-
-			.navItem {
-				height: 50px;
-				width: 120px;
-				text-align: center;
-				vertical-align: middle;
-				line-height: 50px;
-				transition: 0.2s;
-			}
-
-			.Icon {
-				line-height: 62px;
-				width: 80px;
-			}
-
-			.nav div:nth-child(3) {
 				margin-left: auto;
 			}
-		}
-
-		/* Tablet */
-		@media screen and (min-width: 620px) {
-			.right {
-				display: flex;
-			}
 
 			.container {
 				display: flex;
 			}
 
 			.Menu {
-				display: none;
+				display: none !important;
 			}
 
 			.navItem {
@@ -139,22 +108,37 @@
 		}
 
 		/* Iphone */
-		@media screen and (max-width: 620px) {
+		@media screen and (max-width: 600px) {
+			.Menu {
+				margin-left: auto;
+			}
+
 			.right {
 				display: flex;
-				margin-left: auto;
 			}
 
 			.container {
 				color: black;
-				background-color: white;
 				width: 120px;
 				height: 150px;
 				margin-top: 50px;
-				left: 0;
+				right: 0;
 				position: absolute;
 				border-right: var(--main-color);
 				border-bottom: var(--main-color);
+			}
+
+			.container div {
+				background-color: white;
+				border-left: 2px solid var(--main-color);
+			}
+
+			.container div:last-child {
+				border-bottom: 2px solid var(--main-color);
+			}
+
+			.container div:first-child {
+				border-top: 2px solid var(--main-color);
 			}
 
 			.navItem {
@@ -174,15 +158,47 @@
 				width: 60px;
 			}
 		}
+
+		/* Tablet */
+		@media (min-width: 600px) and (max-width:700px) {
+			.right {
+				display: flex;
+				margin-left: auto;
+
+			}
+
+			.container {
+				display: inline-flex;
+			}
+
+			.Menu {
+				display: none !important;
+			}
+
+			.navItem {
+				height: 50px;
+				width: 120px;
+				text-align: center;
+				vertical-align: middle;
+				line-height: 50px;
+				transition: 0.2s;
+			}
+
+			.Icon {
+				line-height: 62px;
+				width: 80px;
+			}
+
+			.nav div:nth-child(3) {
+				margin-left: auto;
+			}
+		}
 	</style>
 </head>
 
 <body>
 	<div class='nav'>
-		<div class='navItem Icon Menu'>
-			<span class='material-icons-round menuIcon'>menu</span>
-		</div>
-		<div class="container navItem">
+		<div class="container">
 			<div class='navItem dropdown'>
 				Courses
 				<span class='material-icons-round arrow'>
@@ -219,10 +235,13 @@
 				</span>
 			</div>
 		</div>
+		<div class='navItem Icon Menu'>
+			<span class='material-icons-round menuIcon'>menu</span>
+		</div>
 	</div>
 	<div class="header">Learn To Code</div>
 	<div class="text">With, HTML, CSS and JavaScript</div>
-<script>
+	<script>
 		var check = 1;
 		document.querySelector('.Menu').addEventListener('click', () => {
 			if (check == 1) {
