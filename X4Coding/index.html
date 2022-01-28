@@ -15,7 +15,7 @@
 
 		body {
 			margin: 0px;
-			margin-top: 60px;
+			margin-top: 50px;
 		}
 
 		:root {
@@ -53,8 +53,12 @@
 			display: none !important;
 		}
 
+		.widthAlert {
+			display: none;
+		}
+
 		/* Computer */
-		@media screen and (min-width: 700px) {
+		@media screen and (min-width: 600px) {
 			.header {
 				padding-top: 70px;
 				font-size: 90px;
@@ -66,6 +70,15 @@
 				font-size: 30px;
 				vertical-align: middle;
 				text-align: center;
+			}
+
+			section {
+				height: 500px;
+			}
+
+			section:nth-child(1) {
+				background-color: var(--main-color);
+				color: white;
 			}
 
 
@@ -158,41 +171,6 @@
 				width: 60px;
 			}
 		}
-
-		/* Tablet */
-		@media (min-width: 600px) and (max-width:700px) {
-			.right {
-				display: flex;
-				margin-left: auto;
-
-			}
-
-			.container {
-				display: inline-flex;
-			}
-
-			.Menu {
-				display: none !important;
-			}
-
-			.navItem {
-				height: 50px;
-				width: 120px;
-				text-align: center;
-				vertical-align: middle;
-				line-height: 50px;
-				transition: 0.2s;
-			}
-
-			.Icon {
-				line-height: 62px;
-				width: 80px;
-			}
-
-			.nav div:nth-child(3) {
-				margin-left: auto;
-			}
-		}
 	</style>
 </head>
 
@@ -239,8 +217,27 @@
 			<span class='material-icons-round menuIcon'>menu</span>
 		</div>
 	</div>
-	<div class="header">Learn To Code</div>
-	<div class="text">With, HTML, CSS and JavaScript</div>
+	<div class="text">
+		<section>
+			<div class="header">Learn To Code</div>
+			<div class="text">With, HTML, CSS and JavaScript</div>
+		</section>
+	
+		<section>
+			<div class="header">The Editor</div>
+			<div class="text">With, HTML, CSS and JavaScript</div>
+		</section>
+
+		<section>
+			<div class="header">The Editor</div>
+			<div class="text">With, HTML, CSS and JavaScript</div>
+		</section>
+
+		<section>
+			<div class="header">The Editor</div>
+			<div class="text">With, HTML, CSS and JavaScript</div>
+		</section>
+	</div>
 	<script>
 		var check = 1;
 		document.querySelector('.Menu').addEventListener('click', () => {
