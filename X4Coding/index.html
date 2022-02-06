@@ -7,6 +7,7 @@
 	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
 	<link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Round' rel='stylesheet'>
+	<link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
 	<title>X4Coding</title>
 	<style>
 		* {
@@ -77,10 +78,38 @@
 			}
 
 			section:nth-child(1) {
-				background-color: #279AF1;
+				background-color: var(--main-color);
 				color: white;
 			}
 
+			section:nth-child(2) {
+				display: flex;
+				justify-content: space-evenly;
+				align-items: center;
+				background-color: #b3ffb3;
+				color: black;
+			}
+			@media screen and (max-width: 1100px) {
+					section:nth-child(2) {
+						display: block !important;
+					}
+					.editor {
+						margin-top: 50px;
+					}
+			}
+
+			.editor {
+				width: 600px;
+				height: 320px;
+				border: 2px solid var(--main-color);
+				display: inline-block;
+				text-align: left;
+				background-color: white;
+			}
+
+			pre {
+				font-family: 'Space Mono', monospace;
+			}
 
 
 
@@ -224,13 +253,26 @@
 		</section>
 
 		<section>
-			<div class="header">The Editor</div>
-			<div class="text">With, HTML, CSS and JavaScript</div>
+			<div>
+				<div class="header">The Editor</div>
+				<div class="text">Code Lively with HTML, CSS, and JavaScript</div>
+			</div>
+			<div class="editor">
+				<pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+	&lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+			</div>
 		</section>
 
 		<section>
 			<div class="header">The Editor</div>
-			<div class="text">With, HTML, CSS and JavaScript</div>
+			<div class="text">Code with HTML, CSS, and JavaScript</div>
 		</section>
 
 		<section>
