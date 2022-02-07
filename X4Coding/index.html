@@ -5,202 +5,9 @@
 	<meta charset='UTF-8'>
 	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
 	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
-	<link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Round' rel='stylesheet'>
-	<link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="./style.css">
 	<title>X4Coding</title>
-	<style>
-		* {
-			font-family: 'Ubuntu', sans-serif;
-		}
-
-		body {
-			margin: 0px;
-			margin-top: 50px;
-		}
-
-		:root {
-			--main-color-light: #70caff;
-			--main-color: #279AF1;
-			--main-color-dark: #006cbe;
-		}
-
-		.nav {
-			background-color: white;
-			position: fixed;
-			top: 0px;
-			width: 100%;
-			height: 50px;
-			border-bottom: 2px solid var(--main-color);
-			display: flex;
-		}
-
-		.arrow {
-			vertical-align: middle;
-			margin-bottom: 5px;
-			margin-left: -7px;
-		}
-
-		.navItem:not(.container):hover {
-			color: white;
-			background-color: var(--main-color);
-		}
-
-		.displayBlock {
-			display: block !important;
-		}
-
-		.displayNone {
-			display: none !important;
-		}
-
-		.widthAlert {
-			display: none;
-		}
-
-		/* Computer */
-		@media screen and (min-width: 600px) {
-			.header {
-				font-size: 90px;
-				vertical-align: middle;
-				text-align: center;
-			}
-
-			.text {
-				font-size: 30px;
-				vertical-align: middle;
-				text-align: center;
-			}
-
-			section {
-				padding-top: 180.5px;
-				padding-bottom: 180.5px;
-			}
-
-			section:nth-child(1) {
-				background-color: var(--main-color);
-				color: white;
-			}
-
-			section:nth-child(2) {
-				display: flex;
-				justify-content: space-evenly;
-				align-items: center;
-				background-color: #b3ffb3;
-				color: black;
-			}
-			@media screen and (max-width: 1100px) {
-					section:nth-child(2) {
-						display: block !important;
-					}
-					.editor {
-						margin-top: 50px;
-					}
-			}
-
-			.editor {
-				width: 600px;
-				height: 320px;
-				border: 2px solid var(--main-color);
-				display: inline-block;
-				text-align: left;
-				background-color: white;
-			}
-
-			pre {
-				font-family: 'Space Mono', monospace;
-			}
-
-
-
-
-
-
-
-			.right {
-				display: flex;
-				margin-left: auto;
-			}
-
-			.container {
-				display: flex;
-			}
-
-			.Menu {
-				display: none !important;
-			}
-
-			.navItem {
-				height: 50px;
-				width: 120px;
-				text-align: center;
-				vertical-align: middle;
-				line-height: 50px;
-				transition: 0.2s;
-			}
-
-			.Icon {
-				line-height: 62px;
-				width: 80px;
-			}
-
-			.nav div:nth-child(3) {
-				margin-left: auto;
-			}
-		}
-
-		/* Iphone */
-		@media screen and (max-width: 600px) {
-			.Menu {
-				margin-left: auto;
-			}
-
-			.right {
-				display: flex;
-			}
-
-			.container {
-				color: black;
-				width: 120px;
-				height: 150px;
-				margin-top: 50px;
-				right: 0;
-				position: absolute;
-				border-right: var(--main-color);
-				border-bottom: var(--main-color);
-			}
-
-			.container div {
-				background-color: white;
-				border-left: 2px solid var(--main-color);
-			}
-
-			.container div:last-child {
-				border-bottom: 2px solid var(--main-color);
-			}
-
-			.container div:first-child {
-				border-top: 2px solid var(--main-color);
-			}
-
-			.navItem {
-				height: 50px;
-				width: 120px;
-				text-align: center;
-				vertical-align: middle;
-				line-height: 50px;
-			}
-
-			.navItem:not(.Menu) {
-				display: none;
-			}
-
-			.Icon {
-				line-height: 62px;
-				width: 60px;
-			}
-		}
-	</style>
 </head>
 
 <body>
@@ -253,20 +60,73 @@
 		</section>
 
 		<section>
-			<div>
+			<div class="heads">
 				<div class="header">The Editor</div>
 				<div class="text">Code Lively with HTML, CSS, and JavaScript</div>
 			</div>
+			<div class="editors">
 			<div class="editor">
-				<pre>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-	&lt;title&gt;Document&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-	
-&lt;/body&gt;
-&lt;/html&gt;</pre>
+				<div class="title">HTML Example:</div>
+				<div class="code">
+					<span><span class="lt"><</span><span class="tag">!DOCTYPE <span class="attr">html</span></span><span class="gt">></span></span>
+					<br>
+					<span><span class="lt"><</span><span class="tag">html</span><span class="gt">></span></span>
+					<br>
+					<span class="indent"><span class="lt"><</span><span class="tag">head</span><span class="gt">></span></span>
+					<br>
+					<span class="indent2"><span class="lt"><</span><span class="tag">title</span><span class="gt">></span><span class="reg">This is a title</span><span class="lt"><</span><span class="tag">/title</span><span class="gt">></span>
+					<br>
+					<span class="indent"><span class="lt"><</span><span class="tag">/head</span><span class="gt">></span>
+					<br>
+					<span class="indent"><span class="lt"><</span><span class="tag">body</span><span class="gt">></span></span>
+					<br>
+					<span class="indent2"><span class="lt"><</span><span class="tag">h1</span><span class="gt">></span></span><span class="reg">This is a header</span><span><span class="lt"><</span><span class="tag">/h1</span><span class="gt">></span></span>
+					<br>
+					<span class="indent2"><span class="lt"><</span><span class="tag">div</span><span class="gt">></span></span><span class="reg">This is a div</span><span><span class="lt"><</span><span class="tag">/div</span><span class="gt">></span></span>
+					<br>
+					<span class="indent"><span class="lt"><</span><span class="tag">/body</span><span class="gt">></span></span>
+					<br>
+					<span><span class="lt"><</span><span class="tag">/html</span><span class="gt">></span></span>
+				</div>
+			</div>
+			<br>
+			<div class="editor">
+				<div class="title">CSS Example:</div>
+				<div class="code">
+					<span class="sel">div </span><span class="reg">{</span>
+					<br>
+					<span class="attr indent">background-color</span><span class="reg">:</span> <span class="val">blue</span><span class="reg">;</span>
+					<br>
+					<span class="attr indent">color</span><span class="reg">:</span> <span class="val">white</span><span class="reg">;</span>
+					<br><span class="reg">}</span>
+					<br>
+					<br>
+					<span class="sel">body </span><span class="reg">{</span>
+					<br>
+					<span class="attr indent">border</span><span class="reg">:</span> <span class="val">2px dashed orange</span><span class="reg">;</span>
+					<br><span class="reg">}</span>
+				</div>
+			</div>
+			<br>
+			<div class="editor">
+				<div class="title">JavaScript Example:</div>
+				<div class="code">
+					<span><span class="lt"><</span><span class="tag">button </span><span class="attr">onclick</span><span class="val">="colorChange()"></span><span class="reg">Change Color!</span><span><span class="lt"><</span><span class="tag">/button</span><span class="gt">></span></span>
+					<br>
+					<br>
+					<span><span class="lt"><</span><span class="tag">script</span><span class="gt">></span></span>
+					<br>
+					<span class="indent"><span class="val">function </span><span class="reg">{</span></span>
+					<br>
+					<span class="val indent2">let </span><span class="reg">para = document.getElementById(</span><span class="sel">"paragraph"</span><span class="reg">);</span>
+					<br>
+					<span class="reg indent2">para.style.color =</span><span class="sel">"red"</span><span class="reg">;</span>
+					<br>
+					<span class="reg indent">}</span>
+					<br>
+					<span><span class="lt"><</span><span class="tag">/script</span><span class="gt">></span></span>
+				</div>
+			</div>
 			</div>
 		</section>
 
@@ -280,17 +140,7 @@
 			<div class="text">With, HTML, CSS and JavaScript</div>
 		</section>
 	</div>
-	<script>
-		var check = 1;
-		document.querySelector('.Menu').addEventListener('click', () => {
-			if (check == 1) {
-				check++;
-				document.querySelectorAll('.navItem').forEach(display => display.classList.add('displayBlock'));
-			} else {
-				check--;
-				document.querySelectorAll('.navItem').forEach(display => display.classList.remove('displayBlock'));
-			}
-		});
+	<script src="./script.js">
 	</script>
 </body>
 
