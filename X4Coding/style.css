@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+
+* {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+    margin: 0px;
+    margin-top: 50px;
+}
+
+:root {
+    --main-color-light: #70caff;
+    --main-color: #279AF1;
+    --main-color-dark: #006cbe;
+}
+
+.nav {
+    background-color: white;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid var(--main-color);
+    display: flex;
+}
+
+.indent {
+    padding-left: 25px;
+}
+
+.indent2 {
+    padding-left: 50px;
+}
+
+.tag {
+    color: brown;
+}
+
+.lt {
+    color: #0818A8;
+}
+
+.gt {
+    color: #0818A8;
+}
+
+.attr {
+    color: red;
+}
+
+.sel {
+    color: brown;
+}
+
+.val {
+    color: #0818A8;
+}
+
+.reg {
+    color: black;
+}
+
+.arrow {
+    vertical-align: middle;
+    margin-bottom: 5px;
+    margin-left: -7px;
+}
+
+.navItem:not(.container):hover {
+    color: white;
+    background-color: var(--main-color);
+}
+
+.displayBlock {
+    display: block !important;
+}
+
+.displayNone {
+    display: none !important;
+}
+
+.widthAlert {
+    display: none;
+}
+
+/* Computer */
+@media screen and (min-width: 600px) {
+    .header {
+        font-size: 90px;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .text {
+        font-size: 30px;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    section {
+        padding-top: 180.5px;
+        padding-bottom: 180.5px;
+    }
+
+    section:nth-child(1) {
+        background-color: var(--main-color);
+        color: white;
+    }
+
+    section:nth-child(2) {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        background-color: #35CE8D;
+        color: white;
+    }
+
+    @media screen and (max-width: 1100px) {
+        section:nth-child(2) {
+            align-items: center;
+            display: block !important;
+        }
+
+        .editor {
+            margin: auto;
+            margin-top: 60px;
+            width: 570px;
+        }
+    }
+
+    .editor {
+        border: 2px solid var(--main-color-dark);
+        background-color: var(--main-color);
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+        line-height: 1.4;
+    }
+
+    .code {
+        border-top: 2px solid var(--main-color-dark);
+        padding: 10px;
+        width: 550px;
+        display: inline-block;
+        text-align: left;
+        background-color: white;
+        color: black;
+        font-family: 'Source Code Pro', monospace !important;
+        font-size: 15px !important;
+        font-weight: bold;
+        letter-spacing: 1.5px;
+    }
+
+    .title {
+        padding: 10px;
+    }
+
+    .heads {
+        padding: 10px;
+    }
+
+
+
+
+
+
+
+    .right {
+        display: flex;
+        margin-left: auto;
+    }
+
+    .container {
+        display: flex;
+    }
+
+    .Menu {
+        display: none !important;
+    }
+
+    .navItem {
+        height: 50px;
+        width: 120px;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 50px;
+        transition: 0.2s;
+    }
+
+    .Icon {
+        line-height: 62px;
+        width: 80px;
+    }
+
+    .nav div:nth-child(3) {
+        margin-left: auto;
+    }
+}
+
+/* Iphone */
+@media screen and (max-width: 600px) {
+    .Menu {
+        margin-left: auto;
+    }
+
+    .right {
+        display: flex;
+    }
+
+    .container {
+        color: black;
+        width: 120px;
+        height: 150px;
+        margin-top: 50px;
+        right: 0;
+        position: absolute;
+        border-right: var(--main-color);
+        border-bottom: var(--main-color);
+    }
+
+    .container div {
+        background-color: white;
+        border-left: 2px solid var(--main-color);
+    }
+
+    .container div:last-child {
+        border-bottom: 2px solid var(--main-color);
+    }
+
+    .container div:first-child {
+        border-top: 2px solid var(--main-color);
+    }
+
+    .navItem {
+        height: 50px;
+        width: 120px;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 50px;
+    }
+
+    .navItem:not(.Menu) {
+        display: none;
+    }
+
+    .Icon {
+        line-height: 62px;
+        width: 60px;
+    }
+}
