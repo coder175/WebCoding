@@ -6,6 +6,9 @@
 	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
 	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
 	<link href='https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Round' rel='stylesheet'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css">
+	</link>
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/codemirror.css'>
 	<link rel="stylesheet" href="./style.css">
 	<title>X4Coding</title>
 </head>
@@ -65,82 +68,48 @@
 				<div class="text">Code Lively with HTML, CSS, and JavaScript</div>
 			</div>
 			<div class="editors">
-			<div class="editor">
-				<div class="title">HTML Example:</div>
-				<div class="code">
-					<span><span class="lt"><</span><span class="tag">!DOCTYPE <span class="attr">html</span></span><span class="gt">></span></span>
-					<br>
-					<span><span class="lt"><</span><span class="tag">html</span><span class="gt">></span></span>
-					<br>
-					<span class="indent"><span class="lt"><</span><span class="tag">head</span><span class="gt">></span></span>
-					<br>
-					<span class="indent2"><span class="lt"><</span><span class="tag">title</span><span class="gt">></span><span class="reg">This is a title</span><span class="lt"><</span><span class="tag">/title</span><span class="gt">></span>
-					<br>
-					<span class="indent"><span class="lt"><</span><span class="tag">/head</span><span class="gt">></span>
-					<br>
-					<span class="indent"><span class="lt"><</span><span class="tag">body</span><span class="gt">></span></span>
-					<br>
-					<span class="indent2"><span class="lt"><</span><span class="tag">h1</span><span class="gt">></span></span><span class="reg">This is a header</span><span><span class="lt"><</span><span class="tag">/h1</span><span class="gt">></span></span>
-					<br>
-					<span class="indent2"><span class="lt"><</span><span class="tag">div</span><span class="gt">></span></span><span class="reg">This is a div</span><span><span class="lt"><</span><span class="tag">/div</span><span class="gt">></span></span>
-					<br>
-					<span class="indent"><span class="lt"><</span><span class="tag">/body</span><span class="gt">></span></span>
-					<br>
-					<span><span class="lt"><</span><span class="tag">/html</span><span class="gt">></span></span>
+				<div class="editor">
+					<div class="title">HTML Example:</div>
+					<div class="code">
+						<textarea id="code">
+							<h1>this is a test</h1>
+						</textarea>
+					</div>
+					<iframe id="code_result" width="100%" height="500px" style="border: 5px solid gray">
+					</iframe>
 				</div>
 			</div>
 			<br>
 			<div class="editor">
 				<div class="title">CSS Example:</div>
 				<div class="code">
-					<span class="sel">div </span><span class="reg">{</span>
-					<br>
-					<span class="attr indent">background-color</span><span class="reg">:</span> <span class="val">blue</span><span class="reg">;</span>
-					<br>
-					<span class="attr indent">color</span><span class="reg">:</span> <span class="val">white</span><span class="reg">;</span>
-					<br><span class="reg">}</span>
-					<br>
-					<br>
-					<span class="sel">body </span><span class="reg">{</span>
-					<br>
-					<span class="attr indent">border</span><span class="reg">:</span> <span class="val">2px dashed orange</span><span class="reg">;</span>
-					<br><span class="reg">}</span>
 				</div>
 			</div>
 			<br>
 			<div class="editor">
 				<div class="title">JavaScript Example:</div>
 				<div class="code">
-					<span><span class="lt"><</span><span class="tag">button </span><span class="attr">onclick</span><span class="val">="colorChange()"></span><span class="reg">Change Color!</span><span><span class="lt"><</span><span class="tag">/button</span><span class="gt">></span></span>
-					<br>
-					<br>
-					<span><span class="lt"><</span><span class="tag">script</span><span class="gt">></span></span>
-					<br>
-					<span class="indent"><span class="val">function </span><span class="reg">{</span></span>
-					<br>
-					<span class="val indent2">let </span><span class="reg">para = document.getElementById(</span><span class="sel">"paragraph"</span><span class="reg">);</span>
-					<br>
-					<span class="reg indent2">para.style.color =</span><span class="sel">"red"</span><span class="reg">;</span>
-					<br>
-					<span class="reg indent">}</span>
-					<br>
-					<span><span class="lt"><</span><span class="tag">/script</span><span class="gt">></span></span>
 				</div>
 			</div>
-			</div>
-		</section>
-
-		<section>
-			<div class="header">The Editor</div>
-			<div class="text">Code with HTML, CSS, and JavaScript</div>
-		</section>
-
-		<section>
-			<div class="header">The Editor</div>
-			<div class="text">With, HTML, CSS and JavaScript</div>
-		</section>
 	</div>
-	<script src="./script.js">
+	</section>
+
+	<section>
+		<div class="header">The Editor</div>
+		<div class="text">Code with HTML, CSS, and JavaScript</div>
+	</section>
+
+	<section>
+		<div class="header">The Editor</div>
+		<div class="text">With, HTML, CSS and JavaScript</div>
+	</section>
+	</div>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/codemirror.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/xml/xml.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/css/css.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/javascript/javascript.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/htmlmixed/htmlmixed.js'></script>
+	<script src="./script.js" id="rendered-js">
 	</script>
 </body>
 
