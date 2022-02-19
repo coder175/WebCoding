@@ -93,6 +93,16 @@ body {
         text-align: center;
     }
 
+    .smallnav {
+        height: 50px;
+        width: 100%;
+        background-color: red;
+    }
+    .smallnav button {
+        height: 100%;
+        font-size: 25px;
+    }
+
     .text {
         font-size: 30px;
         vertical-align: middle;
