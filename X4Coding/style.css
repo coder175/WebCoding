@@ -101,6 +101,9 @@ body {
     .smallnav button {
         height: 100%;
         font-size: 25px;
+        border: 0px;
+        background-color: var(--main-color);
+        color: white;
     }
 
     .text {
@@ -141,7 +144,9 @@ body {
     }
 
     .editor {
-        border: 2px solid var(--main-color-dark);
+        border-right: 2px solid var(--main-color-dark);
+        border-left: 2px solid var(--main-color-dark);
+        border-bottom: 2px solid var(--main-color-dark);
         background-color: var(--main-color);
         box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
         line-height: 1.4;
