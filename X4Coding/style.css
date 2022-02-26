@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
-
 * {
     font-family: 'Ubuntu', sans-serif;
     outline: none;
@@ -25,42 +24,6 @@ body {
     height: 50px;
     border-bottom: 2px solid var(--main-color);
     display: flex;
-}
-
-.indent {
-    padding-left: 25px;
-}
-
-.indent2 {
-    padding-left: 50px;
-}
-
-.tag {
-    color: brown;
-}
-
-.lt {
-    color: #0818A8;
-}
-
-.gt {
-    color: #0818A8;
-}
-
-.attr {
-    color: red;
-}
-
-.sel {
-    color: brown;
-}
-
-.val {
-    color: #0818A8;
-}
-
-.reg {
-    color: black;
 }
 
 .arrow {
@@ -97,9 +60,10 @@ body {
     .smallnav {
         height: 50px;
         width: 100%;
-        background-color: red;
+        background-color: black;
         border-top: 2px solid var(--main-color-dark);
     }
+
     .smallnav button {
         padding-left: 10px;
         padding-right: 10px;
@@ -145,6 +109,14 @@ body {
     }
 
     @media screen and (max-width: 1100px) {
+
+
+
+
+
+
+
+
         section:nth-child(2) {
             align-items: center;
             display: block !important;

@@ -5,99 +5,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        /**
- * Tabs
- */
-.tabs {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.tabs label {
-  order: 1;
-  display: block;
-  padding: 1rem 2rem;
-  margin-right: 0.2rem;
-  cursor: pointer;
-  background: #90CAF9;
-  font-weight: bold;
-  transition: background ease 0.2s;
-}
-
-.tabs .tab {
-  order: 99;
-  flex-grow: 1;
-  width: 100%;
-  display: none;
-  padding: 1rem;
-  background: #fff;
-}
-
-.tabs input[type=radio] {
-  display: none;
-}
-
-.tabs input[type=radio]:checked + label {
-  background: #fff;
-}
-
-.tabs input[type=radio]:checked + label + .tab {
-  display: block;
-}
-
-@media (max-width: 45em) {
-  .tabs .tab,
-.tabs label {
-    order: initial;
-  }
-
-  .tabs label {
-    width: 100%;
-    margin-right: 0;
-    margin-top: 0.2rem;
-  }
-}
-/**
- * Generic Styling
-*/
-body {
-  background: #eee;
-  min-height: 100vh;
-  box-sizing: border-box;
-  padding-top: 10vh;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 300;
-  line-height: 1.5;
-  max-width: 60rem;
-  margin: 0 auto;
-  font-size: 112%;
-}
-    </style>
+    <style>input { display: none; }
+        input + label { display: inline-block }
+        
+        input ~ .tab { display: none }
+        #tab1:checked ~ .tab.content1,
+        #tab2:checked ~ .tab.content2,
+        #tab3:checked ~ .tab.content3,
+        #tab4:checked ~ .tab.content4,
+        #tab5:checked ~ .tab.content5 { display: block; }
+        
+        input + label {
+          border: 1px solid #999;
+          background: #EEE;
+          padding: 4px 12px;
+          border-radius: 4px 4px 0 0;
+          position: relative;
+          top: 1px;
+        }
+        input:checked + label {
+          background: #FFF;
+          border-bottom: 1px solid transparent;
+        }
+        input ~ .tab {
+          border-top: 1px solid #999;
+          padding: 12px;
+        }</style>
 </head>
 <body>
-    <div class="tabs">
-        <input type="radio" name="tabs" id="tabone" checked="checked">
-        <label for="tabone">Tab One</label>
-        <div class="tab">
-          <h1>Tab One Content</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-        
-        <input type="radio" name="tabs" id="tabtwo">
-        <label for="tabtwo">Tab Two</label>
-        <div class="tab">
-          <h1>Tab Two Content</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-        
-        <input type="radio" name="tabs" id="tabthree">
-        <label for="tabthree">Tab Three</label>
-        <div class="tab">
-          <h1>Tab Three Content</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-        </div>
-      </div>
+    <input type="radio" name="tabs" id="tab1" checked />
+<label for="tab1">Tab1</label>
+
+<input type="radio" name="tabs" id="tab2" />
+<label for="tab2">Tab2</label>
+
+<input type="radio" name="tabs" id="tab3" />
+<label for="tab3">Tab3</label>
+
+<input type="radio" name="tabs" id="tab4" />
+<label for="tab4">tab4</label>
+
+<input type="radio" name="tabs" id="tab5" />
+<label for="tab5">tab5</label>
+
+<div class="tab content1">Tab1 Contents</div>
+<div class="tab content2">Tab2 Contents</div>
+<div class="tab content3">Tab3 Contents</div>
+<div class="tab content4">Tab4 Contents</div>
+<div class="tab content5">Tab5 Contents</div>
+
 </body>
 </html>
