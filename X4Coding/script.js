@@ -9,8 +9,6 @@ document.querySelector('.Menu').addEventListener('click', () => {
     }
 });
 
-var doc = document.getElementById('code_result').contentWindow.document;
-var html_value;
 var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
     lineNumbers: false,
     matchBrackets: true,

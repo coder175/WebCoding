@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+
 * {
     font-family: 'Ubuntu', sans-serif;
     outline: none;
@@ -51,40 +52,43 @@ body {
 
 /* Computer */
 @media screen and (min-width: 600px) {
+    @media screen and (max-width: 1100px) {
+        section:nth-child(2) {
+            align-items: center;
+            display: block !important;
+        }
+        editor {
+            width: 300px;
+        }
+    }
+
+    editor {
+        padding: 50px;
+        background-color: #bbbbbb;
+        border-radius: 20px;
+        text-align: left;
+        color: var(--main-color-dark);
+        width: 600px;
+        font-size: 20px;
+    }
+
+    .editorHeader {
+        margin-bottom: 20px;
+        font-size: 30px;
+    }
+
+    #code {
+        width: 500px;
+        height: 300px;
+    }
+
     .header {
         font-size: 90px;
         vertical-align: middle;
         text-align: center;
     }
 
-    .smallnav {
-        height: 50px;
-        width: 100%;
-        background-color: black;
-        border-top: 2px solid var(--main-color-dark);
-    }
-
-    .smallnav button {
-        padding-left: 10px;
-        padding-right: 10px;
-        height: 100%;
-        font-size: 25px;
-        border: 0px;
-        background-color: var(--main-color);
-        color: white;
-    }
-
-    .smallnav button:hover {
-        background-color: #2287d4;
-        color: white;
-    }
-
-    .smallnav button:active {
-        background-color: var(--main-color-dark);
-        color: white;
-    }
-
-    .text {
+    .text1 {
         font-size: 30px;
         vertical-align: middle;
         text-align: center;
@@ -107,66 +111,6 @@ body {
         background-color: #35CE8D;
         color: white;
     }
-
-    @media screen and (max-width: 1100px) {
-
-
-
-
-
-
-
-
-        section:nth-child(2) {
-            align-items: center;
-            display: block !important;
-        }
-
-        .editor {
-            margin: auto;
-            margin-top: 60px;
-            width: 570px;
-        }
-    }
-
-    .editor {
-        border-right: 2px solid var(--main-color-dark);
-        border-left: 2px solid var(--main-color-dark);
-        border-bottom: 2px solid var(--main-color-dark);
-        border-top: none;
-        background-color: var(--main-color);
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-        line-height: 1.4;
-    }
-
-    .code {
-        padding: 10px;
-        width: 97%;
-        display: inline-block;
-        text-align: left;
-        background-color: white;
-        color: black;
-        font-family: 'Source Code Pro', monospace !important;
-        font-size: 15px !important;
-        font-weight: bold;
-        letter-spacing: 1.5px;
-    }
-
-    .title {
-        padding: 10px;
-        background-color: var(--main-color-light);
-        border-top: 2px solid var(--main-color-dark);
-    }
-
-    .heads {
-        padding: 10px;
-    }
-
-
-
-
-
-
 
     .right {
         display: flex;
@@ -193,10 +137,6 @@ body {
     .Icon {
         line-height: 62px;
         width: 80px;
-    }
-
-    .nav div:nth-child(3) {
-        margin-left: auto;
     }
 }
 
