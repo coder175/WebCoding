@@ -64,10 +64,10 @@ body {
 
     editor {
         padding: 50px;
-        background-color: #bbbbbb;
+        background-color: #d8d8d8;
         border-radius: 20px;
         text-align: left;
-        color: var(--main-color-dark);
+        color: var(--main-color);
         width: 600px;
         font-size: 20px;
     }
