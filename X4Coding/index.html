@@ -13,7 +13,7 @@
 	<title>X4Coding</title>
 </head>
 
-<body>
+<body onload="html()">
 	<div class='nav'>
 		<div class="container">
 			<div class='navItem dropdown'>
@@ -71,18 +71,54 @@
 			</div>
 			<editor>
 				<div class="editorHeader">Coding Example:</div>
+				<div class="smallbar">
+					<span class="items" onclick="html()">HTML</span>
+					<span class="items" onclick="css()">CSS</span>
+					<span class="items" onclick="js()">JavaScript</span>
+					<span class="items" onclick="result()">Result</span>
+				</div>
+				<span class="types">
 <textarea id="code">
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Title</title>
-</head>
-<body>
-	<h1>This is a h1</h1>
-	<div>This is a div</div>
-</body>
-</html>
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Title</title>
+	</head>
+	<body>
+		<h1>This is a h1</h1>
+		<div>This is a div</div>
+	</body>
+	</html>
 </textarea>
+				</span>
+
+				<span class="types">
+<textarea id="code1">
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Not Title</title>
+	</head>
+	<body>
+		<h1>This is not a h1</h1>
+		<div>This is not a div</div>
+	</body>
+	</html>
+</textarea>
+				</span>
+
+				<span class="types">
+<textarea id="code2">
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Not Title</title>
+	</head>
+	<body>
+	</body>
+	</html>
+</textarea>
+				</span>
 			</editor>
 		</section>
 	</div>

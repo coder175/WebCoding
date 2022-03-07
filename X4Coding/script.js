@@ -16,9 +16,37 @@ var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
     autoCloseTags: true,
     mode: "htmlmixed",
 });
+
+var editor = CodeMirror.fromTextArea(document.getElementById("code1"), {
+    lineNumbers: false,
+    matchBrackets: true,
+    autoCloseBrackets: true,
+    autoCloseTags: true,
+    mode: "htmlmixed",
+});
+var editor = CodeMirror.fromTextArea(document.getElementById("code2"), {
+    lineNumbers: false,
+    matchBrackets: true,
+    autoCloseBrackets: true,
+    autoCloseTags: true,
+    mode: "htmlmixed",
+});
 function run() {
     html_value = editor.getValue();
     doc.open();
     doc.write(html_value);
     doc.close();
+}
+
+function html() {
+}
+
+function css() {
+}
+
+function js() {
+}
+
+function result() {
+
 }
