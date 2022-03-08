@@ -13,7 +13,7 @@
 	<title>X4Coding</title>
 </head>
 
-<body onload="html()">
+<body>
 	<div class="nav">
 		<div class="container">
 			<div class="navItem dropdown"> Courses
@@ -63,7 +63,7 @@
 				</div>
 				<div id="html" class="tabcontent">
 					<span class="types">
-						<textarea id="code">
+						<textarea id="htmlCode">
 <!DOCTYPE html>
 <html>
 	<head>
@@ -71,42 +71,35 @@
 	</head>
 	<body>
 		<h1>This is a h1</h1>
-		<div>This is a div</div>
+		<div id="div">This is a div</div>
 	</body>
-</html></textarea>
+</html>
+						</textarea>
 					</span>
 				</div>
 				<div id="css" class="tabcontent">
 					<span class="types">
-						<textarea id="code1">
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Not Title</title>
-	</head>
-	<body>
-		<h1>This is not a h1</h1>
-		<div>This is not a div</div>
-	</body>
-</html></textarea>
+						<textarea id="cssCode">
+body {
+	background-color: orange;
+	border: 2px solid red;
+}
+						</textarea>
 					</span>
 				</div>
 				<div id="javascript" class="tabcontent">
 					<span class="types">
-						<textarea id="code2">
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Not Title</title>
-	</head>
-	<body>
-		<h1>djfkdf</h1>
-	</body>
-</html></textarea>
+						<textarea id="jsCode">
+let div = document.getElementById('div');
+div.style.color = "blue";
+					</textarea>
 					</span>
 				</div>
 
 				<div id="result" class="tabcontent">
+					<button>
+						Run <span class="material-icons">keyboard_double_arrow_right</span>
+					</button>
 					<iframe id="resultIframe">
 					</iframe>
 				</div>

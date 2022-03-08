@@ -1,12 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
 
-* {
+body {
     font-family: 'Ubuntu', sans-serif;
     outline: none;
-}
-
-body {
     margin: 0px;
     margin-top: 50px;
 }
@@ -92,10 +89,29 @@ body {
     }
 
     .tabcontent {
+        font-family: 'Source Code Pro', monospace !important;
         transform: translate(-99999px, 0px);
         position: absolute;
         width: 598.5px !important;
         border-top: none;
+    }
+
+    button {
+        border: none;
+        background-color: var(--main-color-light);
+        color: white;
+    }
+
+    button:hover {
+        border: none;
+        background-color: var(--main-color);
+        color: white;
+    }
+
+    button:active {
+        border: none;
+        background-color: var(--main-color-dark);
+        color: white;
     }
 
     #resultIframe {
@@ -119,11 +135,6 @@ body {
     .editorHeader {
         margin-bottom: 20px;
         font-size: 30px;
-    }
-
-    #code {
-        width: 500px;
-        height: 300px;
     }
 
     .header {
@@ -176,6 +187,7 @@ body {
         vertical-align: middle;
         line-height: 50px;
         transition: 0.2s;
+        color: var(--main-color-dark);
     }
 
     .Icon {

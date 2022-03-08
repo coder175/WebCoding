@@ -9,7 +9,7 @@ document.querySelector('.Menu').addEventListener('click', () => {
     }
 });
 
-var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+var editor = CodeMirror.fromTextArea(document.getElementById("htmlCode"), {
     lineNumbers: true,
     matchBrackets: true,
     autoCloseBrackets: true,
@@ -17,19 +17,19 @@ var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
     mode: "htmlmixed",
 });
 
-var editor = CodeMirror.fromTextArea(document.getElementById("code1"), {
+var editor = CodeMirror.fromTextArea(document.getElementById("cssCode"), {
     lineNumbers: true,
     matchBrackets: true,
     autoCloseBrackets: true,
     autoCloseTags: true,
-    mode: "htmlmixed",
+    mode: "css",
 });
-var editor = CodeMirror.fromTextArea(document.getElementById("code2"), {
+var editor = CodeMirror.fromTextArea(document.getElementById("jsCode"), {
     lineNumbers: true,
     matchBrackets: true,
     autoCloseBrackets: true,
     autoCloseTags: true,
-    mode: "htmlmixed",
+    mode: "javascript",
 });
 function run() {
     var startingFirst = `
@@ -48,9 +48,9 @@ var startingLast = `
 </body>
 </html>`
 
-var bodyText = document.getElementById('code').innerText;
-var headText = document.getElementById('code1').innerText;
-var scriptText = document.getElementById('code2').innerText;
+var bodyText = document.getElementById('htmlCode').innerText;
+var headText = document.getElementById('cssCode').innerText;
+var scriptText = document.getElementById('jsCode').innerText;
 var end = startingFirst + headText + startingFirstMiddle + bodyText + startingMiddle + scriptText + startingLast;
 console.log(end);
 }
@@ -69,16 +69,3 @@ function openCity(evt, cityName) {
     document.getElementById(cityName).style.transform = "translate(0px, 0px)";
     evt.currentTarget.className += " active";
   }
-
-  function html() {
-}
-
-function css() {
-}
-
-function js() {
-}
-
-function result() {
-
-}
