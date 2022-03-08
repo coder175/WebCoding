@@ -64,20 +64,45 @@ body {
         }
     }
 
-    .smallbar {
-        width: 100%;
-        height: 50px;
+    .tab {
+        overflow: hidden;
+        background-color: var(--main-color-light);
+    }
+
+    .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+        color: var(--main-color-dark);
+    }
+
+    .tab button:hover {
+        background-color: var(--main-color);
+        color: white;
+    }
+
+    .tab button.active {
         background-color: var(--main-color-dark);
         color: white;
-        display: flex;
     }
 
-    .items {
-        padding: 13px;
+    .tabcontent {
+        transform: translate(-99999px, 0px);
+        position: absolute;
+        width: 598.5px !important;
+        border-top: none;
     }
 
-    .items:hover {
-        background-color: var(--main-color);
+    #resultIframe {
+        width: 600px;
+        height: 300px;
+        border: 0px;
+        background-color: white;
     }
 
     editor {
@@ -88,6 +113,7 @@ body {
         color: var(--main-color);
         width: 600px;
         font-size: 20px;
+        height: 410px !important;
     }
 
     .editorHeader {

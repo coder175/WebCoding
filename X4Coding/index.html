@@ -1,59 +1,44 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="en">
 
 <head>
-	<meta charset='UTF-8'>
-	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
-	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
-	<link href='https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Round' rel='stylesheet'>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Round" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css">
 	</link>
-	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/codemirror.css'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/codemirror.css">
 	<link rel="stylesheet" href="./style.css">
 	<title>X4Coding</title>
 </head>
 
 <body onload="html()">
-	<div class='nav'>
+	<div class="nav">
 		<div class="container">
-			<div class='navItem dropdown'>
-				Courses
-				<span class='material-icons-round arrow'>
-					arrow_drop_down
-				</span>
+			<div class="navItem dropdown"> Courses
+				<span class="material-icons-round arrow"> arrow_drop_down</span>
 			</div>
-			<div class='navItem dropdown'>
-				Tutorials
-				<span class='material-icons-round arrow'>
-					arrow_drop_down
-				</span>
+			<div class="navItem dropdown"> Tutorials
+				<span class="material-icons-round arrow"> arrow_drop_down</span>
 			</div>
-			<div class='navItem dropdown'>
-				Exercises
-				<span class='material-icons-round arrow'>
-					arrow_drop_down
-				</span>
+			<div class="navItem dropdown"> Exercises
+				<span class="material-icons-round arrow"> arrow_drop_down</span>
 			</div>
 		</div>
 		<div class="right">
-			<div class='navItem Icon'>
-				<span class='material-icons-round'>
-					brightness_4
-				</span>
+			<div class="navItem Icon">
+				<span class="material-icons-round"> brightness_4</span>
 			</div>
-			<div class='navItem Icon'>
-				<span class='material-icons-round'>
-					translate
-				</span>
+			<div class="navItem Icon">
+				<span class="material-icons-round"> translate</span>
 			</div>
-			<div class='navItem Icon'>
-				<span class='material-icons-round'>
-					search
-				</span>
+			<div class="navItem Icon">
+				<span class="material-icons-round"> search</span>
 			</div>
 		</div>
-		<div class='navItem Icon Menu'>
-			<span class='material-icons-round menuIcon'>menu</span>
+		<div class="navItem Icon Menu">
+			<span class="material-icons-round menuIcon">menu</span>
 		</div>
 	</div>
 	<div>
@@ -63,7 +48,6 @@
 				<div class="text1">With, HTML, CSS and JavaScript</div>
 			</div>
 		</section>
-
 		<section>
 			<div>
 				<div class="header">The Editor</div>
@@ -71,16 +55,17 @@
 			</div>
 			<editor>
 				<div class="editorHeader">Coding Example:</div>
-				<div class="smallbar">
-					<span class="items" onclick="html()">HTML</span>
-					<span class="items" onclick="css()">CSS</span>
-					<span class="items" onclick="js()">JavaScript</span>
-					<span class="items" onclick="result()">Result</span>
+				<div class="tab">
+					<button class="tablinks" onclick="openCity(event, 'html')">HTML</button>
+					<button class="tablinks" onclick="openCity(event, 'css')">CSS</button>
+					<button class="tablinks" onclick="openCity(event, 'javascript')">JavaScript</button>
+					<button class="tablinks" onclick="openCity(event, 'result')">Result</button>
 				</div>
-				<span class="types">
-<textarea id="code">
-	<!DOCTYPE html>
-	<html>
+				<div id="html" class="tabcontent">
+					<span class="types">
+						<textarea id="code">
+<!DOCTYPE html>
+<html>
 	<head>
 		<title>Title</title>
 	</head>
@@ -88,14 +73,14 @@
 		<h1>This is a h1</h1>
 		<div>This is a div</div>
 	</body>
-	</html>
-</textarea>
-				</span>
-
-				<span class="types">
-<textarea id="code1">
-	<!DOCTYPE html>
-	<html>
+</html></textarea>
+					</span>
+				</div>
+				<div id="css" class="tabcontent">
+					<span class="types">
+						<textarea id="code1">
+<!DOCTYPE html>
+<html>
 	<head>
 		<title>Not Title</title>
 	</head>
@@ -103,43 +88,46 @@
 		<h1>This is not a h1</h1>
 		<div>This is not a div</div>
 	</body>
-	</html>
-</textarea>
-				</span>
-
-				<span class="types">
-<textarea id="code2">
-	<!DOCTYPE html>
-	<html>
+</html></textarea>
+					</span>
+				</div>
+				<div id="javascript" class="tabcontent">
+					<span class="types">
+						<textarea id="code2">
+<!DOCTYPE html>
+<html>
 	<head>
 		<title>Not Title</title>
 	</head>
 	<body>
+		<h1>djfkdf</h1>
 	</body>
-	</html>
-</textarea>
-				</span>
+</html></textarea>
+					</span>
+				</div>
+
+				<div id="result" class="tabcontent">
+					<iframe id="resultIframe">
+					</iframe>
+				</div>
 			</editor>
 		</section>
 	</div>
-
 	<section>
 		<div class="header">The Editor</div>
 		<div class="text">Code with HTML, CSS, and JavaScript</div>
 	</section>
-
 	<section>
 		<div class="header">The Editor</div>
 		<div class="text">With, HTML, CSS and JavaScript</div>
 	</section>
 	</div>
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/codemirror.js'></script>
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/xml/xml.js'></script>
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/css/css.js'></script>
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/javascript/javascript.js'></script>
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/htmlmixed/htmlmixed.js'></script>
-	<script src="./script.js" id="rendered-js">
-	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/codemirror.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/xml/xml.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/css/css.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/javascript/javascript.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.13.4/mode/htmlmixed/htmlmixed.js"></script>
+	<script src="./script.js" id="rendered-js"></script>
 </body>
 
 </html>
