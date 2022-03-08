@@ -32,29 +32,25 @@ var editor = CodeMirror.fromTextArea(document.getElementById("jsCode"), {
     mode: "javascript",
 });
 function run() {
-    var startingFirst = `
+    var end = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>`
-var startingFirstMiddle = `
+<style>
+${document.getElementById('cssCode').innerText}
 </style>
 </head>
-<body>`
-var startingMiddle = `
-<script>`
-var startingLast = `
+<body>
+${document.getElementById('htmlCode').innerText}
+<script>
+${document.getElementById('jsCode').innerText}
 </script>
 </body>
 </html>`
+document.getElementById('resultIframe').srcdoc = "";
+document.getElementById('resultIframe').srcdoc = end;
 
-var bodyText = document.getElementById('htmlCode').innerText;
-var headText = document.getElementById('cssCode').innerText;
-var scriptText = document.getElementById('jsCode').innerText;
-var end = startingFirst + headText + startingFirstMiddle + bodyText + startingMiddle + scriptText + startingLast;
-console.log(end);
 }
-run();
 
 function openCity(evt, cityName) {
     var i, tabcontent, tablinks;
