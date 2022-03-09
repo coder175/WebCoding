@@ -6,6 +6,7 @@ body {
     outline: none;
     margin: 0px;
     margin-top: 50px;
+    transition: all 4s ease;
 }
 
 :root {

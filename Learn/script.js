@@ -13,8 +13,11 @@ function courses() {
     if (courseCheck == 0) {
         document.getElementById('drop1').style.display = "flex";
         courseCheck++;
+        document.getElementById('arrow1').style.transform = "rotate(180deg)";
     } else {
         document.getElementById('drop1').style.display = "none";
         courseCheck--;
+        document.getElementById('arrow1').style.transform = "rotate(0deg)";
+
     }
 }
