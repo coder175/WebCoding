@@ -49,15 +49,13 @@ body {
 }
 
 .drop {
-    width: 100vw;
+    width: 100%;
     display: flex;
     border-bottom: 2px solid var(--main-color);
     color: var(--main-color);
     flex-flow: row wrap;
     justify-content: space-around;
-}
-.minContainer:nth-child(5) {
-    border: none !important;
+    display: none;
 }
 
 .drop .minContainer {
