@@ -23,3 +23,12 @@ function drop(childLocation) {
         checkChildLocation = childLocation;
     }
 }
+
+function IDtoogleDisplay(id) {
+    id = id.substring(1);
+    if (document.getElementById(id).style.display == "block") {
+        document.getElementById(id).style.display = "none";
+    } else {
+        document.getElementById(id).style.display = "block";
+    }
+}
