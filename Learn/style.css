@@ -5,8 +5,13 @@ body {
     font-family: 'Ubuntu', sans-serif;
     outline: none;
     margin: 0px;
-    margin-top: 50px;
-    transition: all 1s linear;
+    margin-top: 52px;
+    transition: all 0s linear;
+    overflow-x: hidden;
+}
+
+div.nav {
+    transition: all 0.3s linear;
 }
 
 :root {
@@ -39,13 +44,13 @@ body {
     height: 25px;
     position: fixed;
     right: 0;
-    top: 50px;
+    top: 52px;
     display: none;
 }
 
-#translate > {
+#translate> {
     position: fixed;
-    top: 50px;
+    top: 52px;
 }
 
 .navItem:not(.container):hover {
@@ -66,6 +71,7 @@ body {
 }
 
 .drop {
+    background-color: white;
     width: 100%;
     display: flex;
     border-bottom: 2px solid var(--main-color);
@@ -74,7 +80,7 @@ body {
     justify-content: space-around;
     display: none;
     position: fixed;
-    top: 50px;
+    top: 52px;
     z-index: 8;
 }
 
@@ -101,8 +107,84 @@ body {
     font-size: small;
 }
 
+#shape1 {
+    position: absolute;
+    left: 40vw;
+    top: 200px;
+    transform: rotate(65deg);
+}
+
+.tri {
+    width: 0;
+    height: 0;
+    border-left: 60px solid transparent;
+    border-right: 60px solid transparent;
+    border-bottom: 100px solid red;
+    opacity: 0.7;
+}
+
+.squ {
+    width: 100px;
+    height: 100px;
+    background: red;
+    opacity: 0.7;
+}
+
+.cir {
+    width: 100px;
+    height: 100px;
+    background: red;
+    border-radius: 50%;
+    opacity: 0.7;
+}
+
 /* Computer */
 @media screen and (min-width: 600px) {
+    section {
+        width: 100%;
+        height: 550px;
+        background-color: white;
+        color: var(--main-color);
+        text-align: center;
+    }
+
+    hero, header {
+        position: relative;
+        z-index: 2;
+    }
+
+    @media screen and (min-width: 700px) {
+        hero {
+            font-size: 77px;
+            font-weight: bolder;
+            text-align: center;
+            display: block;
+            padding-bottom: 10px;
+
+        }
+
+        header {
+            font-size: 20px;
+            text-align: center;
+            display: block;
+        }
+    }
+
+    @media screen and (min-width: 1000px) {
+        hero {
+            font-size: 110px;
+            font-weight: bolder;
+            text-align: center;
+            display: block;
+            padding-bottom: 15px;
+        }
+
+        header {
+            font-size: 30px;
+            text-align: center;
+            display: block;
+        }
+    }
 
     .right {
         display: flex;
@@ -147,7 +229,7 @@ body {
         color: black;
         width: 120px;
         height: 150px;
-        margin-top: 50px;
+        margin-top: 52px;
         right: 0;
         position: absolute;
         border-right: var(--main-color);
