@@ -5,7 +5,7 @@ body {
     font-family: 'Ubuntu', sans-serif;
     outline: none;
     margin: 0px;
-    margin-top: 52px;
+    padding-top: 52px;
     transition: all 0s linear;
     overflow-x: hidden;
 }
@@ -111,7 +111,39 @@ div.nav {
     position: absolute;
     left: 40vw;
     top: 200px;
-    transform: rotate(65deg);
+    transform: rotate(70deg);
+    animation: move 10s ease-in-out infinite;
+    transform-origin: 50% 50%;
+}
+
+@keyframes move {
+    0% {
+        transform: translate(0vw, 0px);
+    }
+
+    18% {
+        transform: translate(-1vw, 20px);
+    }
+
+    20% {
+        transform: translate(-1vw, 20px);
+    }
+
+    38% {
+        transform: translate(1vw, 0px);
+    }
+
+    40% {
+        transform: translate(1vw, 0px);
+    }
+
+    98% {
+        transform: translate(0vw, 0px);
+    }
+
+    100% {
+        transform: translate(0vw, 0px);
+    }
 }
 
 .tri {
