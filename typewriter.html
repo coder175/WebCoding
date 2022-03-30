@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <p id="text"></p>
+
+    <script>
+        var txt = 'HTML';
+        var speed = 150;
+        var deleteSpeed = 100;
+        var j = 0;
+        var txtCut = txt.slice(0, -1);
+        function typeWriter() {
+            for (var i = 0;i < txt.length; i++) {
+                document.getElementById("text").innerHTML += txt.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+                typeDelete()
+        }
+        function typeDelete() {
+            document.getElementById('text').innerHTML = txtCut;
+            txtCut = txtCut.slice(0, -1);
+            if (j <= txt.length) {
+                setTimeout(typeDelete, deleteSpeed);
+                j++;
+            }
+        }
+        setTimeout(function () {
+
+            typeWriter();
+        }, 500); 
+    </script>
+
+</body>
+
+</html>

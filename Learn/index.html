@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+	<meta charset='UTF-8'>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+	<title>Learning - The Place to Learn</title>
+	<!-- <link rel="shortcut icon" href="./favicon.jpeg" type="image/x-icon"> -->
+	<link href='https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Round' rel='stylesheet'>
+
+	<link rel='stylesheet' href='./style.css'>
+</head>
+
+<body>
+	<div class='nav'>
+		<div class='container'>
+			<div class='navItem dropdown' onclick='drop(1)'> Courses
+				<span class='material-icons-round arrow' id='arrow1'> arrow_drop_down</span>
+			</div>
+			<div class='navItem dropdown' onclick='drop(2)'> Tutorials
+				<span class='material-icons-round arrow' id='arrow2'> arrow_drop_down</span>
+			</div>
+			<div class='navItem dropdown' onclick='drop(3)'> Exercises
+				<span class='material-icons-round arrow' id='arrow3'> arrow_drop_down</span>
+			</div>
+		</div>
+		<div class='right'>
+			<div class='navItem Icon'>
+				<span class='material-icons-round'> brightness_4</span>
+			</div>
+			<div class='navItem Icon' onclick="IDtoogleDisplay('Etranslate')">
+				<span class='material-icons-round'> translate</span>
+			</div>
+			<div class='navItem Icon'>
+				<span class='material-icons-round'> search</span>
+			</div>
+		</div>
+		<div class='navItem Icon Menu'>
+			<span class='material-icons-round menuIcon'>menu</span>
+		</div>
+	</div>
+	<div id="translate">
+		<div id="google_translate_element"></div>
+	</div>
+	<div class='containerDropdown'>
+		<div class='drop' id='drop1'>
+			<div class='minContainer'>
+				<div class='conHeader'>Coding123</div>
+				<li class='item'>Learn HTML</li>
+				<li class='item'>Learn CSS</li>
+				<li class='item'>Learn JavaScript</li>
+			</div>
+
+
+			<div class='minContainer'>
+				<div class='conHeader'>Math: Grades 2 - 8</div>
+				<li class='item'>2rd Grade Math</li>
+				<li class='item'>3rd Grade Math</li>
+				<li class='item'>4rd Grade Math</li>
+				<li class='item'>5rd Grade Math</li>
+				<li class='item'>6rd Grade Math</li>
+				<li class='item'>7rd Grade Math</li>
+				<li class='item'>8rd Grade Math</li>
+			</div>
+
+
+
+			<div class='minContainer'>
+				<div class='conHeader'>Language</div>
+				<div class='item'>1</div>
+				<div class='item'>2</div>
+				<div class='item'>3</div>
+			</div>
+
+
+
+			<div class='minContainer'>
+				<div class='conHeader'>Science</div>
+				<div class='item'>1</div>
+				<div class='item'>2</div>
+				<div class='item'>3</div>
+			</div>
+
+
+			<div class='minContainer'>
+				<div class='conHeader'>Social Studies</div>
+				<div class='item'>1</div>
+				<div class='item'>2</div>
+				<div class='item'>3</div>
+			</div>
+
+		</div>
+		<div class='drop' id='drop2'>
+			<div class='minContainer'>
+				<div class='conHeader'>Coding</div>
+				<li class='item'>Learn HTML</li>
+				<li class='item'>Learn CSS</li>
+				<li class='item'>Learn JavaScript</li>
+			</div>
+
+
+			<div class='minContainer'>
+				<div class='conHeader'>Math: Grades 2 - 8</div>
+				<li class='item'>2rd Grade Math</li>
+				<li class='item'>3rd Grade Math</li>
+				<li class='item'>4rd Grade Math</li>
+				<li class='item'>5rd Grade Math</li>
+				<li class='item'>6rd Grade Math</li>
+				<li class='item'>7rd Grade Math</li>
+				<li class='item'>8rd Grade Math</li>
+			</div>
+
+
+
+			<div class='minContainer'>
+				<div class='conHeader'>Language</div>
+				<div class='item'>1</div>
+				<div class='item'>2</div>
+				<div class='item'>3</div>
+			</div>
+
+
+
+			<div class='minContainer'>
+				<div class='conHeader'>Science</div>
+				<div class='item'>1</div>
+				<div class='item'>2</div>
+				<div class='item'>3</div>
+			</div>
+
+
+			<div class='minContainer'>
+				<div class='conHeader'>Social Studies</div>
+				<div class='item'>1</div>
+				<div class='item'>2</div>
+				<div class='item'>3</div>
+			</div>
+
+		</div>
+		<div class='drop' id='drop3'>
+			<div class='minContainer'>
+				<div class='conHeader'>Coding12</div>
+				<li class='item'>Learn HTML</li>
+				<li class='item'>Learn CSS</li>
+				<li class='item'>Learn JavaScript</li>
+			</div>
+
+
+			<div class='minContainer'>
+				<div class='conHeader'>Math: Grades 2 - 8</div>
+				<li class='item'>2rd Grade Math</li>
+				<li class='item'>3rd Grade Math</li>
+				<li class='item'>4rd Grade Math</li>
+				<li class='item'>5rd Grade Math</li>
+				<li class='item'>6rd Grade Math</li>
+				<li class='item'>7rd Grade Math</li>
+				<li class='item'>8rd Grade Math</li>
+			</div>
+
+
+
+			<div class='minContainer'>
+				<div class='conHeader'>Language</div>
+				<div class='item'>1</div>
+				<div class='item'>2</div>
+				<div class='item'>3</div>
+			</div>
+
+
+
+			<div class='minContainer'>
+				<div class='conHeader'>Science</div>
+				<div class='item'>1</div>
+				<div class='item'>2</div>
+				<div class='item'>3</div>
+			</div>
+
+
+			<div class='minContainer'>
+				<div class='conHeader'>Social Studies</div>
+				<div class='item'>1</div>
+				<div class='item'>2</div>
+				<div class='item'>3</div>
+			</div>
+
+		</div>
+	</div>
+	<content>
+		<div class="tri" id="shape1"></div>
+		<div class="squ"></div>
+		<div class="cir"></div>
+		<section>
+			<hero>LEARN to</hero>
+			<header>With Learning</header>
+		</section>
+	</content>
+	<script src='./script.js'></script>
+	<script type="text/javascript">
+		function googleTranslateElementInit() {
+			new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
+		}
+	</script>
+	<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+		type="text/javascript"></script>
+</body>
+
+</html>
