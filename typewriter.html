@@ -6,31 +6,35 @@
     <p id="text"></p>
 
     <script>
-        var txt = 'HTML';
-        var speed = 150;
-        var deleteSpeed = 100;
-        var j = 0;
-        var txtCut = txt.slice(0, -1);
-        function typeWriter() {
-            for (var i = 0;i < txt.length; i++) {
-                document.getElementById("text").innerHTML += txt.charAt(i);
-                i++;
-                setTimeout(typeWriter, speed);
-            }
-                typeDelete()
+        var typewriter = {
+            txt: ['HTML', 'CSS', 'JavaScript'],
+            speed: 150,
+            deleteSpeed: 150,
+            j: 0,
+            i: 0,
+            x:0
         }
+
+        for (var placeholder = 0; typewriter.x < typewriter.txt.length; placeholder++) {
+            var txtCut = typewriter.txt[typewriter.x].slice(0, -1);
+            typeWriter();
+        }
+        function typeWriter() {
+            if (typewriter.j < typewriter.txt[typewriter.x].length) {
+                document.getElementById("text").innerHTML += typewriter.txt[typewriter.x].charAt(typewriter.j);
+                setTimeout(typeWriter, typewriter.speed);
+                typewriter.j++;
+            } else typeDelete();
+        }
+
         function typeDelete() {
             document.getElementById('text').innerHTML = txtCut;
             txtCut = txtCut.slice(0, -1);
-            if (j <= txt.length) {
-                setTimeout(typeDelete, deleteSpeed);
-                j++;
+            if (typewriter.i <= typewriter.txt[typewriter.x].length) {
+                setTimeout(typeDelete, typewriter.deleteSpeed);
+                typewriter.i++;
             }
         }
-        setTimeout(function () {
-
-            typeWriter();
-        }, 500); 
     </script>
 
 </body>
