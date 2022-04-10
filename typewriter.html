@@ -1,40 +1,73 @@
 <!DOCTYPE html>
 <html>
 
-<body>
-
-    <p id="text"></p>
-
-    <script>
-        var typewriter = {
-            txt: ['HTML', 'CSS', 'JavaScript'],
-            speed: 150,
-            deleteSpeed: 150,
-            j: 0,
-            i: 0,
-            x:0
+<head>
+    <style>
+        .blink {
+            animation: blink 0.7s infinite;
+            margin-left: -8px;
         }
 
-        for (var placeholder = 0; typewriter.x < typewriter.txt.length; placeholder++) {
-            var txtCut = typewriter.txt[typewriter.x].slice(0, -1);
-            typeWriter();
-        }
-        function typeWriter() {
-            if (typewriter.j < typewriter.txt[typewriter.x].length) {
-                document.getElementById("text").innerHTML += typewriter.txt[typewriter.x].charAt(typewriter.j);
-                setTimeout(typeWriter, typewriter.speed);
-                typewriter.j++;
-            } else typeDelete();
-        }
-
-        function typeDelete() {
-            document.getElementById('text').innerHTML = txtCut;
-            txtCut = txtCut.slice(0, -1);
-            if (typewriter.i <= typewriter.txt[typewriter.x].length) {
-                setTimeout(typeDelete, typewriter.deleteSpeed);
-                typewriter.i++;
+        @keyframes blink {
+            to {
+                opacity: .0;
             }
         }
+
+        .flex {
+            display: flex;
+        }
+
+        .type {
+            font-size: 20px;
+            padding: 0.1em;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <script>
+        const words = ["HTML", "CSS", "JavaScript"];
+        let i = 0;
+        let timer;
+
+        function typingEffect() {
+            let word = words[i].split("");
+            var loopTyping = function () {
+                if (word.length > 0) {
+                    document.getElementById('word').innerHTML += word.shift();
+                } else {
+                    setTimeout(deletingEffect, 1000);
+                    return false;
+                };
+                timer = setTimeout(loopTyping, 180);
+            };
+            loopTyping();
+        };
+
+        function deletingEffect() {
+            let word = words[i].split("");
+            var loopDeleting = function () {
+                if (word.length > 0) {
+                    word.pop();
+                    document.getElementById('word').innerHTML = word.join("");
+                } else {
+                    if (words.length > (i + 1)) {
+                        i++;
+                    } else {
+                        i = 0;
+                    };
+                    typingEffect();
+                    return false;
+                };
+                timer = setTimeout(loopDeleting, 80);
+            };
+            loopDeleting();
+        };
+
+        typingEffect(); Î
     </script>
 
 </body>

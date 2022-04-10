@@ -148,7 +148,8 @@ div.nav {
         text-align: center;
     }
 
-    hero, header {
+    hero,
+    header {
         position: relative;
         z-index: 2;
     }
@@ -265,4 +266,20 @@ div.nav {
         line-height: 62px;
         width: 60px;
     }
+}
+
+.blink {
+    animation: blink 0.7s infinite;
+    margin-left: -4px;
+}
+
+@keyframes blink {
+    to {
+        opacity: .0;
+    }
+}
+
+hero {
+    display: flex;
+    justify-content: center;
 }
