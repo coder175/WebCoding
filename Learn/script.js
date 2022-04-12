@@ -33,7 +33,7 @@ function IDtoogleDisplay(id) {
     }
 }
 
-const words = ["HTML", "CSS", "JavaScript"];
+const words = [" Code", " do Math", " Multiply Numbers", ];
 let i = 0;
 let timer;
 
@@ -63,7 +63,7 @@ function deletingEffect() {
             } else {
                 i = 0;
             };
-            typingEffect();
+            setTimeout(typingEffect, 500);
             return false;
         };
         timer = setTimeout(loopDeleting, 70);

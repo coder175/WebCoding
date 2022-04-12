@@ -16,7 +16,7 @@ div.nav {
 
 :root {
     --main-color-light: #70caff;
-    --main-color: #279AF1;
+    --main-color: #279af1;
     --main-color-dark: #006cbe;
 }
 
@@ -282,4 +282,9 @@ div.nav {
 hero {
     display: flex;
     justify-content: center;
+}
+
+.typewriter {
+    font-size: 1em;
+    color: #FE4A49;
 }
