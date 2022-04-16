@@ -8,6 +8,7 @@ body {
     padding-top: 52px;
     transition: all 0s linear;
     overflow-x: hidden;
+    background-color: white;
 }
 
 div.nav {
@@ -154,38 +155,36 @@ div.nav {
         z-index: 2;
     }
 
-    @media screen and (min-width: 700px) {
-        hero {
-            font-size: 77px;
-            font-weight: bolder;
-            text-align: center;
-            display: block;
-            padding-bottom: 10px;
+                        @media screen and (min-width: 700px) {
+                            hero {
+                                font-weight: bolder;
+                                text-align: center;
+                                display: block;
+                                padding-bottom: 10px;
 
-        }
+                            }
 
-        header {
-            font-size: 20px;
-            text-align: center;
-            display: block;
-        }
-    }
+                            header {
+                                text-align: center;
+                                display: block;
+                            }
+                        }
 
-    @media screen and (min-width: 1000px) {
-        hero {
-            font-size: 110px;
-            font-weight: bolder;
-            text-align: center;
-            display: block;
-            padding-bottom: 15px;
-        }
+                        @media screen and (min-width: 1000px) {
+                            hero {
+                                font-size: 100px;
+                                font-weight: bolder;
+                                text-align: center;
+                                display: block;
+                                padding-bottom: 15px;
+                            }
 
-        header {
-            font-size: 30px;
-            text-align: center;
-            display: block;
-        }
-    }
+                            header {
+                                font-size: 30px;
+                                text-align: center;
+                                display: block;
+                            }
+                        }
 
     .right {
         display: flex;
@@ -270,7 +269,7 @@ div.nav {
 
 .blink {
     animation: blink 0.7s infinite;
-    margin-left: -4px;
+    margin-left: -25px;
 }
 
 @keyframes blink {
@@ -284,7 +283,7 @@ hero {
     justify-content: center;
 }
 
-.typewriter {
-    font-size: 1em;
-    color: #FE4A49;
+.keep {
+    font-size: .8em;
+            /* #FE4A49 */
 }

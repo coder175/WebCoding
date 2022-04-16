@@ -33,7 +33,7 @@ function IDtoogleDisplay(id) {
     }
 }
 
-const words = [" Code", " do Math", " Multiply Numbers", ];
+const words = [" Make Web Pages", " Multiply Numbers", " Multiply Numbers", ];
 let i = 0;
 let timer;
 
