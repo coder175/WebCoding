@@ -25,7 +25,7 @@
 
 <body>
     <div id='myDiv' style='color: white;background-color: blue;'>Numbers Here</div>
-    <input type='number' id='input1' oninput='fibonacciProgram(this.value)' placeholder='Type Some Numbers Here'>
+    <input type='number' id='input1' oninput='fibonacciProgram(this.value - 1)' placeholder='Type Some Numbers Here'>
     <script>
         function fibonacciProgram(numberCount) {
             let resultElement = document.getElementById('myDiv');
@@ -34,19 +34,22 @@
                 resultElement.innerHTML = 'please enter a number';
                 return;
             }
-            let firstBox = 0;
-            let secondBox = 1;
+            let firstBox = BigInt(0);
+            resultElement.innerHTML += firstBox + (', ');
+            let secondBox = BigInt(1);
+            resultElement.innerHTML += secondBox + (', ');
             let swichBox;
-            let entries = [];
-            entries.push(secondBox);
+            //let entries = [];
+            //entries.push(secondBox);
             while (numberCount > 1) {
                 swichBox = firstBox + secondBox;
-                entries.push(swichBox);
+                resultElement.innerHTML += swichBox + (', ');
                 firstBox = secondBox;
                 secondBox = swichBox;
                 numberCount--;
+                
             }
-            resultElement.innerHTML = entries.join(', ');
+            
         }
     </script>
 </body>
