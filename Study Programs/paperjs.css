@@ -1,8 +1,0 @@
-#myCanvas {
-    width: calc(100vw - 15px);
-    height: calc(100vh - 15px);
-}
-
-body {
-    margin: 0px;
-}

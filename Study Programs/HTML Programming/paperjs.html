@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Hello, World</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.15/paper-full.min.js"></script>
     <link rel="stylesheet" href="./paperjs.css">
+    <style>
+        #myCanvas {
+            width: calc(100vw - 15px);
+            height: calc(100vh - 15px);
+        }
+
+        body {
+            margin: 0px;
+        }
+    </style>
 </head>
+
 <body>
     <canvas id="myCanvas"></canvas>
     <script type="text/paperscript" canvas="myCanvas" src="./paperjs.js"></script>
 </body>
+
 </html>
