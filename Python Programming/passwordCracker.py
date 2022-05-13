@@ -1,19 +1,44 @@
-from itertools import permutations
+#All of the functions we need come automatically with python but do need to be imported.
+import itertools
+import time
 import random
+num = ("0123456789")
 amount = input('How many digits do you want the secret password to be? ')
 while not amount.isdigit():
     print('Please Give a number')
     amount = input('How many digits do you want the secret password to be? ')
 amount = int(amount)
-amount = amount - 1
-y = '1'
+password = ''
 for x in range(amount):
-    y = y + '0'
-password = random.randint(int(y), int(y) * 9)
+    password = password + str(random.randint(0, 9))
 print(password)
+start = time.time()
+counter = 1
+charNum = 1
 
-for z in permutations([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], amount + 1):
-    randomNumber = ''.join(str(z))
-    print(z)
-    if randomNumber == password:
-        print('Password Cracked! it is: ' + str(z))
+#This stops the program once it gets to 25 chars (most people would run out of patience WAY before that
+#But if you feel the need you can increase the number.
+for charNum in range(25):
+    passwords = (itertools.product(num, repeat = charNum))
+    print("\n \n")
+    print("currently working on passwords with ", charNum, " chars")
+    print("It has been ", "{:,}".format(round(time.time() - start)), " seconds!")
+    print("We have tried ", "{:,}".format(counter), " possible passwords!")
+    for i in passwords:
+        counter += 1
+        i = str(i)
+        i = i.replace("[", "")
+        i = i.replace("]", "")
+        i = i.replace("'", "")
+        i = i.replace(" ", "")
+        i = i.replace(",", "")
+        i = i.replace("(", "")
+        i = i.replace(")", "")
+        if i == password:
+            end = round(time.time() - start)
+            timetaken = end - start
+            print('\n \n')
+            print('I used ' + "{:,}".format(counter) + ' tries.')
+            print('I used ' + "{:,}".format(end) + ' seconds to find the password.')
+            print('Also the password is ' + "{:,}".format(int(i)))
+            exit()
