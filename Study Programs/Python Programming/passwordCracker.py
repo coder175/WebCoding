@@ -1,4 +1,3 @@
-#All of the functions we need come automatically with python but do need to be imported.
 import itertools
 import time
 import random

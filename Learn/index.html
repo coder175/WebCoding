@@ -8,11 +8,13 @@
 	<title>Learning - The Place to Learn</title>
 	<!-- <link rel="shortcut icon" href="./favicon.jpeg" type="image/x-icon"> -->
 	<link href='https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Round' rel='stylesheet'>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.15/paper-full.min.js"></script>
 	<link rel='stylesheet' href='./style.css'>
 </head>
 
 <body>
+	<canvas id="myCanvas"></canvas>
+    <script type="text/paperscript" canvas="myCanvas" src="./shapes.js"></script>
 	<div class='nav'>
 		<div class='container'>
 			<div class='navItem dropdown' onclick='drop(1)'> Courses

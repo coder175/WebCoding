@@ -15,6 +15,14 @@ div.nav {
     transition: all 0.3s linear;
 }
 
+#myCanvas {
+    opacity: 0.7;
+    position: absolute;
+    z-index: -10;
+    width: calc(100vw + 100px);
+    height: 580px;
+}
+
 :root {
     --main-color-light: #70caff;
     --main-color: #279af1;
@@ -47,6 +55,7 @@ div.nav {
     right: 0;
     top: 52px;
     display: none;
+    z-index: 10;
 }
 
 #translate> {
@@ -108,43 +117,12 @@ div.nav {
     font-size: small;
 }
 
-#shape1 {
-    position: absolute;
-    left: 40vw;
-    top: 200px;
-}
-
-
-.tri {
-    width: 0;
-    height: 0;
-    border-left: 60px solid transparent;
-    border-right: 60px solid transparent;
-    border-bottom: 100px solid red;
-    opacity: 0.7;
-}
-
-.squ {
-    width: 100px;
-    height: 100px;
-    background: red;
-    opacity: 0.7;
-}
-
-.cir {
-    width: 100px;
-    height: 100px;
-    background: red;
-    border-radius: 50%;
-    opacity: 0.7;
-}
-
 /* Computer */
 @media screen and (min-width: 600px) {
     section {
         width: 100%;
         height: 550px;
-        background-color: white;
+        background-color: transparent;
         color: var(--main-color);
         text-align: center;
     }
@@ -155,36 +133,36 @@ div.nav {
         z-index: 2;
     }
 
-                        @media screen and (min-width: 700px) {
-                            hero {
-                                font-weight: bolder;
-                                text-align: center;
-                                display: block;
-                                padding-bottom: 10px;
+    @media screen and (min-width: 700px) {
+        hero {
+            font-weight: bolder;
+            text-align: center;
+            display: block;
+            padding-bottom: 10px;
 
-                            }
+        }
 
-                            header {
-                                text-align: center;
-                                display: block;
-                            }
-                        }
+        header {
+            text-align: center;
+            display: block;
+        }
+    }
 
-                        @media screen and (min-width: 1000px) {
-                            hero {
-                                font-size: 100px;
-                                font-weight: bolder;
-                                text-align: center;
-                                display: block;
-                                padding-bottom: 15px;
-                            }
+    @media screen and (min-width: 1000px) {
+        hero {
+            font-size: 100px;
+            font-weight: bolder;
+            text-align: center;
+            display: block;
+            padding-bottom: 15px;
+        }
 
-                            header {
-                                font-size: 30px;
-                                text-align: center;
-                                display: block;
-                            }
-                        }
+        header {
+            font-size: 30px;
+            text-align: center;
+            display: block;
+        }
+    }
 
     .right {
         display: flex;
@@ -285,5 +263,5 @@ hero {
 
 .keep {
     font-size: .8em;
-            /* #FE4A49 */
+    /* #FE4A49 */
 }
