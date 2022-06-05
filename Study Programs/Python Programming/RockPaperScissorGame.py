@@ -1,9 +1,6 @@
 import random
 import time
-from xml.etree.ElementTree import tostring
-from simple_chalk import chalk, green
-from simple_chalk import chalk, red
-from simple_chalk import chalk, yellow
+from simple_chalk import green, red, yellow
 
 
 def RPSGame():
