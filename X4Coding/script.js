@@ -10,6 +10,7 @@ document.querySelector('.Menu').addEventListener('click', () => {
 });
 
 var editor = CodeMirror.fromTextArea(document.getElementById("htmlCode"), {
+    matchClosingTags: true,
     lineNumbers: true,
     matchBrackets: true,
     autoCloseBrackets: true,
