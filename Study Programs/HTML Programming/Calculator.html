@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="en">
 
 <head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <link href='fonts.googleapis.com/css?family=Roboto:700'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="fonts.googleapis.com/css?family=Roboto:700">
     <title>Calculator</title>
     <style>
         * {
@@ -43,9 +43,6 @@
         .calculator-keypad {
             text-align: center;
             display: inline-block;
-            position: absolute;
-            left: 600px;
-            top: 20px;
             width: 500px;
             height: 400px;
         }
@@ -115,7 +112,6 @@
             position: relative;
             text-align: right;
             z-index: 9;
-            left: 20px;
             color: grey;
             padding: 0px 10px;
             padding-top: 40px;
@@ -126,10 +122,10 @@
             cursor: context-menu;
             margin: 0px !important;
             margin-top: 10px !important;
-            margin-bottom: 40px !important;
+            margin-bottom: 10px !important;
             background-color: white;
-            height: 400px;
-            width: 500px;
+            height: 200px;
+            width: 400px;
             max-height: 400px;
         }
 
@@ -160,9 +156,7 @@
             opacity: 1;
             transition: opacity 0.6s;
             margin-bottom: 15px;
-            position: absolute;
             z-index: 200;
-            width: 97%;
             display: none;
         }
 
@@ -187,52 +181,52 @@
             right: 0;
             margin-right: 20px;
         }
+
+        .calculator {
+            width: 500px;
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
-    <span class='calculator-answer'>
-        <div id='answerthis'>0</div>
-    </span>
-    <span class='calculator-keypad'>
-        <input type='button' value='⌫' class='btn1' id='back' onclick='clearJustLast()'>
-        <input type='button' value='CE' class='btn1' id='clear' onclick='clearAnswer()'>
-        <input type='button' value='&nbsp;(&nbsp;' class='btn1' id='clear' onclick='openParentheses()'>
-        <input type='button' value='&nbsp;)&nbsp;' class='btn1' id='clear' onclick='closeParentheses()'>
+    <div class="calculator">
+        <span class="calculator-answer">
+            <div id="answerthis">0</div>
+        </span>
+        <span class="calculator-keypad">
+            <input type="button" value="⌫" class="btn1" id="back" onclick="clearJustLast()">
+            <input type="button" value="CE" class="btn1" id="clear" onclick="clearAnswer()">
+            <input type="button" value="&nbsp;(&nbsp;" class="btn1" id="clear" onclick="openParentheses()">
+            <input type="button" value="&nbsp;)&nbsp;" class="btn1" id="clear" onclick="closeParentheses()">
+            <br>
+            <input type="button" class="btn" value="7" id="btn" onclick="trigger7()">
+            <input type="button" class="btn" value="8" id="btn1" onclick="trigger8()">
+            <input type="button" class="btn" value="9" id="btn2" onclick="trigger9()">
+            <input type="button" class="btn1" value="+" id="add" onclick="triggerAdd()">
+            <br>
+            <input type="button" class="btn" value="4" id="btn3" onclick="trigger4()">
+            <input type="button" class="btn" value="5" id="btn4" onclick="trigger5()">
+            <input type="button" class="btn" value="6" id="btn5" onclick="trigger6()">
+            <input type="button" class="btn1 nice" value="-" id="minus" onclick="triggerSub()">
+            <br>
+            <input type="button" class="btn" value="1" id="btn6" onclick="trigger1()">
+            <input type="button" class="btn" value="2" id="btn7" onclick="trigger2()">
+            <input type="button" class="btn" value="3" id="btn8" onclick="trigger3()">
+            <input type="button" class="btn1" value="×" id="times" onclick="triggerTimes()">
+            <br>
+            <input type="button" class="btn" value="0" id="btn0" onclick="trigger0()">
+            <input type="button" class="btn" value="." id="btndot" onclick="triggerDot()">
+            <input type="button" class="btn12" value="=" id="equals" onclick="giveAnswer()">
+            <input type="button" class="btn1" value="÷" id="divide" onclick="triggerDivide()">
+            <br>
+        </span>
 
-        <br>
-
-        <input type='button' class='btn' value='7' id='btn' onclick='trigger7()' />
-        <input type='button' class='btn' value='8' id='btn1' onclick='trigger8()' />
-        <input type='button' class='btn' value='9' id='btn2' onclick='trigger9()' />
-        <input type='button' class='btn1' value='+' id='add' onclick='triggerAdd()' />
-
-        <br>
-
-        <input type='button' class='btn' value='4' id='btn3' onclick='trigger4()' />
-        <input type='button' class='btn' value='5' id='btn4' onclick='trigger5()' />
-        <input type='button' class='btn' value='6' id='btn5' onclick='trigger6()' />
-        <input type='button' class='btn1 nice' value='-' id='minus' onclick='triggerSub()' />
-
-        <br>
-
-        <input type='button' class='btn' value='1' id='btn6' onclick='trigger1()' />
-        <input type='button' class='btn' value='2' id='btn7' onclick='trigger2()' />
-        <input type='button' class='btn' value='3' id='btn8' onclick='trigger3()' />
-        <input type='button' class='btn1' value='×' id='times' onclick='triggerTimes()' />
-
-        <br>
-
-        <input type='button' class='btn' value='0' id='btn0' onclick='trigger0()' />
-        <input type='button' class='btn' value='.' id='btndot' onclick='triggerDot()' />
-        <input type='button' class='btn12' value='=' id='equals' onclick='giveAnswer()' />
-        <input type='button' class='btn1' value='÷' id='divide' onclick='triggerDivide()' />
-
-        <br>
-    </span>
-    <div class="alert" id="EquationWrongInfo">
-        <span class="closebtn">&times;</span>
-        <strong>ERROR</strong> Invalid Equation
+        <span class="alert" id="EquationWrongInfo">
+            <span class="closebtn">&times;</span>
+            <strong>ERROR</strong>
+            Invalid Equation
+        </span>
     </div>
     <script>
         window.addEventListener("keydown", function (evt) {
@@ -481,7 +475,7 @@
             if (answerpop == "+" || answerpop == "-" || answerpop == "×" || answerpop == "÷") {
                 // do nothing
             } else {
-                answer.innerHTML += '<br> +';
+                answer.innerHTML += '+';
             }
         }
 
@@ -492,7 +486,7 @@
             if (answerpop == "+" || answerpop == "-" || answerpop == "×" || answerpop == "÷") {
                 // do nothing
             } else {
-                answer.innerHTML += '<br> -';
+                answer.innerHTML += '-';
             }
         }
 
@@ -502,7 +496,7 @@
             let answerpop = answerSplit.pop();
             if (answerpop == "+" || answerpop == "-" || answerpop == "×" || answerpop == "÷") {
             } else {
-                answer.innerHTML += '<br> ×';
+                answer.innerHTML += '×';
             }
         }
 
@@ -513,7 +507,7 @@
             if (answerpop == "+" || answerpop == "-" || answerpop == "×" || answerpop == "÷") {
                 // do nothing
             } else {
-                answer.innerHTML += '<br> ÷';
+                answer.innerHTML += '÷';
             }
         }
 
