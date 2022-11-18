@@ -1,5 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@900&display=swap');
 
+:root {
+    --main-color-light: #70caff;
+    --main-color: #279AF1;
+    --main-color-dark: #006cbe;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+
 #restOfBody {
     visibility: hidden;
     opacity: 0;
@@ -7,7 +21,7 @@
 }
 
 * {
-    transition: 2s;
+    transition: 1s;
 }
 
 body {
@@ -117,7 +131,25 @@ navbar {
     top: 0;
     right: 0;
     left: 0;
-    border-bottom: 2px solid blue;
+    border-bottom: 2px solid var(--main-color);
     width: 100vw;
     height: 50px;
+}
+
+navbar button {
+    border: none;
+    background-color: var(--main-color);
+    color: white;
+    position: relative;
+    width: 20%;
+    height: 0;
+    padding-bottom: 20%;
+}
+
+navbar button:hover {
+
+}
+
+navbar button:active {
+
 }

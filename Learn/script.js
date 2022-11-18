@@ -1,4 +1,4 @@
-const phrases = ['How the first printing press became','Other stuff']
+const phrases = ['How the first printing press became', 'Other stuff']
 let round = 0
 function type() {
     document.getElementById('cursor').style.opacity = '1'
@@ -41,7 +41,7 @@ function blink(stime) {
     }, 500);
 }
 setTimeout(() => {
-    type()
+    setTimeout(() => { type() }, 500);
     document.getElementById('restOfBody').style.visibility = 'visible';
     document.getElementById('restOfBody').style.opacity = '1';
 }, 1500);
