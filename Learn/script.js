@@ -45,3 +45,8 @@ setTimeout(() => {
     document.getElementById('restOfBody').style.visibility = 'visible';
     document.getElementById('restOfBody').style.opacity = '1';
 }, 1500);
+
+var bodyElement = document.querySelector("body");
+var navElement = document.querySelector("nav");
+this.scrollY > 500 ? navElement.style.opacity = .8 : navElement.style.opacity = 1;
+window.addEventListener("scroll", changeCss , false);
