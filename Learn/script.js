@@ -46,7 +46,7 @@ setTimeout(() => {
     document.getElementById('restOfBody').style.opacity = '1';
 }, 1500);
 
-var bodyElement = document.querySelector("body");
-var navElement = document.querySelector("nav");
-this.scrollY > 500 ? navElement.style.opacity = .8 : navElement.style.opacity = 1;
-window.addEventListener("scroll", changeCss , false);
+window.addEventListener("scroll", () => {
+    let navElement = document.querySelector("navbar");
+    this.scrollY > 110 ? navElement.style.borderBottom = '2px solid var(--main-color)' : navElement.style.borderBottom = 'none';
+}, false);
