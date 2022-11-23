@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@900&display=swap');
 
+.material-symbols-rounded {
+    font-variation-settings: 'FILL' 1,
+    'wght' 700,
+    'GRAD' 0,
+    'opsz' 48
+}
+
 :root {
     --main-color-light: #70caff;
     --main-color: #279AF1;
@@ -18,8 +25,9 @@
 }
 
 body {
+    padding: 0;
     height: 1000px;
-    margin-top: 60px;
+    margin: 60px 0 0 0;
     transition: 0s;
     font-family: 'Raleway', sans-serif;
 }
@@ -53,7 +61,7 @@ body {
     top: 0;
     bottom: 0;
     right: 25%;
-    width: 0px;
+    width: 0;
     background-image: linear-gradient(to right, #ff00 0%, #fff 30%, #fff 100%);
     -moz-animation: show 1.2s ease-in;
     -webkit-animation: show 1.2s linear;
@@ -68,7 +76,7 @@ body {
     }
 
     100% {
-        width: 0px;
+        width: 0;
     }
 }
 
@@ -78,7 +86,7 @@ body {
     }
 
     100% {
-        width: 0px;
+        width: 0;
     }
 }
 
@@ -88,7 +96,7 @@ body {
     }
 
     100% {
-        width: 0px;
+        width: 0;
     }
 }
 
@@ -98,7 +106,7 @@ body {
     }
 
     100% {
-        width: 0px;
+        width: 0;
     }
 }
 
@@ -108,7 +116,7 @@ body {
     }
 
     100% {
-        width: 0px;
+        width: 0;
     }
 }
 
@@ -119,6 +127,7 @@ section {
 
 
 navbar {
+    display: block;
     position: fixed;
     top: 0;
     right: 0;
@@ -126,19 +135,78 @@ navbar {
     background-color: white;
     border-bottom: none;
     width: 100vw;
-    height: 50px;
+    height: 3.5vw;
+    font-size: 0;
 }
 
 navbar button {
+    padding: 0;
     border: none;
     background-color: white;
     color: var(--main-color);
-    height: 50px;
-    width: 55px;
+    width: 3.9vw;
     outline: 0;
 }
 
+.menu {
+    display: none !important;
+    margin-right: 15px;
+}
+
+.notLeft {
+    float: right;
+}
+
+.hidden {
+    display: block;
+    padding-right: 15px;
+}
+
+@media only screen and (max-width: 800px) and (min-width: 500px) {
+    navbar button {
+        font-size: 4vw !important;
+    }
+
+    navbar button {
+        height: 9vw !important;
+        width: 10vw !important;
+    }
+}  /*Between 700px and 800px*/
+
+@media only screen and (max-width: 500px) {
+
+    navbar button {
+        height: 45px !important;
+        width: 49px !important;
+        font-size: 30px !important;
+    }
+
+    .hidden {
+        width: 50px;
+        display: none !important;
+    }
+
+    navbar {
+        width: 50px;
+        float: right;
+    }
+
+    .menu {
+        display: inline !important;
+    }
+}  /*Smaller than 700px */
+
+@media screen and (min-width: 800px) {
+    navbar button {
+        font-size: 2.5vw !important;
+        height: 6vw !important;
+        width: 5vw !important;
+    }
+}  /*Bigger than 800px */
+
+
 navbar button:hover {
+    display: inline-block;
     background-color: var(--main-color);
     color: white;
 }
