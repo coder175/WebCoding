@@ -1,36 +1,36 @@
 const phrases = ['How the first printing press became', 'Other stuff']
 let round = 0
 function type() {
-    document.getElementById('cursor').style.opacity = '1'
+    document.getElementById('caret').style.opacity = '1'
     let phrs = phrases[round].split('');
     for (let x = 0; x < phrs.length; x++) {
         setTimeout(() => {
             document.querySelector('#subtitle').innerHTML += phrs.shift();
-        }, x * 200);
+        }, x * 100);
     }
     setTimeout(() => {
         blink(8)
         setTimeout(() => { del() }, 4500);
-    }, phrs.length * 200);
+    }, phrs.length * 100);
 }
 function del() {
-    document.getElementById('cursor').style.opacity = '1'
+    document.getElementById('caret').style.opacity = '1'
     let phrsLen = phrases[round].split('');
     for (let x = 0; x < phrsLen.length; x++) {
         setTimeout(() => {
             document.querySelector('#subtitle').innerHTML = phrsLen.slice(0, -(x + 1)).join('');
-        }, x * 100);
+        }, x * 70);
     }
     if (phrases.length > (round + 1)) round++
     else round = 0
     setTimeout(() => {
         blink(4)
         setTimeout(() => { type() }, 2500);
-    }, phrsLen.length * 100);
+    }, phrsLen.length * 70);
 }
 let rtime = 0
 function blink(stime) {
-    let c = document.getElementById('cursor');
+    let c = document.getElementById('caret');
     let interval = setInterval(function () {
         if (rtime >= stime) {
             rtime = 0
@@ -52,6 +52,6 @@ window.addEventListener('scroll', () => {
 }, false);
 
 document.querySelector('.menu').addEventListener("click", function() {
-    let elem = document.querySelector('.hidden')
+    let elem = document.querySelector('.hiddenDownMenu');
     elem.style.display === 'block' ? elem.style.setProperty('display', 'none','important'): elem.style.setProperty('display', 'block','important')
 });
