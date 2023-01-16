@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+<head>
+    <style>
+        :root[color-mode="light"] {
+            --surface1: #e6e6e6;
+            --element1: #111111;
+            --primary: #01408e;
+            --box-shadow: 20px 20px 60px #cacaca, -20px -20px 60px #ffffff;
+        }
+
+        :root[color-mode="dark"] {
+            --surface1: #262626;
+            --element1: #eeeeee;
+            --primary: #8fceff;
+            --box-shadow: 20px 20px 60px #1d1d1d, -20px -20px 60px #272727;
+        }
+
+        html {
+            background-color: var(--surface1);
+        }
+
+        :root[color-mode="light"] .color-mode .light--hidden {
+            display: none;
+        }
+
+        :root[color-mode="dark"] .color-mode .dark--hidden {
+            display: none;
+        }
+
+        .color-mode__btn {
+            color: var(--element1);
+            cursor: pointer;
+            background: none;
+            border: none;
+            box-shadow: var(--box-shadow);
+        }
+
+        .color-mode__section {
+            color: var(--element1);
+            background-color: var(--surface1);
+            box-shadow: var(--box-shadow);
+        }
+    </style>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script>
+        if (localStorage.getItem("color-mode") === "dark" || window.matchMedia("(prefers-color-scheme: dark)").matches && !localStorage.getItem("color-mode")) {
+            document.documentElement.setAttribute("color-mode", "dark");
+        }
+    </script>
+</head>
+<body>
+<main class="color-mode">
+    <section class="color-mode__section">
+        <header class="color-mode__header">
+            <button
+                    class="color-mode__btn light--hidden"
+                    aria-label="Toggle light mode">
+                Toggle Light Mode
+                <svg aria-hidden="true">
+                    <title>Light Mode</title>
+                </svg>
+            </button>
+            <button
+                    class="color-mode__btn dark--hidden"
+                    aria-label="Toggle dark mode">
+                Toggle Dark Mode
+                <svg aria-hidden="true">
+                    <title>Dark Mode</title>
+                </svg>
+            </button>
+        </header>
+        <div class="color-mode__container dark--hidden">
+            <h1>Hi, I'm light mode.</h1>
+        </div>
+        <div class="color-mode__container light--hidden">
+            <h1>Hi, I'm dark mode.</h1>
+        </div>
+    </section>
+</main>
+<script>
+    if (window.CSS && CSS.supports("color", "var(--primary)")) {
+        const toggleColorMode = function toggleColorMode(e) {
+            // Switch to Light Mode
+            if (e.currentTarget.classList.contains("light--hidden")) {
+                // Sets the custom html attribute
+                document.documentElement.setAttribute("color-mode", "light"); // Sets the user's preference in local storage
+                localStorage.setItem("color-mode", "light");
+                return;
+            }
+            /* Switch to Dark Mode
+            Sets the custom html attribute */
+            document.documentElement.setAttribute("color-mode", "dark"); // Sets the user's preference in local storage
+
+            localStorage.setItem("color-mode", "dark");
+        }; // Get the buttons in the DOM
+
+        const toggleColorButtons = document.querySelectorAll(".color-mode__btn"); // Set up event listeners
+
+        toggleColorButtons.forEach(function (btn) {
+            btn.addEventListener("click", toggleColorMode);
+        });
+    } else {
+        // If the feature isn't supported, then we hide the toggle buttons
+        document.querySelector(".color-mode__header").style.display = 'none';
+    }</script>
+</body>
+</html>
