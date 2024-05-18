@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title> Tank Game </title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+            body {
+                font-family: Silkscreen,serif;
+                transition: 0.5s;
+                overflow: hidden;
+            }
+
+
+            * {
+                font-family: Silkscreen,serif;
+            }
+
+
+            @media (max-width: 600px) {
+                .tank {
+                    width: 10vw;
+                    position: absolute;
+                    bottom: -10vh;
+                    left: 45vw;
+                }
+                .titleLeft {
+                    animation: title-up 0.3s ease-in;
+                    transition: 2s;
+                    animation-delay: 4s;
+                    animation-fill-mode: forwards;
+                }
+                .moveTank {
+                    animation: move-up 3s linear;
+                    animation-delay: .5s;
+                    transition: 1s;
+                }
+                .game {
+                    position: absolute;
+                    bottom: 100vh;
+                }
+            }
+            @media (min-width: 599px) {
+                .tank {
+                    transform: rotate(90deg);
+                    width: 10vw;
+                    position: absolute;
+                    bottom: 45vh;
+                    left: -10vw;
+                }
+                .moveTank {
+                    animation: move-right 3s linear;
+                    animation-delay: .5s;
+                    transition: 1s;
+                }
+                .titleLeft {
+                    animation: title-left 0.5s ease-in;
+                    transition: 2s;
+                    animation-delay: 4s;
+                    animation-fill-mode: forwards;
+                }
+                .game {
+                    position: absolute;
+                    left: 100vw;
+                }
+            }
+
+
+            @keyframes move-right {
+                0% {
+                    left: -10vw;
+                }
+                10% {
+                    left: 0;
+                }
+                30% {
+                    left: 25vw;
+                }
+                55% {
+                    left: 50vw;
+                }
+                75% {
+                    left: 75vw;
+                }
+                100% {
+                    left: 150vw;
+                    display: none;
+                }
+            }
+
+
+            @keyframes move-up {
+                0% {
+                    bottom: -10vh;
+                }
+                10% {
+                    bottom: 0;
+                }
+                30% {
+                    bottom: 25vh;
+                }
+                55% {
+                    bottom: 50vh;
+                }
+                75% {
+                    bottom: 75vh;
+                }
+                100% {
+                    bottom: 150vh;
+                    display: none;
+                }
+            }
+        
+            .frontPage {
+                font-size: 7vw;
+                text-align: center;
+                position: relative;
+                top: 0;
+                font-weight: bold;
+                transform: rotate(-5deg);
+                animation: shake-title 0.1s linear;
+                animation-fill-mode: forwards;
+                animation-iteration-count: 8;
+                animation-delay: 0.1s;
+            }
+
+
+            @keyframes shake-title {
+                0% {
+                    margin-left: 0.5vw;
+                    margin-top: 1vw;
+                }
+
+
+                33% {
+                    margin-right: 0.5vw;
+                    margin-bottom: 1vw;
+                }
+
+
+                66% {
+                    margin-left: 0.5vw;
+                    margin-top: 1vw;
+                }
+
+
+                100% {
+                    margin-right: 0.5vw;
+                    margin-bottom: 1vw;
+                }
+            }
+
+
+            .innerText1 {
+                position: relative;
+                top: 10vh;
+                opacity: 0;
+                animation: title-fade-in 0.56s ease-out;
+                animation-fill-mode: forwards;
+            }
+
+
+            @keyframes title-fade-in {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+
+
+            @keyframes title-left {
+                from {}
+                to {
+                    margin-left: -300vw;
+                    display: none;
+                }
+            }
+
+
+
+
+            @keyframes title-up {
+                from {}
+                to {
+                    margin-top: -50vw;
+                    display: none;
+                }
+            }
+
+
+            .continue {
+                width: 150px;
+                font-size: 18px;
+                height: 55px;
+                position: absolute;
+                left: calc(50vw - 75px);
+                bottom: calc(35vh - 28px);
+                background-color: #00539C;
+                border: none;
+                color: white;
+                cursor: pointer;
+
+
+            }
+            #moveTitle {
+                position: absolute;
+                top: 0;
+                left: 25vw;
+                width: 50vw;
+            }
+            
+            .removeButton {
+                animation: growFade 1s ease-in-out forwards;
+                animation-delay: 0.75s;
+            }
+            
+            @keyframes growFade {
+                from {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+                to {
+                    opacity: 0;
+                    transform: scale(5);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="game" id="game">
+            Hello!
+        </div>
+        <img class="tank" id="tank" src="https://cdn-icons-png.flaticon.com/512/942/942456.png" alt="Tank Image">
+        <div id="moveTitle">
+            <div class="frontPage">
+                <div class="innerText1">
+                    THE TANK
+                </div>
+                <div class="innerText1">
+                    GAME
+                </div>
+            </div>
+        </div>
+        <input type="button" class="continue" value="CONTINUE" id="continue" onclick="continueFunction()">
+        <script>
+            function continueFunction() {
+                let title = document.getElementById("moveTitle");
+                title.classList.add("titleLeft");
+                let tank = document.getElementById("tank");
+                tank.classList.add("moveTank");
+                let continueButton = document.getElementById("continue");
+                continueButton.classList.add("removeButton");
+            }
+        </script>
+    </body>
+</html>
