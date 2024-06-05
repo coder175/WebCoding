@@ -26,7 +26,7 @@
                 .titleLeft {
                     animation: title-up 0.3s ease-in;
                     transition: 2s;
-                    animation-delay: 4s;
+                    animation-delay: 2.75s;
                     animation-fill-mode: forwards;
                 }
                 .moveTank {
@@ -55,12 +55,19 @@
                 .titleLeft {
                     animation: title-left 0.5s ease-in;
                     transition: 2s;
-                    animation-delay: 4s;
+                    animation-delay: 2.75s;
                     animation-fill-mode: forwards;
                 }
                 .game {
                     position: absolute;
                     left: 100vw;
+                }
+            }
+
+            @media (max-height: 700px) {
+                #moveTitle {
+
+                    
                 }
             }
 
@@ -170,9 +177,12 @@
 
 
             @keyframes title-left {
-                from {}
+                from {
+                    transform: scale(1);
+                }
                 to {
-                    margin-left: -300vw;
+                    transform: scale(-5);
+                    opacity: 0;
                     display: none;
                 }
             }
@@ -181,9 +191,12 @@
 
 
             @keyframes title-up {
-                from {}
+                from {
+                    transform: scale(1);
+                }
                 to {
-                    margin-top: -50vw;
+                    transform: scale(-5);
+                    opacity: 0;
                     display: none;
                 }
             }
@@ -212,7 +225,7 @@
             
             .removeButton {
                 animation: growFade 1s ease-in-out forwards;
-                animation-delay: 0.75s;
+                animation-delay: 2.65s;
             }
             
             @keyframes growFade {
@@ -222,7 +235,7 @@
                 }
                 to {
                     opacity: 0;
-                    transform: scale(5);
+                    transform: scale(-10);
                 }
             }
         </style>
