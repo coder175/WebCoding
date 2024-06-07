@@ -1,283 +1,474 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title> Tank Game </title>
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
-            body {
-                font-family: Silkscreen,serif;
-                transition: 0.5s;
-                overflow: hidden;
-                margin: 0;
-            }
+<head>
+    <title> Tank Game </title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+
+        :root {
+            --main-light-green: #71c285;
+            --main-extra-light-green: #7ed09e;
+            --main-dark-green: #4c8056;
+            --main-light-grey: #5e5f62;
+            --main-lighter-grey: #b2e3c5;
+        }
+
+        body {
+            font-family: Silkscreen, serif;
+            transition: 0.5s;
+            overflow: hidden;
+            margin: 0;
+        }
 
 
-            * {
-                font-family: Silkscreen,serif;
-            }
+        * {
+            font-family: Silkscreen, serif;
+        }
+
+        .tank {
+            position: absolute;
+            left: 45vw;
+            top: 70vh;
+        }
 
 
-            @media (max-width: 600px) {
-                .tank {
-                    width: 10vw;
-                    position: absolute;
-                    bottom: -10vh;
-                    left: 45vw;
-                }
-                .titleLeft {
-                    animation: title-up 0.3s ease-in;
-                    transition: 2s;
-                    animation-delay: 2.75s;
-                    animation-fill-mode: forwards;
-                }
-                .moveTank {
-                    animation: move-up 3s linear;
-                    animation-delay: .5s;
-                    transition: 1s;
-                }
-                .game {
-                    position: absolute;
-                }
-            }
-            @media (min-width: 599px) {
-                .tank {
-                    transform: rotate(90deg);
-                    width: 10vw;
-                    position: absolute;
-                    bottom: 45vh;
-                    left: -10vw;
-                }
-                .moveTank {
-                    animation: move-right 3s linear;
-                    animation-delay: .5s;
-                    transition: 1s;
-                }
-                .titleLeft {
-                    animation: title-left 0.5s ease-in;
-                    transition: 2s;
-                    animation-delay: 2.75s;
-                    animation-fill-mode: forwards;
-                }
-                .game {
-                    position: absolute;
-                }
-            }
+        @media screen and (min-aspect-ratio: 2.2/1) {
 
-            @media (max-height: 600px) {
-                #moveTitle {
-                    width: 50vw;
-                    position: absolute !important;
-                    left: 10vw !important;
-
-                }
-
-                #continue {
-                    position: absolute !important;
-                    left: calc(75vw - 10vw) !important;
-                    margin-left: 0 !important;
-                    bottom: calc(50vh - 8vh) !important;
-                }
-            }
-
-
-            @keyframes move-right {
-                0% {
-                    left: -10vw;
-                }
-                10% {
-                    left: 0;
-                }
-                30% {
-                    left: 25vw;
-                }
-                55% {
-                    left: 50vw;
-                }
-                75% {
-                    left: 75vw;
-                }
-                100% {
-                    left: 150vw;
-                    display: none;
-                }
-            }
-
-
-            @keyframes move-up {
-                0% {
-                    bottom: -10vh;
-                }
-                10% {
-                    bottom: 0;
-                }
-                30% {
-                    bottom: 25vh;
-                }
-                55% {
-                    bottom: 50vh;
-                }
-                75% {
-                    bottom: 75vh;
-                }
-                100% {
-                    bottom: 150vh;
-                    display: none;
-                }
-            }
-        
-            .frontPage {
-                font-size: 7vw;
-                text-align: center;
-                position: relative;
-                top: 0;
-                font-weight: bold;
-                animation: shake-title 0.1s linear;
+            .titleLeft {
+                animation: title-up 0.3s ease-in;
+                transition: 2s;
+                animation-delay: 2.75s;
                 animation-fill-mode: forwards;
-                animation-iteration-count: 8;
-                animation-delay: 0.1s;
-            }
-
-
-            @keyframes shake-title {
-                0% {
-                    margin-left: 0.5vw;
-                    margin-top: 1vw;
-                }
-
-
-                33% {
-                    margin-right: 0.5vw;
-                    margin-bottom: 1vw;
-                }
-
-
-                66% {
-                    margin-left: 0.5vw;
-                    margin-top: 1vw;
-                }
-
-
-                100% {
-                    margin-right: 0.5vw;
-                    margin-bottom: 1vw;
-                }
-            }
-
-
-            .innerText1 {
-                position: relative;
-                top: 10vh;
-                opacity: 0;
-                animation: title-fade-in 0.56s ease-out;
-                animation-fill-mode: forwards;
-            }
-
-
-            @keyframes title-fade-in {
-                from {
-                    opacity: 0;
-                }
-                to {
-                    opacity: 1;
-                }
-            }
-
-
-            @keyframes title-left {
-                from {
-                    transform: scale(1);
-                }
-                to {
-                    transform: scale(-5);
-                    opacity: 0;
-                    display: none;
-                }
-            }
-
-
-
-
-            @keyframes title-up {
-                from {
-                    transform: scale(1);
-                }
-                to {
-                    transform: scale(-5);
-                    opacity: 0;
-                    display: none;
-                }
-            }
-
-
-            .continue {
-                width: 18vw;
-                margin-left: 41vw;
-                font-size: calc((3vw + 3vh)/2);
-                height: 14vh;
-                position: absolute;
-                bottom: calc(35vh - 28px);
-                background-color: #00539C;
-                border: none;
-                color: white;
-                cursor: pointer;
-
-
-            }
-            #moveTitle {
-                position: absolute;
-                top: 0;
-                left: 25vw;
-                width: 50vw;
-            }
-            
-            .removeButton {
-                animation: growFade 1s ease-in-out forwards;
-                animation-delay: 2.65s;
-            }
-            
-            @keyframes growFade {
-                from {
-                    opacity: 1;
-                    transform: scale(1);
-                }
-                to {
-                    opacity: 0;
-                    transform: scale(-10);
-                    display: none;
-                }
             }
 
             .game {
-                width: 100vw;
-                height: 100vh;
-                background-color: rgba(171, 131, 8, 0.5);
+                position: absolute;
             }
-        </style>
-    </head>
-    <body>
-        <div class="game" id="game">
-        </div>
-        <img class="tank" id="tank" src="https://cdn-icons-png.flaticon.com/512/942/942456.png" alt="Tank Image">
-        <div id="moveTitle">
-            <div class="frontPage">
-                <div class="innerText1">
-                    THE TANK
-                </div>
-                <div class="innerText1">
-                    GAME
-                </div>
-            </div>
-        </div>
-        <input type="button" class="continue" value="CONTINUE" id="continue" onclick="continueFunction()">
-        <script>
-            function continueFunction() {
-                let title = document.getElementById("moveTitle");
-                title.classList.add("titleLeft");
-                let tank = document.getElementById("tank");
-                tank.classList.add("moveTank");
-                let continueButton = document.getElementById("continue");
-                continueButton.classList.add("removeButton");
+        }
+
+        @media screen and (max-aspect-ratio: 2.2/1) {
+
+            .titleLeft {
+                animation: title-left 0.5s ease-in;
+                transition: 2s;
+                animation-delay: 2.75s;
+                animation-fill-mode: forwards;
             }
-        </script>
-    </body>
+
+            .game {
+                position: absolute;
+            }
+        }
+
+        @media screen and (min-aspect-ratio: 2.2/1) {
+            #moveTitle {
+                width: 50vw;
+                position: absolute !important;
+                left: 10vw !important;
+
+            }
+
+            #continue {
+                position: absolute !important;
+                left: calc(75vw - 10vw) !important;
+                margin-left: 0 !important;
+                bottom: calc(50vh - 8vh) !important;
+            }
+        }
+
+
+        .frontPage {
+            font-size: 7vw;
+            text-align: center;
+            position: relative;
+            top: 0;
+            font-weight: bold;
+        }
+
+
+        .innerText1 {
+            position: relative;
+            top: 10vh;
+            opacity: 0;
+            animation: title-fade-in 0.56s ease-out;
+            animation-fill-mode: forwards;
+        }
+
+
+        @keyframes title-fade-in {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+
+        @keyframes title-left {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(-5);
+                opacity: 0;
+                display: none;
+            }
+        }
+
+
+        @keyframes title-up {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(-5);
+                opacity: 0;
+                display: none;
+            }
+        }
+
+
+        .continue {
+            width: 18vw;
+            margin-left: 41vw;
+            font-size: calc((3vw + 3vh) / 2);
+            height: 14vh;
+            position: absolute;
+            bottom: calc(45vh - 28px);
+            background-color: #00539C;
+            border: none;
+            color: white;
+            cursor: pointer;
+
+
+        }
+
+        #moveTitle {
+            position: absolute;
+            top: -3vw;
+            left: 25vw;
+            width: 50vw;
+        }
+
+        .removeButton {
+            animation: growFade 1s ease-in-out forwards;
+            animation-delay: 2.65s;
+        }
+
+        @keyframes growFade {
+            from {
+                opacity: 1;
+                transform: scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: scale(-10);
+                display: none;
+            }
+        }
+
+        .game {
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(171, 131, 8, 0.5);
+        }
+
+
+        .tank * {
+            position: absolute;
+        }
+
+        .tank {
+            position: absolute;
+        }
+
+        :root {
+            --resize-amount: 3/4;
+        }
+
+        .tankBody {
+            top: calc(1.25vw * var(--resize-amount));
+            width: calc(13vw * var(--resize-amount));
+            height: calc(12vw * var(--resize-amount));
+            background-color: var(--main-dark-green);
+        }
+
+        .tankTreads_1 {
+            width: calc(3vw * var(--resize-amount));
+            height: calc(14.5vw * var(--resize-amount));
+            background-color: var(--main-light-green);
+            border-radius: calc(0.5vw * var(--resize-amount));
+        }
+
+        .tankTreads_2 {
+            left: calc(10vw * var(--resize-amount));
+            width: calc(3vw * var(--resize-amount));
+            height: calc(14.5vw * var(--resize-amount));
+            background-color: var(--main-light-green);
+            border-radius: calc(0.5vw * var(--resize-amount));
+        }
+
+        .tankTop {
+            top: calc(3.5vw * var(--resize-amount));
+            left: calc(2.25vw * var(--resize-amount));
+            width: calc(8.5vw * var(--resize-amount));
+            height: calc(8vw * var(--resize-amount));
+            border-radius: calc(0.75vw * var(--resize-amount));
+            background-color: var(--main-dark-green);
+        }
+
+        .tankTopSmall {
+            top: calc(4.5vw * var(--resize-amount));
+            left: calc(3.5vw * var(--resize-amount));
+            width: calc(6vw * var(--resize-amount));
+            height: calc(6vw * var(--resize-amount));
+            border-radius: calc(0.75vw * var(--resize-amount));
+            background-color: var(--main-light-green);
+        }
+
+        .nozzle {
+            top: calc(-5vw * var(--resize-amount));
+            left: calc(5.88vw * var(--resize-amount));
+            width: calc(1.25vw * var(--resize-amount));
+            height: calc(10vw * var(--resize-amount));
+            background-color: var(--main-light-grey);
+            border-radius: calc(0.35vw * var(--resize-amount));
+        }
+
+        .bigJointNozzle {
+            top: calc(2.5vw * var(--resize-amount));
+            left: calc(5.25vw * var(--resize-amount));
+            width: calc(2.5vw * var(--resize-amount));
+            height: calc(2.5vw * var(--resize-amount));
+            background-color: var(--main-extra-light-green);
+            border-radius: calc(0.25vw * var(--resize-amount));
+        }
+
+        .smallJointNozzle {
+            top: calc(1vw * var(--resize-amount));
+            left: calc(5.5vw * var(--resize-amount));
+            width: calc(2vw * var(--resize-amount));
+            height: calc(2vw * var(--resize-amount));
+            background-color: var(--main-light-green);
+            border-radius: calc(0.25vw * var(--resize-amount));
+        }
+
+        .lightTankTreads_1 {
+            top: calc(3.75vw * var(--resize-amount));
+            width: calc(3vw * var(--resize-amount));
+            height: calc(2.5vw * var(--resize-amount));
+            background-color: var(--main-extra-light-green);
+        }
+
+        .lightTankTreads_2 {
+            top: calc(8vw * var(--resize-amount));
+            width: calc(3vw * var(--resize-amount));
+            height: calc(2.5vw * var(--resize-amount));
+            background-color: var(--main-extra-light-green);
+        }
+
+        .lightTankTreads_3 {
+            left: calc(10vw * var(--resize-amount));
+            top: calc(3.75vw * var(--resize-amount));
+            width: calc(3vw * var(--resize-amount));
+            height: calc(2.5vw * var(--resize-amount));
+            background-color: var(--main-extra-light-green);
+        }
+
+        .lightTankTreads_4 {
+            left: calc(10vw * var(--resize-amount));
+            top: calc(8vw * var(--resize-amount));
+            width: calc(3vw * var(--resize-amount));
+            height: calc(2.5vw * var(--resize-amount));
+            background-color: var(--main-extra-light-green);
+        }
+
+        .tankTreadsFront_1 {
+            top: calc(0.75vw * var(--resize-amount));
+            left: calc(0.45vw * var(--resize-amount));
+            width: calc(1.75vw * var(--resize-amount));
+            height: calc(1.75vw * var(--resize-amount));
+            background-color: var(--main-dark-green);
+            border-radius: calc(0.5vw * var(--resize-amount));
+        }
+
+        .tankTreadsFront_2 {
+            top: calc(12vw * var(--resize-amount));
+            left: calc(0.45vw * var(--resize-amount));
+            width: calc(1.75vw * var(--resize-amount));
+            height: calc(1.75vw * var(--resize-amount));
+            background-color: var(--main-dark-green);
+            border-radius: calc(0.5vw * var(--resize-amount));
+        }
+
+        .tankTreadsBack_1 {
+            top: calc(0.75vw * var(--resize-amount));
+            left: calc(10.75vw * var(--resize-amount));
+            width: calc(1.75vw * var(--resize-amount));
+            height: calc(1.75vw * var(--resize-amount));
+            background-color: var(--main-dark-green);
+            border-radius: calc(0.5vw * var(--resize-amount));
+        }
+
+        .tankTreadsBack_2 {
+            top: calc(12vw * var(--resize-amount));
+            left: calc(10.75vw * var(--resize-amount));
+            width: calc(1.75vw * var(--resize-amount));
+            height: calc(1.75vw * var(--resize-amount));
+            background-color: var(--main-dark-green);
+            border-radius: calc(0.5vw * var(--resize-amount));
+        }
+
+        .tankTopSmallRight {
+            top: calc(5.5vw * var(--resize-amount));
+            left: calc(7vw * var(--resize-amount));
+            width: calc(1.75vw * var(--resize-amount));
+            height: calc(4vw * var(--resize-amount));
+            background-color: var(--main-lighter-grey);
+            border-radius: calc(0.5vw * var(--resize-amount));
+        }
+
+        .tankTopSmallLeftTop {
+            top: calc(5.5vw * var(--resize-amount));
+            left: calc(4.5vw * var(--resize-amount));
+            width: calc(1.75vw * var(--resize-amount));
+            height: calc(1.05vw * var(--resize-amount));
+            background-color: var(--main-lighter-grey);
+            border-radius: calc(0.5vw * var(--resize-amount));
+        }
+
+        .tankTopSmallLeftMiddle {
+            top: calc(7vw * var(--resize-amount));
+            left: calc(4.5vw * var(--resize-amount));
+            width: calc(1.75vw * var(--resize-amount));
+            height: calc(1.05vw * var(--resize-amount));
+            background-color: var(--main-lighter-grey);
+            border-radius: calc(0.5vw * var(--resize-amount));
+        }
+
+        .tankTopSmallLeftBottom {
+            top: calc(8.45vw * var(--resize-amount));
+            left: calc(4.5vw * var(--resize-amount));
+            width: calc(1.75vw * var(--resize-amount));
+            height: calc(1.05vw * var(--resize-amount));
+            background-color: var(--main-lighter-grey);
+            border-radius: calc(0.5vw * var(--resize-amount));
+        }
+
+        .introAnimation {
+            transform: scale(0);
+            transition: transform 0.75s ease-in-out;
+        }
+
+
+        .shakeIntroElement {
+            animation: shakeIntroElement 0.5s;
+        }
+
+        @keyframes shakeIntroElement {
+            0% {
+                transform: translate(1px, 1px) rotate(0deg);
+            }
+            10% {
+                transform: translate(-1px, -2px) rotate(-1deg);
+            }
+            20% {
+                transform: translate(-3px, 0px) rotate(1deg);
+            }
+            30% {
+                transform: translate(3px, 2px) rotate(0deg);
+            }
+            40% {
+                transform: translate(1px, -1px) rotate(1deg);
+            }
+            50% {
+                transform: translate(-1px, 2px) rotate(-1deg);
+            }
+            60% {
+                transform: translate(-3px, 1px) rotate(0deg);
+            }
+            70% {
+                transform: translate(3px, 1px) rotate(-1deg);
+            }
+            80% {
+                transform: translate(-1px, -1px) rotate(1deg);
+            }
+            90% {
+                transform: translate(1px, 2px) rotate(0deg);
+            }
+            100% {
+                transform: translate(1px, -2px) rotate(-1deg);
+            }
+        }
+
+        .showIntroElement {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+<div class="game" id="game">
+</div>
+<div class="tank intoAnimation" id="tank">
+    <div class="tankBody"></div>
+    <div class="tankTreads_1"></div>
+    <div class="tankTreads_2"></div>
+    <div class="lightTankTreads_1"></div>
+    <div class="lightTankTreads_2"></div>
+    <div class="lightTankTreads_3"></div>
+    <div class="lightTankTreads_4"></div>
+    <div class="tankTreadsFront_1"></div>
+    <div class="tankTreadsFront_2"></div>
+    <div class="tankTreadsBack_1"></div>
+    <div class="tankTreadsBack_2"></div>
+    <div class="tankTop"></div>
+    <div class="nozzle"></div>
+    <div class="smallJointNozzle"></div>
+    <div class="bigJointNozzle"></div>
+    <div class="tankTopSmall"></div>
+    <div class="tankTopSmallRight"></div>
+    <div class="tankTopSmallLeftTop"></div>
+    <div class="tankTopSmallLeftMiddle"></div>
+    <div class="tankTopSmallLeftBottom"></div>
+</div>
+<div id="moveTitle" class="introAnimation">
+    <div class="frontPage">
+        <div class="innerText1">
+            THE TANK
+        </div>
+        <div class="innerText1">
+            GAME
+        </div>
+    </div>
+</div>
+<input type="button" class="continue introAnimation" value="CONTINUE" id="continue" onclick="continueFunction()">
+<div id="emptyDiv"></div>
+<script>
+    function continueFunction() {
+        let title = document.getElementById("moveTitle");
+        title.classList.add("titleLeft");
+        let continueButton = document.getElementById("continue");
+        continueButton.classList.add("removeButton");
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const elements = ['moveTitle', 'tank', 'continue', "emptyDiv"];
+        let delay = 0;
+
+        elements.forEach((elementId, index) => {
+            setTimeout(() => {
+                document.getElementById(elementId).classList.add('showIntroElement');
+                document.body.classList.add('shakeIntroElement');
+                setTimeout(() => {
+                    document.body.classList.remove('shakeIntroElement');
+                }, 500); // Shake duration
+            }, delay);
+            delay += 1000; // 0.75s for the animation + 1s delay between each element
+        });
+    });
+</script>
+</body>
 </html>
+
+
