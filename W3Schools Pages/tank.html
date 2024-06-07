@@ -8,6 +8,7 @@
                 font-family: Silkscreen,serif;
                 transition: 0.5s;
                 overflow: hidden;
+                margin: 0;
             }
 
 
@@ -36,7 +37,6 @@
                 }
                 .game {
                     position: absolute;
-                    bottom: 100vh;
                 }
             }
             @media (min-width: 599px) {
@@ -60,7 +60,6 @@
                 }
                 .game {
                     position: absolute;
-                    left: 100vw;
                 }
             }
 
@@ -74,8 +73,9 @@
 
                 #continue {
                     position: absolute !important;
-                    left: calc(75vw - 150px) !important;
-                    bottom: calc(50vh - 55px) !important;
+                    left: calc(75vw - 10vw) !important;
+                    margin-left: 0 !important;
+                    bottom: calc(50vh - 8vh) !important;
                 }
             }
 
@@ -131,7 +131,6 @@
                 position: relative;
                 top: 0;
                 font-weight: bold;
-                transform: rotate(-5deg);
                 animation: shake-title 0.1s linear;
                 animation-fill-mode: forwards;
                 animation-iteration-count: 8;
@@ -211,11 +210,11 @@
 
 
             .continue {
-                width: 150px;
-                font-size: 18px;
-                height: 55px;
+                width: 18vw;
+                margin-left: 41vw;
+                font-size: calc((3vw + 3vh)/2);
+                height: 14vh;
                 position: absolute;
-                left: calc(50vw - 75px);
                 bottom: calc(35vh - 28px);
                 background-color: #00539C;
                 border: none;
@@ -244,13 +243,19 @@
                 to {
                     opacity: 0;
                     transform: scale(-10);
+                    display: none;
                 }
+            }
+
+            .game {
+                width: 100vw;
+                height: 100vh;
+                background-color: rgba(171, 131, 8, 0.5);
             }
         </style>
     </head>
     <body>
         <div class="game" id="game">
-            Hello!
         </div>
         <img class="tank" id="tank" src="https://cdn-icons-png.flaticon.com/512/942/942456.png" alt="Tank Image">
         <div id="moveTitle">
