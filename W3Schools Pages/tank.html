@@ -14,6 +14,7 @@
         }
 
         body {
+            background-color: rgba(171, 131, 8, 0.5);
             font-family: Silkscreen, serif;
             transition: 0.5s;
             overflow: hidden;
@@ -23,9 +24,12 @@
 
         * {
             font-family: Silkscreen, serif;
+            transition: 1s ease-in-out;
         }
 
         .tank {
+            width: 20vw;
+            height: 20vh;
             position: absolute;
             left: 45vw;
             top: 70vh;
@@ -51,7 +55,6 @@
             .titleLeft {
                 animation: title-left 0.5s ease-in;
                 transition: 2s;
-                animation-delay: 2.75s;
                 animation-fill-mode: forwards;
             }
 
@@ -69,10 +72,15 @@
             }
 
             #continue {
+                width: 18vw;
                 position: absolute !important;
                 left: calc(75vw - 10vw) !important;
                 margin-left: 0 !important;
                 bottom: calc(50vh - 8vh) !important;
+            }
+
+            .tank {
+                transform: rotate(90deg) !important;
             }
         }
 
@@ -130,8 +138,8 @@
 
 
         .continue {
-            width: 18vw;
-            margin-left: 41vw;
+            width: 50vw;
+            margin-left: 25vw;
             font-size: calc((3vw + 3vh) / 2);
             height: 14vh;
             position: absolute;
@@ -140,8 +148,6 @@
             border: none;
             color: white;
             cursor: pointer;
-
-
         }
 
         #moveTitle {
@@ -149,11 +155,16 @@
             top: -3vw;
             left: 25vw;
             width: 50vw;
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
         }
 
         .removeButton {
             animation: growFade 1s ease-in-out forwards;
-            animation-delay: 2.65s;
         }
 
         @keyframes growFade {
@@ -171,9 +182,13 @@
         .game {
             width: 100vw;
             height: 100vh;
-            background-color: rgba(171, 131, 8, 0.5);
+            opacity: 0;
         }
 
+        .showPlayingGame {
+            display: block;
+            opacity: 1;
+        }
 
         .tank * {
             position: absolute;
@@ -358,7 +373,7 @@
 
         .introAnimation {
             transform: scale(0);
-            transition: transform 0.75s ease-in-out;
+            transition: transform 1s ease-in-out;
         }
 
 
@@ -403,14 +418,29 @@
         }
 
         .showIntroElement {
-            transform: scale(1);
+            transform: scale(1) !important;
+        }
+
+        #screen {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+        }
+
+        .screenGone {
+            display: none;
         }
     </style>
 </head>
 <body>
 <div class="game" id="game">
+    HELLO! THIS IS THE GAME!
+    <div id="screen"></div>
 </div>
-<div class="tank intoAnimation" id="tank">
+<div class="tank introAnimation" id="tankMove">
     <div class="tankBody"></div>
     <div class="tankTreads_1"></div>
     <div class="tankTreads_2"></div>
@@ -442,21 +472,27 @@
         </div>
     </div>
 </div>
-<input type="button" class="continue introAnimation" value="CONTINUE" id="continue" onclick="continueFunction()">
-<div id="emptyDiv"></div>
+<input type="button" class="continue introAnimation" value="<< PLAY >>" id="continue" onclick="continueFunction()">
 <script>
     function continueFunction() {
         let title = document.getElementById("moveTitle");
         title.classList.add("titleLeft");
         let continueButton = document.getElementById("continue");
         continueButton.classList.add("removeButton");
+        setTimeout(() => {
+            let game = document.getElementById("game");
+            game.classList.add("showPlayingGame")
+            let screen = document.getElementById("screen");
+            screen.classList.add("screenGone")
+        }, 2000);
+
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        const elements = ['moveTitle', 'tank', 'continue', "emptyDiv"];
+        const elements = ['moveTitle', 'tankMove', 'continue'];
         let delay = 0;
 
-        elements.forEach((elementId, index) => {
+        elements.forEach((elementId) => {
             setTimeout(() => {
                 document.getElementById(elementId).classList.add('showIntroElement');
                 document.body.classList.add('shakeIntroElement');
@@ -464,7 +500,7 @@
                     document.body.classList.remove('shakeIntroElement');
                 }, 500); // Shake duration
             }, delay);
-            delay += 1000; // 0.75s for the animation + 1s delay between each element
+            delay += 1500; // 0.75s for the animation + 1s delay between each element
         });
     });
 </script>
