@@ -3,7 +3,7 @@
 <head>
     <title> Tank Game </title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap');
 
         :root {
             --main-light-green: #71c285;
@@ -14,8 +14,8 @@
         }
 
         body {
-            background-color: rgba(171, 131, 8, 0.5);
-            font-family: Silkscreen, serif;
+            background-color: #9B7653;
+            font-family: "Jaro", sans-serif;
             transition: 0.5s;
             overflow: hidden;
             margin: 0;
@@ -23,16 +23,17 @@
 
 
         * {
-            font-family: Silkscreen, serif;
+            font-family: "Jaro", sans-serif;
             transition: 1s ease-in-out;
         }
 
         .tank {
-            width: 20vw;
-            height: 20vh;
+            width: 9.75vw;
+            height: 10.875vw;
             position: absolute;
             left: 45vw;
             top: 70vh;
+            transition: left 0.1s, top 0.1s !important;
         }
 
 
@@ -67,7 +68,6 @@
             #moveTitle {
                 width: 50vw;
                 position: absolute !important;
-                left: 10vw !important;
 
             }
 
@@ -76,11 +76,12 @@
                 position: absolute !important;
                 left: calc(75vw - 10vw) !important;
                 margin-left: 0 !important;
-                bottom: calc(50vh - 8vh) !important;
+                bottom: calc(50vh - 18vh) !important;
             }
 
             .tank {
-                transform: rotate(90deg) !important;
+                left: 4vw;
+                transform: scale(0) rotate(90deg) !important;
             }
         }
 
@@ -94,7 +95,7 @@
         }
 
 
-        .innerText1 {
+        .frontPage {
             position: relative;
             top: 10vh;
             opacity: 0;
@@ -143,7 +144,7 @@
             font-size: calc((3vw + 3vh) / 2);
             height: 14vh;
             position: absolute;
-            bottom: calc(45vh - 28px);
+            bottom: calc(55vh - 28px);
             background-color: #00539C;
             border: none;
             color: white;
@@ -151,15 +152,15 @@
         }
 
         #moveTitle {
+            letter-spacing: 0.2vw;
             position: absolute;
             top: -3vw;
             left: 25vw;
             width: 50vw;
-            -webkit-touch-callout: none; /* iOS Safari */
-            -webkit-user-select: none; /* Safari */
-            -khtml-user-select: none; /* Konqueror HTML */
-            -moz-user-select: none; /* Old versions of Firefox */
-            -ms-user-select: none; /* Internet Explorer/Edge */
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
             user-select: none;
         }
 
@@ -183,6 +184,7 @@
             width: 100vw;
             height: 100vh;
             opacity: 0;
+            transform-origin: center;
         }
 
         .showPlayingGame {
@@ -417,8 +419,20 @@
             }
         }
 
-        .showIntroElement {
-            transform: scale(1) !important;
+        .showIntroElement:not(.tank) {
+            transform: scale(1);
+        }
+
+        @media screen and (min-aspect-ratio: 2.2/1) {
+            .showIntroElement.tank {
+                transform: scale(1) rotate(90deg) !important;
+            }
+        }
+
+        @media screen and (max-aspect-ratio: 2.2/1) {
+            .showIntroElement {
+                transform: scale(1);
+                }
         }
 
         #screen {
@@ -433,11 +447,39 @@
         .screenGone {
             display: none;
         }
+
+        .instructions div {
+            font-size: 3vw;
+        }
+
+        .wasdtoMove {
+            text-align: center;
+            position: absolute;
+            left: 10vw;
+            bottom: 20vh;
+            width: 20vw;
+        }
+
+        .mousetoShoot {
+            text-align: center;
+            position: absolute;
+            right: 10vw;
+            bottom: 20vh;
+            width: 20vw;
+        }
     </style>
 </head>
 <body>
 <div class="game" id="game">
-    HELLO! THIS IS THE GAME!
+    <div class="instructions">
+        <div class="wasdtoMove">
+            USE WASD TO MOVE
+        </div>
+        <div class="mousetoShoot">
+            USE MOUSE TO AIM/SHOOT
+        </div>
+
+    </div>
     <div id="screen"></div>
 </div>
 <div class="tank introAnimation" id="tankMove">
@@ -464,12 +506,8 @@
 </div>
 <div id="moveTitle" class="introAnimation">
     <div class="frontPage">
-        <div class="innerText1">
             THE TANK
-        </div>
-        <div class="innerText1">
             GAME
-        </div>
     </div>
 </div>
 <input type="button" class="continue introAnimation" value="<< PLAY >>" id="continue" onclick="continueFunction()">
@@ -484,6 +522,8 @@
             game.classList.add("showPlayingGame")
             let screen = document.getElementById("screen");
             screen.classList.add("screenGone")
+            document.addEventListener('mousemove', updateTargetAngle);
+            document.addEventListener('keydown', moveDiv);
         }, 2000);
 
     }
@@ -500,9 +540,76 @@
                     document.body.classList.remove('shakeIntroElement');
                 }, 500); // Shake duration
             }, delay);
-            delay += 1500; // 0.75s for the animation + 1s delay between each element
+            delay += 1200; // 0.75s for the animation + 1s delay between each element
         });
     });
+
+
+var currentAngle = 0;
+var targetAngle = 0;
+var initialRotation = 90; // Adjust the initial rotation if needed
+var rotationSpeed = 2; // Base speed of rotation
+var angleThreshold = 0.1; // Threshold to stop rotation when close to target
+var moveSpeed = 5; // Speed of movement with WASD keys
+
+var div = document.getElementById('tankMove');
+var divRect = div.getBoundingClientRect();
+var divX = window.innerWidth / 2 - divRect.width / 2;
+var divY = window.innerHeight / 2 - divRect.height / 2;
+
+function updateTargetAngle(event) {
+  var divCenterX = divX + divRect.width / 2;
+  var divCenterY = divY + divRect.height / 2;
+
+  var angleRad = Math.atan2(event.clientY - divCenterY, event.clientX - divCenterX);
+  targetAngle = angleRad * (180 / Math.PI) + initialRotation;
+}
+
+function normalizeAngle(angle) {
+  return (angle + 360) % 360;
+}
+
+function rotateDiv() {
+  currentAngle = normalizeAngle(currentAngle);
+  targetAngle = normalizeAngle(targetAngle);
+
+  var angleDifference = targetAngle - currentAngle;
+
+  if (Math.abs(angleDifference) > 180) {
+    angleDifference = angleDifference > 0 ? angleDifference - 360 : angleDifference + 360;
+  }
+
+  if (Math.abs(angleDifference) > angleThreshold) {
+    var adjustedSpeed = Math.min(rotationSpeed, Math.abs(angleDifference) / 2);
+    currentAngle += adjustedSpeed * Math.sign(angleDifference);
+    currentAngle = normalizeAngle(currentAngle);
+  }
+
+  div.style.transform = `rotate(${currentAngle}deg)`;
+  requestAnimationFrame(rotateDiv);
+}
+
+function moveDiv(event) {
+  switch(event.key) {
+    case 'w':
+      divY -= moveSpeed;
+      break;
+    case 'a':
+      divX -= moveSpeed;
+      break;
+    case 's':
+      divY += moveSpeed;
+      break;
+    case 'd':
+      divX += moveSpeed;
+      break;
+  }
+  div.style.left = `${divX}px`;
+  div.style.top = `${divY}px`;
+}
+
+rotateDiv();
+
 </script>
 </body>
 </html>
