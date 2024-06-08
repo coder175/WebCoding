@@ -36,6 +36,9 @@
             transition: left 0.1s, top 0.1s !important;
         }
 
+        .tank * {
+            transition: 0s;
+        }
 
         @media screen and (min-aspect-ratio: 2.2/1) {
 
@@ -227,8 +230,8 @@
         }
 
         .tankTop {
-            top: calc(3.5vw * var(--resize-amount));
-            left: calc(2.25vw * var(--resize-amount));
+            top: calc(3vw * var(--resize-amount));
+            left: calc(0.25vw * var(--resize-amount));
             width: calc(8.5vw * var(--resize-amount));
             height: calc(8vw * var(--resize-amount));
             border-radius: calc(0.75vw * var(--resize-amount));
@@ -236,8 +239,8 @@
         }
 
         .tankTopSmall {
-            top: calc(4.5vw * var(--resize-amount));
-            left: calc(3.5vw * var(--resize-amount));
+            top: calc(4vw * var(--resize-amount));
+            left: calc(1.5vw * var(--resize-amount));
             width: calc(6vw * var(--resize-amount));
             height: calc(6vw * var(--resize-amount));
             border-radius: calc(0.75vw * var(--resize-amount));
@@ -245,8 +248,8 @@
         }
 
         .nozzle {
-            top: calc(-5vw * var(--resize-amount));
-            left: calc(5.88vw * var(--resize-amount));
+            top: calc(-5.5vw * var(--resize-amount));
+            left: calc(3.88vw * var(--resize-amount));
             width: calc(1.25vw * var(--resize-amount));
             height: calc(10vw * var(--resize-amount));
             background-color: var(--main-light-grey);
@@ -254,8 +257,8 @@
         }
 
         .bigJointNozzle {
-            top: calc(2.5vw * var(--resize-amount));
-            left: calc(5.25vw * var(--resize-amount));
+            top: calc(2vw * var(--resize-amount));
+            left: calc(3.25vw * var(--resize-amount));
             width: calc(2.5vw * var(--resize-amount));
             height: calc(2.5vw * var(--resize-amount));
             background-color: var(--main-extra-light-green);
@@ -263,8 +266,8 @@
         }
 
         .smallJointNozzle {
-            top: calc(1vw * var(--resize-amount));
-            left: calc(5.5vw * var(--resize-amount));
+            top: calc(0.5vw * var(--resize-amount));
+            left: calc(3.5vw * var(--resize-amount));
             width: calc(2vw * var(--resize-amount));
             height: calc(2vw * var(--resize-amount));
             background-color: var(--main-light-green);
@@ -338,8 +341,8 @@
         }
 
         .tankTopSmallRight {
-            top: calc(5.5vw * var(--resize-amount));
-            left: calc(7vw * var(--resize-amount));
+            top: calc(5vw * var(--resize-amount));
+            left: calc(5vw * var(--resize-amount));
             width: calc(1.75vw * var(--resize-amount));
             height: calc(4vw * var(--resize-amount));
             background-color: var(--main-lighter-grey);
@@ -347,8 +350,8 @@
         }
 
         .tankTopSmallLeftTop {
-            top: calc(5.5vw * var(--resize-amount));
-            left: calc(4.5vw * var(--resize-amount));
+            top: calc(5vw * var(--resize-amount));
+            left: calc(2.5vw * var(--resize-amount));
             width: calc(1.75vw * var(--resize-amount));
             height: calc(1.05vw * var(--resize-amount));
             background-color: var(--main-lighter-grey);
@@ -356,8 +359,8 @@
         }
 
         .tankTopSmallLeftMiddle {
-            top: calc(7vw * var(--resize-amount));
-            left: calc(4.5vw * var(--resize-amount));
+            top: calc(6.5vw * var(--resize-amount));
+            left: calc(2.5vw * var(--resize-amount));
             width: calc(1.75vw * var(--resize-amount));
             height: calc(1.05vw * var(--resize-amount));
             background-color: var(--main-lighter-grey);
@@ -365,8 +368,8 @@
         }
 
         .tankTopSmallLeftBottom {
-            top: calc(8.45vw * var(--resize-amount));
-            left: calc(4.5vw * var(--resize-amount));
+            top: calc(7.95vw * var(--resize-amount));
+            left: calc(2.5vw * var(--resize-amount));
             width: calc(1.75vw * var(--resize-amount));
             height: calc(1.05vw * var(--resize-amount));
             background-color: var(--main-lighter-grey);
@@ -467,6 +470,15 @@
             bottom: 20vh;
             width: 20vw;
         }
+
+        .fullTurret {
+            width: 6.375vw;
+            height: 9.75vw;
+            position: relative !important;
+            left: 1.5vw;
+            top: 0.5vw;
+            transform: translate(2.5vw, -1vw) rotate(0deg);
+        }
     </style>
 </head>
 <body>
@@ -494,15 +506,17 @@
     <div class="tankTreadsFront_2"></div>
     <div class="tankTreadsBack_1"></div>
     <div class="tankTreadsBack_2"></div>
-    <div class="tankTop"></div>
-    <div class="nozzle"></div>
-    <div class="smallJointNozzle"></div>
-    <div class="bigJointNozzle"></div>
-    <div class="tankTopSmall"></div>
-    <div class="tankTopSmallRight"></div>
-    <div class="tankTopSmallLeftTop"></div>
-    <div class="tankTopSmallLeftMiddle"></div>
-    <div class="tankTopSmallLeftBottom"></div>
+    <div class="fullTurret" id='fullTurret'>
+        <div class="tankTop"></div>
+        <div class="nozzle"></div>
+        <div class="smallJointNozzle"></div>
+        <div class="bigJointNozzle"></div>
+        <div class="tankTopSmall"></div>
+        <div class="tankTopSmallRight"></div>
+        <div class="tankTopSmallLeftTop"></div>
+        <div class="tankTopSmallLeftMiddle"></div>
+        <div class="tankTopSmallLeftBottom"></div>
+    </div>
 </div>
 <div id="moveTitle" class="introAnimation">
     <div class="frontPage">
@@ -522,8 +536,17 @@
             game.classList.add("showPlayingGame")
             let screen = document.getElementById("screen");
             screen.classList.add("screenGone")
-            document.addEventListener('mousemove', updateTargetAngle);
-            document.addEventListener('keydown', moveDiv);
+            document.addEventListener('keydown', (e) => {
+                keys[e.code] = true;
+            });
+
+            document.addEventListener('keyup', (e) => {
+                keys[e.code] = false;
+            });
+
+            document.addEventListener('mousemove', function(event) {
+                updateTargetAngle(event);
+            });
         }, 2000);
 
     }
@@ -545,70 +568,72 @@
     });
 
 
-var currentAngle = 0;
-var targetAngle = 0;
-var initialRotation = 90; // Adjust the initial rotation if needed
-var rotationSpeed = 2; // Base speed of rotation
-var angleThreshold = 0.1; // Threshold to stop rotation when close to target
-var moveSpeed = 5; // Speed of movement with WASD keys
+    const div = document.getElementById('tankMove');
+    const turret = document.getElementById('fullTurret');
+    let position = { x: 0, y: 0 };
+    let speed = 0.25; // speed of movement in pixels per frame
+    let keys = {};
+    let mousePosition = { x: 0, y: 0 };
+    let currentAngle = 0;
+    let targetAngle = 0;
+    let initialRotation = 90; // Adjust the initial rotation if needed
+    let rotationSpeed = 5; // Base speed of rotation
+    let angleThreshold = 0.1; // Threshold to stop rotation when close to target
 
-var div = document.getElementById('tankMove');
-var divRect = div.getBoundingClientRect();
-var divX = window.innerWidth / 2 - divRect.width / 2;
-var divY = window.innerHeight / 2 - divRect.height / 2;
 
-function updateTargetAngle(event) {
-  var divCenterX = divX + divRect.width / 2;
-  var divCenterY = divY + divRect.height / 2;
+    // Move Body
+    function updatePosition() {
+        if (keys['KeyW']) position.y -= speed;
+        if (keys['KeyS']) position.y += speed;
+        if (keys['KeyA']) position.x -= speed;
+        if (keys['KeyD']) position.x += speed;
+        div.style.transform = `translate(${position.x}vw, ${position.y}vh)`;
+        requestAnimationFrame(updatePosition);
+        }
 
-  var angleRad = Math.atan2(event.clientY - divCenterY, event.clientX - divCenterX);
-  targetAngle = angleRad * (180 / Math.PI) + initialRotation;
-}
+    requestAnimationFrame(updatePosition);
 
-function normalizeAngle(angle) {
-  return (angle + 360) % 360;
-}
 
-function rotateDiv() {
-  currentAngle = normalizeAngle(currentAngle);
-  targetAngle = normalizeAngle(targetAngle);
 
-  var angleDifference = targetAngle - currentAngle;
+    //Turn Turret
+    function updateTargetAngle(event) {
+        var turret = document.getElementById('fullTurret');
+        var divRect = div.getBoundingClientRect();
 
-  if (Math.abs(angleDifference) > 180) {
-    angleDifference = angleDifference > 0 ? angleDifference - 360 : angleDifference + 360;
-  }
+        var divCenterX = divRect.left + divRect.width / 2;
+        var divCenterY = divRect.top + divRect.height / 2;
 
-  if (Math.abs(angleDifference) > angleThreshold) {
-    var adjustedSpeed = Math.min(rotationSpeed, Math.abs(angleDifference) / 2);
-    currentAngle += adjustedSpeed * Math.sign(angleDifference);
-    currentAngle = normalizeAngle(currentAngle);
-  }
+        var angleRad = Math.atan2(event.clientY - divCenterY, event.clientX - divCenterX);
+        targetAngle = angleRad * (180 / Math.PI) + initialRotation;
+    }
 
-  div.style.transform = `rotate(${currentAngle}deg)`;
-  requestAnimationFrame(rotateDiv);
-}
+    function normalizeAngle(angle) {
+        return (angle + 360) % 360;
+    }
 
-function moveDiv(event) {
-  switch(event.key) {
-    case 'w':
-      divY -= moveSpeed;
-      break;
-    case 'a':
-      divX -= moveSpeed;
-      break;
-    case 's':
-      divY += moveSpeed;
-      break;
-    case 'd':
-      divX += moveSpeed;
-      break;
-  }
-  div.style.left = `${divX}px`;
-  div.style.top = `${divY}px`;
-}
+    function rotateDiv() {
+        var turret = document.getElementById('fullTurret');
 
-rotateDiv();
+        currentAngle = normalizeAngle(currentAngle);
+        targetAngle = normalizeAngle(targetAngle);
+
+        var angleDifference = targetAngle - currentAngle;
+
+        if (Math.abs(angleDifference) > 180) {
+            angleDifference = angleDifference > 0 ? angleDifference - 360 : angleDifference + 360;
+        }
+
+        if (Math.abs(angleDifference) > angleThreshold) {
+            var adjustedSpeed = Math.min(rotationSpeed, Math.abs(angleDifference) / 2);
+            currentAngle += adjustedSpeed * Math.sign(angleDifference);
+            currentAngle = normalizeAngle(currentAngle);
+        }
+
+        turret.style.transform = 'rotate(' + currentAngle + 'deg)';
+        requestAnimationFrame(rotateDiv);
+    }
+
+    rotateDiv();
 
 </script>
 </body>
