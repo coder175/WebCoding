@@ -1,106 +1,88 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
+<head>
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-             <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                         <title>Document</title><style>#rotating-div {
-                                 width: 100px;
-                                height: 100px;
-                                background-color: blue;
-                                position: absolute;
-                                top: 50%;
-                                left: 50%;
-                                transform-origin: center;
-                            }
-                            </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Move and Rotate Div with WASD</title>
+    <style>
+        #movable-div {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translate(50vw, 50vh) rotate(0deg);
+        }
+    </style>
 </head>
 <body>
-    <div id="rotating-div"></div>
-<script>
+    <div id="movable-div"></div>
+    <script>
+        const div = document.getElementById('movable-div');
+        let position = { x: 50, y: 50 }; // Position in vw and vh
+        const speed = 0.5; // Speed of movement in vw/vh per frame
+        const rotationSpeed = 5; // Rotation speed in degrees per frame
+        const angleThreshold = 1; // Minimum angle difference to apply rotation in degrees
+        let keys = {};
+        let mousePosition = { x: 0, y: 0 };
+        let currentRotation =  180; // Initial rotation angle
 
-    document.addEventListener('mousemove', updateTargetAngle);
-    document.addEventListener('keydown', handleKeyDown);
-    document.addEventListener('keyup', handleKeyUp);
+        function updatePosition() {
+            if (keys['KeyW']) position.y -= speed;
+            if (keys['KeyS']) position.y += speed;
+            if (keys['KeyA']) position.x -= speed;
+            if (keys['KeyD']) position.x += speed;
 
-    var currentAngle = 0;
-    var targetAngle = 0;
-    var initialRotation = 90; // Adjust the initial rotation if needed
-    var extraSeconds = 0.25; // Extra seconds to complete the rotation
-    var moveSpeed = 2; // Speed of movement with WASD keys
+            // Ensure the position stays within viewport bounds
+            position.x = Math.max(0, Math.min(100, position.x));
+            position.y = Math.max(0, Math.min(100, position.y));
 
-    var div = document.getElementById('rotating-div');
-    var divRect = div.getBoundingClientRect();
-    var divX = window.innerWidth / 2 - divRect.width / 2;
-    var divY = window.innerHeight / 2 - divRect.height / 2;
+            // Calculate the angle between the center of the div and the cursor
+            const rect = div.getBoundingClientRect();
+            const divCenterX = rect.left + rect.width / 2;
+            const divCenterY = rect.top + rect.height / 2;
+            const targetAngle = Math.atan2(mousePosition.y - divCenterY, mousePosition.x - divCenterX) * (180 / Math.PI);
 
-    var keysPressed = {};
+            // Smoothly rotate towards the target angle
+            let angleDifference = targetAngle - currentRotation;
 
-    function updateTargetAngle(event) {
-        var divCenterX = divX + divRect.width / 2;
-        var divCenterY = divY + divRect.height / 2;
+            // Ensure angle difference is within -180 to 180 degrees range
+            angleDifference = (angleDifference + 180) % 360 - 180;
 
-        var angleRad = Math.atan2(event.clientY - divCenterY, event.clientX - divCenterX);
-        targetAngle = angleRad * (180 / Math.PI) + initialRotation;
-    }
+            // Adjust rotation direction to take the shortest path
+            if (Math.abs(angleDifference) > 180) {
+                angleDifference -= Math.sign(angleDifference) * 360;
+            }
 
-    function normalizeAngle(angle) {
-        return (angle + 360) % 360;
-    }
+            if (Math.abs(angleDifference) > angleThreshold) {
+                if (angleDifference > 0) {
+                    currentRotation += Math.min(rotationSpeed, angleDifference);
+                } else {
+                    currentRotation -= Math.min(rotationSpeed, -angleDifference);
+                }
+            }
 
-    function rotateDiv(timestamp) {
-        currentAngle = normalizeAngle(currentAngle);
-        targetAngle = normalizeAngle(targetAngle);
+            // Apply translation and rotation
+            div.style.transform = `translate(${position.x}vw, ${position.y}vh) rotate(${currentRotation}deg)`;
 
-        var angleDifference = targetAngle - currentAngle;
-
-        if (Math.abs(angleDifference) > 180) {
-            angleDifference = angleDifference > 0 ? angleDifference - 360 : angleDifference + 360;
+            requestAnimationFrame(updatePosition);
         }
 
-        var timeFactor = Math.min(extraSeconds * 60, 1); // Factor based on extra seconds
-        var angleVelocity = angleDifference * timeFactor;
+        document.addEventListener('keydown', (e) => {
+            keys[e.code] = true;
+        });
 
-        if (Math.abs(angleDifference) > angleThreshold) {
-            currentAngle += angleVelocity;
-            currentAngle = normalizeAngle(currentAngle);
-        }
+        document.addEventListener('keyup', (e) => {
+            keys[e.code] = false;
+        });
 
-        div.style.transform = `translate(-50%, -50%) rotate(${currentAngle}deg)`;
-        requestAnimationFrame(rotateDiv);
-    }
+        document.addEventListener('mousemove', (e) => {
+            mousePosition.x = e.clientX;
+            mousePosition.y = e.clientY;
+        });
 
-    function moveDiv() {
-        if (keysPressed['w']) {
-            divY -= moveSpeed;
-        }
-        if (keysPressed['a']) {
-            divX -= moveSpeed;
-        }
-        if (keysPressed['s']) {
-            divY += moveSpeed;
-        }
-        if (keysPressed['d']) {
-            divX += moveSpeed;
-        }
-        div.style.left = `${divX}px`;
-        div.style.top = `${divY}px`;
-
-        requestAnimationFrame(moveDiv);
-    }
-
-    function handleKeyDown(event) {
-        keysPressed[event.key] = true;
-    }
-
-    function handleKeyUp(event) {
-        keysPressed[event.key] = false;
-    }
-
-    // Start the loops
-    rotateDiv();
-    moveDiv();
-    
-</script>
+        requestAnimationFrame(updatePosition);
+    </script>
 </body>
 </html>
