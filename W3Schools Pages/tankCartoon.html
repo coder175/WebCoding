@@ -19,6 +19,10 @@
             position: absolute;
         }
 
+        .tank {
+            transform-origin: 50% 50%;
+        }
+
         .tankBody {
             top: 1.25vw;
             width: 13vw;
@@ -49,7 +53,7 @@
 
         .tankTop {
             top: 3.5vw;
-            left: 2.25vw;
+            left: -0.75vw;
             width: 8.5vw;
             height: 8vw;
             border-radius: 0.75vw;
@@ -58,22 +62,16 @@
 
         .tankTopSmall {
             top: 4.5vw;
-            left: 3.5vw;
+            left: 0.5vw;
             width: 6vw;
             height: 6vw;
             border-radius: 0.75vw;
             background-color: var(--main-light-green);
         }
 
-        img {
-            position: absolute;
-            top: -8vh;
-            left: 15vw;
-        }
-
         .nozzle {
             top: -6vw;
-            left: 5.88vw;
+            left: 2.88vw;
             width: 1.25vw;
             height: 10vw;
             background-color: var(--main-light-grey);
@@ -82,7 +80,7 @@
 
         .bigJointNozzle {
             top: 2.5vw;
-            left: 5.25vw;
+            left: 2.25vw;
             width: 2.5vw;
             height: 2.5vw;
             background-color: var(--main-extra-light-green);
@@ -91,7 +89,7 @@
 
         .smallJointNozzle {
             top: 1vw;
-            left: 5.5vw;
+            left: 2.5vw;
             width: 2vw;
             height: 2vw;
             background-color: var(--main-light-green);
@@ -166,7 +164,7 @@
         
         .tankTopSmallRight {
             top: 5.5vw;
-            left: 7vw;
+            left: 4vw;
             width: 1.75vw;
             height: 4vw;
             background-color: var(--main-lighter-grey);
@@ -175,7 +173,7 @@
         
         .tankTopSmallLeftTop {
             top: 5.5vw;
-            left: 4.5vw;
+            left: 1.5vw;
             width: 1.75vw;
             height: 1.05vw;
             background-color: var(--main-lighter-grey);
@@ -183,7 +181,7 @@
             }
         .tankTopSmallLeftMiddle {
             top: 7vw;
-            left: 4.5vw;
+            left: 1.5vw;
             width: 1.75vw;
             height: 1.05vw;
             background-color: var(--main-lighter-grey);
@@ -191,16 +189,22 @@
             }
         .tankTopSmallLeftBottom {
             top: 8.45vw;
-            left: 4.5vw;
+            left: 1.5vw;
             width: 1.75vw;
             height: 1.05vw;
             background-color: var(--main-lighter-grey);
             border-radius: 0.5vw;
             }
+
+        .fullTurret {
+            position: absolute;
+            width: 7.1vw;
+            height: 9.75vw;
+        }
     </style>
 </head>
 <body>
-    <div class="tank" id="tank">
+    <div class="tank introAnimation" id="tankMove">
         <div class="tankBody"></div>
         <div class="tankTreads_1"></div>
         <div class="tankTreads_2"></div>
@@ -212,16 +216,90 @@
         <div class="tankTreadsFront_2"></div>
         <div class="tankTreadsBack_1"></div>
         <div class="tankTreadsBack_2"></div>
-        <div class="tankTop"></div>
-        <div class="nozzle"></div>
-        <div class="smallJointNozzle"></div>
-        <div class="bigJointNozzle"></div>
-        <div class="tankTopSmall"></div>
-        <div class="tankTopSmallRight"></div>
-        <div class="tankTopSmallLeftTop"></div>
-        <div class="tankTopSmallLeftMiddle"></div>
-        <div class="tankTopSmallLeftBottom"></div>
+        <div class="fullTurret" id='fullTurret'>
+            <div class="tankTop"></div>
+            <div class="nozzle"></div>
+            <div class="smallJointNozzle"></div>
+            <div class="bigJointNozzle"></div>
+            <div class="tankTopSmall"></div>
+            <div class="tankTopSmallRight"></div>
+            <div class="tankTopSmallLeftTop"></div>
+            <div class="tankTopSmallLeftMiddle"></div>
+            <div class="tankTopSmallLeftBottom"></div>
+        </div>
     </div>
+
+<script>
+
+    const div = document.getElementById('tankMove');
+    const turret = document.getElementById('fullTurret');
+    let position = { x: 50, y: 50 }; // Position in vw and vh
+    const speed = 0.5; // Speed of movement in vw/vh per frame
+    const rotationSpeed = 5; // Rotation speed in degrees per frame
+    const angleThreshold = 1; // Minimum angle difference to apply rotation in degrees
+    let keys = {};
+    let mousePosition = { x: 0, y: 0 };
+    let currentRotation =  0; // Initial rotation angle
+
+
+    // Move Body
+    function updatePosition() {
+        if (keys['KeyW']) position.y -= speed;
+        if (keys['KeyS']) position.y += speed;
+        if (keys['KeyA']) position.x -= speed;
+        if (keys['KeyD']) position.x += speed;
+
+        // Ensure the position stays within viewport bounds
+        position.x = Math.max(0, Math.min(100, position.x));
+        position.y = Math.max(0, Math.min(100, position.y));
+
+        // Calculate the angle between the center of the div and the cursor
+        const rect = div.getBoundingClientRect();
+        const divCenterX = rect.left + rect.width / 2;
+        const divCenterY = rect.top + rect.height / 2;
+        const targetAngle = Math.atan2(mousePosition.y - divCenterY, mousePosition.x - divCenterX) * (180 / Math.PI);
+
+        // Smoothly rotate towards the target angle
+        let angleDifference = targetAngle - currentRotation;
+
+        // Ensure angle difference is within -180 to 180 degrees range
+        angleDifference = (angleDifference + 180) % 360 - 180;
+
+        // Adjust rotation direction to take the shortest path
+        if (Math.abs(angleDifference) > 180) {
+            angleDifference -= Math.sign(angleDifference) * 360;
+        }
+
+        if (Math.abs(angleDifference) > angleThreshold) {
+            if (angleDifference > 0) {
+                currentRotation += Math.min(rotationSpeed, angleDifference);
+            } else {
+                currentRotation -= Math.min(rotationSpeed, -angleDifference);
+            }
+        }
+
+        // Apply translation and rotation
+        div.style.transform = `translate(${position.x}vw, ${position.y}vh)`;
+        turret.style.transform = `translate(3vw, 0vh) rotate(${currentRotation}deg)`;
+
+        requestAnimationFrame(updatePosition);
+    }
+
+    document.addEventListener('keydown', (e) => {
+        keys[e.code] = true;
+    });
+
+    document.addEventListener('keyup', (e) => {
+        keys[e.code] = false;
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        mousePosition.x = e.clientX;
+        mousePosition.y = e.clientY;
+    });
+
+    requestAnimationFrame(updatePosition);
+</script>
 
 </body>
 </html>
