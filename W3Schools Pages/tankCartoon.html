@@ -20,13 +20,16 @@
         }
 
         .tank {
-            transform-origin: 50% 50%;
+            position: absolute;
+            transform: translate(50vw, 50vh);
+            transform-origin: center center;
+            transition: 0.09s;
         }
 
         .tankBody {
             top: 1.25vw;
             width: 13vw;
-            height: 12vw;
+            height: 15vw; /* supposed to be 12*/
             background-color: var(--main-dark-green);
         }
 
@@ -200,6 +203,8 @@
             position: absolute;
             width: 7.1vw;
             height: 9.75vw;
+            transform: translate(50vw, 50vh);
+            transform-origin: 50% 50%;
         }
     </style>
 </head>
@@ -216,18 +221,19 @@
         <div class="tankTreadsFront_2"></div>
         <div class="tankTreadsBack_1"></div>
         <div class="tankTreadsBack_2"></div>
-        <div class="fullTurret" id='fullTurret'>
-            <div class="tankTop"></div>
-            <div class="nozzle"></div>
-            <div class="smallJointNozzle"></div>
-            <div class="bigJointNozzle"></div>
-            <div class="tankTopSmall"></div>
-            <div class="tankTopSmallRight"></div>
-            <div class="tankTopSmallLeftTop"></div>
-            <div class="tankTopSmallLeftMiddle"></div>
-            <div class="tankTopSmallLeftBottom"></div>
-        </div>
     </div>
+
+    <div class="fullTurret" id='fullTurret'>
+        <div class="tankTop"></div>
+        <div class="nozzle"></div>
+        <div class="smallJointNozzle"></div>
+        <div class="bigJointNozzle"></div>
+        <div class="tankTopSmall"></div>
+        <div class="tankTopSmallRight"></div>
+        <div class="tankTopSmallLeftTop"></div>
+        <div class="tankTopSmallLeftMiddle"></div>
+        <div class="tankTopSmallLeftBottom"></div>
+        </div>
 
 <script>
 
@@ -240,6 +246,7 @@
     let keys = {};
     let mousePosition = { x: 0, y: 0 };
     let currentRotation =  0; // Initial rotation angle
+    let direction = 0
 
 
     // Move Body
@@ -249,12 +256,32 @@
         if (keys['KeyA']) position.x -= speed;
         if (keys['KeyD']) position.x += speed;
 
+        if (keys['KeyW'] && keys['KeyD']) {
+            direction = 45
+        } else if (keys['KeyW'] && keys['KeyA']) {
+            direction = -45
+        } else if (keys['KeyA'] && keys['KeyS']) {
+            direction = -135
+        } else if (keys['KeyS'] && keys['KeyD']) {
+            direction = 135
+        } else if (keys['KeyS']) {
+            direction = 180
+        } else if (keys['KeyW']) {
+            direction = 0
+        } else if (keys['KeyA']) {
+            direction = -90
+        } else if (keys['KeyD']) {
+            direction = 90
+        }
+
+        console.log(direction)
+
         // Ensure the position stays within viewport bounds
         position.x = Math.max(0, Math.min(100, position.x));
         position.y = Math.max(0, Math.min(100, position.y));
 
         // Calculate the angle between the center of the div and the cursor
-        const rect = div.getBoundingClientRect();
+        const rect = turret.getBoundingClientRect();
         const divCenterX = rect.left + rect.width / 2;
         const divCenterY = rect.top + rect.height / 2;
         const targetAngle = Math.atan2(mousePosition.y - divCenterY, mousePosition.x - divCenterX) * (180 / Math.PI);
@@ -279,8 +306,8 @@
         }
 
         // Apply translation and rotation
-        div.style.transform = `translate(${position.x}vw, ${position.y}vh)`;
-        turret.style.transform = `translate(3vw, 0vh) rotate(${currentRotation}deg)`;
+        div.style.transform = `translate(${position.x}vw, ${position.y}vh) rotate(${direction}deg)`;
+        turret.style.transform = `translate(${3+position.x}vw, ${position.y}vh) rotate(${currentRotation + 90}deg)`;
 
         requestAnimationFrame(updatePosition);
     }
