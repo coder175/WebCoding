@@ -3,152 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collision Detection</title>
+    <title>Div Collision</title>
     <style>
-        #game-board {
-            position: relative;
-            width: 800px;
-            height: 600px;
-            border: 1px solid black;
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
         }
 
-        .rock, #player {
+        #movable-div {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            transform: translate(-50%, -50%);
+            z-index: 100;
+        }
+
+        #container {
+            position: absolute;
+            width: 2000px; /* Example large container */
+            height: 2000px; /* Example large container */
+            background-color: lightgrey;
+        }
+
+        .static-div {
             position: absolute;
             width: 50px;
             height: 50px;
-        }
-
-        .rock {
-            background-color: gray;
-        }
-
-        #player {
             background-color: blue;
         }
     </style>
 </head>
 <body>
-<div id="game-board">
-    <div id="player"></div>
-    <div class="rock" style="left: 100px; top: 100px;"></div>
-    <div class="rock" style="left: 200px; top: 200px;"></div>
-    <!-- Add more rock divs as needed -->
+<div id="movable-div"></div>
+<div id="container">
+    <div class="static-div" style="top: 100px; left: 100px;"></div>
+    <div class="static-div" style="top: 200px; left: 200px;"></div>
+    <!-- Add more static divs as needed, ensuring 20 in total -->
+    <div class="static-div" style="top: 300px; left: 300px;"></div>
+    <div class="static-div" style="top: 400px; left: 400px;"></div>
+    <div class="static-div" style="top: 500px; left: 500px;"></div>
+    <div class="static-div" style="top: 600px; left: 600px;"></div>
+    <div class="static-div" style="top: 700px; left: 700px;"></div>
+    <div class="static-div" style="top: 800px; left: 800px;"></div>
+    <div class="static-div" style="top: 900px; left: 900px;"></div>
+    <div class="static-div" style="top: 1000px; left: 1000px;"></div>
+    <div class="static-div" style="top: 1100px; left: 1100px;"></div>
+    <div class="static-div" style="top: 1200px; left: 1200px;"></div>
+    <div class="static-div" style="top: 1300px; left: 1300px;"></div>
+    <div class="static-div" style="top: 1400px; left: 1400px;"></div>
+    <div class="static-div" style="top: 1500px; left: 1500px;"></div>
+    <div class="static-div" style="top: 1600px; left: 1600px;"></div>
+    <div class="static-div" style="top: 1700px; left: 1700px;"></div>
+    <div class="static-div" style="top: 1800px; left: 1800px;"></div>
+    <div class="static-div" style="top: 1900px; left: 1900px;"></div>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-        const player = document.getElementById('player');
-        const rocks = document.querySelectorAll('.rock');
-        const step = 200; // Pixels per second
+    const container = document.getElementById('container');
+    const staticDivs = document.querySelectorAll('.static-div');
 
-        let moveDirection = {x: 0, y: 0};
-        let lastTimestamp = 0;
-        let animationId = null;
+    const speed = 5;
+    let containerPosition = {top: 0, left: 0};
+    let keys = {};
 
-        player.style.left = '0px';
-        player.style.top = '0px';
+    document.addEventListener('keydown', (e) => keys[e.key] = true);
+    document.addEventListener('keyup', (e) => keys[e.key] = false);
 
-        function checkCollision(newLeft, newTop) {
-            const playerRect = player.getBoundingClientRect();
+    function move() {
+        let newTop = containerPosition.top;
+        let newLeft = containerPosition.left;
 
-            for (let rock of rocks) {
-                const rockRect = rock.getBoundingClientRect();
+        if (keys['ArrowUp']) newTop += speed;
+        if (keys['ArrowLeft']) newLeft += speed;
+        if (keys['ArrowDown']) newTop -= speed;
+        if (keys['ArrowRight']) newLeft -= speed;
 
-                if (
-                    newLeft < rockRect.right &&
-                    newLeft + playerRect.width > rockRect.left &&
-                    newTop < rockRect.bottom &&
-                    newTop + playerRect.height > rockRect.top
-                ) {
-                    return true;
-                }
-            }
-            return false;
+        if (!isColliding(newLeft, containerPosition.top)) {
+            containerPosition.left = newLeft;
+        }
+        if (!isColliding(containerPosition.left, newTop)) {
+            containerPosition.top = newTop;
         }
 
-        function movePlayer(timestamp) {
-            if (!lastTimestamp) lastTimestamp = timestamp;
-            const deltaTime = timestamp - lastTimestamp;
+        container.style.top = `${containerPosition.top}px`;
+        container.style.left = `${containerPosition.left}px`;
 
-            const playerRect = player.getBoundingClientRect();
-            const boardRect = player.parentElement.getBoundingClientRect();
+        requestAnimationFrame(move);
+    }
 
-            const dx = moveDirection.x * (deltaTime / 1000) * step;
-            const dy = moveDirection.y * (deltaTime / 1000) * step;
+    function isColliding(newLeft, newTop) {
+        const movableRect = {
+            top: window.innerHeight / 2 - 25,
+            left: window.innerWidth / 2 - 25,
+            right: window.innerWidth / 2 + 25,
+            bottom: window.innerHeight / 2 + 25
+        };
 
-            let newLeft = playerRect.left + dx;
-            let newTop = playerRect.top + dy;
+        for (let staticDiv of staticDivs) {
+            const staticRect = staticDiv.getBoundingClientRect();
 
-            // Check for collision with board boundaries
-            if (newLeft < boardRect.left) newLeft = boardRect.left;
-            if (newLeft + playerRect.width > boardRect.right) newLeft = boardRect.right - playerRect.width;
-            if (newTop < boardRect.top) newTop = boardRect.top;
-            if (newTop + playerRect.height > boardRect.bottom) newTop = boardRect.bottom - playerRect.height;
+            const adjustedStaticRect = {
+                top: staticRect.top + newTop - containerPosition.top,
+                left: staticRect.left + newLeft - containerPosition.left,
+                right: staticRect.right + newLeft - containerPosition.left,
+                bottom: staticRect.bottom + newTop - containerPosition.top
+            };
 
-            // Check for collision with rocks
-            if (!checkCollision(newLeft, newTop)) {
-                player.style.left = newLeft - boardRect.left + 'px';
-                player.style.top = newTop - boardRect.top + 'px';
-            }
-
-            lastTimestamp = timestamp;
-            animationId = requestAnimationFrame(movePlayer);
-        }
-
-        function startAnimation() {
-            if (animationId === null) {
-                lastTimestamp = null;
-                animationId = requestAnimationFrame(movePlayer);
+            if (!(movableRect.right <= adjustedStaticRect.left ||
+                movableRect.left >= adjustedStaticRect.right ||
+                movableRect.bottom <= adjustedStaticRect.top ||
+                movableRect.top >= adjustedStaticRect.bottom)) {
+                return true;
             }
         }
+        return false;
+    }
 
-        function stopAnimation() {
-            cancelAnimationFrame(animationId);
-            animationId = null;
-        }
-
-        function handleKeyDown(event) {
-            switch (event.key) {
-                case 'w':
-                    moveDirection.y = -1;
-                    startAnimation();
-                    break;
-                case 'a':
-                    moveDirection.x = -1;
-                    startAnimation();
-                    break;
-                case 's':
-                    moveDirection.y = 1;
-                    startAnimation();
-                    break;
-                case 'd':
-                    moveDirection.x = 1;
-                    startAnimation();
-                    break;
-            }
-        }
-
-        function handleKeyUp(event) {
-            switch (event.key) {
-                case 'w':
-                case 's':
-                    moveDirection.y = 0;
-                    break;
-                case 'a':
-                case 'd':
-                    moveDirection.x = 0;
-                    break;
-            }
-            if (moveDirection.x === 0 && moveDirection.y === 0) {
-                stopAnimation();
-            }
-        }
-
-        document.addEventListener('keydown', handleKeyDown);
-        document.addEventListener('keyup', handleKeyUp);
-    });
-
-
+    move();
 </script>
 </body>
 </html>
