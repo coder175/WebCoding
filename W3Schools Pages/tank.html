@@ -579,7 +579,6 @@
 <input type="button" class="continue introAnimation nottank" value="<< PLAY >>" id="continue"
        onclick="continueFunction()">
 <script>
-    let moved = false
     const gridSize = 20;
     const gridElement = document.getElementById('GameBlocks');
     const level1 = [
@@ -604,8 +603,6 @@
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     ];
-
-    rockPositions = getRockPositions();
 
     function createGrid(level) {
         for (let row = 0; row < gridSize; row++) {
@@ -677,7 +674,6 @@
     const gameDiv = document.getElementById('game'); // Reference to the game div
     let position = {x: 50, y: 50}; // Position in vw and vh
     let offset = (window.screen.width) * 0.013
-    console.log(offset)
     let gamePosition = {x: -offset, y: 0}; // Position of the game div
     const rotationSpeed = 5; // Rotation speed in degrees per frame
     const angleThreshold = 1; // Minimum angle difference to apply rotation in degrees
@@ -685,12 +681,12 @@
     let mousePosition = {x: 0, y: 0};
     let currentRotation = 0; // Initial rotation angle
     let direction = 0
-    let drivingSpeed = 0.7
+    let drivingSpeed = 0.2
 
     // Put this wherever you change drivingSpeed
 
     MovingTreads.forEach(div => {
-        div.style.animation = `move ${0.3 / drivingSpeed}s linear infinite`
+        div.style.animation = `move ${0.08 / drivingSpeed}s linear infinite`
     });
 
 
@@ -756,74 +752,65 @@
         div.style.transform = `translate(50vw, 51vh) rotate(${direction}deg)`;
         turret.style.transform = `translate(${0.8 + position.x}vw, ${position.y + 0.4}vh) rotate(${currentRotation + 90}deg)`;
 
+        let newTop = gamePosition.y;
+        let newLeft = gamePosition.x;
+
         // Update the position of the game div based on the keys pressed
-        if (keys['KeyW'] || keys['ArrowUp']) {
-            gamePosition.y += drivingSpeed;
-            moved = true
-        }
-        if (keys['KeyS'] || keys['ArrowDown']) {
-            gamePosition.y -= drivingSpeed;
-            moved = true
-        }
-        if (keys['KeyA'] || keys['ArrowLeft']) {
-            gamePosition.x += drivingSpeed;
-            moved = true
-        }
-        if (keys['KeyD'] || keys['ArrowRight']) {
-            gamePosition.x -= drivingSpeed;
-            moved = true
-        }
+        if (keys['KeyW'] || keys['ArrowUp']) newTop += drivingSpeed;
+        if (keys['KeyS'] || keys['ArrowDown']) newTop -= drivingSpeed;
+        if (keys['KeyA'] || keys['ArrowLeft']) newLeft += drivingSpeed;
+        if (keys['KeyD'] || keys['ArrowRight']) newLeft -= drivingSpeed;
 
 
-//        let rockElements = document.querySelectorAll('.gameblocksitem')
-//
-//        rockElements.forEach(function(element) {
-//            const currentRock = element.getBoundingClientRect();
-//            console.log(currentRock.bottom)
-//
-//            const tankToStopHit = div.getBoundingClientRect();
-//            console.log(tankToStopHit.top)
-//            // const topOfRock = tankToStopHit.top;
-//
-//            if (currentRock.bottom >= tankToStopHit.top && currentRock.bottom <= tankToStopHit.top) {
-//                gamePosition.x += drivingSpeed;
-//            }
-//
-//        });
-
-
-//        function checkForCollision(tankX, tankY) {
-//            for (const rockPos of rockPositions) {
-//                if (tankX === rockPos.x && tankY === rockPos.y) {
-//                    return true; // Collision detected
-//                }
-//            }
-//            return false; // No collision detected
-//        }
+        if (!isColliding(newLeft, gamePosition.y)) {
+            gamePosition.x = newLeft;
+            console.log("No Collide!")
+        }
+        if (!isColliding(gamePosition.x, newTop)) {
+            gamePosition.y = newTop;
+            console.log("No Collide!")
+        }
 
 
         // Apply the new position to the game div
-        gameDiv.style.transform = `translate(${gamePosition.x / 4}vw, ${gamePosition.y / 4}vw)`;
-        let rockPositions = getRockPositions();
-        console.log(rockPositions)
-        moved = false;
+        gameDiv.style.transform = `translate(${gamePosition.x}vw, ${gamePosition.y}vw)`;
 
         requestAnimationFrame(updatePosition);
     }
 
     requestAnimationFrame(updatePosition);
 
-    function getRockPositions(grid) {
-        if (moved) {
-            let rockElements = document.querySelectorAll('.rock')
-            const rockPositions = [];
+    let staticDivs = document.querySelectorAll('.rock')
 
-            rockElements.forEach(function(element) {
-                const currentRock = element.getBoundingClientRect();
-                rockPositions.push({top: currentRock.top, bottom: currentRock.bottom, left: currentRock.left, right: currentRock.right}); // Store x and y coordinates of rocks
-            });
-            return rockPositions;
+    function isColliding(newLeft, newTop) {
+        let MoveableRectWidth = (window.screen.width) / (100/5)
+        const movableRect = {
+            top: window.innerHeight / 2 - 25,
+            left: window.innerWidth / 2 - 25,
+            right: window.innerWidth / 2 + 25,
+            bottom: window.innerHeight / 2 + 25
+        };
+
+        for (let staticDiv of staticDivs) {
+            const staticRect = staticDiv.getBoundingClientRect();
+
+            const adjustedStaticRect = {
+                top: staticRect.top + newTop - gamePosition.y,
+                left: staticRect.left + newLeft - gamePosition.x,
+                right: staticRect.right + newLeft - gamePosition.x,
+                bottom: staticRect.bottom + newTop - gamePosition.y
+            };
+
+            if (!(movableRect.right <= adjustedStaticRect.left ||
+                movableRect.left >= adjustedStaticRect.right ||
+                movableRect.bottom <= adjustedStaticRect.top ||
+                movableRect.top >= adjustedStaticRect.bottom)) {
+                console.log("Collide!")
+                return true;
+            }
         }
+        console.log("No Collide!")
+        return false;
     }
 </script>
 
