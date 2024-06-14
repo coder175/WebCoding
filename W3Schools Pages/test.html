@@ -39,92 +39,91 @@
     </style>
 </head>
 <body>
-<div id="movable-div"></div>
-<div id="container">
-    <div class="static-div" style="top: 100px; left: 100px;"></div>
-    <div class="static-div" style="top: 200px; left: 200px;"></div>
-    <!-- Add more static divs as needed, ensuring 20 in total -->
-    <div class="static-div" style="top: 300px; left: 300px;"></div>
-    <div class="static-div" style="top: 400px; left: 400px;"></div>
-    <div class="static-div" style="top: 500px; left: 500px;"></div>
-    <div class="static-div" style="top: 600px; left: 600px;"></div>
-    <div class="static-div" style="top: 700px; left: 700px;"></div>
-    <div class="static-div" style="top: 800px; left: 800px;"></div>
-    <div class="static-div" style="top: 900px; left: 900px;"></div>
-    <div class="static-div" style="top: 1000px; left: 1000px;"></div>
-    <div class="static-div" style="top: 1100px; left: 1100px;"></div>
-    <div class="static-div" style="top: 1200px; left: 1200px;"></div>
-    <div class="static-div" style="top: 1300px; left: 1300px;"></div>
-    <div class="static-div" style="top: 1400px; left: 1400px;"></div>
-    <div class="static-div" style="top: 1500px; left: 1500px;"></div>
-    <div class="static-div" style="top: 1600px; left: 1600px;"></div>
-    <div class="static-div" style="top: 1700px; left: 1700px;"></div>
-    <div class="static-div" style="top: 1800px; left: 1800px;"></div>
-    <div class="static-div" style="top: 1900px; left: 1900px;"></div>
-</div>
+    <div id="movable-div"></div>
+    <div id="container">
+        <div class="static-div" style="top: 100px; left: 100px;"></div>
+        <div class="static-div" style="top: 200px; left: 200px;"></div>
+        <!-- Add more static divs as needed, ensuring 20 in total -->
+        <div class="static-div" style="top: 300px; left: 300px;"></div>
+        <div class="static-div" style="top: 400px; left: 400px;"></div>
+        <div class="static-div" style="top: 500px; left: 500px;"></div>
+        <div class="static-div" style="top: 600px; left: 600px;"></div>
+        <div class="static-div" style="top: 700px; left: 700px;"></div>
+        <div class="static-div" style="top: 800px; left: 800px;"></div>
+        <div class="static-div" style="top: 900px; left: 900px;"></div>
+        <div class="static-div" style="top: 1000px; left: 1000px;"></div>
+        <div class="static-div" style="top: 1100px; left: 1100px;"></div>
+        <div class="static-div" style="top: 1200px; left: 1200px;"></div>
+        <div class="static-div" style="top: 1300px; left: 1300px;"></div>
+        <div class="static-div" style="top: 1400px; left: 1400px;"></div>
+        <div class="static-div" style="top: 1500px; left: 1500px;"></div>
+        <div class="static-div" style="top: 1600px; left: 1600px;"></div>
+        <div class="static-div" style="top: 1700px; left: 1700px;"></div>
+        <div class="static-div" style="top: 1800px; left: 1800px;"></div>
+        <div class="static-div" style="top: 1900px; left: 1900px;"></div>
+    </div>
 
-<script>
-    const container = document.getElementById('container');
-    const staticDivs = document.querySelectorAll('.static-div');
+    <script>
+        const container = document.getElementById('container');
+        const staticDivs = document.querySelectorAll('.static-div');
 
-    const speed = 5;
-    let containerPosition = {top: 0, left: 0};
-    let keys = {};
+        const speed = 0.25; // Speed in vw units
+        let containerPosition = { x: 0, y: 0 }; // In vw units
+        let keys = {};
 
-    document.addEventListener('keydown', (e) => keys[e.key] = true);
-    document.addEventListener('keyup', (e) => keys[e.key] = false);
+        document.addEventListener('keydown', (e) => keys[e.key] = true);
+        document.addEventListener('keyup', (e) => keys[e.key] = false);
 
-    function move() {
-        let newTop = containerPosition.top;
-        let newLeft = containerPosition.left;
+        function move() {
+            let newX = containerPosition.x;
+            let newY = containerPosition.y;
 
-        if (keys['ArrowUp']) newTop += speed;
-        if (keys['ArrowLeft']) newLeft += speed;
-        if (keys['ArrowDown']) newTop -= speed;
-        if (keys['ArrowRight']) newLeft -= speed;
+            if (keys['ArrowUp']) newY += speed;
+            if (keys['ArrowLeft']) newX += speed;
+            if (keys['ArrowDown']) newY -= speed;
+            if (keys['ArrowRight']) newX -= speed;
 
-        if (!isColliding(newLeft, containerPosition.top)) {
-            containerPosition.left = newLeft;
+            if (!isColliding(newX, containerPosition.y)) {
+                containerPosition.x = newX;
+            }
+            if (!isColliding(containerPosition.x, newY)) {
+                containerPosition.y = newY;
+            }
+
+            container.style.transform = `translate(${containerPosition.x}vw, ${containerPosition.y}vw)`;
+
+            requestAnimationFrame(move);
         }
-        if (!isColliding(containerPosition.left, newTop)) {
-            containerPosition.top = newTop;
-        }
 
-        container.style.top = `${containerPosition.top}px`;
-        container.style.left = `${containerPosition.left}px`;
-
-        requestAnimationFrame(move);
-    }
-
-    function isColliding(newLeft, newTop) {
-        const movableRect = {
-            top: window.innerHeight / 2 - 25,
-            left: window.innerWidth / 2 - 25,
-            right: window.innerWidth / 2 + 25,
-            bottom: window.innerHeight / 2 + 25
-        };
-
-        for (let staticDiv of staticDivs) {
-            const staticRect = staticDiv.getBoundingClientRect();
-
-            const adjustedStaticRect = {
-                top: staticRect.top + newTop - containerPosition.top,
-                left: staticRect.left + newLeft - containerPosition.left,
-                right: staticRect.right + newLeft - containerPosition.left,
-                bottom: staticRect.bottom + newTop - containerPosition.top
+        function isColliding(newX, newY) {
+            const movableRect = {
+                top: window.innerHeight / 2 - 25,
+                left: window.innerWidth / 2 - 25,
+                right: window.innerWidth / 2 + 25,
+                bottom: window.innerHeight / 2 + 25
             };
 
-            if (!(movableRect.right <= adjustedStaticRect.left ||
-                movableRect.left >= adjustedStaticRect.right ||
-                movableRect.bottom <= adjustedStaticRect.top ||
-                movableRect.top >= adjustedStaticRect.bottom)) {
-                return true;
-            }
-        }
-        return false;
-    }
+            for (let staticDiv of staticDivs) {
+                const staticRect = staticDiv.getBoundingClientRect();
 
-    move();
-</script>
+                const adjustedStaticRect = {
+                    top: staticRect.top + (newY - containerPosition.y) * window.innerWidth / 100,
+                    left: staticRect.left + (newX - containerPosition.x) * window.innerWidth / 100,
+                    right: staticRect.right + (newX - containerPosition.x) * window.innerWidth / 100,
+                    bottom: staticRect.bottom + (newY - containerPosition.y) * window.innerWidth / 100
+                };
+
+                if (!(movableRect.right <= adjustedStaticRect.left ||
+                    movableRect.left >= adjustedStaticRect.right ||
+                    movableRect.bottom <= adjustedStaticRect.top ||
+                    movableRect.top >= adjustedStaticRect.bottom)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        move();
+    </script>
 </body>
 </html>
