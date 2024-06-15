@@ -3,127 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Div Collision</title>
-    <style>
-        body, html {
+    <title>Menu Options</title>
+    <style>/* styles.css */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .menu-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-button {
+            padding: 10px 20px;
             margin: 0;
-            padding: 0;
-            overflow: hidden;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            transition: color 0.3s;
+        }
+
+        .menu-button.active {
+            color: #fff;
+        }
+
+        .slider {
+            left: 0;
+            position: absolute;
+            width: 50%;
             height: 100%;
+            background-color: #007bff;
+            transition: transform 0.3s;
+            z-index: 0;
         }
 
-        #movable-div {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            width: 50px;
-            height: 50px;
-            background-color: red;
-            transform: translate(-50%, -50%);
-            z-index: 100;
+        .content-section {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
         }
 
-        #container {
-            position: absolute;
-            width: 2000px; /* Example large container */
-            height: 2000px; /* Example large container */
-            background-color: lightgrey;
+        .content-section h2 {
+            margin-bottom: 10px;
         }
 
-        .static-div {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background-color: blue;
+        .content-section ul {
+            list-style-type: none;
+            padding: 0;
         }
-    </style>
+
+        .content-section ul li {
+            margin: 5px 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+        </style>
 </head>
 <body>
-    <div id="movable-div"></div>
-    <div id="container">
-        <div class="static-div" style="top: 100px; left: 100px;"></div>
-        <div class="static-div" style="top: 200px; left: 200px;"></div>
-        <!-- Add more static divs as needed, ensuring 20 in total -->
-        <div class="static-div" style="top: 300px; left: 300px;"></div>
-        <div class="static-div" style="top: 400px; left: 400px;"></div>
-        <div class="static-div" style="top: 500px; left: 500px;"></div>
-        <div class="static-div" style="top: 600px; left: 600px;"></div>
-        <div class="static-div" style="top: 700px; left: 700px;"></div>
-        <div class="static-div" style="top: 800px; left: 800px;"></div>
-        <div class="static-div" style="top: 900px; left: 900px;"></div>
-        <div class="static-div" style="top: 1000px; left: 1000px;"></div>
-        <div class="static-div" style="top: 1100px; left: 1100px;"></div>
-        <div class="static-div" style="top: 1200px; left: 1200px;"></div>
-        <div class="static-div" style="top: 1300px; left: 1300px;"></div>
-        <div class="static-div" style="top: 1400px; left: 1400px;"></div>
-        <div class="static-div" style="top: 1500px; left: 1500px;"></div>
-        <div class="static-div" style="top: 1600px; left: 1600px;"></div>
-        <div class="static-div" style="top: 1700px; left: 1700px;"></div>
-        <div class="static-div" style="top: 1800px; left: 1800px;"></div>
-        <div class="static-div" style="top: 1900px; left: 1900px;"></div>
+    <div class="menu-container">
+        <div class="menu">
+            <button id="foodsBtn" class="menu-button active" onclick="showContent('foods')">Foods</button>
+            <button id="drinksBtn" class="menu-button" onclick="showContent('drinks')">Drinks</button>
+            <div id="slider" class="slider"></div>
+        </div>
     </div>
+    <div id="content">
+        <div id="foods" class="content-section">
+            <h2>Foods</h2>
+            <ul>
+                <li>Pizza</li>
+                <li>Burger</li>
+                <li>Pasta</li>
+                <li>Salad</li>
+            </ul>
+        </div>
+        <div id="drinks" class="content-section hidden">
+            <h2>Drinks</h2>
+            <ul>
+                <li>Coffee</li>
+                <li>Tea</li>
+                <li>Soda</li>
+                <li>Juice</li>
+            </ul>
+        </div>
+    </div>
+    <script>// script.js
+        function showContent(type) {
+            const foodsBtn = document.getElementById('foodsBtn');
+            const drinksBtn = document.getElementById('drinksBtn');
+            const slider = document.getElementById('slider');
+            const foodsContent = document.getElementById('foods');
+            const drinksContent = document.getElementById('drinks');
 
-    <script>
-        const container = document.getElementById('container');
-        const staticDivs = document.querySelectorAll('.static-div');
-
-        const speed = 0.25; // Speed in vw units
-        let containerPosition = { x: 0, y: 0 }; // In vw units
-        let keys = {};
-
-        document.addEventListener('keydown', (e) => keys[e.key] = true);
-        document.addEventListener('keyup', (e) => keys[e.key] = false);
-
-        function move() {
-            let newX = containerPosition.x;
-            let newY = containerPosition.y;
-
-            if (keys['ArrowUp']) newY += speed;
-            if (keys['ArrowLeft']) newX += speed;
-            if (keys['ArrowDown']) newY -= speed;
-            if (keys['ArrowRight']) newX -= speed;
-
-            if (!isColliding(newX, containerPosition.y)) {
-                containerPosition.x = newX;
+            if (type === 'foods') {
+                foodsBtn.classList.add('active');
+                drinksBtn.classList.remove('active');
+                foodsContent.classList.remove('hidden');
+                drinksContent.classList.add('hidden');
+                slider.style.transform = 'translateX(0%)';
+            } else if (type === 'drinks') {
+                drinksBtn.classList.add('active');
+                foodsBtn.classList.remove('active');
+                drinksContent.classList.remove('hidden');
+                foodsContent.classList.add('hidden');
+                slider.style.transform = 'translateX(100%)';
             }
-            if (!isColliding(containerPosition.x, newY)) {
-                containerPosition.y = newY;
-            }
-
-            container.style.transform = `translate(${containerPosition.x}vw, ${containerPosition.y}vw)`;
-
-            requestAnimationFrame(move);
         }
 
-        function isColliding(newX, newY) {
-            const movableRect = {
-                top: window.innerHeight / 2 - 25,
-                left: window.innerWidth / 2 - 25,
-                right: window.innerWidth / 2 + 25,
-                bottom: window.innerHeight / 2 + 25
-            };
-
-            for (let staticDiv of staticDivs) {
-                const staticRect = staticDiv.getBoundingClientRect();
-
-                const adjustedStaticRect = {
-                    top: staticRect.top + (newY - containerPosition.y) * window.innerWidth / 100,
-                    left: staticRect.left + (newX - containerPosition.x) * window.innerWidth / 100,
-                    right: staticRect.right + (newX - containerPosition.x) * window.innerWidth / 100,
-                    bottom: staticRect.bottom + (newY - containerPosition.y) * window.innerWidth / 100
-                };
-
-                if (!(movableRect.right <= adjustedStaticRect.left ||
-                    movableRect.left >= adjustedStaticRect.right ||
-                    movableRect.bottom <= adjustedStaticRect.top ||
-                    movableRect.top >= adjustedStaticRect.bottom)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        move();
-    </script>
+        // Initially show the foods content
+        document.addEventListener('DOMContentLoaded', () => {
+            showContent('foods');
+        });
+        </script>
 </body>
 </html>
