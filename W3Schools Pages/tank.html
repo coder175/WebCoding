@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Tank Game</title>
+        <style>
+            /*------------------------------------------------------------------
+            [Table of contents]
+
+            1. Root, *, body, tag, @keyframes, formating & imports
+            2. @media Styles
+            3. Intro / #intro
+            4. Game / #game
+            5. Upgrades / #upgrades
+            ------------------------------------------------------------------*/
+
+
+
+            /*------------------------------------------------------------------
+            Root, *, body, tag formating & imports
+              \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
+            ------------------------------------------------------------------*/
+
+            @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+            :root {
+                --dark-blue: #0077B6;
+                --darker-blue: #004d76;
+                --darkest-blue: #00476d;
+            }
+
+            * {
+                font-family: "Bebas Neue", sans-serif;
+                font-weight: 1000;
+                font-style: normal;
+
+                /*-------
+                No Select
+                \/ \/ \/‎‎
+                -------*/
+                -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none; /* Safari */
+                -khtml-user-select: none; /* Konqueror HTML */
+                -moz-user-select: none; /* Old versions of Firefox */
+                -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; /* Non-prefixed version, currently
+                                      supported by Chrome, Edge, Opera and Firefox */
+            }
+
+            button {
+                background-color: var(--dark-blue);
+                color: white;
+                border: none;
+                cursor: pointer;
+                border-radius: 0.5vw;
+            }
+
+            button:hover {
+                background-color: var(--darker-blue)
+            }
+
+            button:active {
+                background-color: var(--darkest-blue)
+            }
+
+            #NotCompatable {
+                display: none;
+                width: 100vw;
+                height: 100vh;
+                top: 0;
+                left: 0;
+                text-align: center;
+                padding-top: 20vh;
+                position: absolute;
+                z-index: 99999999999;
+                background-color: lightsalmon;
+            }
+
+            body {
+                margin: 0;
+                overflow: hidden;
+            }
+
+
+
+            /*------------------------------------------------------------------
+            @media Styles, Keyframes
+              \/ \/ \/ \/ \/ \/ \/
+            ------------------------------------------------------------------*/
+
+            @keyframes shake {
+                0% {
+                    transform: translate(0.2vw, 0.2vw) rotate(0deg);
+                }
+                10% {
+                    transform: translate(-0.2vw, -0.4vw) rotate(-1deg);
+                }
+                20% {
+                    transform: translate(-0.6vw, 0px) rotate(1deg);
+                }
+                30% {
+                    transform: translate(0.6vw, 0.4vw) rotate(0deg);
+                }
+                40% {
+                    transform: translate(0.2vw, -0.2vw) rotate(1deg);
+                }
+                50% {
+                    transform: translate(-0.2vw, 0.4vw) rotate(-1deg);
+                }
+                60% {
+                    transform: translate(-0.6vw, 0.2vw) rotate(0deg);
+                }
+                70% {
+                    transform: translate(0.6vw, 0.2vw) rotate(-1deg);
+                }
+                80% {
+                    transform: translate(-0.2vw, -0.2vw) rotate(1deg);
+                }
+                90% {
+                    transform: translate(0.2vw, 0.4vw) rotate(0deg);
+                }
+                100% {
+                    transform: translate(0.2vw, -0.4vw) rotate(-1deg);
+                }
+            }
+
+            @media screen and (min-aspect-ratio: 4.9/1), (max-aspect-ratio: 0.3/1) {
+                #NotCompatable {
+                    display: block;
+                }
+            }
+
+
+
+            /*------------------------------------------------------------------
+            Intro / #intro
+            \/ \/ \/ \/ \/
+            ------------------------------------------------------------------*/
+
+
+            #intro {
+                transition: 0.5s;
+            }
+
+            #intro .title {
+                margin-top: 10vh;
+                font-size: calc((7vw + 7vh) / 2);
+                text-align: center;
+            }
+
+            #intro .title span {
+                display: inline-block;
+                font-size: calc((10vw + 10vh) / 2);
+            }
+
+            #intro .start {
+                position: relative;
+                width: 30vw;
+                top: calc((3vw + 3vh) / 2);
+                left: 35vw;
+                height: 10vh;
+                font-size: calc((3vw + 3vh) / 2);
+            }
+
+            #intro .start span {
+                display: inline-block;
+                transform: scale(.5, 1);
+            }
+
+            #intro .introAnimation {
+                transform: scale(0);
+                transition: 0.5s;
+            }
+
+            #intro .expanded {
+                transform: scale(1);
+            }
+
+            .shake {
+                animation: shake 0.5s ease-in-out;
+            }
+
+            /*------------------------------------------------------------------
+            Game / #game
+            \/ \/ \/ \/ \/
+            ------------------------------------------------------------------*/
+
+            #game {
+                position: absolute;
+                width: 100vw;
+                height: 100vw;
+                top: 0;
+                left: 0;
+                transform: scale(0);
+                transition: 0.5s;
+                transform-origin: center center;
+            }
+
+            /*------------------------------------------------------------------
+            Upgrades / #upgrades
+            \/ \/ \/ \/ \/
+            ------------------------------------------------------------------*/
+
+            #upgrades .options {
+                width: 100vw;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1vw;
+                margin-left: 10vw;
+            }
+
+            #upgrades .options .slider {
+                transition: transform 0.3s;
+                width: 20vw;
+                height: 10vh;
+                position: relative;
+                background-color: var(--dark-blue);
+                left: -42vw;
+                border-radius: 0.5vw;
+                transform: translateX(calc(100% + 1vw));
+            }
+
+            #upgrades .title {
+                margin-top: 12vh;
+                font-size: calc((10vw + 10vh) / 2);
+                text-align: center;
+            }
+
+            #upgrades button {
+                border: 0.1vw dashed var(--dark-blue);
+                width: 20vw;
+                height: 10vh;
+                background-color: transparent;
+                cursor: pointer;
+                color: black;
+                position: relative;
+                z-index: 1;
+                transition: color 0.3s;
+                font-size: calc((3vw + 3vh) / 2);
+            }
+
+            #upgrades button.sliderButtonWhite {
+                color: #fff;
+                border: 0.1vw solid var(--dark-blue);
+            }
+
+            #upgrades .upgradeOptions #movementUpgrades {
+
+            }
+
+            #upgrades .upgradeOptions #weaponUpgrades {
+
+            }
+
+            #upgrades .upgradeOptions #weaponUpgrades.hidden, #upgrades .upgradeOptions #movementUpgrades.hidden {
+                visibility: hidden;
+            }
+
+            .upgradeOptions {
+                height: 0;
+            }
+
+            .upgradeSection {
+                background-color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="NotCompatable">SORRY, YOUR SCREEN SIZE IS NOT COMPATABLE WITH THIS GAME.</div>
+
+
+        <div id="intro">
+            <div class="title">
+                <div class="introAnimation">THE</div>
+                <span class="introAnimation">TANK</span>
+                <span class="introAnimation">GAME</span>
+            </div>
+            <button class="start introAnimation" id="start"><span><<</span> PLAY <span>>></span></button>
+        </div>
+
+        <div id="game">
+            <div id="upgrades">
+                <div class="title">UPGRADES</div>
+                <div class="options">
+                    <button id="movementOption">MOVEMENT</button>
+                    <button id="weaponsOption" class="sliderButtonWhite">WEAPONS</button>
+                    <div class="slider" id="slider"></div>
+                </div>
+                <div class="upgradeOptions" id="upgradeOptions">
+                    <div id="movementUpgrades" class="hidden upgradeSection">THESE ARE THE MOVEMENT UPGRADES: GYAT!</div>
+                    <div id="weaponUpgrades" class="upgradeSection">THESE ARE THE WEAPON UPGRADES: GYATSO!</div>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            /* Variable Initialization */
+            let introLoaded = false;
+
+            /* Elements */
+            const introElement = document.getElementById("intro");
+            const gameElement = document.getElementById("game");
+            const movementOption = document.getElementById("movementOption");
+            const weaponsOption = document.getElementById("weaponsOption");
+            const startButton = document.getElementById("start");
+            const slider = document.getElementById('slider');
+            const movementUpgrades = document.getElementById('movementUpgrades');
+            const weaponUpgrades = document.getElementById('weaponUpgrades');
+            const upgradeOptions = document.getElementById('upgradeOptions');
+            const upgrades = document.getElementById('upgrades');
+
+
+            /* Start Game from Intro Screen */
+            document.addEventListener('DOMContentLoaded', () => {
+                const elements = document.querySelectorAll('.introAnimation');
+                let delay = 0;
+                elements.forEach((element) => {
+                    setTimeout(() => {
+                        element.classList.add('expanded');
+                        // element.classList.add('shake');
+                        document.body.classList.add('shake');
+                        if (delay === 4000) introLoaded = true;
+                        setTimeout(() => {
+                            document.body.classList.remove('shake');
+                        }, 500);
+                    }, delay);
+                    delay += 1000;
+                });
+            });
+
+            startButton.addEventListener('click', () => {
+                if (introLoaded) {
+                    introElement.style.setProperty("transform", "scale(0)");
+                    gameElement.style.setProperty("transform", "scale(1)");
+                }
+            });
+
+            movementOption.addEventListener('click', () => {
+                slider.style.setProperty("transform", "translateX(0%)");
+                movementOption.classList.add("sliderButtonWhite")
+                weaponsOption.classList.remove("sliderButtonWhite")
+                weaponUpgrades.classList.add("hidden")
+                movementUpgrades.classList.remove("hidden")
+            });
+            weaponsOption.addEventListener('click', () => {
+                slider.style.setProperty("transform", "translateX(calc(100% + 1vw))");
+                weaponsOption.classList.add("sliderButtonWhite")
+                movementOption.classList.remove("sliderButtonWhite")
+                movementUpgrades.classList.add("hidden")
+                weaponUpgrades.classList.remove("hidden")
+            });
+            window.addEventListener('resize', function(event) {
+                // \/\/\/\/\/\/\/\/\/\/\/\/
+                // PUT CODE TO FIND upgradeOptions SIZE AFTER MEASURING upgrades HEIGHT AND ADDING 12 VH TO IT FIRST.
+                ////\/\/\/\/\/\/\/\/\/\/\/\
+            }, true);
+        </script>
+    </body>
+</html>
