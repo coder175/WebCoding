@@ -19,9 +19,9 @@
 
 
             /*------------------------------------------------------------------
-            Root, *, body, tag formating & imports
-              \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
-            ------------------------------------------------------------------*/
+                                                Root, *, body, tag formating & imports
+                                                  \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
+                                                ------------------------------------------------------------------*/
 
             @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
@@ -86,9 +86,9 @@
 
 
             /*------------------------------------------------------------------
-            @media Styles, Keyframes
-              \/ \/ \/ \/ \/ \/ \/
-            ------------------------------------------------------------------*/
+                                                @media Styles, Keyframes
+                                                  \/ \/ \/ \/ \/ \/ \/
+                                                ------------------------------------------------------------------*/
 
             @keyframes shake {
                 0% {
@@ -135,9 +135,9 @@
 
 
             /*------------------------------------------------------------------
-            Intro / #intro
-            \/ \/ \/ \/ \/
-            ------------------------------------------------------------------*/
+                                                Intro / #intro
+                                                \/ \/ \/ \/ \/
+                                                ------------------------------------------------------------------*/
 
 
             #intro {
@@ -182,10 +182,12 @@
                 animation: shake 0.5s ease-in-out;
             }
 
+
+
             /*------------------------------------------------------------------
-            Game / #game
-            \/ \/ \/ \/ \/
-            ------------------------------------------------------------------*/
+                        Game / #game
+                        \/ \/ \/ \/ \/
+                        ------------------------------------------------------------------*/
 
             #game {
                 position: absolute;
@@ -198,10 +200,12 @@
                 transform-origin: center center;
             }
 
+
+
             /*------------------------------------------------------------------
-            Upgrades / #upgrades
-            \/ \/ \/ \/ \/
-            ------------------------------------------------------------------*/
+                        Upgrades / #upgrades
+                        \/ \/ \/ \/ \/
+                        ------------------------------------------------------------------*/
 
             #upgrades .options {
                 width: 100vw;
@@ -210,6 +214,7 @@
                 justify-content: center;
                 gap: 1vw;
                 margin-left: 10vw;
+                height: calc((13vh + 13vw) / 2);
             }
 
             #upgrades .options .slider {
@@ -224,7 +229,8 @@
             }
 
             #upgrades .title {
-                margin-top: 12vh;
+                height: 20vh;
+                margin-top: 5vh;
                 font-size: calc((10vw + 10vh) / 2);
                 text-align: center;
             }
@@ -247,24 +253,51 @@
                 border: 0.1vw solid var(--dark-blue);
             }
 
-            #upgrades .upgradeOptions #movementUpgrades {
-
-            }
-
-            #upgrades .upgradeOptions #weaponUpgrades {
-
-            }
-
             #upgrades .upgradeOptions #weaponUpgrades.hidden, #upgrades .upgradeOptions #movementUpgrades.hidden {
                 visibility: hidden;
             }
 
-            .upgradeOptions {
+            #upgrades .upgradeOptions {
                 height: 0;
             }
 
-            .upgradeSection {
+            #upgrades .upgradeOptions .upgradeSection {
+                position: absolute;
+                display: flex;
+                top: 28vh;
+                width: 98vw;
+                height: 60vh;
+                margin: 1vh 1vw;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.5vw;
+            }
+            #upgrades .upgradeOptions .upgradeSection * {
+                height: 25vh;
+                width: 32.3vw;
+                flex-grow: 1;
+                flex-shrink: 1;
+                text-align: center;
+                margin: auto;
                 background-color: red;
+                border-radius: 0.5vw;
+                font-size: calc((2.5vw + 2.5vh)/2);
+            }
+
+            #upgrades .upgradeOptions #weaponUpgrades * {
+                height: 25vh;
+                width: 32.3vw;
+                flex-grow: 1;
+                flex-shrink: 1;
+                text-align: center;
+                margin: auto;
+                background-color: red;
+                border-radius: 0.5vw;
+                font-size: calc((2.5vw + 2.5vh)/2);
+            }
+
+            #upgrades .upgradeOptions .upgradeSection .top {
+                margin-bottom: 0.5vw;
             }
         </style>
     </head>
@@ -285,13 +318,48 @@
             <div id="upgrades">
                 <div class="title">UPGRADES</div>
                 <div class="options">
-                    <button id="movementOption">MOVEMENT</button>
+                    <button id="movementOption">TANK BODY</button>
                     <button id="weaponsOption" class="sliderButtonWhite">WEAPONS</button>
                     <div class="slider" id="slider"></div>
                 </div>
                 <div class="upgradeOptions" id="upgradeOptions">
-                    <div id="movementUpgrades" class="hidden upgradeSection">THESE ARE THE MOVEMENT UPGRADES: GYAT!</div>
-                    <div id="weaponUpgrades" class="upgradeSection">THESE ARE THE WEAPON UPGRADES: GYATSO!</div>
+                    <div id="movementUpgrades" class="hidden upgradeSection">
+                        <div>
+                            <div class="top">MOVEMENT SPEED</div>
+                            <div>ARMOR</div>
+                        </div>
+
+                        <div>
+                            <div class="top">TURRET SPEED</div>
+                            <div>MAXIMUM AMMUNITION</div>
+                        </div>
+
+                        <div>
+                            <div class="top">BUBBLE PROTECTION DURATION</div>
+                            <div>BUBBLE PROTECTION STRENGTH</div>
+                        </div>
+                    </div>
+                    <div id="weaponUpgrades" class="upgradeSection">
+                        <div>
+                            <div class="top">ROCK SHOOTER</div>
+                            <div>TWO</div>
+                        </div>
+
+                        <div>
+                            <div class="top">THREE</div>
+                            <div>FOUR</div>
+                        </div>
+
+                        <div>
+                            <div class="top">FIVE</div>
+                            <div>SIX</div>
+                        </div>
+
+                        <div>
+                            <div class="top">SEVEN</div>
+                            <div>EIGHT</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -312,11 +380,11 @@
             const weaponUpgrades = document.getElementById('weaponUpgrades');
             const upgradeOptions = document.getElementById('upgradeOptions');
             const upgrades = document.getElementById('upgrades');
+            const elements = document.querySelectorAll('.introAnimation');
 
 
             /* Start Game from Intro Screen */
             document.addEventListener('DOMContentLoaded', () => {
-                const elements = document.querySelectorAll('.introAnimation');
                 let delay = 0;
                 elements.forEach((element) => {
                     setTimeout(() => {
@@ -353,11 +421,6 @@
                 movementUpgrades.classList.add("hidden")
                 weaponUpgrades.classList.remove("hidden")
             });
-            window.addEventListener('resize', function(event) {
-                // \/\/\/\/\/\/\/\/\/\/\/\/
-                // PUT CODE TO FIND upgradeOptions SIZE AFTER MEASURING upgrades HEIGHT AND ADDING 12 VH TO IT FIRST.
-                ////\/\/\/\/\/\/\/\/\/\/\/\
-            }, true);
         </script>
     </body>
 </html>
