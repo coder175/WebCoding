@@ -1,131 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Options</title>
-    <style>/* styles.css */
-        body {
-            font-family: Arial, sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    .bubble-container {
+        position: relative;
+        width: 50vw;  /* 50% of viewport width */
+        height: 50vh; /* 50% of viewport height */
+        background-color: #f0f0f0; /* Background color of the container */
+        overflow: hidden; /* Ensure bubbles outside container are hidden */
+      }
 
-        .menu-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .menu {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .menu-button {
-            padding: 10px 20px;
-            margin: 0;
-            border: none;
-            background-color: transparent;
-            cursor: pointer;
-            position: relative;
-            z-index: 1;
-            transition: color 0.3s;
-        }
-
-        .menu-button.active {
-            color: #fff;
-        }
-
-        .slider {
-            left: 0;
-            position: absolute;
-            width: 50%;
-            height: 100%;
-            background-color: #007bff;
-            transition: transform 0.3s;
-            z-index: 0;
-        }
-
-        .content-section {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .content-section h2 {
-            margin-bottom: 10px;
-        }
-
-        .content-section ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .content-section ul li {
-            margin: 5px 0;
-        }
-
-        .hidden {
-            display: none;
-        }
-        </style>
+      /* Define the bubble shape and animation */
+      .bubble {
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+        width: 20px;
+        height: 20px;
+        border-radius: 50%; /* Make it round */
+      }
+</style>
 </head>
 <body>
-    <div class="menu-container">
-        <div class="menu">
-            <button id="foodsBtn" class="menu-button active" onclick="showContent('foods')">Foods</button>
-            <button id="drinksBtn" class="menu-button" onclick="showContent('drinks')">Drinks</button>
-            <div id="slider" class="slider"></div>
-        </div>
-    </div>
-    <div id="content">
-        <div id="foods" class="content-section">
-            <h2>Foods</h2>
-            <ul>
-                <li>Pizza</li>
-                <li>Burger</li>
-                <li>Pasta</li>
-                <li>Salad</li>
-            </ul>
-        </div>
-        <div id="drinks" class="content-section hidden">
-            <h2>Drinks</h2>
-            <ul>
-                <li>Coffee</li>
-                <li>Tea</li>
-                <li>Soda</li>
-                <li>Juice</li>
-            </ul>
-        </div>
-    </div>
-    <script>// script.js
-        function showContent(type) {
-            const foodsBtn = document.getElementById('foodsBtn');
-            const drinksBtn = document.getElementById('drinksBtn');
-            const slider = document.getElementById('slider');
-            const foodsContent = document.getElementById('foods');
-            const drinksContent = document.getElementById('drinks');
+    <div class="bubble-container">
+        <div class="bubble" style="top: 30%; left: 20%;"></div>
+        <div class="bubble" style="top: 50%; left: 70%;"></div>
+      </div>
 
-            if (type === 'foods') {
-                foodsBtn.classList.add('active');
-                drinksBtn.classList.remove('active');
-                foodsContent.classList.remove('hidden');
-                drinksContent.classList.add('hidden');
-                slider.style.transform = 'translateX(0%)';
-            } else if (type === 'drinks') {
-                drinksBtn.classList.add('active');
-                foodsBtn.classList.remove('active');
-                drinksContent.classList.remove('hidden');
-                foodsContent.classList.add('hidden');
-                slider.style.transform = 'translateX(100%)';
-            }
-        }
-
-        // Initially show the foods content
-        document.addEventListener('DOMContentLoaded', () => {
-            showContent('foods');
-        });
-        </script>
 </body>
 </html>
