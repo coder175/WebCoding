@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Tank Game</title>
+        <style>
+            :root {
+                --dark-green: #2e7d32;
+                --light-green: #4caf50;
+                --ligher-green: #8cc44a;
+                --light-dark-green: #558c31;
+                --another-green: #9e9d24;
+                --grey: #5e5f62;
+                --yellow: #cddc39;
+            }
+            body {
+                margin: 0;
+                overflow: hidden;
+            }
+            .tank {
+                left: 50vw;
+                top: 50vh;
+                transform: translate(-50%, -50%);
+                transition: transform 0.2s linear; /* Smooth transition for tank rotation */
+            }
+            
+            * {
+                position: absolute;
+                border-radius: 0.8vw;
+            }
+            
+            .wheels1 {
+                z-index: -1;
+                width: 3vw;
+                top: -6.25vw;
+                left: -6.25vw;
+                height: 12.5vw;
+                background-color: blue;
+                border-radius: 0.5vw;
+            }
+            
+            .wheels2 {
+                z-index: -1;
+                width: 3vw;
+                top: -6.25vw;
+                left: 3.25vw;
+                height: 12.5vw;
+                background-color: blue;
+                border-radius: 0.5vw;
+            }
+            
+            .center {
+                width: 1vw;
+                height: 1vw;
+                z-index: 4;
+                left: -0.5vw;
+                top: -0.5vw;
+                background-color: black;
+            }
+            
+            .body {
+                width: 10vw;
+                height: 10vw;
+                background-color: red;
+                left: -5vw;
+                top: -5vw;
+            }
+            
+            .treads * {
+                height: 0.3vh;
+                background-color: grey;
+                border-radius: 0;
+                width: 3vw;
+                z-index: -1;
+                animation: moveTreads 1s linear infinite;
+            }
+            
+            @keyframes moveTreads {
+                0% {
+                    transform: translateY(-2vw);
+                }
+                100% {
+                    transform: translateY(2vw);
+                }
+            }
+            
+            .left1, .left2, .left3, .left4, .left5 {
+                left: -6.25vw;
+            }
+            
+            .right1, .right2, .right3, .right4, .right5 {
+                left: 3.25vw;
+            }
+            
+            .left1 {
+                top: -3.99vw;
+            }
+            .left2 {
+                top: -1.73vw;
+            }
+            .left3 {
+                top: 0.53vw;
+            }
+            .left4 {
+                top: 2.79vw;
+            }
+            .left5 {
+                top: 5.05vw;
+            }
+            
+            .right1 {
+                top: -3.99vw;
+            }
+            .right2 {
+                top: -1.73vw;
+            }
+            .right3 {
+                top: 0.53vw;
+            }
+            .right4 {
+                top: 2.79vw;
+            }
+            .right5 {
+                top: 5.05vw;
+            }
+            
+            .nozzle {
+                width: 1.25vw;
+                height: 12vw;
+                background-color: orange;
+                left: -2.325vw;
+                top: -12vw;
+            }
+            .nozzle2 {
+                width: 1.25vw;
+                height: 12vw;
+                background-color: orange;
+                left: 1.075vw;
+                top: -12vw;
+            }
+            
+            .TankHEAD {
+                width: 8vw;
+                height: 8vw;
+                left: -4vw;
+                top: -4vw;
+                background-color: green;
+            }
+            .TankTurret {
+                transform-origin: center center;
+                top: 50vh;
+                left: 50vw;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="tank">
+            <div class="tankBody">
+                <div class="body"></div>
+                <div class="wheels1"></div>
+                <div class="wheels2"></div>
+                <div class="treads">
+                    <div class="left1"></div>
+                    <div class="left2"></div>
+                    <div class="left3"></div>
+                    <div class="left4"></div>
+                    <div class="left5"></div>
+                    <div class="right1"></div>
+                    <div class="right2"></div>
+                    <div class="right3"></div>
+                    <div class="right4"></div>
+                    <div class="right5"></div>
+                </div>
+            </div>
+            <div class="center"></div>
+        </div>
+        
+        <div class="TankTurret">
+            <div class="nozzle"></div>
+            <div class="nozzle2"></div>
+            <div class="TankHEAD"></div>
+        </div>
+        <script>
+            const tank = document.querySelector('.tank');
+            const turret = document.querySelector('.TankTurret');
+
+            let tankRect = tank.getBoundingClientRect();            //ALSO ADD THIS TO RESIZE ADDEVENTLISTENER
+            let tankCenterX = tankRect.left + tankRect.width / 2;   //ALSO ADD THIS TO RESIZE ADDEVENTLISTENER
+            let tankCenterY = tankRect.top + tankRect.height / 2;   //ALSO ADD THIS TO RESIZE ADDEVENTLISTENER
+            let angle = 0
+
+            let targetAngle = 0;
+            let currentAngle = 0;
+            const turretSpeed = 2.5; // Change this value to adjust the rotation speed (degrees per frame)
+
+            document.addEventListener('mousemove', function(e) {
+                const angle = Math.atan2(e.clientY - tankCenterY, e.clientX - tankCenterX);
+                targetAngle = angle * (180 / Math.PI);
+            });
+
+            function updateTurret() {
+                let deltaAngle = targetAngle - currentAngle;
+                deltaAngle = (deltaAngle + 360) % 360;
+                if (deltaAngle > 180) deltaAngle -= 360;
+
+                // Rotate by the speed amount in the correct direction
+                if (deltaAngle > turretSpeed) {
+                    currentAngle += turretSpeed;
+                } else if (deltaAngle < -turretSpeed) {
+                    currentAngle -= turretSpeed;
+                } else {
+                    currentAngle = targetAngle;
+                }
+
+                // Apply the rotation to the turret
+                turret.style.transform = `rotate(${currentAngle + 90}deg)`;
+
+                // Request the next animation frame
+                requestAnimationFrame(updateTurret);
+            }
+
+            // Start the update loop for the turret
+            updateTurret();
+
+            // Key handling for tank rotation
+            const keysPressed = {};
+
+            document.addEventListener('keydown', (event) => {
+                keysPressed[event.key.toLowerCase()] = true;
+                updateTankDirection();
+            });
+
+            document.addEventListener('keyup', (event) => {
+                keysPressed[event.key.toLowerCase()] = false;
+                updateTankDirection();
+            });
+            
+            function getShortestRotationAngle(current, target) {
+                let delta = target - current;
+                delta = ((delta + 180) % 360 + 540) % 360 - 180;
+                return current + delta;
+            }
+
+            function updateTankDirection() {
+                console.log(angle)
+
+                if ((keysPressed['w'] || keysPressed['arrowup']) && (keysPressed['d'] || keysPressed['arrowright'])) {
+                    angle = getShortestRotationAngle(angle, 45); // Up-right
+                } else if ((keysPressed['w'] || keysPressed['arrowup']) && (keysPressed['a'] || keysPressed['arrowleft'])) {
+                    angle = getShortestRotationAngle(angle, 315); // Up-left
+                } else if ((keysPressed['s'] || keysPressed['arrowdown']) && (keysPressed['d'] || keysPressed['arrowright'])) {
+                    angle = getShortestRotationAngle(angle, 135); // Down-right
+                } else if ((keysPressed['s'] || keysPressed['arrowdown']) && (keysPressed['a'] || keysPressed['arrowleft'])) {
+                    angle = getShortestRotationAngle(angle, 225); // Down-left
+                } else if (keysPressed['w'] || keysPressed['arrowup']) {
+                    angle = getShortestRotationAngle(angle, 0); // Up
+                } else if (keysPressed['s'] || keysPressed['arrowdown']) {
+                    angle = getShortestRotationAngle(angle, 180); // Down
+                } else if (keysPressed['d'] || keysPressed['arrowright']) {
+                    angle = getShortestRotationAngle(angle, 90); // Right
+                } else if (keysPressed['a'] || keysPressed['arrowleft']) {
+                    angle = getShortestRotationAngle(angle, 270); // Left
+                }
+
+                if (angle !== null) {
+                    tank.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+                }
+            }
+        </script>
+    </body>
+</html>
