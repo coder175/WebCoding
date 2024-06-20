@@ -73,18 +73,28 @@
                 background-color: grey;
                 border-radius: 0;
                 width: 3vw;
-                z-index: -1;
+                z-index: 5;
                 animation: moveTreads 1s linear infinite;
             }
             
-            @keyframes moveTreads {
-                0% {
-                    transform: translateY(-2vw);
-                }
-                100% {
-                    transform: translateY(2vw);
-                }
+            .treads {
+                position: relative;
+                height: 12.5vw;
+                width: 12.5vw;
+                left: -6.45vw;
+                top: -6.45vw;
+                border: 2px solid black;
+                overflow: hidden;
             }
+
+/*            @keyframes moveTreads {*/
+/*                0% {*/
+/*                    transform: translateY(-2.26vw);*/
+/*                }*/
+/*                100% {*/
+/*                    transform: translateY(2.26vw);*/
+/*                }*/
+/*            }*/
             
             .left1, .left2, .left3, .left4, .left5 {
                 left: -6.25vw;
@@ -189,6 +199,13 @@
             let tankRect = tank.getBoundingClientRect();            //ALSO ADD THIS TO RESIZE ADDEVENTLISTENER
             let tankCenterX = tankRect.left + tankRect.width / 2;   //ALSO ADD THIS TO RESIZE ADDEVENTLISTENER
             let tankCenterY = tankRect.top + tankRect.height / 2;   //ALSO ADD THIS TO RESIZE ADDEVENTLISTENER
+
+            window.onresize = function(event) {
+                tankRect = tank.getBoundingClientRect();            //ALSO ADD THIS TO RESIZE ADDEVENTLISTENER
+                tankCenterX = tankRect.left + tankRect.width / 2;   //ALSO ADD THIS TO RESIZE ADDEVENTLISTENER
+                tankCenterY = tankRect.top + tankRect.height / 2;   //ALSO ADD THIS TO RESIZE ADDEVENTLISTENER
+            };
+
             let angle = 0
 
             let targetAngle = 0;
