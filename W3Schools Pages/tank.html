@@ -15,14 +15,15 @@
             3. Intro / #intro
             4. Game / #game
             5. Upgrades / #upgrades
+            6. Tank / .tank
             ------------------------------------------------------------------*/
 
 
 
             /*------------------------------------------------------------------
-                                                                                                                                                            Root, *, body, tag formating & imports
-                                                                                                                                                              \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
-                                                                                                                                                            ------------------------------------------------------------------*/
+            Root, *, body, tag formating & imports
+              \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
+            ------------------------------------------------------------------*/
 
             @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
@@ -38,6 +39,10 @@
                 --dark-green: #066c00;
                 --darker-green: #055600;
                 --darkest-green: #044100;
+                --light-green: #4caf50;
+                --grey: #747579;
+                --yellow: #cddc39;
+                --u: calc((0.35vw + 0.35vh)); /*Add a /2*/
             }
 
             * {
@@ -53,11 +58,17 @@
                 -------*/
                 -webkit-touch-callout: none; /* iOS Safari */
                 -webkit-user-select: none; /* Safari */
-                -khtml-user-select: none; /* Konqueror HTML */
                 -moz-user-select: none; /* Old versions of Firefox */
                 -ms-user-select: none; /* Internet Explorer/Edge */
                 user-select: none; /* Non-prefixed version, currently
                                       supported by Chrome, Edge, Opera and Firefox */
+            }
+
+            .pauseAnimation {
+                -webkit-animation-play-state: paused !important;
+                -moz-animation-play-state: paused !important;
+                -o-animation-play-state: paused !important;
+                animation-play-state: paused !important;
             }
 
             button {
@@ -81,6 +92,19 @@
                 background-color: var(--darkest-green);
             }
 
+            progress {
+                border-radius: 0.1vw;
+                box-shadow: 1px 1px 4px rgba( 0, 0, 0, 0.2 );
+            }
+
+            progress::-webkit-progress-bar {
+                background-color: #a6a6a6;
+            }
+
+            progress::-webkit-progress-value {
+                background-color: var(--grey);
+            }
+
             #NotCompatable {
                 display: none;
                 width: 100vw;
@@ -102,9 +126,9 @@
 
 
             /*------------------------------------------------------------------
-                                                                                                                                                            @media Styles, Keyframes
-                                                                                                                                                              \/ \/ \/ \/ \/ \/ \/
-                                                                                                                                                            ------------------------------------------------------------------*/
+              @media Styles, Keyframes
+                \/ \/ \/ \/ \/ \/ \/
+              ------------------------------------------------------------------*/
 
             @keyframes shake {
                 0% {
@@ -142,6 +166,22 @@
                 }
             }
 
+            @keyframes moveTreads {
+
+                0% {
+
+                    transform: translateY(calc((var(--u) * -2.26)));
+
+                }
+
+                100% {
+
+                    transform: translateY(calc((var(--u) * 2.26)));
+
+                }
+
+            }
+
             @media screen and (min-aspect-ratio: 4.3/1), (max-aspect-ratio: 0.4/1) {
                 #NotCompatable {
                     display: block;
@@ -151,13 +191,15 @@
 
 
             /*------------------------------------------------------------------
-                                                                                                                                                            Intro / #intro
-                                                                                                                                                            \/ \/ \/ \/ \/
-                                                                                                                                                            ------------------------------------------------------------------*/
+             Intro / #intro
+             \/ \/ \/ \/ \/
+             ------------------------------------------------------------------*/
 
 
             #intro {
+                position: relative;
                 transition: 0.5s;
+                z-index: 2;
             }
 
             #intro .title {
@@ -196,9 +238,9 @@
 
 
             /*------------------------------------------------------------------
-                                                                                                                                    Game / #game
-                                                                                                                                    \/ \/ \/ \/ \/
-                                                                                                                                    ------------------------------------------------------------------*/
+            Game / #game
+            \/ \/ \/ \/ \/
+            ------------------------------------------------------------------*/
 
             #game {
                 position: absolute;
@@ -206,7 +248,6 @@
                 height: 100vw;
                 top: 0;
                 left: 0;
-                transform: scale(0);
                 transition: 0.5s;
                 transform-origin: center center;
             }
@@ -214,9 +255,14 @@
 
 
             /*------------------------------------------------------------------
-                                                                                                                                    Upgrades / #upgrades
-                                                                                                                                    \/ \/ \/ \/ \/
-                                                                                                                                    ------------------------------------------------------------------*/
+            Upgrades / #upgrades
+            \/ \/ \/ \/ \/
+            ------------------------------------------------------------------*/
+
+            #upgrades {
+                transition: 0.5s;
+                transform: scale(0);
+            }
 
             #upgrades .options {
                 width: 100vw;
@@ -307,7 +353,6 @@
                 flex-grow: 1;
                 flex-shrink: 1;
                 text-align: center;
-                margin: auto;
                 color: white;
                 border-radius: 0.5vw;
                 font-size: calc((2.5vw + 2.5vh)/2);
@@ -323,6 +368,7 @@
             }
 
             #upgrades .upgradeOptions .upgradeSection .top {
+                margin-top: 13vh;
                 margin-bottom: 0.5vw;
             }
 
@@ -330,6 +376,212 @@
                 background-color: rgba(6, 108, 0, 0.6);
                 color: white;
                 transition: 0.5s;
+            }
+
+            /*------------------------------------------------------------------
+            Tank / .Tank
+            \/ \/ \/ \/ \/
+            ------------------------------------------------------------------*/
+
+            #tank, #tank * {
+                position: absolute;
+                border-radius: calc((var(--u) * 0.8));
+            }
+
+            #tankBody *:not(#treadBumps), #tankTurret *:not(#treadBumps) {
+                box-shadow: inset 0 0 0.5vw 0.5vw rgba(0, 0, 0, 0.2);
+            }
+
+            #tank {
+                transform: scale(0);
+            }
+
+            #tank #tankBody {
+                position: fixed;
+                left: 50vw;
+                top: 50vh;
+                transition: transform 0.2s linear;
+            }
+
+            #tank #tankBody div #tankBase {
+                width: calc((var(--u) * 10));
+                height: calc((var(--u) * 10));
+                background-color: var(--dark-green);
+                left: calc((var(--u) * -5));
+                top: calc((var(--u) * -5));
+            }
+
+            #tank #tankBody div #treadsLeft {
+                z-index: -1;
+                width: calc((var(--u) * 3));
+                top: calc((var(--u) * -6.25));
+                left: calc((var(--u) * -6.25));
+                height: calc((var(--u) * 12.5));
+                background-color: var(--grey);
+                border-radius: calc((var(--u) * 0.5)) 0 0 calc((var(--u) * 0.5));
+            }
+
+            #tank #tankBody div #treadsRight {
+                z-index: -1;
+                width: calc((var(--u) * 3));
+                top: calc((var(--u) * -6.25));
+                left: calc((var(--u) * 3.25));
+                height: calc((var(--u) * 12.5));
+                background-color: var(--grey);
+                border-radius: 0 calc((var(--u) * 0.5)) calc((var(--u) * 0.5)) 0;
+            }
+
+            #tank #tankBody div #treadBumps {
+                height: calc((var(--u) * 12.5));
+                width: calc((var(--u) * 12.5));
+                left: calc((var(--u) * -6.25));
+                top: calc((var(--u) * -6.25));
+                overflow: hidden;
+            }
+
+            #tank #tankBody div #treadBumps * {
+                height: calc((var(--u) * 0.3));
+                background: rgb(116,117,121);
+                background: linear-gradient(0deg, rgba(116,117,121,1) 0%, rgba(76,77,79,1) 50%, rgba(116,117,121,1) 100%);
+                border-radius: 0;
+                width: calc((var(--u) * 3));
+                z-index: -1;
+            }
+
+            .right0, .right1, .right2, .right3, .right4, .right5, .right6 {
+                left: calc((var(--u) * 9.5));
+            }
+
+            .left0 {
+                top: 0;
+            }
+            .left1 {
+                top: calc((var(--u) * 2.26));
+            }
+            .left2 {
+                top: calc((var(--u) * 4.52));
+            }
+            .left3 {
+                top: calc((var(--u) * 6.78));
+            }
+            .left4 {
+                top: calc((var(--u) * 9.04));
+            }
+            .left5 {
+                top: calc((var(--u) * 11.3));
+            }
+            .left6 {
+                top: calc((var(--u) * 13.56));
+            }
+
+            .right0 {
+                top: 0;
+            }
+            .right1 {
+                top: calc((var(--u) * 2.26));
+            }
+            .right2 {
+                top: calc((var(--u) * 4.52));
+            }
+            .right3 {
+                top: calc((var(--u) * 6.78));
+            }
+            .right4 {
+                top: calc((var(--u) * 9.04));
+            }
+            .right5 {
+                top: calc((var(--u) * 11.3));
+            }
+            .right6 {
+                top: calc((var(--u) * 13.56));
+            }
+
+            #tankTurret {
+                position: fixed;
+                left: 50vw;
+                top: 50vh;
+            }
+
+
+                                    .nozzle {
+                                        width: calc((var(--u) * 1.25));
+                                        height: calc((var(--u) * 12));
+                                        background-color: var(--yellow);
+                                        left: calc((var(--u) * -2.325));
+                                        top: calc((var(--u) * -12));
+                                    }
+                                    .nozzle2 {
+                                        width: calc((var(--u) * 1.25));
+                                        height: calc((var(--u) * 12));
+                                        background-color: var(--yellow);
+                                        left: calc((var(--u) * 1.075));
+                                        top: calc((var(--u) * -12));
+                                    }
+
+                                    .TankHEAD {
+                                        width: calc((var(--u) * 8));
+                                        height: calc((var(--u) * 8));
+                                        left: calc((var(--u) * -4));
+                                        top: calc((var(--u) * -4));
+                                        background-color: var(--light-green);
+                                    }
+
+            #tank #onlineJoystick {
+                background-color: rgba(255, 255, 255, 0.2);
+                position: fixed;
+                bottom: -105vh;
+                left: 0;
+                width: calc((35vw + 35vh) / 2);
+                height: calc((35vw + 35vh) / 2);
+                display: none;
+                border-top-right-radius: 75%;
+            }
+
+            #tank #arrows {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: calc((31.5vw + 31.5vh) / 2);
+                height: calc((31.5vw + 31.5vh) / 2);
+                display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+                display: -ms-flexbox;  /* TWEENER - IE 10 */
+                display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+                display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+
+                justify-content: center;
+                align-items: center;
+            }
+
+            #tank #arrows div * {
+                position: relative;
+                border: solid var(--light-green);
+                border-width: 0 calc((1vw + 1vh) / 2) calc((1vw + 1vh) / 2) 0;
+                display: inline-block;
+                padding: calc((2vw + 2vh) / 2);
+            }
+
+            #tank #onlineJoystick #arrows div #right {
+                left: 8vw;
+                transform: rotate(-45deg);
+                -webkit-transform: rotate(-45deg);
+            }
+
+            #tank #onlineJoystick #arrows div #left {
+                left: -8vw;
+                transform: rotate(135deg);
+                -webkit-transform: rotate(135deg);
+            }
+
+            #tank #onlineJoystick #arrows div #up {
+                bottom: 8vw;
+                transform: rotate(-135deg);
+                -webkit-transform: rotate(-135deg);
+            }
+
+            #tank #onlineJoystick #arrows div #down {
+                bottom: -8vw;
+                transform: rotate(45deg);
+                -webkit-transform: rotate(45deg);
             }
         </style>
     </head>
@@ -367,44 +619,52 @@
                         <div>
                             <div class="top">
                                 <span class="label">MOVEMENT SPEED</span>
-                                <span id="movementSpeedImageInUpgrades">MOVEMENT SPEED IMAGE</span>
+                                <span id="movementSpeedProgressLabel">4/5</span>
+                                <progress id="movementSpeedProgressBar" value="0.8"></progress>
                             </div>
                             <div>
-                                <span class="label">ARMOR</span>
-                                <span id="armorImageInUpgrades">TANK ARMOR IMAGE</span>
+                                <span class="label">TURRET SPEED</span>
+                                <span id="turretSpeedProgressLabel">4/5</span>
+                                <progress id="turretSpeedProgressBar" value="0.8"></progress>
                             </div>
                         </div>
 
                         <div>
                             <div class="top">
-                                <span class="label">TURRET SPEED</span>
-                                <span id="turretSpeedImageInUpgrades">TURRET SPEED IMAGE</span>
+                                <span class="label">ARMOR</span>
+                                <span id="armorProgressLabel">4/5</span>
+                                <progress id="armorProgressBar" value="0.8"></progress>
                             </div>
                             <div>
                                 <span class="label">MAXIMUM AMMUNITION</span>
-                                <span id="maximumAmmunitionImageInUpgrades">MAXIUMUM AMMUNITION IMAGE</span>
+                                <span id="maxiumumAmmunitionProgressLabel">4/5</span>
+                                <progress id="maximumAmmunitionProgressBar" value="0.8"></progress>
                             </div>
                         </div>
 
                         <div>
                             <div class="top">
                                 <span class="label">VISIBILITY</span>
-                                <span id="visibilityImageInUpgrades">VISIBILITY IMAGE</span>
+                                <span id="visibilityProgressLabel">4/5</span>
+                                <progress id="visibilityProgressBar" value="0.8"></progress>
                             </div>
                             <div>
                                 <span class="label">PROJECTILE SPEED</span>
-                                <span id="projectileSpeedImageInUpgrades">PROJECTILE SPEED IMAGE</span>
+                                <span id="projectileSpeedProgressLabel">4/5</span>
+                                <progress id="projectileSpeedProgressBar" value="0.8"></progress>
                             </div>
                         </div>
 
                         <div>
                             <div class="top">
                                 <span class="label">BUBBLE PROTECTION DURATION</span>
-                                <span id="bubbleProtectionDurationImageInUpgrades">BUBBLE PROTECTION DURATION IMAGE</span>
+                                <span id="protectionDurationProgressLabel">4/5</span>
+                                <progress id="bubbleProtectionDurationProgressBar" value="0.8"></progress>
                             </div>
                             <div>
                                 <span class="label">BUBBLE PROTECTION STRENGTH</span>
-                                <span id="bubbleProtectionStrengthImageInUpgrades">BUBBLE PROTECTION STRENGTH IMAGE</span>
+                                <span id="protectionStrengthProgressLabel">4/5</span>
+                                <progress id="bubbleProtectionStrengthProgressBar" value="0.8"></progress>
                             </div>
                         </div>
                     </div>
@@ -412,107 +672,324 @@
                         <div>
                             <div class="top">
                                 <span class="label">ROCK SHOOTER</span>
-                                <span id="rockShooterTankImageInUpgrades">ROCK SHOOTER IMAGE</span>
+                                <span id="rockShooterProgressLabel">4/5</span>
+                                <progress id="rockShooterTankProgressBar" value="0.8"></progress>
                             </div>
                             <div>
                                 <span class="label">MOTAR</span>
-                                <span id="motarTankImageInUpgrades">MOTAR IMAGE</span>
+                                <span id="motarProgressLabel">4/5</span>
+                                <progress id="motarTankProgressBar" value="0.8"></progress>
                             </div>
                         </div>
 
                         <div>
                             <div class="top">
                                 <span class="label">MINIGUN</span>
-                                <span id="minigunTankImageInUpgrades">MINIGUN IMAGE</span>
+                                <span id="minigunProgressLabel">4/5</span>
+                                <progress id="minigunTankProgressBar" value="0.8"></progress>
                             </div>
                             <div>
                                 <span class="label">ROCKET</span>
-                                <span id="rocketTankImageInUpgrades">ROCKET IMAGE</span>
+                                <span id="rocketProgressLabel">4/5</span>
+                                <progress id="rocketTankProgressBar" value="0.8"></progress>
                             </div>
                         </div>
 
                         <div>
                             <div class="top">
                                 <span class="label">MACHINE GUN</span>
-                                <span id="machineGunTankImageInUpgrades">MACHINE GUN IMAGE</span>
+                                <span id="machineGunProgressLabel">4/5</span>
+                                <progress id="machineGunTankProgressBar" value="0.8"></progress>
                             </div>
                             <div>
                                 <span class="label">ION CANNON</span>
-                                <span id="ionCannonTankImageInUpgrades">ION CANNON IMAGE</span>
+                                <span id="ionCannonProgressLabel">4/5</span>
+                                <progress id="ionCannonTankProgressBar" value="0.8"></progress>
                             </div>
                         </div>
 
                         <div>
                             <div class="top">
                                 <span class="label">TASER BOMB</span>
-                                <span id="taserBombImageInUpgrades">TASER BOMB IMAGE</span>
+                                <span id="taserBombProgressLabel">4/5</span>
+                                <progress id="taserBombProgressBar" value="0.8"></progress>
                             </div>
                             <div>
                                 <span class="label">MINES</span>
-                                <span id="minesTankImageInUpgrades">MINES IMAGE</span>
+                                <span id="minesProgressLabel">4/5</span>
+                                <progress id="minesTankProgressBar" value="0.8"></progress>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div id="tank">
+                <div id="onlineJoystick">
+                    <div id="arrows">
+                        <div><i id="up"></i></div>
+                        <div><i id="right"></i></div>
+                        <div><i id="down"></i></div>
+                        <div><i id="left"></i></div>
+                    </div>
+                </div>
+                <div id='tankBody'>
+                    <div>
+                        <div id="tankBase"></div>
+                        <div id="treadsLeft"></div>
+                        <div id="treadsRight"></div>
+                        <div id="treadBumps">
+                            <div class="left0 movingTread pauseAnimation"></div>
+                            <div class="left1 movingTread pauseAnimation"></div>
+                            <div class="left2 movingTread pauseAnimation"></div>
+                            <div class="left3 movingTread pauseAnimation"></div>
+                            <div class="left4 movingTread pauseAnimation"></div>
+                            <div class="left5 movingTread pauseAnimation"></div>
+                            <div class="left6 movingTread pauseAnimation"></div>
+                            <div class="right0 movingTread pauseAnimation"></div>
+                            <div class="right1 movingTread pauseAnimation"></div>
+                            <div class="right2 movingTread pauseAnimation"></div>
+                            <div class="right3 movingTread pauseAnimation"></div>
+                            <div class="right4 movingTread pauseAnimation"></div>
+                            <div class="right5 movingTread pauseAnimation"></div>
+                            <div class="right6 movingTread pauseAnimation"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id='tankTurret'>
+                    <div class="nozzle"></div>
+                    <div class="nozzle2"></div>
+                    <div class="TankHEAD"></div>
+                </div>
+            </div>
         </div>
+
+        <script src="https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js"></script>
 
         <script>
             /* Variable Initialization */
-            let introLoaded = false;
+
+                /* Intro */
+                let introLoaded = false;
+
+                /* Tank */
+                let angle = 0;
+                let targetAngle = 0;
+                let currentAngle = 0;
+                let turretSpeed = 2.5;
+                let driveSpeed = 0.5;
 
             /* Elements */
-            const introElement = document.getElementById("intro");
-            const gameElement = document.getElementById("game");
-            const movementOption = document.getElementById("movementOption");
-            const weaponsOption = document.getElementById("weaponsOption");
-            const startButton = document.getElementById("start");
-            const slider = document.getElementById('slider');
-            const movementUpgrades = document.getElementById('movementUpgrades');
-            const weaponUpgrades = document.getElementById('weaponUpgrades');
-            const upgradeOptions = document.getElementById('upgradeOptions');
-            const upgrades = document.getElementById('upgrades');
-            const elements = document.querySelectorAll('.introAnimation');
+
+                /*INTRO*/
+                const elements = document.querySelectorAll('.introAnimation');
+                const introElement = document.getElementById("intro");
+                const startButton = document.getElementById("start");
+
+                /*GAME*/
+//                const gameElement = document.getElementById("game");
+
+                /*UPGRADES*/
+                const movementOption = document.getElementById("movementOption");
+                const weaponsOption = document.getElementById("weaponsOption");
+                const slider = document.getElementById('slider');
+                const movementUpgrades = document.getElementById('movementUpgrades');
+                const weaponUpgrades = document.getElementById('weaponUpgrades');
+                const upgrades = document.getElementById('upgrades');
+                const beginGame = document.getElementById('startGameAfterUpgrades');
+
+                /*TANK*/
+                const tank = document.getElementById('tank');
+                const onlineJoystick = document.getElementById('onlineJoystick');
+                const tankBody = document.getElementById('tankBody');
+                const tankTurret = document.getElementById('tankTurret');
+
+                /*Setting tankBody Dimentions*/
+                let tankCenterX = window.innerWidth / 2
+                let tankCenterY = window.innerHeight / 2
 
 
-            /* Start Game from Intro Screen */
-            document.addEventListener('DOMContentLoaded', () => {
-                let delay = 0;
-                elements.forEach((element) => {
-                    setTimeout(() => {
-                        element.classList.add('expanded');
-                        // element.classList.add('shake');
-                        document.body.classList.add('shake');
-                        if (delay === 4000) introLoaded = true;
+            /* INTRO */
+                /* Start Game from Intro Screen */
+                document.addEventListener('DOMContentLoaded', () => {
+                    let delay = 0;
+                    elements.forEach((element) => {
                         setTimeout(() => {
-                            document.body.classList.remove('shake');
-                        }, 500);
-                    }, delay);
-                    delay += 1000;
+                            element.classList.add('expanded');
+                            // element.classList.add('shake');
+                            document.body.classList.add('shake');
+                            if (delay === 4000) introLoaded = true;
+                            setTimeout(() => {
+                                document.body.classList.remove('shake');
+                            }, 500);
+                        }, delay);
+                        delay += 1000;
+                    });
                 });
-            });
+                startButton.addEventListener('click', () => {
+                    if (introLoaded) {
+                        introElement.style.setProperty("transform", "scale(0)");
+                        upgrades.style.setProperty("transform", "scale(1)");
+                    }
+                });
 
-            startButton.addEventListener('click', () => {
-                if (introLoaded) {
-                    introElement.style.setProperty("transform", "scale(0)");
-                    gameElement.style.setProperty("transform", "scale(1)");
+
+            /* UPGRADES */
+                /* Addeventlistener for click in upgrade section */
+                movementOption.addEventListener('click', () => {
+                    slider.style.setProperty("transform", "translateX(0%)");
+                    movementOption.classList.add("sliderButtonWhite")
+                    weaponsOption.classList.remove("sliderButtonWhite")
+                    weaponUpgrades.classList.add("hidden")
+                    movementUpgrades.classList.remove("hidden")
+                });
+                weaponsOption.addEventListener('click', () => {
+                    slider.style.setProperty("transform", "translateX(calc(100% + 1vw))");
+                    weaponsOption.classList.add("sliderButtonWhite")
+                    movementOption.classList.remove("sliderButtonWhite")
+                    movementUpgrades.classList.add("hidden")
+                    weaponUpgrades.classList.remove("hidden")
+                });
+                beginGame.addEventListener('click', () => {
+                    upgrades.style.setProperty("transform", "scale(0)");
+                    upgrades.style.setProperty("display", "none");
+                    tank.style.setProperty("transform", "scale(1)");
+                    startTouchScreenMovement()
+                    document.addEventListener('keyup', () => {
+                        if (keysPressed['w'] || keysPressed['a'] || keysPressed['s'] || keysPressed['d'] || keysPressed['arrowup'] || keysPressed['arrowleft'] || keysPressed['arrowdown'] || keysPressed['arrowright']) {
+                            MovingTreads.forEach(div => {
+                                div.classList.add("pauseAnimation")
+                            })
+                        }
+                    });
+
+                    document.addEventListener('keyup', (event) => {
+                        keysPressed[event.key.toLowerCase()] = false;
+                        updateTankDirection();
+                    });
+
+                    /* Add keyspressed when the keys are pressed */
+                    document.addEventListener('keydown', (event) => {
+                        keysPressed[event.key.toLowerCase()] = true;
+                        updateTankDirection();
+                    });
+                });
+
+            /* TANK */
+                /* Setting tankBody Dimentions when Screen Resizes */
+                window.onresize = () => {
+                    tankCenterX = window.innerWidth / 2
+                    tankCenterY = window.innerHeight / 2
+                };
+
+                /* Set animation based on tank movement speed */
+                const MovingTreads = document.querySelectorAll(".movingTread");
+                MovingTreads.forEach(div => {
+                    div.style.animation = `moveTreads ${0.4/driveSpeed}s linear infinite`
+                });
+
+                /* Set angle based on mouse position */
+                document.addEventListener('mousemove', function (e) {
+                    const angle = Math.atan2(e.clientY - tankCenterY, e.clientX - tankCenterX);
+                    targetAngle = angle * (180 / Math.PI);
+                });
+
+                /* Update Turret Rotation repeatadly using mousemove above */
+                function updateTurret() {
+                    let deltaAngle = targetAngle - currentAngle;
+                    deltaAngle = (deltaAngle + 360) % 360;
+                    if (deltaAngle > 180) deltaAngle -= 360;
+
+                    if (deltaAngle > turretSpeed) {
+                        currentAngle += turretSpeed;
+                    } else if (deltaAngle < -turretSpeed) {
+                        currentAngle -= turretSpeed;
+                    } else {
+                        currentAngle = targetAngle;
+                    }
+
+                    tankTurret.style.transform = `rotate(${currentAngle + 90}deg)`;
+
+                    requestAnimationFrame(updateTurret);
                 }
-            });
+                updateTurret();
 
-            movementOption.addEventListener('click', () => {
-                slider.style.setProperty("transform", "translateX(0%)");
-                movementOption.classList.add("sliderButtonWhite")
-                weaponsOption.classList.remove("sliderButtonWhite")
-                weaponUpgrades.classList.add("hidden")
-                movementUpgrades.classList.remove("hidden")
-            });
-            weaponsOption.addEventListener('click', () => {
-                slider.style.setProperty("transform", "translateX(calc(100% + 1vw))");
-                weaponsOption.classList.add("sliderButtonWhite")
-                movementOption.classList.remove("sliderButtonWhite")
-                movementUpgrades.classList.add("hidden")
-                weaponUpgrades.classList.remove("hidden")
-            });
+                /* Add animation when you move tank */
+                const keysPressed = {};
+
+                /* Find shortest path for tank body */
+                function getShortestRotationAngle(current, target) {
+                    let delta = target - current;
+                    delta = ((delta + 180) % 360 + 540) % 360 - 180;
+                    return current + delta;
+                }
+
+                /* Change tank body direction based on keys pressed using code above */
+                function updateTankDirection(exactAngle) {
+                    if (typeof exactAngle !== 'undefined') {
+                        console.log('GYAQTTTATATT')
+                        angle = getShortestRotationAngle(angle, (90 - exactAngle))
+                        MovingTreads.forEach(div => {
+                            div.classList.remove("pauseAnimation")
+                        });
+                    } else {
+                        if ((keysPressed['w'] || keysPressed['arrowup']) && (keysPressed['d'] || keysPressed['arrowright'])) {
+                            angle = getShortestRotationAngle(angle, 45); // Up-right
+                        } else if ((keysPressed['w'] || keysPressed['arrowup']) && (keysPressed['a'] || keysPressed['arrowleft'])) {
+                            angle = getShortestRotationAngle(angle, 315); // Up-left
+                        } else if ((keysPressed['s'] || keysPressed['arrowdown']) && (keysPressed['d'] || keysPressed['arrowright'])) {
+                            angle = getShortestRotationAngle(angle, 135); // Down-right
+                        } else if ((keysPressed['s'] || keysPressed['arrowdown']) && (keysPressed['a'] || keysPressed['arrowleft'])) {
+                            angle = getShortestRotationAngle(angle, 225); // Down-left
+                        } else if (keysPressed['w'] || keysPressed['arrowup']) {
+                            angle = getShortestRotationAngle(angle, 0); // Up
+                        } else if (keysPressed['s'] || keysPressed['arrowdown']) {
+                            angle = getShortestRotationAngle(angle, 180); // Down
+                        } else if (keysPressed['d'] || keysPressed['arrowright']) {
+                            angle = getShortestRotationAngle(angle, 90); // Right
+                        } else if (keysPressed['a'] || keysPressed['arrowleft']) {
+                            angle = getShortestRotationAngle(angle, 270); // Left
+                        }
+
+                        if (keysPressed['w'] || keysPressed['a'] || keysPressed['s'] || keysPressed['d'] || keysPressed['arrowup'] || keysPressed['arrowleft'] || keysPressed['arrowdown'] || keysPressed['arrowright']) {
+                            MovingTreads.forEach(div => {
+                                div.classList.remove("pauseAnimation");
+                            })
+                        }
+                    }
+
+                    if (angle !== null) {
+                        tankBody.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+                    }
+                }
+
+
+
+
+            function startTouchScreenMovement() {
+                if (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0)) {
+                    tankBody.style.setProperty("transition", "0.1s");
+                    console.log('GYAT')
+                    onlineJoystick.style.setProperty("display","block");
+                    const joystick = nipplejs.create({
+                        zone: onlineJoystick,
+                        mode: 'static',
+                        size: ((window.innerWidth * 0.12 + window.innerHeight * 0.12)/2),
+                        position: { left: '45%', bottom: '45%' },
+                        color: '#066c00',
+                    });
+
+                    joystick.on('move', function (evt, data) {
+                        updateTankDirection(data.angle.degree); // Get the angle in degrees
+
+                    });
+
+                    joystick.on('end', function () {
+                        MovingTreads.forEach(div => {
+                            div.classList.add("pauseAnimation")
+                        })
+                    });
+                }
+            }
         </script>
     </body>
 </html>
