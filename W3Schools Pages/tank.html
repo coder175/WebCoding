@@ -29,7 +29,7 @@
 
             .material-symbols-outlined {
                 font-variation-settings: 'FILL' 0,
-                    'wght' 700,
+                    'wght' 300,
                     'GRAD' 200,
                     'opsz' 48;
                 font-size: calc((3vw + 3vh)/2);
@@ -118,9 +118,52 @@
                 background-color: lightsalmon;
             }
 
+            #rotateScreen {
+                position: absolute;
+                width: 100vw;
+                height: 100vh;
+                top: 0;
+                left: 0;
+                text-align: center;
+                padding-top: 20vh;
+                z-index: 999;
+                background-color: lightsalmon;
+            }
+
+            #rotateScreen .label {
+                font-size: 3vw;
+            }
+
+            #rotateScreen .rotateAnimation {
+                height: 10vh;
+                text-align: center;
+            }
+
+            #rotateScreen .rotateAnimation * {
+                font-size: calc((8vw + 8vh)/2);
+                text-align: center;
+            }
+
+            #rotateScreen .rotateAnimation #rotateClockwise {
+                position: relative;
+                left: -2vw;
+            }
+
+            #rotateScreen .rotateAnimation #portraitPhone {
+                rotate: 45deg;
+                position: relative;
+            }
+
+            #rotateScreen .rotateAnimation #rotateCounterclockwise {
+                position: relative;
+                rotate: 180deg;
+                right: -2vw;
+            }
+
             body {
                 margin: 0;
                 overflow: hidden;
+                background-color: grey;
             }
 
 
@@ -526,68 +569,30 @@
                                         background-color: var(--light-green);
                                     }
 
-            #tank #onlineJoystick {
+            #tank #joystickContainer #onlineJoystick {
                 background-color: rgba(255, 255, 255, 0.2);
-                position: fixed;
-                bottom: -105vh;
-                left: 0;
-                width: calc((35vw + 35vh) / 2);
-                height: calc((35vw + 35vh) / 2);
-                display: none;
-                border-top-right-radius: 75%;
-            }
-
-            #tank #arrows {
                 position: absolute;
-                bottom: 0;
-                left: 0;
-                width: calc((31.5vw + 31.5vh) / 2);
-                height: calc((31.5vw + 31.5vh) / 2);
-                display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-                display: -ms-flexbox;  /* TWEENER - IE 10 */
-                display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-                display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
-
-                justify-content: center;
-                align-items: center;
+                bottom: calc((10vw + 10vh) / 2);
+                left:  calc((10vw + 10vh) / 2);
+                display: none;
             }
 
-            #tank #arrows div * {
-                position: relative;
-                border: solid var(--light-green);
-                border-width: 0 calc((1vw + 1vh) / 2) calc((1vw + 1vh) / 2) 0;
-                display: inline-block;
-                padding: calc((2vw + 2vh) / 2);
-            }
-
-            #tank #onlineJoystick #arrows div #right {
-                left: 8vw;
-                transform: rotate(-45deg);
-                -webkit-transform: rotate(-45deg);
-            }
-
-            #tank #onlineJoystick #arrows div #left {
-                left: -8vw;
-                transform: rotate(135deg);
-                -webkit-transform: rotate(135deg);
-            }
-
-            #tank #onlineJoystick #arrows div #up {
-                bottom: 8vw;
-                transform: rotate(-135deg);
-                -webkit-transform: rotate(-135deg);
-            }
-
-            #tank #onlineJoystick #arrows div #down {
-                bottom: -8vw;
-                transform: rotate(45deg);
-                -webkit-transform: rotate(45deg);
+            #tank #joystickContainer {
+                width: 100vw;
+                height: 100vh;
             }
         </style>
     </head>
     <body>
         <div id="NotCompatable">SORRY, YOUR SCREEN SIZE IS NOT COMPATABLE WITH THIS GAME.</div>
-
+        <div id="rotateScreen">
+            <div class="label">ROTATE SCREEN FOR A BETTER EXPERIENCE</div>
+            <div class="rotateAnimation">
+                <div id="rotateClockwise"><span class="material-symbols-outlined">switch_access_shortcut</span></div>
+                <div id="portraitPhone"><span class="material-symbols-outlined">smartphone</span></div>
+                <div id="rotateCounterclockwise"><span class="material-symbols-outlined">switch_access_shortcut</span></div>
+            </div>
+        </div>
 
         <div id="intro">
             <div class="title">
@@ -724,13 +729,8 @@
                 </div>
             </div>
             <div id="tank">
-                <div id="onlineJoystick">
-                    <div id="arrows">
-                        <div><i id="up"></i></div>
-                        <div><i id="right"></i></div>
-                        <div><i id="down"></i></div>
-                        <div><i id="left"></i></div>
-                    </div>
+                <div id="joystickContainer">
+                    <div id="onlineJoystick"></div>
                 </div>
                 <div id='tankBody'>
                     <div>
@@ -786,7 +786,6 @@
                 const startButton = document.getElementById("start");
 
                 /*GAME*/
-//                const gameElement = document.getElementById("game");
 
                 /*UPGRADES*/
                 const movementOption = document.getElementById("movementOption");
@@ -926,7 +925,6 @@
                 /* Change tank body direction based on keys pressed using code above */
                 function updateTankDirection(exactAngle) {
                     if (typeof exactAngle !== 'undefined') {
-                        console.log('GYAQTTTATATT')
                         angle = getShortestRotationAngle(angle, (90 - exactAngle))
                         MovingTreads.forEach(div => {
                             div.classList.remove("pauseAnimation")
@@ -968,13 +966,12 @@
             function startTouchScreenMovement() {
                 if (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0)) {
                     tankBody.style.setProperty("transition", "0.1s");
-                    console.log('GYAT')
                     onlineJoystick.style.setProperty("display","block");
                     const joystick = nipplejs.create({
                         zone: onlineJoystick,
                         mode: 'static',
                         size: ((window.innerWidth * 0.12 + window.innerHeight * 0.12)/2),
-                        position: { left: '45%', bottom: '45%' },
+                        position: { left: '50%', bottom: '50%' },
                         color: '#066c00',
                     });
 
