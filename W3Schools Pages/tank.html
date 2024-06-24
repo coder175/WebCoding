@@ -1081,6 +1081,7 @@
 
                     shootingjoystick.on('move', function (evt, data) {
                         shootingJoystickAim(data.angle.degree); // Get the angle in degrees
+                        console.log(data.angle.degree)
 
                     });
 
@@ -1096,12 +1097,8 @@
                         } else {
                             currentAngle = targetAngle;
                         }
-
-                        tankTurret.style.transform = `rotate(${currentAngle + 90}deg)`;
-                        requestAnimationFrame(shootingJoystickAim);
+                        tankTurret.style.transform = `rotate(${currentAngle + 180}deg)`;
                     }
-
-                    shootingJoystickAim();
 
                     shootingjoystick.on('end', function () {
 // Shooting joystick END
