@@ -848,6 +848,7 @@
                 let turretSpeed = 2.5;
                 let driveSpeed = 0.5;
                 mobile = false;
+                shootingAngle = 0
 
             /* Elements */
 
@@ -1057,7 +1058,7 @@
 
                     joystick.on('end', function () {
                         MovingTreads.forEach(div => {
-                            div.classList.add("pauseAnimation")
+                            div.classList.add("pauseAnimation");
                         })
                     });
 
@@ -1080,25 +1081,45 @@
                     });
 
                     shootingjoystick.on('move', function (evt, data) {
-                        shootingJoystickAim(data.angle.degree); // Get the angle in degrees
-                        console.log(data.angle.degree)
-
+                        shootingAngle = shootingJoystickAim(data.angle.degree); // Get the angle in degrees
                     });
 
                     function shootingJoystickAim(angle) {
-                        let deltaAngle = 90 - angle - currentAngle;
+                        let deltaAngle = angle - currentAngle;
                         deltaAngle = (deltaAngle + 360) % 360;
                         if (deltaAngle > 180) deltaAngle -= 360;
 
-                        if (deltaAngle > turretSpeed) {
+                        if ((90 - angle) > turretSpeed) {
                             currentAngle += turretSpeed;
-                        } else if (deltaAngle < -turretSpeed) {
+                        } else if ((90 - angle) < -turretSpeed) {
                             currentAngle -= turretSpeed;
                         } else {
                             currentAngle = targetAngle;
                         }
-                        tankTurret.style.transform = `rotate(${currentAngle + 180}deg)`;
+
+                        console.log(currentAngle)
+                        tankTurret.style.transform = `rotate(${currentAngle}deg)`;
+                        requestAnimationFrame(animate);
                     }
+
+                    function animate() {
+                        if (currentRotation !== targetRotation) {
+                            let diff = (targetRotation - currentRotation + 360) % 360;
+                            if (diff > 180) diff -= 360;
+
+                            let step = Math.min(Math.abs(diff), speed / 60);
+                            if (diff < 0) step = -step;
+
+                            currentRotation = (currentRotation + step + 360) % 360;
+                            div.style.transform = `rotate(${currentRotation}deg)`;
+                        }
+                        requestAnimationFrame(animate);
+                    }
+
+                    animate();
+
+
+
 
                     shootingjoystick.on('end', function () {
 // Shooting joystick END
