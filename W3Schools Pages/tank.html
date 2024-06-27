@@ -95,6 +95,7 @@
             progress {
                 border-radius: 0.1vw;
                 box-shadow: 1px 1px 4px rgba( 0, 0, 0, 0.2 );
+                width: 18vw;
             }
 
             progress::-webkit-progress-bar {
@@ -119,6 +120,7 @@
             }
 
             #rotateScreen {
+                transition: scale 0.5s;
                 position: absolute;
                 width: 100vw;
                 height: 100vh;
@@ -128,6 +130,7 @@
                 padding-top: 20vh;
                 z-index: 999;
                 background-color: lightsalmon;
+                scale: 0;
             }
 
             #rotateScreen .label {
@@ -137,6 +140,14 @@
             #rotateScreen svg {
                 height: 70vh;
                 text-align: center;
+            }
+
+            #rotateScreen button {
+                position: relative;
+                width: 20vw;
+                height: 10vh;
+                bottom: 15vh;
+                font-size: calc((2vw + 2vh) / 2);
             }
 
             body {
@@ -246,7 +257,7 @@
 
             #intro .introAnimation {
                 transform: scale(0);
-                transition: 0.5s;
+                transition: scale 0.5s;
             }
 
             #intro .expanded {
@@ -549,11 +560,10 @@
                                     }
 
             #tank #joystickContainer #onlineJoystick {
-                background-color: rgba(255, 255, 255, 0.2);
                 position: absolute;
                 bottom: 0;
-                width: calc((20vw + 20vh) / 2);
-                height: calc((20vw + 20vh) / 2);
+                width: calc((25vw + 25vh) / 2);
+                height: calc((25vw + 25vh) / 2);
                 display: none;
                 z-index: 10;
             }
@@ -575,7 +585,7 @@
         <div class="alerts">
             <div id="NotCompatable">SORRY, YOUR SCREEN SIZE IS NOT COMPATABLE WITH THIS GAME.</div>
             <div id="rotateScreen">
-                <div class="label">ROTATE SCREEN FOR A BETTER EXPERIENCE</div>
+                <div class="label">FOR A BETTER EXPERIENCE, ROTATE YOUR SCREEN</div>
                 <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100%"
                      viewBox="0 0 576 1024" xml:space="preserve">
                         <path fill="#000000" opacity="1.000000" stroke="none" d="
@@ -660,7 +670,7 @@
                         	C341.172119,247.460724 387.882568,253.404602 408.333374,289.681122
                         z"/>
                 </svg>
-                <button onclick="this.parentElement.style.display='none'" class="">HIDE</button>
+                <button onclick="this.parentElement.style.scale='0'">NO THANKS</button>
             </div>
         </div>
 
@@ -855,6 +865,10 @@
 
             /* Elements */
 
+                /*ALERTS*/
+
+                const rotateScreen = document.getElementById("rotateScreen");
+
                 /*INTRO*/
                 const elements = document.querySelectorAll('.introAnimation');
                 const introElement = document.getElementById("intro");
@@ -954,6 +968,17 @@
                 window.onresize = () => {
                     tankCenterX = window.innerWidth / 2
                     tankCenterY = window.innerHeight / 2
+
+                    if (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0)) {
+                        if (window.matchMedia("(orientation: portrait)").matches) {
+                            rotateScreen.style.scale = "1";
+                            }
+
+                        // Check if the screen is landscape
+                        if (window.matchMedia("(orientation: landscape)").matches) {
+                            rotateScreen.style.scale = "0";
+                        }
+                    }
                 };
 
                 /* Set animation based on tank movement speed */
@@ -1038,12 +1063,21 @@
                     }
                 }
 
+            if (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0)) {
+                if (window.matchMedia("(orientation: portrait)").matches) {
+                        rotateScreen.style.scale = "1";
+                    }
 
-
+                // Check if the screen is landscape
+                if (window.matchMedia("(orientation: landscape)").matches) {
+                        rotateScreen.style.scale = "0";
+                }
+            }
 
             function startTouchScreenMovement() {
                 if (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0)) {
                     mobile = true;
+
                     tankBody.style.setProperty("transition", "0.1s");
                     onlineJoystick.style.setProperty("display","block");
                     const joystick = nipplejs.create({
