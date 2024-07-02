@@ -1,66 +1,78 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
-        <style>
-            .container {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 10px;
-                padding: 10px;
-                box-sizing: border-box;
-                min-height: 100vh;
-            }
-            
-            .item {
-                width: 100px;
-                height: 100px;
-                background-color: lightblue;
-                transition: transform 0.3s, background-color 0.3s;
-                flex-shrink: 0;
-            }
-            
-            .item:hover {
-                transform: scale(1.1);
-                background-color: lightcoral;
-            }
-            
-            /* Portrait mode (default) */
-            .container {
-                flex-direction: row;
-                justify-content: center;
-                align-items: flex-start;
-                align-content: flex-start;
-            }
-            
-            /* Landscape mode */
-            @media (orientation: landscape) {
-                .container {
-                    flex-direction: column;
-                    align-items: flex-start;
-                    justify-content: center;
-                    width: 120px;
-                    height: 100vh;
-                }
-            }
-            
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="item">Item 1</div>
-            <div class="item">Item 2</div>
-            <div class="item">Item 3</div>
-            <div class="item">Item 4</div>
-            <div class="item">Item 5</div>
-            <div class="item">Item 6</div>
-            <div class="item">Item 7</div>
-            <div class="item">Item 8</div>
-        </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swipe and Click Menu</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
 
+    #menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background: #333;
+      color: #fff;
+        overflow: hidden;
+        transition: height 0.3s ease;
+      }
 
-    </body>
-</html>
+      #menu.visible {
+        height: 50%;
+      }
+
+      #content {
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="menu" class="hidden">Menu Content</div>
+    <div id="content">Main Content</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var menu = document.getElementById('menu');
+        var menuButton = document.getElementById('menu-button');
+
+        var hammerBody = new Hammer(document.body);
+        hammerBody.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+
+        hammerBody.on('swipedown', function () {
+          openMenu();
+        });
+
+        hammerBody.on('swipeup', function () {
+          closeMenu();
+        });
+
+          content.addEventListener('click', function () {
+          if (menu.classList.contains('visible')) {
+            closeMenu();
+          } else {
+            openMenu();
+          }
+
+              menu.addEventListener('click', function () {
+                      closeMenu();
+
+              });
+        });
+
+        function openMenu() {
+          menu.classList.add('visible');
+        }
+
+        function closeMenu() {
+          menu.classList.remove('visible');
+        }
+      });
+    </script>
+  </body>
+  </html>
