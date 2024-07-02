@@ -50,7 +50,6 @@
                 font-family: "Bebas Neue", sans-serif;
                 font-weight: 1000;
                 font-style: normal;
-                vertical-align: middle;
 
                 /*-------
                 No Select
@@ -134,7 +133,7 @@
             }
 
             #rotateScreen .label {
-                font-size: 3vw;
+                font-size: 5vw;
             }
 
             #rotateScreen svg {
@@ -143,14 +142,26 @@
             }
 
             #rotateScreen button {
-                position: relative;
+                position: fixed;
                 width: 20vw;
                 height: 10vh;
-                bottom: 15vh;
-                font-size: calc((2vw + 2vh) / 2);
+                bottom: 30vh;
+                font-size: calc((3vw + 3vh) / 2);
+            }
+
+            #rotateScreen .noThanks {
+                left: 20vw;
+            }
+
+            #rotateScreen .neverShow {
+                right: 20vw;
             }
 
             body {
+                position: fixed;
+                top: 0;
+                height: 100vh;
+                width: 100vw;
                 margin: 0;
                 overflow: hidden;
             }
@@ -280,7 +291,7 @@
                 height: 100vw;
                 top: 0;
                 left: 0;
-                transition: 0.5s;
+                transition: scale 0.5s;
                 transform-origin: center center;
             }
 
@@ -292,21 +303,19 @@
                         ------------------------------------------------------------------*/
 
             #upgrades {
+                height: 100vh;
                 transition: 0.5s;
                 transform: scale(0);
             }
 
             #upgrades #startGameAfterUpgrades {
                 left: 40vw;
-                border: 0.1vw solid var(--dark-green);
+                color: white;
+                background-color: var(--dark-green);
             }
 
-            #upgrades #startGameAfterUpgrades * {
-                color: black !important;
-            }
-
-            #upgrades .title {
-                margin-top: 5vh;
+            #upgrades .upgradeTitle {
+                padding-top: 5vh;
                 font-size: calc((10vw + 10vh) / 2);
                 text-align: center;
             }
@@ -320,14 +329,66 @@
                 color: black;
                 position: relative;
                 z-index: 1;
-                transition: color 0.3s;
                 font-size: calc((3vw + 3vh) / 2);
             }
 
-            #upgrades .upgradeOptions .tankUpgrades .label {
-                color: white;
+            #upgrades .upgradeOptions .selectWeapon {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
             }
 
+            #upgrades .upgradeOptions .selectWeapon .content {
+                height: 100%;
+                flex-grow: 1;
+                flex-shrink: 1;
+            }
+
+            #upgrades .upgradeOptions .selectWeapon .upgradeButtons button {
+                display: block;
+                width: 9vw;
+                height: 9vw;
+                border-radius: 25%;
+                flex-shrink: 0;
+            }
+
+            #upgrades .upgradeOptions .selectWeapon button:hover {
+                background-color: #555;
+                transform: scale(1.1);
+            }
+
+            #upgrades .upgradeOptions .selectWeapon .upgradeButtons {
+                position: relative;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5vw;
+                padding: 0.5vw;
+                box-sizing: border-box;
+                flex-direction: row;
+                justify-content: center;
+                align-items: flex-start;
+                align-content: flex-start;
+            }
+
+            @media (orientation: landscape) {
+                #upgrades .upgradeOptions .selectWeapon .upgradeButtons {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    justify-content: center;
+                    gap: 0.5vw;
+                    padding: 0.5vw;
+                    height: 100%;
+                }
+
+                #upgrades .upgradeOptions .selectWeapon .upgradeButtons button {
+                    width: 9vh;
+                    height: 9vh;
+                }
+
+                #upgrades .upgradeOptions .selectWeapon {
+                    flex-direction: row;
+                }
+            }
 
             /*------------------------------------------------------------------
             Tank / .Tank
@@ -588,7 +649,8 @@
                         	C341.172119,247.460724 387.882568,253.404602 408.333374,289.681122
                         z"/>
                 </svg>
-                <button onclick="this.parentElement.style.scale = '0'">NO THANKS</button>
+                <button onclick="this.parentElement.style.scale = '0'" class="noThanks">NO THANKS</button>
+                <button onclick="this.parentElement.style.scale = '0'" id="noShowRotate" class="neverShow">NEVER SHOW</button>
             </div>
         </div>
 
@@ -607,24 +669,29 @@
 
         <div id="game">
             <div id="upgrades">
-                <div class="title">UPGRADES</div>
+                <div class="upgradeTitle">UPGRADES</div>
                 <button id="startGameAfterUpgrades">
                     START
                     <span class="material-symbols-outlined">trending_flat</span>
                 </button>
                 <div class="upgradeOptions" id="upgradeOptions">
                     <!--Upgrade Types: Movement Speed, Turret Speed, Armor, Maxiumum Ammunition, Visibility, Projectile Speed, etc, etc-->
-                    <div id="tankUpgrades" class="tankUpgrades">
-                        <!--<span id="rockShooterProgressLabel">4/5</span>-->
-                        <!--<progress id="rockShooterTankProgressBar" value="0.8"></progress>-->
-                                <span class="label">ROCK SHOOTER</span>
-                                <span class="label">MOTAR</span>
-                                <span class="label">MINIGUN</span>
-                                <span class="label">ROCKET</span>
-                                <span class="label">MACHINE GUN</span>
-                                <span class="label">ION CANNON</span>
-                                <span class="label">TASER BOMB</span>
-                                <span class="label">MINES</span>
+                    <!--<span id="rockShooterProgressLabel">4/5</span>-->
+                    <!--<progress id="rockShooterTankProgressBar" value="0.8"></progress>-->
+                    <div class="selectWeapon">
+                        <span class="upgradeButtons">
+                            <button class="label">1</button> <!-- ROCK CANNON -->
+                            <button class="label">2</button> <!-- TASER -->
+                            <button class="label">3</button> <!-- FLAMETHROWER OR RICOCHET -->
+                            <button class="label">4</button> <!-- ROCKET -->
+                            <button class="label">5</button> <!-- BOMB -->
+                            <button class="label">6</button> <!-- SHOCK -->
+                            <button class="label">7</button> <!-- MACHINE GUN -->
+                            <button class="label">8</button> <!-- MINES -->
+                        </span>
+                        <div class="content">
+                            ARMOR, SPEED, TURRET SPEED, VISIBILITY, PROJECTILE SPEED (AND MORE PROJECTILE DISTANCE), FORTUNE, RELOAD SPEED, MAX AMMO, WEAPON UPGRADES
+                        </div>
                     </div>
                 </div>
             </div>
@@ -669,6 +736,8 @@
         <script>
             /* Variable Initialization */
 
+            let noShow = false;
+
             /* Intro */
             let introLoaded = false;
 
@@ -686,6 +755,7 @@
             /*ALERTS*/
 
             const rotateScreen = document.getElementById("rotateScreen");
+            const noShowRotate = document.getElementById('noShowRotate');
 
             /*INTRO*/
             const elements = document.querySelectorAll('.introAnimation');
@@ -697,6 +767,8 @@
             /*UPGRADES*/
             const upgrades = document.getElementById('upgrades');
             const beginGame = document.getElementById('startGameAfterUpgrades');
+            const upgradeTitle = document.querySelector('.upgradeTitle');
+            const upgradeOptions = document.getElementById('upgradeOptions');
 
             /*TANK*/
             const tank = document.getElementById('tank');
@@ -723,11 +795,19 @@
                     delay += 1000;
                 });
             });
+
+            noShowRotate.addEventListener('click', () => {
+                noShow = true;
+            });
+
             startButton.addEventListener('click', () => {
                 if (introLoaded) {
                     introElement.style.setProperty("transform", "scale(0)");
                     upgrades.style.setProperty("transform", "scale(1)");
                 }
+
+                let elementHeight = `${(document.body.offsetHeight - beginGame.offsetHeight - upgradeTitle.offsetHeight)}px`
+                upgradeOptions.style.setProperty('height', elementHeight);
             });
 
 
@@ -743,20 +823,25 @@
             /* TANK */
             /* Setting tankBody Dimentions when Screen Resizes */
             window.onresize = () => {
-                if (window.matchMedia("(orientation: portrait)").matches) {
-                    rotateScreen.style.scale = "1";
-                }
+                let elementHeight = `${(document.body.offsetHeight - beginGame.offsetHeight - upgradeTitle.offsetHeight)}px`
+                upgradeOptions.style.setProperty('height', elementHeight);
 
-                // Check if the screen is landscape
-                if (window.matchMedia("(orientation: landscape)").matches) {
-                    rotateScreen.style.scale = "0";
+                if(!noShow) {
+                    if (window.matchMedia("(orientation: portrait)").matches) {
+                        rotateScreen.style.scale = "1";
+                    }
+
+                    // Check if the screen is landscape
+                    if (window.matchMedia("(orientation: landscape)").matches) {
+                        rotateScreen.style.scale = "0";
+                    }
                 }
             };
 
             /* Set animation based on tank movement speed */
             const MovingTreads = document.querySelectorAll(".movingTread");
             MovingTreads.forEach(div => {
-                div.style.animation = `moveTreads ${0.4 / driveSpeed}s linear infinite`
+                div.style.animation = `moveTreads ${0.4 / driveSpeed}s linear infinite`;
             });
 
             /* Find shortest path for tank body */
