@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" oncontextmenu="return false" ondragstart="return false">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -21,9 +21,9 @@
 
 
             /*------------------------------------------------------------------
-                        Root, *, body, tag formating & imports
-                          \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
-                        ------------------------------------------------------------------*/
+            Root, *, body, tag formating & imports
+              \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
+            ------------------------------------------------------------------*/
 
             @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
@@ -93,7 +93,7 @@
 
             progress {
                 border-radius: 0.1vw;
-                box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+                box-shadow: 0.2vw 0.2vw 0.8vw rgba(0, 0, 0, 0.2);
                 width: 18vw;
             }
 
@@ -114,7 +114,7 @@
                 text-align: center;
                 padding-top: 20vh;
                 position: absolute;
-                z-index: 99999999999;
+                z-index: calc(infinity);
                 background-color: lightsalmon;
             }
 
@@ -169,9 +169,9 @@
 
 
             /*------------------------------------------------------------------
-                          @media Styles, Keyframes
-                            \/ \/ \/ \/ \/ \/ \/
-                          ------------------------------------------------------------------*/
+            @media Styles, Keyframes
+            \/ \/ \/ \/ \/ \/ \/
+            ------------------------------------------------------------------*/
 
             @keyframes shake {
                 0% {
@@ -234,9 +234,9 @@
 
 
             /*------------------------------------------------------------------
-                         Intro / #intro
-                         \/ \/ \/ \/ \/
-                         ------------------------------------------------------------------*/
+            Intro / #intro
+            \/ \/ \/ \/ \/
+            ------------------------------------------------------------------*/
 
 
             #intro {
@@ -281,9 +281,9 @@
 
 
             /*------------------------------------------------------------------
-                        Game / #game
-                        \/ \/ \/ \/ \/
-                        ------------------------------------------------------------------*/
+            Game / #game
+            \/ \/ \/ \/ \/
+            ------------------------------------------------------------------*/
 
             #game {
                 position: absolute;
@@ -298,9 +298,9 @@
 
 
             /*------------------------------------------------------------------
-                        Upgrades / #upgrades
-                        \/ \/ \/ \/ \/
-                        ------------------------------------------------------------------*/
+            Upgrades / #upgrades
+            \/ \/ \/ \/ \/
+            ------------------------------------------------------------------*/
 
             #upgrades {
                 height: 100vh;
@@ -320,6 +320,8 @@
                 text-align: center;
             }
 
+
+
             #upgrades button {
                 border: 0.1vw dashed var(--dark-green);
                 width: 20vw;
@@ -334,20 +336,26 @@
 
             #upgrades .upgradeOptions .selectWeapon {
                 height: 100%;
-                display: flex;
-                flex-direction: column;
             }
 
             #upgrades .upgradeOptions .selectWeapon .content {
+                display: flex;
                 height: 100%;
                 flex-grow: 1;
                 flex-shrink: 1;
             }
 
+            #upgrades .upgradeOptions .selectWeapon .content .upgradeTankSection {
+                width: 10vw;
+                height: 10vw;
+                background-color: red;
+                border: 2px solid blue;
+            }
+
             #upgrades .upgradeOptions .selectWeapon .upgradeButtons button {
                 display: block;
-                width: 9vw;
-                height: 9vw;
+                width: calc((14vw + 14vh) / 2);
+                height: calc((14vw + 14vh) / 2);
                 border-radius: 25%;
                 flex-shrink: 0;
             }
@@ -358,35 +366,18 @@
             }
 
             #upgrades .upgradeOptions .selectWeapon .upgradeButtons {
-                position: relative;
-                display: flex;
-                flex-wrap: wrap;
+                position: absolute;
+                bottom: 0;
                 gap: 0.5vw;
-                padding: 0.5vw;
-                box-sizing: border-box;
-                flex-direction: row;
-                justify-content: center;
-                align-items: flex-start;
-                align-content: flex-start;
+                box-shadow: 0 -0.5vw 0.8vw #c7c8ca;
+                padding: 3% 2%;
             }
 
             @media (orientation: landscape) {
                 #upgrades .upgradeOptions .selectWeapon .upgradeButtons {
-                    flex-direction: column;
-                    align-items: flex-start;
-                    justify-content: center;
-                    gap: 0.5vw;
-                    padding: 0.5vw;
+                    position: relative;
                     height: 100%;
-                }
-
-                #upgrades .upgradeOptions .selectWeapon .upgradeButtons button {
-                    width: 9vh;
-                    height: 9vh;
-                }
-
-                #upgrades .upgradeOptions .selectWeapon {
-                    flex-direction: row;
+                    box-shadow: none;
                 }
             }
 
@@ -562,7 +553,7 @@
     </head>
     <body>
         <div class="alerts">
-            <div id="NotCompatable">SORRY, YOUR SCREEN SIZE IS NOT COMPATABLE WITH THIS GAME.</div>
+            <div id="NotCompatable">SORRY, YOUR SCREEN SIZE IS NOT COMPATABLE WITH THIS GAME. <br/> TIP: TRY ROTATING YOUR SCREEN FOR A BETTER VIEW.</div>
             <div id="rotateScreen">
                 <div class="label">FOR A BETTER EXPERIENCE, ROTATE YOUR SCREEN</div>
                 <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100%"
@@ -679,17 +670,25 @@
                     <!--<span id="rockShooterProgressLabel">4/5</span>-->
                     <!--<progress id="rockShooterTankProgressBar" value="0.8"></progress>-->
                     <div class="selectWeapon">
-                        <span class="upgradeButtons">
-                            <button class="label">1</button> <!-- ROCK CANNON -->
-                            <button class="label">2</button> <!-- TASER -->
-                            <button class="label">3</button> <!-- FLAMETHROWER OR RICOCHET -->
-                            <button class="label">4</button> <!-- ROCKET -->
-                            <button class="label">5</button> <!-- BOMB -->
-                            <button class="label">6</button> <!-- SHOCK -->
-                            <button class="label">7</button> <!-- MACHINE GUN -->
-                            <button class="label">8</button> <!-- MINES -->
-                        </span>
+                            <span class="upgradeButtons">
+                                <button class="label">1</button> <!-- ROCK CANNON -->
+                                <button class="label">2</button> <!-- TASER -->
+                                <button class="label">3</button> <!-- FLAMETHROWER OR RICOCHET -->
+                                <button class="label">4</button> <!-- ROCKET -->
+                                <button class="label">5</button> <!-- BOMB -->
+                                <button class="label">6</button> <!-- SHOCK -->
+                                <button class="label">7</button> <!-- MACHINE GUN -->
+                                <button class="label">8</button> <!-- MINES -->
+                            </span>
                         <div class="content">
+                            <div class="upgradeTankSection" id="upgradeArmor">ARMOR</div>
+                            <div class="upgradeTankSection" id="upgradeSpeed">SPEED</div>
+                            <div class="upgradeTankSection" id="upgradeTurretSpeed">TURRET SPEED</div>
+                            <div class="upgradeTankSection" id="upgradeVisibility">VISIBILITY</div>
+                            <div class="upgradeTankSection" id="upgradeProjectileSpeed">PROJECTILE SPEED</div> <!-- More Projectile Upgrade = More Projectile Distance -->
+                            <div class="upgradeTankSection" id="upgradeFortune">Fortune</div>
+                            <div class="upgradeTankSection" id="upgradeReloadSpeed">ReloadSpeed</div>
+                            <div class="upgradeTankSection" id="upgradeMaxAmmo">Max Ammo</div>
                             ARMOR, SPEED, TURRET SPEED, VISIBILITY, PROJECTILE SPEED (AND MORE PROJECTILE DISTANCE), FORTUNE, RELOAD SPEED, MAX AMMO, WEAPON UPGRADES
                         </div>
                     </div>
