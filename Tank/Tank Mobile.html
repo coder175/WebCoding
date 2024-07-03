@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" oncontextmenu="return false" ondragstart="return false">
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -10,7 +10,8 @@
             /*------------------------------------------------------------------
             [Table of contents]
 
-            1. Root, *, body, tag, @keyframes, formating & imports
+            1. Root, *, body, tag formating & imports
+            2. Alerts / .alerts
             2. @media Styles
             3. Intro / #intro
             4. Lobby / #lobby
@@ -20,11 +21,11 @@
             ------------------------------------------------------------------*/
 
 
-
             /*------------------------------------------------------------------
             Root, *, body, tag formating & imports
               \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
             ------------------------------------------------------------------*/
+
 
             @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
@@ -43,10 +44,11 @@
                 --light-green: #4caf50;
                 --grey: #747579;
                 --yellow: #cddc39;
-                --u: calc((0.35vw + 0.35vh)); /*Add a /2*/
+                --u: calc((0.25vw + 0.25vh));
             }
 
             * {
+                transition: visibility 0s, opacity 0.4s linear;
                 color: black;
                 font-family: "Bebas Neue", sans-serif;
                 font-weight: 1000;
@@ -106,8 +108,24 @@
                 background-color: var(--grey);
             }
 
+            body {
+                position: fixed;
+                top: 0;
+                height: 100vh;
+                width: 100vw;
+                margin: 0;
+                overflow: hidden;
+            }
+
+            /*------------------------------------------------------------------
+            Alerts / .alerts
+             \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
+            ------------------------------------------------------------------*/
+
             #NotCompatable {
-                display: none;
+                visibility: hidden;
+                opacity: 0;
+                font-size: 4.5vw;
                 width: 100vw;
                 height: 100vh;
                 top: 0;
@@ -120,7 +138,8 @@
             }
 
             #rotateScreen {
-                transition: scale 0.5s;
+                visibility: hidden;
+                opacity: 0;
                 position: absolute;
                 width: 100vw;
                 height: 100vh;
@@ -128,9 +147,8 @@
                 left: 0;
                 text-align: center;
                 padding-top: 20vh;
-                z-index: 999;
+                z-index: 999999;
                 background-color: lightsalmon;
-                scale: 0;
             }
 
             #rotateScreen .label {
@@ -146,7 +164,7 @@
                 position: fixed;
                 width: 20vw;
                 height: 10vh;
-                bottom: 30vh;
+                bottom: 10vh;
                 font-size: calc((3vw + 3vh) / 2);
             }
 
@@ -157,17 +175,6 @@
             #rotateScreen .neverShow {
                 right: 20vw;
             }
-
-            body {
-                position: fixed;
-                top: 0;
-                height: 100vh;
-                width: 100vw;
-                margin: 0;
-                overflow: hidden;
-            }
-
-
 
             /*------------------------------------------------------------------
             @media Styles, Keyframes
@@ -228,10 +235,10 @@
 
             @media screen and (min-aspect-ratio: 4.3/1), (max-aspect-ratio: 0.4/1) {
                 #NotCompatable {
-                    display: block;
+                    visibility: visible;
+                    opacity: 1;
                 }
             }
-
 
 
             /*------------------------------------------------------------------
@@ -239,10 +246,9 @@
             \/ \/ \/ \/ \/
             ------------------------------------------------------------------*/
 
-
             #intro {
                 position: relative;
-                transition: 0.5s;
+                transition: opacity 0.5s;
                 z-index: 2;
             }
 
@@ -279,14 +285,15 @@
                 animation: shake 0.5s ease-in-out;
             }
 
-
             /*------------------------------------------------------------------
             Lobby / #lobby
             \/ \/ \/ \/ \/
             ------------------------------------------------------------------*/
 
-
-
+            #lobby {
+                visibility: hidden;
+                opacity: 0;
+            }
 
 
             /*------------------------------------------------------------------
@@ -295,9 +302,12 @@
             ------------------------------------------------------------------*/
 
             #upgrades {
+                position: fixed;
+                left: 0;
+                top: 0;
                 height: 100vh;
                 transition: 0.5s;
-                transform: scale(0);
+/*                transform: translateX(100%);*/
             }
 
             #upgrades #startGameAfterUpgrades {
@@ -346,8 +356,8 @@
 
             #upgrades .upgradeOptions .selectWeapon .upgradeButtons button {
                 display: block;
-                width: calc((14vw + 14vh) / 2);
-                height: calc((14vw + 14vh) / 2);
+                width: calc((11vw + 11vh) / 2);
+                height: calc((11vw + 11vh) / 2);
                 border-radius: 25%;
                 flex-shrink: 0;
             }
@@ -360,16 +370,20 @@
             #upgrades .upgradeOptions .selectWeapon .upgradeButtons {
                 position: absolute;
                 bottom: 0;
-                gap: 0.5vw;
+                height: calc((10vw + 10vh) / 2);
+                width: 100vw;
+                display: flex;
+                overflow-x: auto;
+                gap: 2%;
                 box-shadow: 0 -0.5vw 0.8vw #c7c8ca;
-                padding: 3% 2%;
+                padding: 3%;
             }
 
             @media (orientation: landscape) {
                 #upgrades .upgradeOptions .selectWeapon .upgradeButtons {
-                    position: relative;
-                    height: 100%;
-                    box-shadow: none;
+/*                    position: relative;*/
+/*                    height: 100%;*/
+/*                    box-shadow: none;*/
                 }
             }
 
@@ -384,8 +398,9 @@
                 height: 100vw;
                 top: 0;
                 left: 0;
-                transition: scale 0.5s;
                 transform-origin: center center;
+                visibility: hidden;
+                opacity: 0;
             }
 
             /*------------------------------------------------------------------
@@ -400,10 +415,6 @@
 
             #tankBody *:not(#treadBumps), #tankTurret *:not(#treadBumps) {
                 box-shadow: inset 0 0 0.5vw 0.5vw rgba(0, 0, 0, 0.2);
-            }
-
-            #tank {
-                transform: scale(0);
             }
 
             #tank #tankBody {
@@ -564,89 +575,89 @@
             <div id="rotateScreen">
                 <div class="label">FOR A BETTER EXPERIENCE, ROTATE YOUR SCREEN</div>
                 <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100%"
-                     viewBox="0 0 576 1024" xml:space="preserve">
-                        <path fill="#000000" opacity="1.000000" stroke="none" d="
-                        M313.099243,562.114075
-                        	C293.189148,578.848328 273.622589,595.442688 253.909943,611.861694
-                        	C240.583755,622.961304 226.017166,621.670898 214.817917,608.380188
-                        	C186.901474,575.250427 159.130508,541.998108 131.239624,508.846741
-                        	C123.499313,499.646515 121.717308,489.719421 126.755760,478.678131
-                        	C128.548599,474.749237 131.666107,471.994049 134.856216,469.315186
-                        	C177.474121,433.527008 220.109222,397.759308 262.735779,361.981384
-                        	C283.027130,344.950165 303.246887,327.832825 323.617340,310.896820
-                        	C337.525208,299.333832 352.148438,300.845184 363.798035,314.738373
-                        	C391.527283,347.807983 419.283295,380.855164 446.979645,413.952271
-                        	C457.875488,426.972778 456.228638,442.176056 443.217438,453.056366
-                        	C399.894165,489.284424 356.653107,525.610840 313.099243,562.114075
-                        M179.400116,486.117859
-                        	C205.193390,516.889709 230.991119,547.657898 256.775452,578.437256
-                        	C260.918427,583.382812 260.909943,583.428894 266.032166,579.141357
-                        	C288.260620,560.535217 310.488556,541.928406 332.694458,523.295349
-                        	C358.600769,501.557251 384.450409,479.751343 410.423035,458.092926
-                        	C413.379700,455.627380 413.722870,453.969574 411.136414,450.905426
-                        	C385.237335,420.223419 359.487122,389.415802 333.668793,358.665527
-                        	C328.240051,352.199738 322.704590,345.823486 316.878510,339.008484
-                        	C265.665100,382.005157 214.955368,424.578979 163.784409,467.540009
-                        	C169.137970,473.905609 174.043198,479.738068 179.400116,486.117859
-                        M374.310242,354.170959
-                        	C369.277313,348.177063 364.249115,342.179199 359.209808,336.190643
-                        	C355.671844,331.986206 352.256744,327.667206 348.534790,323.631775
-                        	C344.617371,319.384491 339.427856,320.113770 333.965668,324.632080
-                        	C328.761871,328.936676 333.400879,331.259308 335.544250,333.833069
-                        	C355.577728,357.889343 375.708252,381.864838 395.825714,405.851105
-                        	C405.349579,417.206482 414.963013,428.487396 424.406982,439.908600
-                        	C426.732544,442.721039 428.591766,442.874420 431.414856,440.551086
-                        	C437.823730,435.276855 438.405945,430.660675 432.851044,424.017548
-                        	C413.516357,400.895020 394.133087,377.813080 374.310242,354.170959
-                        M159.311615,515.204712
-                        	C182.120544,542.383423 204.929474,569.562134 227.738464,596.740784
-                        	C229.353867,598.665771 231.014175,600.473938 233.592514,601.197876
-                        	C237.486862,602.291260 243.198044,599.966064 245.671204,595.950134
-                        	C247.865753,592.386597 244.263931,590.845215 242.684494,588.950623
-                        	C213.137817,553.509338 183.481125,518.159851 153.828796,482.806732
-                        	C152.785507,481.562805 151.916672,480.043335 150.150833,479.645264
-                        	C139.626358,486.050995 138.768265,490.626923 146.362656,499.706879
-                        	C150.530319,504.689697 154.703995,509.667511 159.311615,515.204712
-                        z"/>
-                        <path fill="#000000" opacity="1.000000" stroke="none"
-                        	d="
-                        M165.420227,621.539062
-                        	C166.258041,614.723633 166.273102,614.633362 172.417877,615.658508
-                        	C182.263199,617.301086 192.081253,619.106506 201.921982,620.777466
-                        	C204.738525,621.255798 205.870163,622.513245 205.430344,625.551331
-                        	C204.951797,628.856934 203.292633,629.066406 200.537796,628.545166
-                        	C193.887436,627.286682 187.191818,626.267395 179.453217,624.974365
-                        	C181.755356,632.075256 185.791016,636.858032 190.301224,641.096191
-                        	C212.949158,662.377747 247.672104,660.375549 267.551025,636.509583
-                        	C270.801575,632.607178 273.673309,633.103210 278.224548,634.987427
-                        	C268.479706,651.001892 254.465714,660.290833 236.767227,662.700012
-                        	C208.379639,666.564087 186.864441,655.097046 171.867950,629.576538
-                        	C170.563263,637.065979 169.436325,643.700195 168.238831,650.321594
-                        	C167.805786,652.716187 167.877090,655.528015 163.931122,654.889099
-                        	C160.127121,654.273193 159.702240,652.458435 160.443390,648.945862
-                        	C162.330063,640.003906 163.727417,630.958679 165.420227,621.539062
-                        z"/>
-                        <path fill="#000000" opacity="1.000000" stroke="none"
-                        	d="
-                        M408.333374,289.681122
-                        	C410.789124,289.730164 410.316071,287.725891 410.570984,286.444275
-                        	C411.705414,280.740967 412.713837,275.010315 413.639404,269.268860
-                        	C413.997894,267.044952 414.856720,266.004395 417.277405,266.434326
-                        	C419.570282,266.841553 421.774384,267.233948 421.244202,270.284363
-                        	C419.308563,281.420868 417.279480,292.541107 415.303223,303.670593
-                        	C414.858643,306.174225 413.190125,306.300751 411.179565,305.941101
-                        	C400.540466,304.037964 389.907654,302.096680 379.251373,300.294647
-                        	C376.562256,299.839905 375.420898,298.616455 375.907501,295.909760
-                        	C376.359497,293.395599 377.532074,292.065796 380.352234,292.607452
-                        	C385.412567,293.579315 390.505127,294.382629 395.580139,295.279358
-                        	C397.373413,295.596222 399.157318,296.101593 400.967346,295.191345
-                        	C401.685760,293.111176 400.276642,291.684143 399.361298,290.198059
-                        	C380.666443,259.846741 336.460571,256.860016 313.878052,284.399048
-                        	C310.360809,288.688293 310.141907,288.731079 303.725494,286.074036
-                        	C305.609894,281.148254 309.114471,277.439819 312.817078,273.977295
-                        	C341.172119,247.460724 387.882568,253.404602 408.333374,289.681122
-                        z"/>
-                </svg>
+             viewBox="0 0 576 1024" xml:space="preserve">
+                <path fill="#000000" opacity="1.000000" stroke="none" d="
+                M313.099243,562.114075
+                	C293.189148,578.848328 273.622589,595.442688 253.909943,611.861694
+                	C240.583755,622.961304 226.017166,621.670898 214.817917,608.380188
+                	C186.901474,575.250427 159.130508,541.998108 131.239624,508.846741
+                	C123.499313,499.646515 121.717308,489.719421 126.755760,478.678131
+                	C128.548599,474.749237 131.666107,471.994049 134.856216,469.315186
+                	C177.474121,433.527008 220.109222,397.759308 262.735779,361.981384
+                	C283.027130,344.950165 303.246887,327.832825 323.617340,310.896820
+                	C337.525208,299.333832 352.148438,300.845184 363.798035,314.738373
+                	C391.527283,347.807983 419.283295,380.855164 446.979645,413.952271
+                	C457.875488,426.972778 456.228638,442.176056 443.217438,453.056366
+                	C399.894165,489.284424 356.653107,525.610840 313.099243,562.114075
+                M179.400116,486.117859
+                	C205.193390,516.889709 230.991119,547.657898 256.775452,578.437256
+                	C260.918427,583.382812 260.909943,583.428894 266.032166,579.141357
+                	C288.260620,560.535217 310.488556,541.928406 332.694458,523.295349
+                	C358.600769,501.557251 384.450409,479.751343 410.423035,458.092926
+                	C413.379700,455.627380 413.722870,453.969574 411.136414,450.905426
+                	C385.237335,420.223419 359.487122,389.415802 333.668793,358.665527
+                	C328.240051,352.199738 322.704590,345.823486 316.878510,339.008484
+                	C265.665100,382.005157 214.955368,424.578979 163.784409,467.540009
+                	C169.137970,473.905609 174.043198,479.738068 179.400116,486.117859
+                M374.310242,354.170959
+                	C369.277313,348.177063 364.249115,342.179199 359.209808,336.190643
+                	C355.671844,331.986206 352.256744,327.667206 348.534790,323.631775
+                	C344.617371,319.384491 339.427856,320.113770 333.965668,324.632080
+                	C328.761871,328.936676 333.400879,331.259308 335.544250,333.833069
+                	C355.577728,357.889343 375.708252,381.864838 395.825714,405.851105
+                	C405.349579,417.206482 414.963013,428.487396 424.406982,439.908600
+                	C426.732544,442.721039 428.591766,442.874420 431.414856,440.551086
+                	C437.823730,435.276855 438.405945,430.660675 432.851044,424.017548
+                	C413.516357,400.895020 394.133087,377.813080 374.310242,354.170959
+                M159.311615,515.204712
+                	C182.120544,542.383423 204.929474,569.562134 227.738464,596.740784
+                	C229.353867,598.665771 231.014175,600.473938 233.592514,601.197876
+                	C237.486862,602.291260 243.198044,599.966064 245.671204,595.950134
+                	C247.865753,592.386597 244.263931,590.845215 242.684494,588.950623
+                	C213.137817,553.509338 183.481125,518.159851 153.828796,482.806732
+                	C152.785507,481.562805 151.916672,480.043335 150.150833,479.645264
+                	C139.626358,486.050995 138.768265,490.626923 146.362656,499.706879
+                	C150.530319,504.689697 154.703995,509.667511 159.311615,515.204712
+                z"/>
+                <path fill="#000000" opacity="1.000000" stroke="none"
+                	d="
+                M165.420227,621.539062
+                	C166.258041,614.723633 166.273102,614.633362 172.417877,615.658508
+                	C182.263199,617.301086 192.081253,619.106506 201.921982,620.777466
+                	C204.738525,621.255798 205.870163,622.513245 205.430344,625.551331
+                	C204.951797,628.856934 203.292633,629.066406 200.537796,628.545166
+                	C193.887436,627.286682 187.191818,626.267395 179.453217,624.974365
+                	C181.755356,632.075256 185.791016,636.858032 190.301224,641.096191
+                	C212.949158,662.377747 247.672104,660.375549 267.551025,636.509583
+                	C270.801575,632.607178 273.673309,633.103210 278.224548,634.987427
+                	C268.479706,651.001892 254.465714,660.290833 236.767227,662.700012
+                	C208.379639,666.564087 186.864441,655.097046 171.867950,629.576538
+                	C170.563263,637.065979 169.436325,643.700195 168.238831,650.321594
+                	C167.805786,652.716187 167.877090,655.528015 163.931122,654.889099
+                	C160.127121,654.273193 159.702240,652.458435 160.443390,648.945862
+                	C162.330063,640.003906 163.727417,630.958679 165.420227,621.539062
+                z"/>
+                <path fill="#000000" opacity="1.000000" stroke="none"
+                	d="
+                M408.333374,289.681122
+                	C410.789124,289.730164 410.316071,287.725891 410.570984,286.444275
+                	C411.705414,280.740967 412.713837,275.010315 413.639404,269.268860
+                	C413.997894,267.044952 414.856720,266.004395 417.277405,266.434326
+                	C419.570282,266.841553 421.774384,267.233948 421.244202,270.284363
+                	C419.308563,281.420868 417.279480,292.541107 415.303223,303.670593
+                	C414.858643,306.174225 413.190125,306.300751 411.179565,305.941101
+                	C400.540466,304.037964 389.907654,302.096680 379.251373,300.294647
+                	C376.562256,299.839905 375.420898,298.616455 375.907501,295.909760
+                	C376.359497,293.395599 377.532074,292.065796 380.352234,292.607452
+                	C385.412567,293.579315 390.505127,294.382629 395.580139,295.279358
+                	C397.373413,295.596222 399.157318,296.101593 400.967346,295.191345
+                	C401.685760,293.111176 400.276642,291.684143 399.361298,290.198059
+                	C380.666443,259.846741 336.460571,256.860016 313.878052,284.399048
+                	C310.360809,288.688293 310.141907,288.731079 303.725494,286.074036
+                	C305.609894,281.148254 309.114471,277.439819 312.817078,273.977295
+                	C341.172119,247.460724 387.882568,253.404602 408.333374,289.681122
+                z"/>
+        </svg>
                 <button onclick="this.parentElement.style.scale = '0'" class="noThanks">NO THANKS</button>
                 <button onclick="this.parentElement.style.scale = '0'" id="noShowRotate" class="neverShow">NEVER SHOW</button>
             </div>
@@ -666,7 +677,7 @@
         </div>
 
         <div id="lobby">
-            <div id="mainScreen"></div>
+            <div id="mainScreen">MAINSCREEN</div>
             <div id="upgrades">
                 <div class="upgradeTitle">UPGRADES</div>
                 <button id="startGameAfterUpgrades">
@@ -741,17 +752,13 @@
             </div>
         </div>
 
+
         <script src="https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js"></script>
-
         <script>
-            /* Variable Initialization */
 
+            /* Variables */
             let noShow = false;
-
-            /* Intro */
             let introLoaded = false;
-
-            /* Tank */
             let angle = 0;
             let turretSpeed = 2.5;
             let driveSpeed = 0.5;
@@ -759,6 +766,7 @@
             let currentRotation = 0;
             let targetRotation = 0;
             let isRotating = false;
+
 
             /* Elements */
 
@@ -774,14 +782,19 @@
 
             /*GAME*/
 
-            /*UPGRADES*/
-            const upgrades = document.getElementById('upgrades');
-            const beginGame = document.getElementById('startGameAfterUpgrades');
-            const upgradeTitle = document.querySelector('.upgradeTitle');
-            const upgradeOptions = document.getElementById('upgradeOptions');
+            const game = document.getElementById('game');
+
+            /*LOBBY*/
+
+            const lobby = document.getElementById('lobby');
+
+                /*UPGRADES*/
+                const upgrades = document.getElementById('upgrades');
+                const beginGame = document.getElementById('startGameAfterUpgrades');
+                const upgradeTitle = document.querySelector('.upgradeTitle');
+                const upgradeOptions = document.getElementById('upgradeOptions');
 
             /*TANK*/
-            const tank = document.getElementById('tank');
             const onlineJoystick = document.getElementById('onlineJoystick');
             const shootingOnlineJoystick = document.getElementById('shootingOnlineJoystick');
             const tankBody = document.getElementById('tankBody');
@@ -791,13 +804,12 @@
             /* INTRO */
             /* Start Game from Intro Screen */
             document.addEventListener('DOMContentLoaded', () => {
-                let delay = 0;
+                let delay = 550;
                 elements.forEach((element) => {
                     setTimeout(() => {
                         element.classList.add('expanded');
-                        // element.classList.add('shake');
                         introElement.classList.add('shake');
-                        if (delay === 4000) introLoaded = true;
+                        if (delay === 4550) introLoaded = true;
                         setTimeout(() => {
                             introElement.classList.remove('shake');
                         }, 500);
@@ -812,42 +824,63 @@
 
             startButton.addEventListener('click', () => {
                 if (introLoaded) {
-                    introElement.style.setProperty("transform", "scale(0)");
-                    upgrades.style.setProperty("transform", "scale(1)");
+                    introElement.style.setProperty("visibility", "hidden");
+                    introElement.style.setProperty("opacity", "0");
+                    introElement.style.setProperty("display", "none");
+                    lobby.style.setProperty("visibility", "visible");
+                    lobby.style.setProperty("opacity", "1");
                 }
 
                 let elementHeight = `${(document.body.offsetHeight - beginGame.offsetHeight - upgradeTitle.offsetHeight)}px`
                 upgradeOptions.style.setProperty('height', elementHeight);
             });
 
+            noShowRotate.addEventListener('click', () => {
+                noShow = true;
+            });
 
             /* UPGRADES */
             /* Addeventlistener for click in upgrade section */
             beginGame.addEventListener('click', () => {
-                upgrades.style.setProperty("transform", "scale(0)");
-                upgrades.style.setProperty("display", "none");
-                tank.style.setProperty("transform", "scale(1)");
+                lobby.style.setProperty("visibility", "hidden");
+                lobby.style.setProperty("opacity", "0");
+                lobby.style.setProperty("display", "none");
+                game.style.setProperty("visibility", "visible");
+                game.style.setProperty("opacity", "1");
                 startTouchScreenMovement()
             });
 
-            /* TANK */
             /* Setting tankBody Dimentions when Screen Resizes */
+            /* OnResize Function */
             window.onresize = () => {
                 let elementHeight = `${(document.body.offsetHeight - beginGame.offsetHeight - upgradeTitle.offsetHeight)}px`
                 upgradeOptions.style.setProperty('height', elementHeight);
-
                 if(!noShow) {
                     if (window.matchMedia("(orientation: portrait)").matches) {
-                        rotateScreen.style.scale = "1";
+                        rotateScreen.style.visibility = "visible";
+                        rotateScreen.style.opacity = "1";
                     }
 
                     // Check if the screen is landscape
                     if (window.matchMedia("(orientation: landscape)").matches) {
-                        rotateScreen.style.scale = "0";
+                        rotateScreen.style.visibility = "hidden";
+                        rotateScreen.style.opacity = "0";
                     }
                 }
             };
 
+            /* Put Message: "Rotate Screen For Better Experience" */
+            if (window.matchMedia("(orientation: portrait)").matches) {
+                        rotateScreen.style.visibility = "visible";
+                        rotateScreen.style.opacity = "1";
+                    }
+
+            if (window.matchMedia("(orientation: landscape)").matches) {
+                rotateScreen.style.visibility = "hidden";
+                rotateScreen.style.opacity = "0";
+            }
+
+            /* TANK */
             /* Set animation based on tank movement speed */
             const MovingTreads = document.querySelectorAll(".movingTread");
             MovingTreads.forEach(div => {
@@ -873,15 +906,6 @@
                 if (angle !== null) {
                     tankBody.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
                 }
-            }
-
-            if (window.matchMedia("(orientation: portrait)").matches) {
-                rotateScreen.style.scale = "1";
-            }
-
-                // Check if the screen is landscape
-            if (window.matchMedia("(orientation: landscape)").matches) {
-                rotateScreen.style.scale = "0";
             }
 
             function startTouchScreenMovement() {
