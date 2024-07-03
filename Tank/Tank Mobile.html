@@ -13,9 +13,10 @@
             1. Root, *, body, tag, @keyframes, formating & imports
             2. @media Styles
             3. Intro / #intro
-            4. Game / #game
+            4. Lobby / #lobby
             5. Upgrades / #upgrades
-            6. Tank / .tank
+            6. Game / #game
+            7. Tank / .tank
             ------------------------------------------------------------------*/
 
 
@@ -279,21 +280,12 @@
             }
 
 
-
             /*------------------------------------------------------------------
-            Game / #game
+            Lobby / #lobby
             \/ \/ \/ \/ \/
             ------------------------------------------------------------------*/
 
-            #game {
-                position: absolute;
-                width: 100vw;
-                height: 100vw;
-                top: 0;
-                left: 0;
-                transition: scale 0.5s;
-                transform-origin: center center;
-            }
+
 
 
 
@@ -379,6 +371,21 @@
                     height: 100%;
                     box-shadow: none;
                 }
+            }
+
+            /*------------------------------------------------------------------
+            Game / #game
+            \/ \/ \/ \/ \/
+            ------------------------------------------------------------------*/
+
+            #game {
+                position: absolute;
+                width: 100vw;
+                height: 100vw;
+                top: 0;
+                left: 0;
+                transition: scale 0.5s;
+                transform-origin: center center;
             }
 
             /*------------------------------------------------------------------
@@ -658,7 +665,8 @@
             </button>
         </div>
 
-        <div id="game">
+        <div id="lobby">
+            <div id="mainScreen"></div>
             <div id="upgrades">
                 <div class="upgradeTitle">UPGRADES</div>
                 <button id="startGameAfterUpgrades">
@@ -694,6 +702,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div id="game">
             <div id="tank">
                 <div id="joystickContainer">
                     <div id="onlineJoystick"></div>
