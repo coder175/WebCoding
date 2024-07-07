@@ -22,9 +22,9 @@
             ------------------------------------------------------------------*/
 
             /*------------------------------------------------------------------
-																					            Root, *, body, tag formating & imports
-																					              \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
-																					            ------------------------------------------------------------------*/
+			Root, *, body, tag formating & imports
+			\/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
+			------------------------------------------------------------------*/
 
             @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
@@ -38,10 +38,11 @@
             }
 
             :root {
+	            --darkest-green: #044100;
+	            --darker-green: #055600;
                 --dark-green: #066c00;
-                --darker-green: #055600;
-                --darkest-green: #044100;
                 --light-green: #4caf50;
+	            --lighter-green: #93c572;
                 --grey: #747579;
                 --yellow: #cddc39;
                 --u: calc((0.25vw + 0.25vh));
@@ -60,11 +61,11 @@
 	            No Select
 	            \/ \/ \/‎‎
 	            -------*/
-                -webkit-touch-callout: none; /* iOS Safari */
-                -webkit-user-select: none; /* Safari */
-                -moz-user-select: none; /* Old versions of Firefox */
-                -ms-user-select: none; /* Internet Explorer/Edge */
-                user-select: none; /* Non-prefixed version, currently
+                -webkit-touch-callout: none !important; /* iOS Safari */
+                -webkit-user-select: none !important; /* Safari */
+                -moz-user-select: none !important; /* Old versions of Firefox */
+                -ms-user-select: none !important; /* Internet Explorer/Edge */
+                user-select: none !important; /* Non-prefixed version, currently
 						              supported by Chrome, Edge, Opera and Firefox */
             }
 
@@ -120,9 +121,9 @@
             }
 
             /*------------------------------------------------------------------
-																		            Alerts / .alerts
-																		             \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
-																		            ------------------------------------------------------------------*/
+            Alerts / .alerts
+             \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
+            ------------------------------------------------------------------*/
 
             #NotCompatable {
                 visibility: hidden;
@@ -136,7 +137,7 @@
                 padding-top: 20vh;
                 position: absolute;
                 z-index: calc(infinity);
-                background-color: lightsalmon;
+                background-color: var(--lighter-green);
             }
 
             #rotateScreen {
@@ -149,8 +150,8 @@
                 left: 0;
                 text-align: center;
                 padding-top: 20vh;
-                z-index: 999999;
-                background-color: lightsalmon;
+	            z-index: 999;
+                background-color: var(--lighter-green); /* Could also try #87ceeb */
             }
 
             #rotateScreen .label {
@@ -158,30 +159,32 @@
             }
 
             #rotateScreen svg {
-                height: 70vh;
+	            rotate: 45deg;
+	            margin-top: 8vh;
+	            height: calc((35vw + 35vh) / 2);
                 text-align: center;
             }
 
             #rotateScreen button {
                 position: fixed;
-                width: 20vw;
+                width: 25vw;
                 height: 10vh;
                 bottom: 10vh;
                 font-size: calc((3vw + 3vh) / 2);
             }
 
             #rotateScreen .noThanks {
-                left: 20vw;
+                left: 18vw;
             }
 
             #rotateScreen .neverShow {
-                right: 20vw;
+                right: 18vw;
             }
 
             /*------------------------------------------------------------------
-																		            @media Styles, Keyframes
-																		            \/ \/ \/ \/ \/ \/ \/
-																		            ------------------------------------------------------------------*/
+            @media Styles, Keyframes
+			\/ \/ \/ \/ \/ \/ \/
+			------------------------------------------------------------------*/
 
             @keyframes shake {
                 0% {
@@ -237,9 +240,9 @@
             }
 
             /*------------------------------------------------------------------
-																					            Intro / #intro
-																					            \/ \/ \/ \/ \/
-																					            ------------------------------------------------------------------*/
+            Intro / #intro
+            \/ \/ \/ \/ \/
+            ------------------------------------------------------------------*/
 
             #intro {
                 position: relative;
@@ -281,9 +284,9 @@
             }
 
             /*------------------------------------------------------------------
-																		            Lobby / #lobby
-																		            \/ \/ \/ \/ \/
-																		            ------------------------------------------------------------------*/
+			Lobby / #lobby
+			\/ \/ \/ \/ \/
+			------------------------------------------------------------------*/
 
             #lobby {
                 visibility: hidden;
@@ -291,9 +294,9 @@
             }
 
             /*------------------------------------------------------------------
-																					            Upgrades / #upgrades
-																					            \/ \/ \/ \/ \/
-																					            ------------------------------------------------------------------*/
+            Upgrades / #upgrades
+            \/ \/ \/ \/ \/
+            ------------------------------------------------------------------*/
 
             #upgrades {
                 position: fixed;
@@ -317,10 +320,10 @@
             }
 
             #upgrades button {
-                border: 0.1vw dashed var(--dark-green);
+                border: 0.15vw dashed var(--darkest-green);
                 width: 20vw;
                 height: 10vh;
-                background-color: transparent;
+                background-color: rgba(0, 0, 0, 0.3);
                 cursor: pointer;
                 color: black;
                 position: relative;
@@ -361,31 +364,36 @@
             }
 
             #upgrades .upgradeOptions .selectWeapon .upgradeButtons button.selected {
-                background-color: darkorange;
+	            border: 0.5vw solid var(--dark-green);
             }
 
             #upgrades .upgradeOptions .selectWeapon .upgradeButtons {
-                bottom: 0;
-                height: calc((10vw + 10vh) / 2);
-                width: 100vw;
+                width: 80vw;
                 position: fixed;
+	            left: calc(10vw - 2%);
+	            bottom: 4vh;
+	            border-radius: 5vw;
                 cursor: grab;
                 gap: 2%;
-                box-shadow: 0 -0.5vw 0.8vw #c7c8ca;
-                padding: 3%;
+                box-shadow: 0 0 0.8vw #c7c8ca;
+                padding: 2%;
+	            overflow: hidden;
+	            background-color: var(--lighter-green);
             }
 
             @media (orientation: landscape) {
                 #upgrades .upgradeOptions .selectWeapon .upgradeButtons {
                     width: calc((10vw + 10vh) / 2);
-                    height: 100vw;
+                    height: 100%;
+		            left: 0;
+                    bottom: 0;
                 }
             }
 
             /*------------------------------------------------------------------
-																		            Game / #game
-																		            \/ \/ \/ \/ \/
-																		            ------------------------------------------------------------------*/
+            Game / #game
+            \/ \/ \/ \/ \/
+            ------------------------------------------------------------------*/
 
             #game {
                 position: absolute;
@@ -399,9 +407,9 @@
             }
 
             /*------------------------------------------------------------------
-																		            Tank / .Tank
-																		            \/ \/ \/ \/ \/
-																		            ------------------------------------------------------------------*/
+            Tank / .Tank
+            \/ \/ \/ \/ \/
+            ------------------------------------------------------------------*/
 
             #tank,
             #tank * {
@@ -579,101 +587,12 @@
             </div>
             <div id="rotateScreen">
                 <div class="label">FOR A BETTER EXPERIENCE, ROTATE YOUR SCREEN</div>
-                <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100%" viewBox="0 0 576 1024" xml:space="preserve">
-                    <path
-                        fill="#000000"
-                        opacity="1.000000"
-                        stroke="none"
-                        d="
-                M313.099243,562.114075
-                	C293.189148,578.848328 273.622589,595.442688 253.909943,611.861694
-                	C240.583755,622.961304 226.017166,621.670898 214.817917,608.380188
-                	C186.901474,575.250427 159.130508,541.998108 131.239624,508.846741
-                	C123.499313,499.646515 121.717308,489.719421 126.755760,478.678131
-                	C128.548599,474.749237 131.666107,471.994049 134.856216,469.315186
-                	C177.474121,433.527008 220.109222,397.759308 262.735779,361.981384
-                	C283.027130,344.950165 303.246887,327.832825 323.617340,310.896820
-                	C337.525208,299.333832 352.148438,300.845184 363.798035,314.738373
-                	C391.527283,347.807983 419.283295,380.855164 446.979645,413.952271
-                	C457.875488,426.972778 456.228638,442.176056 443.217438,453.056366
-                	C399.894165,489.284424 356.653107,525.610840 313.099243,562.114075
-                M179.400116,486.117859
-                	C205.193390,516.889709 230.991119,547.657898 256.775452,578.437256
-                	C260.918427,583.382812 260.909943,583.428894 266.032166,579.141357
-                	C288.260620,560.535217 310.488556,541.928406 332.694458,523.295349
-                	C358.600769,501.557251 384.450409,479.751343 410.423035,458.092926
-                	C413.379700,455.627380 413.722870,453.969574 411.136414,450.905426
-                	C385.237335,420.223419 359.487122,389.415802 333.668793,358.665527
-                	C328.240051,352.199738 322.704590,345.823486 316.878510,339.008484
-                	C265.665100,382.005157 214.955368,424.578979 163.784409,467.540009
-                	C169.137970,473.905609 174.043198,479.738068 179.400116,486.117859
-                M374.310242,354.170959
-                	C369.277313,348.177063 364.249115,342.179199 359.209808,336.190643
-                	C355.671844,331.986206 352.256744,327.667206 348.534790,323.631775
-                	C344.617371,319.384491 339.427856,320.113770 333.965668,324.632080
-                	C328.761871,328.936676 333.400879,331.259308 335.544250,333.833069
-                	C355.577728,357.889343 375.708252,381.864838 395.825714,405.851105
-                	C405.349579,417.206482 414.963013,428.487396 424.406982,439.908600
-                	C426.732544,442.721039 428.591766,442.874420 431.414856,440.551086
-                	C437.823730,435.276855 438.405945,430.660675 432.851044,424.017548
-                	C413.516357,400.895020 394.133087,377.813080 374.310242,354.170959
-                M159.311615,515.204712
-                	C182.120544,542.383423 204.929474,569.562134 227.738464,596.740784
-                	C229.353867,598.665771 231.014175,600.473938 233.592514,601.197876
-                	C237.486862,602.291260 243.198044,599.966064 245.671204,595.950134
-                	C247.865753,592.386597 244.263931,590.845215 242.684494,588.950623
-                	C213.137817,553.509338 183.481125,518.159851 153.828796,482.806732
-                	C152.785507,481.562805 151.916672,480.043335 150.150833,479.645264
-                	C139.626358,486.050995 138.768265,490.626923 146.362656,499.706879
-                	C150.530319,504.689697 154.703995,509.667511 159.311615,515.204712
-                z"
-                    />
-                    <path
-                        fill="#000000"
-                        opacity="1.000000"
-                        stroke="none"
-                        d="
-                M165.420227,621.539062
-                	C166.258041,614.723633 166.273102,614.633362 172.417877,615.658508
-                	C182.263199,617.301086 192.081253,619.106506 201.921982,620.777466
-                	C204.738525,621.255798 205.870163,622.513245 205.430344,625.551331
-                	C204.951797,628.856934 203.292633,629.066406 200.537796,628.545166
-                	C193.887436,627.286682 187.191818,626.267395 179.453217,624.974365
-                	C181.755356,632.075256 185.791016,636.858032 190.301224,641.096191
-                	C212.949158,662.377747 247.672104,660.375549 267.551025,636.509583
-                	C270.801575,632.607178 273.673309,633.103210 278.224548,634.987427
-                	C268.479706,651.001892 254.465714,660.290833 236.767227,662.700012
-                	C208.379639,666.564087 186.864441,655.097046 171.867950,629.576538
-                	C170.563263,637.065979 169.436325,643.700195 168.238831,650.321594
-                	C167.805786,652.716187 167.877090,655.528015 163.931122,654.889099
-                	C160.127121,654.273193 159.702240,652.458435 160.443390,648.945862
-                	C162.330063,640.003906 163.727417,630.958679 165.420227,621.539062
-                z"
-                    />
-                    <path
-                        fill="#000000"
-                        opacity="1.000000"
-                        stroke="none"
-                        d="
-                M408.333374,289.681122
-                	C410.789124,289.730164 410.316071,287.725891 410.570984,286.444275
-                	C411.705414,280.740967 412.713837,275.010315 413.639404,269.268860
-                	C413.997894,267.044952 414.856720,266.004395 417.277405,266.434326
-                	C419.570282,266.841553 421.774384,267.233948 421.244202,270.284363
-                	C419.308563,281.420868 417.279480,292.541107 415.303223,303.670593
-                	C414.858643,306.174225 413.190125,306.300751 411.179565,305.941101
-                	C400.540466,304.037964 389.907654,302.096680 379.251373,300.294647
-                	C376.562256,299.839905 375.420898,298.616455 375.907501,295.909760
-                	C376.359497,293.395599 377.532074,292.065796 380.352234,292.607452
-                	C385.412567,293.579315 390.505127,294.382629 395.580139,295.279358
-                	C397.373413,295.596222 399.157318,296.101593 400.967346,295.191345
-                	C401.685760,293.111176 400.276642,291.684143 399.361298,290.198059
-                	C380.666443,259.846741 336.460571,256.860016 313.878052,284.399048
-                	C310.360809,288.688293 310.141907,288.731079 303.725494,286.074036
-                	C305.609894,281.148254 309.114471,277.439819 312.817078,273.977295
-                	C341.172119,247.460724 387.882568,253.404602 408.333374,289.681122
-                z"
-                    />
+                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" viewBox="302.05 440.29 479.95 837.51">
+                    <g transform="translate(0.000000,1920.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+                        <path d="M4176 14766 c-24 -20 -37 -39 -33 -47 3 -8 78 -99 166 -203 88 -105 159 -191 158 -193 -2 -1 -48 7 -102 18 -140 29 -368 23 -500 -14 -171 -48 -296 -112 -437 -226 -337 -271 -487 -746 -366 -1159 l13 -43 47 43 47 43 -14 70 c-21 102 -19 272 5 381 42 203 129 364 274 510 209 210 469 313 756 299 85 -4 228 -29 242 -43 4 -4 -78 -78 -183 -166 -104 -87 -189 -161 -189 -165 0 -3 15 -24 34 -46 31 -36 35 -38 52 -25 77 62 530 444 531 449 3 6 -445 544 -456 548 -3 1 -24 -13 -45 -31z"></path>
+                        <path d="M4030 13378 c-30 -6 -62 -15 -70 -22 -8 -6 -28 -18 -44 -26 -45 -23 -141 -120 -160 -162 -9 -21 -20 -38 -24 -38 -4 0 -16 -35 -25 -77 -16 -73 -17 -238 -17 -2480 0 -1741 3 -2417 11 -2455 35 -163 178 -309 339 -345 69 -15 2617 -18 2722 -3 87 13 166 59 246 145 34 36 62 71 62 77 0 6 6 19 13 27 8 9 21 48 31 86 15 64 16 273 16 2472 0 1753 -3 2416 -11 2455 -35 162 -179 309 -341 347 -61 14 -2667 13 -2748 -1z m2723 -289 c33 -20 66 -56 78 -87 5 -13 9 -75 9 -138 l0 -114 -1432 2 -1433 3 -3 95 c-3 94 10 170 28 170 6 0 10 7 10 15 0 8 12 22 28 32 15 10 29 20 32 24 3 4 14 9 25 12 11 3 607 4 1325 3 1181 -1 1308 -3 1333 -17z m87 -2514 l0 -1895 -1432 2 -1433 3 -3 1880 c-1 1034 0 1886 3 1893 3 9 300 12 1435 12 l1430 0 0 -1895z m0 -2299 l0 -125 -49 -50 c-39 -40 -57 -51 -92 -56 -24 -3 -620 -5 -1324 -3 -1389 3 -1297 -1 -1353 56 -39 41 -52 87 -52 192 0 53 3 100 7 103 3 4 649 7 1435 7 l1428 0 0 -124z"></path>
+                        <path d="M7713 8272 l-43 -37 15 -74 c22 -101 20 -274 -4 -386 -73 -351 -321 -633 -660 -751 -177 -62 -412 -71 -580 -22 l-44 13 179 150 c98 83 186 157 196 165 16 14 15 18 -21 58 l-38 43 -259 -216 c-142 -119 -267 -225 -277 -234 -17 -17 -8 -29 208 -287 124 -148 230 -270 234 -272 5 -1 27 13 49 31 l41 35 -170 202 c-93 112 -168 204 -167 206 2 1 27 -4 57 -12 318 -82 694 -1 957 207 279 221 434 540 434 897 0 122 -36 323 -58 322 -4 -1 -26 -18 -49 -38z"></path>
+                    </g>
                 </svg>
                 <button onclick="this.parentElement.style.scale = '0'" class="noThanks">NO THANKS</button>
                 <button onclick="this.parentElement.style.scale = '0'" id="noShowRotate" class="neverShow">NEVER SHOW</button>
@@ -784,15 +703,15 @@
         <script src="https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js"></script>
         <script>
             /* Variables */
-            let noShow = false;
-            let introLoaded = false;
-            let angle = 0;
+
+            let noShow, introLoaded, mobile, isRotating;
+            noShow = introLoaded = mobile = isRotating = false;
+
+            let angle, currentRotation, targetRotation;
+            angle = currentRotation = targetRotation = 0;
+
             let turretSpeed = 2.5;
             let driveSpeed = 0.5;
-            let mobile = false;
-            let currentRotation = 0;
-            let targetRotation = 0;
-            let isRotating = false;
 
             /* Elements */
 
@@ -817,6 +736,8 @@
             /*UPGRADES*/
             const beginGame = document.getElementById('startGameAfterUpgrades');
             const upgradeOptions = document.getElementById('upgradeOptions');
+            const upgradeTitle = document.querySelector('.upgradeTitle');
+            const upgradeButtons = document.querySelector('.upgradeButtons');
 
             /*TANK*/
             const onlineJoystick = document.getElementById('onlineJoystick');
@@ -854,7 +775,7 @@
                     lobby.style.setProperty('opacity', '1');
                 }
 
-                let elementHeight = `$ {(document.body.offsetHeight - beginGame.offsetHeight - upgradeTitle.offsetHeight)}px`;
+	            let elementHeight = `${(document.body.offsetHeight - beginGame.offsetHeight - upgradeTitle.offsetHeight)}px`
                 upgradeOptions.style.setProperty('height', elementHeight);
             });
 
@@ -876,44 +797,19 @@
             /* Setting tankBody Dimentions when Screen Resizes */
             /* OnResize Function */
             window.onresize = () => {
-                let elementHeight = `$ {(document.body.offsetHeight - beginGame.offsetHeight - upgradeTitle.offsetHeight)}px`;
+	            let elementHeight = `${(document.body.offsetHeight - beginGame.offsetHeight - upgradeTitle.offsetHeight)}px`
                 upgradeOptions.style.setProperty('height', elementHeight);
+	            upgradeButtons.style.setProperty('height', `calc(${elementHeight} - 4%) !important`);
                 if (!noShow) {
                     if (window.matchMedia('(orientation: portrait)').matches) {
                         rotateScreen.style.visibility = 'visible';
                         rotateScreen.style.opacity = '1';
-                        swiper = new Swiper('.swiper-container', {
-                            direction: 'landscape', // Set direction to vertical
-                            slidesPerView: 'auto',
-                            spaceBetween: 10,
-                            centeredSlides: true,
-                            freeMode: false, // Disable freeMode to enable snapping
-                            snapGrid: true, // Ensure snapping
-                            on: {
-                                slideChange: function () {
-                                    updateSelectedItem(swiper.activeIndex);
-                                },
-                            },
-                        });
                     }
 
                     // Check if the screen is landscape
                     if (window.matchMedia('(orientation: landscape)').matches) {
                         rotateScreen.style.visibility = 'hidden';
                         rotateScreen.style.opacity = '0';
-                        let swiper = new Swiper('.swiper-container', {
-                            direction: 'vertical', // Set direction to vertical
-                            slidesPerView: 'auto',
-                            spaceBetween: 10,
-                            centeredSlides: true,
-                            freeMode: false, // Disable freeMode to enable snapping
-                            snapGrid: true, // Ensure snapping
-                            on: {
-                                slideChange: function () {
-                                    updateSelectedItem(swiper.activeIndex);
-                                },
-                            },
-                        });
                     }
                 }
             };
@@ -922,40 +818,32 @@
             if (window.matchMedia('(orientation: portrait)').matches) {
                 rotateScreen.style.visibility = 'visible';
                 rotateScreen.style.opacity = '1';
-
-                swiper = new Swiper('.swiper-container', {
-                    direction: 'landscape', // Set direction to vertical
-                    slidesPerView: 'auto',
-                    spaceBetween: 10,
-                    centeredSlides: true,
-                    freeMode: false, // Disable freeMode to enable snapping
-                    snapGrid: true, // Ensure snapping
-                    on: {
-                        slideChange: function () {
-                            updateSelectedItem(swiper.activeIndex);
-                        },
-                    },
-                });
             }
 
             if (window.matchMedia('(orientation: landscape)').matches) {
                 rotateScreen.style.visibility = 'hidden';
                 rotateScreen.style.opacity = '0';
-
-                swiper = new Swiper('.swiper-container', {
-                    direction: 'vertical', // Set direction to vertical
-                    slidesPerView: 'auto',
-                    spaceBetween: 10,
-                    centeredSlides: true,
-                    freeMode: false, // Disable freeMode to enable snapping
-                    snapGrid: true, // Ensure snapping
-                    on: {
-                        slideChange: function () {
-                            updateSelectedItem(swiper.activeIndex);
-                        },
-                    },
-                });
             }
+
+            function initSwiper(direction) {
+        		if (window.swiper) {
+        			window.swiper.destroy(true, true);
+        		}
+
+        		window.swiper = new Swiper('.swiper-container', {
+        			direction: direction,
+        			slidesPerView: 'auto',
+        			spaceBetween: 10,
+        			centeredSlides: true,
+        			freeMode: false, // Disable freeMode to enable snapping
+
+        			on: {
+        				slideChange: function () {
+        					updateSelectedItem(window.swiper.activeIndex);
+        				},
+        			},
+        		});
+        	}
 
             function updateSelectedItem(index) {
                 const slides = document.querySelectorAll('.swiper-slide');
@@ -970,16 +858,34 @@
 
             document.querySelectorAll('.swiper-slide').forEach((slide, index) => {
                 slide.addEventListener('click', () => {
-                    swiper.slideTo(index);
+                    window.swiper.slideTo(index);
                     updateSelectedItem(index);
                 });
             });
+
+            function handleOrientationChange() {
+                if (window.matchMedia("(orientation: portrait)").matches) {
+                    initSwiper('horizontal');
+                } else {
+                    initSwiper('vertical');
+                }
+                updateSelectedItem(0)
+            }
+
+            window.addEventListener('resize', handleOrientationChange);
+            window.addEventListener('orientationchange', handleOrientationChange);
+
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+
+            handleOrientationChange();
 
             /* TANK */
             /* Set animation based on tank movement speed */
             const MovingTreads = document.querySelectorAll('.movingTread');
             MovingTreads.forEach((div) => {
-                div.style.animation = `moveTreads $ {0.4 / driveSpeed}s linear infinite`;
+                div.style.animation = `moveTreads ${0.4 / driveSpeed}s linear infinite`;
             });
 
             /* Find shortest path for tank body */
@@ -999,7 +905,7 @@
                 }
 
                 if (angle !== null) {
-                    tankBody.style.transform = `translate(-50%, -50%) rotate($ {angle}deg)`;
+                    tankBody.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
                 }
             }
 
@@ -1072,7 +978,7 @@
                             isRotating = false;
                         }
 
-                        tankTurret.style.transform = `rotate($ {currentRotation}deg)`;
+                        tankTurret.style.transform = `rotate(${currentRotation}deg)`;
                     } else if (isRotating) {
                         isRotating = false;
                     }
