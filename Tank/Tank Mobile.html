@@ -363,6 +363,27 @@
                 flex-shrink: 0;
             }
 
+            #upgrades .upgradeOptions .selectWeapon #arrow * {
+                position: fixed;
+                rotate: 90deg;
+                height: 5vh;
+                font-variation-settings:
+                    'FILL' 0,
+                    'wght' 700,
+                    'GRAD' 200,
+                    'opsz' 40;
+                    font-size: calc((6vh + 6vw) / 2);
+            }
+
+            #upgrades .upgradeOptions .selectWeapon #arrow {
+                width: 100vw;
+                position: fixed;
+                bottom: 0;
+                height: 4vh;
+                display: flex;
+                justify-content: center;
+            }
+
             #upgrades .upgradeOptions .selectWeapon .upgradeButtons button.selected {
 	            border: 0.5vw solid var(--dark-green);
             }
@@ -375,18 +396,33 @@
 	            border-radius: 5vw;
                 cursor: grab;
                 gap: 2%;
-                box-shadow: 0 0 0.8vw #c7c8ca;
+                border: 0.05vw dashed black;
+                box-shadow: inset 2vw 0 2vw -2vw var(--grey), inset -2vw 0 2vw -2vw var(--grey);
                 padding: 2%;
 	            overflow: hidden;
-	            background-color: var(--lighter-green);
+	            background-color: rgb(245, 245, 245);
             }
 
             @media (orientation: landscape) {
                 #upgrades .upgradeOptions .selectWeapon .upgradeButtons {
+                    height: calc(90vh);
+                    border-radius: 5vh;
                     width: calc((10vw + 10vh) / 2);
-                    height: 100%;
-		            left: 0;
+		            left: 4vw;
                     bottom: 0;
+                    box-shadow: inset 0 2vw 2vw -2vw var(--grey), inset 0 -2vw 2vw -2vw var(--grey);
+                }
+
+                #upgrades .upgradeOptions .selectWeapon #arrow * {
+                    rotate: 180deg;
+                    width: 5vw;
+                }
+
+                #upgrades .upgradeOptions .selectWeapon #arrow {
+                    height: 100vh;
+                    top: 0;
+                    width: 4vw;
+                    align-items: center;
                 }
             }
 
@@ -613,7 +649,6 @@
         </div>
 
         <div id="lobby">
-            <div id="mainScreen">MAINSCREEN</div>
             <div id="upgrades">
                 <div class="upgradeTitle">UPGRADES</div>
                 <button id="startGameAfterUpgrades">
@@ -625,6 +660,9 @@
                     <!--<span id="rockShooterProgressLabel">4/5</span>-->
                     <!--<progress id="rockShooterTankProgressBar" value="0.8"></progress>-->
                     <div class="selectWeapon">
+                        <div id="arrow">
+                            <span class="material-symbols-outlined">chevron_left</span>
+                        </div>
                         <span class="upgradeButtons swiper-container">
                             <span class="swiper-wrapper">
                                 <button class="label swiper-slide">1</button>
@@ -799,7 +837,6 @@
             window.onresize = () => {
 	            let elementHeight = `${(document.body.offsetHeight - beginGame.offsetHeight - upgradeTitle.offsetHeight)}px`
                 upgradeOptions.style.setProperty('height', elementHeight);
-	            upgradeButtons.style.setProperty('height', `calc(${elementHeight} - 4%) !important`);
                 if (!noShow) {
                     if (window.matchMedia('(orientation: portrait)').matches) {
                         rotateScreen.style.visibility = 'visible';
