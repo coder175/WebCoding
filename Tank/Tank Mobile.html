@@ -707,8 +707,8 @@
             #tank #joystickContainer #onlineJoystick {
                 position: absolute;
                 bottom: 0;
-                width: calc((25vw + 25vh) / 2);
-                height: calc((25vw + 25vh) / 2);
+                width: calc((30vw + 30vh) / 2);
+                height: calc((30vw + 30vh) / 2);
                 display: none;
                 z-index: 10;
             }
@@ -724,502 +724,617 @@
                 width: 100vw;
                 height: 100vh;
             }
+
+            /* LOADING ANIMATION */
+
+
+            #loadingAnimation {
+                position: fixed;
+                width: 100vw;
+                height: 100vh;
+                background: #ffffff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                z-index: calc(infinity);
+            }
+            #loadingAnimation #container {
+                width: 80%;
+                background-color: #f3f3f3;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+            #loadingAnimation #container #loadingProgressBarStartup {
+                transition: 0.5s;
+                width: 0;
+                height: 20px;
+                background-color: #4caf50;
+            }
         </style>
     </head>
     <body>
-        <div class="alerts">
-            <div id="NotCompatable">
-                SORRY, YOUR SCREEN SIZE IS NOT COMPATABLE WITH THIS GAME. <br />
-                TIP: TRY ROTATING YOUR SCREEN FOR A BETTER VIEW.
-            </div>
-            <div id="rotateScreen">
-                <div class="label">FOR A BETTER EXPERIENCE, ROTATE YOUR SCREEN</div>
-                <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" viewBox="302.05 440.29 479.95 837.51">
-                    <g transform="translate(0.000000,1920.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
-                        <path d="M4176 14766 c-24 -20 -37 -39 -33 -47 3 -8 78 -99 166 -203 88 -105 159 -191 158 -193 -2 -1 -48 7 -102 18 -140 29 -368 23 -500 -14 -171 -48 -296 -112 -437 -226 -337 -271 -487 -746 -366 -1159 l13 -43 47 43 47 43 -14 70 c-21 102 -19 272 5 381 42 203 129 364 274 510 209 210 469 313 756 299 85 -4 228 -29 242 -43 4 -4 -78 -78 -183 -166 -104 -87 -189 -161 -189 -165 0 -3 15 -24 34 -46 31 -36 35 -38 52 -25 77 62 530 444 531 449 3 6 -445 544 -456 548 -3 1 -24 -13 -45 -31z"></path>
-                        <path d="M4030 13378 c-30 -6 -62 -15 -70 -22 -8 -6 -28 -18 -44 -26 -45 -23 -141 -120 -160 -162 -9 -21 -20 -38 -24 -38 -4 0 -16 -35 -25 -77 -16 -73 -17 -238 -17 -2480 0 -1741 3 -2417 11 -2455 35 -163 178 -309 339 -345 69 -15 2617 -18 2722 -3 87 13 166 59 246 145 34 36 62 71 62 77 0 6 6 19 13 27 8 9 21 48 31 86 15 64 16 273 16 2472 0 1753 -3 2416 -11 2455 -35 162 -179 309 -341 347 -61 14 -2667 13 -2748 -1z m2723 -289 c33 -20 66 -56 78 -87 5 -13 9 -75 9 -138 l0 -114 -1432 2 -1433 3 -3 95 c-3 94 10 170 28 170 6 0 10 7 10 15 0 8 12 22 28 32 15 10 29 20 32 24 3 4 14 9 25 12 11 3 607 4 1325 3 1181 -1 1308 -3 1333 -17z m87 -2514 l0 -1895 -1432 2 -1433 3 -3 1880 c-1 1034 0 1886 3 1893 3 9 300 12 1435 12 l1430 0 0 -1895z m0 -2299 l0 -125 -49 -50 c-39 -40 -57 -51 -92 -56 -24 -3 -620 -5 -1324 -3 -1389 3 -1297 -1 -1353 56 -39 41 -52 87 -52 192 0 53 3 100 7 103 3 4 649 7 1435 7 l1428 0 0 -124z"></path>
-                        <path d="M7713 8272 l-43 -37 15 -74 c22 -101 20 -274 -4 -386 -73 -351 -321 -633 -660 -751 -177 -62 -412 -71 -580 -22 l-44 13 179 150 c98 83 186 157 196 165 16 14 15 18 -21 58 l-38 43 -259 -216 c-142 -119 -267 -225 -277 -234 -17 -17 -8 -29 208 -287 124 -148 230 -270 234 -272 5 -1 27 13 49 31 l41 35 -170 202 c-93 112 -168 204 -167 206 2 1 27 -4 57 -12 318 -82 694 -1 957 207 279 221 434 540 434 897 0 122 -36 323 -58 322 -4 -1 -26 -18 -49 -38z"></path>
-                    </g>
-                </svg>
-                <button onclick="this.parentElement.style.scale = '0'" class="noThanks">NO THANKS</button>
-                <button onclick="this.parentElement.style.scale = '0'" id="noShowRotate" class="neverShow">NEVER SHOW</button>
+        <div id="loadingAnimation">
+            <div id="container">
+                <div id="loadingProgressBarStartup"></div>
             </div>
         </div>
-
-        <div id="intro">
-            <div class="title">
-                <div class="introAnimation">THE</div>
-                <span class="introAnimation">TANK</span>
-                <span class="introAnimation">GAME</span>
+        <div id="restOfContent">
+            <div class="alerts">
+                <div id="NotCompatable">
+                    SORRY, YOUR SCREEN SIZE IS NOT COMPATABLE WITH THIS GAME. <br />
+                    TIP: TRY ROTATING YOUR SCREEN FOR A BETTER VIEW.
+                </div>
+                <div id="rotateScreen">
+                    <div class="label">FOR A BETTER EXPERIENCE, ROTATE YOUR SCREEN</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" viewBox="302.05 440.29 479.95 837.51">
+                        <g transform="translate(0.000000,1920.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+                            <path d="M4176 14766 c-24 -20 -37 -39 -33 -47 3 -8 78 -99 166 -203 88 -105 159 -191 158 -193 -2 -1 -48 7 -102 18 -140 29 -368 23 -500 -14 -171 -48 -296 -112 -437 -226 -337 -271 -487 -746 -366 -1159 l13 -43 47 43 47 43 -14 70 c-21 102 -19 272 5 381 42 203 129 364 274 510 209 210 469 313 756 299 85 -4 228 -29 242 -43 4 -4 -78 -78 -183 -166 -104 -87 -189 -161 -189 -165 0 -3 15 -24 34 -46 31 -36 35 -38 52 -25 77 62 530 444 531 449 3 6 -445 544 -456 548 -3 1 -24 -13 -45 -31z"></path>
+                            <path d="M4030 13378 c-30 -6 -62 -15 -70 -22 -8 -6 -28 -18 -44 -26 -45 -23 -141 -120 -160 -162 -9 -21 -20 -38 -24 -38 -4 0 -16 -35 -25 -77 -16 -73 -17 -238 -17 -2480 0 -1741 3 -2417 11 -2455 35 -163 178 -309 339 -345 69 -15 2617 -18 2722 -3 87 13 166 59 246 145 34 36 62 71 62 77 0 6 6 19 13 27 8 9 21 48 31 86 15 64 16 273 16 2472 0 1753 -3 2416 -11 2455 -35 162 -179 309 -341 347 -61 14 -2667 13 -2748 -1z m2723 -289 c33 -20 66 -56 78 -87 5 -13 9 -75 9 -138 l0 -114 -1432 2 -1433 3 -3 95 c-3 94 10 170 28 170 6 0 10 7 10 15 0 8 12 22 28 32 15 10 29 20 32 24 3 4 14 9 25 12 11 3 607 4 1325 3 1181 -1 1308 -3 1333 -17z m87 -2514 l0 -1895 -1432 2 -1433 3 -3 1880 c-1 1034 0 1886 3 1893 3 9 300 12 1435 12 l1430 0 0 -1895z m0 -2299 l0 -125 -49 -50 c-39 -40 -57 -51 -92 -56 -24 -3 -620 -5 -1324 -3 -1389 3 -1297 -1 -1353 56 -39 41 -52 87 -52 192 0 53 3 100 7 103 3 4 649 7 1435 7 l1428 0 0 -124z"></path>
+                            <path d="M7713 8272 l-43 -37 15 -74 c22 -101 20 -274 -4 -386 -73 -351 -321 -633 -660 -751 -177 -62 -412 -71 -580 -22 l-44 13 179 150 c98 83 186 157 196 165 16 14 15 18 -21 58 l-38 43 -259 -216 c-142 -119 -267 -225 -277 -234 -17 -17 -8 -29 208 -287 124 -148 230 -270 234 -272 5 -1 27 13 49 31 l41 35 -170 202 c-93 112 -168 204 -167 206 2 1 27 -4 57 -12 318 -82 694 -1 957 207 279 221 434 540 434 897 0 122 -36 323 -58 322 -4 -1 -26 -18 -49 -38z"></path>
+                        </g>
+                    </svg>
+                    <button onclick="this.parentElement.style.scale = '0'" class="noThanks">NO THANKS</button>
+                    <button onclick="this.parentElement.style.scale = '0'" id="noShowRotate" class="neverShow">NEVER SHOW</button>
+                </div>
             </div>
-            <button class="start introAnimation" id="start">
-                <span class="material-symbols-outlined">keyboard_double_arrow_left</span>
-                PLAY
-                <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
-            </button>
-        </div>
 
-        <div id="lobby">
-            <div id="lobbyArea">
-                <button id="goToShop">
-                    SHOP
-                    <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
-                </button>
-
-                <button id="startTankGame">
-                    START
-                    <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
-                </button>
-            </div>
-            <div id="shop" class="pageRight">
-                <div class="upgradeTitle">SHOP</div>
-                <button id="startGameAfterShop">
+            <div id="intro">
+                <div class="title">
+                    <div class="introAnimation">THE</div>
+                    <span class="introAnimation">TANK</span>
+                    <span class="introAnimation">GAME</span>
+                </div>
+                <button class="start introAnimation" id="start">
                     <span class="material-symbols-outlined">keyboard_double_arrow_left</span>
-                    LOBBY
+                    PLAY
+                    <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
                 </button>
-                <div class="upgradeOptions" id="upgradeOptions">
-                    <!--Upgrade Types: Movement Speed, Turret Speed, Armor, Maxiumum Ammunition, Visibility, Projectile Speed, etc, etc-->
-                    <!--<span id="rockShooterProgressLabel">4/5</span>-->
-                    <!--<progress id="rockShooterTankProgressBar" value="0.8"></progress>-->
-                    <div class="selectWeapon">
-                        <div class="content">
-                            <div class="upgradeTankSection">
-                                <span class="label">AMMO</span>
-                                <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
+            </div>
+
+            <div id="lobby">
+                <div id="lobbyArea">
+                    <button id="goToShop">
+                        SHOP
+                        <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
+                    </button>
+
+                    <button id="startTankGame">
+                        START
+                        <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
+                    </button>
+                </div>
+                <div id="shop" class="pageRight">
+                    <div class="upgradeTitle">SHOP</div>
+                    <button id="startGameAfterShop">
+                        <span class="material-symbols-outlined">keyboard_double_arrow_left</span>
+                        LOBBY
+                    </button>
+                    <div class="upgradeOptions" id="upgradeOptions">
+                        <!--Upgrade Types: Movement Speed, Turret Speed, Armor, Maxiumum Ammunition, Visibility, Projectile Speed, etc, etc-->
+                        <!--<span id="rockShooterProgressLabel">4/5</span>-->
+                        <!--<progress id="rockShooterTankProgressBar" value="0.8"></progress>-->
+                        <div class="selectWeapon">
+                            <div class="content">
+                                <div class="upgradeTankSection">
+                                    <span class="label">AMMO</span>
+                                    <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
+                                </div>
+                                <div class="upgradeTankSection">
+                                    <span class="label">ATTACK STRENGTH</span>
+                                    <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
+                                </div>
+                                <div class="upgradeTankSection">
+                                    <span class="label">BLAST RADIUS</span>
+                                    <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
+                                </div>
+                                <div class="upgradeTankSection" id="upgradeArmor">
+                                    <span class="label">ARMOR</span>
+                                    <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
+                                </div>
+                                <div class="upgradeTankSection" id="upgradeSpeed">
+                                    <span class="label">SPEED</span>
+                                    <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
+                                </div>
+                                <div class="upgradeTankSection" id="upgradeTurretSpeed">
+                                    <span class="label">TURRET SPEED</span>
+                                    <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
+                                </div>
+                                <div class="upgradeTankSection" id="upgradeVisibility">
+                                    <span class="label">VISIBILITY</span>
+                                    <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
+                                </div>
+                                <div class="upgradeTankSection" id="upgradeProjectileSpeed">
+                                    <span class="label">PROJECTILE SPEED</span>
+                                    <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
+                                </div>
+                                <!-- More Projectile Upgrade = More Projectile Distance -->
+                                <div class="upgradeTankSection" id="upgradeFortune">
+                                    <span class="label">Fortune</span>
+                                    <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
+                                </div>
+                                <div class="upgradeTankSection" id="upgradeReloadSpeed">
+                                    <span class="label">Reload Speed</span>
+                                    <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
+                                </div>
+                                <div class="upgradeTankSection" id="upgradeMaxAmmo">
+                                    <span class="label">Max Ammo</span>
+                                    <span class="upgradeCost">15<span class="material-symbols-outlined">diamond</span></span>
+                                </div>
                             </div>
-                            <div class="upgradeTankSection">
-                                <span class="label">ATTACK STRENGTH</span>
-                                <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
-                            </div>
-                            <div class="upgradeTankSection">
-                                <span class="label">BLAST RADIUS</span>
-                                <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
-                            </div>
-                            <div class="upgradeTankSection" id="upgradeArmor">
-                                <span class="label">ARMOR</span>
-                                <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
-                            </div>
-                            <div class="upgradeTankSection" id="upgradeSpeed">
-                                <span class="label">SPEED</span>
-                                <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
-                            </div>
-                            <div class="upgradeTankSection" id="upgradeTurretSpeed">
-                                <span class="label">TURRET SPEED</span>
-                                <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
-                            </div>
-                            <div class="upgradeTankSection" id="upgradeVisibility">
-                                <span class="label">VISIBILITY</span>
-                                <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
-                            </div>
-                            <div class="upgradeTankSection" id="upgradeProjectileSpeed">
-                                <span class="label">PROJECTILE SPEED</span>
-                                <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
-                            </div>
-                            <!-- More Projectile Upgrade = More Projectile Distance -->
-                            <div class="upgradeTankSection" id="upgradeFortune">
-                                <span class="label">Fortune</span>
-                                <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
-                            </div>
-                            <div class="upgradeTankSection" id="upgradeReloadSpeed">
-                                <span class="label">Reload Speed</span>
-                                <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
-                            </div>
-                            <div class="upgradeTankSection" id="upgradeMaxAmmo">
-                                <span class="label">Max Ammo</span>
-                                <span class="upgradeCost">15<span class="material-symbols-outlined">diamond</span></span>
-                            </div>
-                        </div>
-                        <div id="arrowRight"><span class="material-symbols-outlined">chevron_right</span></div>
-                        <div id="arrowUp"><span class="material-symbols-outlined">keyboard_arrow_up</span></div>
-                        <span class="upgradeButtons swiper-container">
-                            <span class="swiper-wrapper">
-                                <button class="label swiper-slide">1</button>
-                                <!-- ROCK CANNON -->
-                                <button class="label swiper-slide">2</button>
-                                <!-- TASER -->
-                                <button class="label swiper-slide">3</button>
-                                <!-- FLAMETHROWER OR RICOCHET -->
-                                <button class="label swiper-slide">4</button>
-                                <!-- ROCKET -->
-                                <button class="label swiper-slide">5</button>
-                                <!-- BOMB -->
-                                <button class="label swiper-slide">6</button>
-                                <!-- SHOCK -->
-                                <button class="label swiper-slide">7</button>
-                                <!-- MACHINE GUN -->
-                                <button class="label swiper-slide">8</button>
-                                <!-- MINES -->
+                            <div id="arrowRight"><span class="material-symbols-outlined">chevron_right</span></div>
+                            <div id="arrowUp"><span class="material-symbols-outlined">keyboard_arrow_up</span></div>
+                            <span class="upgradeButtons swiper-container">
+                                <span class="swiper-wrapper">
+                                    <button class="label swiper-slide">1</button>
+                                    <!-- ROCK CANNON -->
+                                    <button class="label swiper-slide">2</button>
+                                    <!-- TASER -->
+                                    <button class="label swiper-slide">3</button>
+                                    <!-- FLAMETHROWER OR RICOCHET -->
+                                    <button class="label swiper-slide">4</button>
+                                    <!-- ROCKET -->
+                                    <button class="label swiper-slide">5</button>
+                                    <!-- BOMB -->
+                                    <button class="label swiper-slide">6</button>
+                                    <!-- SHOCK -->
+                                    <button class="label swiper-slide">7</button>
+                                    <!-- MACHINE GUN -->
+                                    <button class="label swiper-slide">8</button>
+                                    <!-- MINES -->
+                                </span>
                             </span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="game">
-            <div id="tank">
-                <div id="joystickContainer">
-                    <div id="onlineJoystick"></div>
-                    <div id="shootingOnlineJoystick"></div>
-                </div>
-                <div id="tankBody">
-                    <div>
-                        <div id="tankBase"></div>
-                        <div id="treadsLeft"></div>
-                        <div id="treadsRight"></div>
-                        <div id="treadBumps">
-                            <div class="left0 movingTread pauseAnimation"></div>
-                            <div class="left1 movingTread pauseAnimation"></div>
-                            <div class="left2 movingTread pauseAnimation"></div>
-                            <div class="left3 movingTread pauseAnimation"></div>
-                            <div class="left4 movingTread pauseAnimation"></div>
-                            <div class="left5 movingTread pauseAnimation"></div>
-                            <div class="left6 movingTread pauseAnimation"></div>
-                            <div class="right0 movingTread pauseAnimation"></div>
-                            <div class="right1 movingTread pauseAnimation"></div>
-                            <div class="right2 movingTread pauseAnimation"></div>
-                            <div class="right3 movingTread pauseAnimation"></div>
-                            <div class="right4 movingTread pauseAnimation"></div>
-                            <div class="right5 movingTread pauseAnimation"></div>
-                            <div class="right6 movingTread pauseAnimation"></div>
                         </div>
                     </div>
                 </div>
-                <div id="tankTurret">
-                    <div class="nozzle"></div>
-                    <div class="nozzle2"></div>
-                    <div class="TankHEAD"></div>
+            </div>
+
+            <div id="game">
+                <div id="tank">
+                    <div id="joystickContainer">
+                        <div id="onlineJoystick"></div>
+                        <div id="shootingOnlineJoystick"></div>
+                    </div>
+                    <div id="tankBody">
+                        <div>
+                            <div id="tankBase"></div>
+                            <div id="treadsLeft"></div>
+                            <div id="treadsRight"></div>
+                            <div id="treadBumps">
+                                <div class="left0 movingTread pauseAnimation"></div>
+                                <div class="left1 movingTread pauseAnimation"></div>
+                                <div class="left2 movingTread pauseAnimation"></div>
+                                <div class="left3 movingTread pauseAnimation"></div>
+                                <div class="left4 movingTread pauseAnimation"></div>
+                                <div class="left5 movingTread pauseAnimation"></div>
+                                <div class="left6 movingTread pauseAnimation"></div>
+                                <div class="right0 movingTread pauseAnimation"></div>
+                                <div class="right1 movingTread pauseAnimation"></div>
+                                <div class="right2 movingTread pauseAnimation"></div>
+                                <div class="right3 movingTread pauseAnimation"></div>
+                                <div class="right4 movingTread pauseAnimation"></div>
+                                <div class="right5 movingTread pauseAnimation"></div>
+                                <div class="right6 movingTread pauseAnimation"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tankTurret">
+                        <div class="nozzle"></div>
+                        <div class="nozzle2"></div>
+                        <div class="TankHEAD"></div>
+                    </div>
                 </div>
             </div>
         </div>
-
         <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
         <script src="https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js"></script>
         <script>
             /* Variables */
 
-            let noShow, introLoaded, mobile, isRotating;
-            noShow = introLoaded = mobile = isRotating = false;
 
-            let angle, currentRotation, targetRotation;
-            angle = currentRotation = targetRotation = 0;
+                let noShow, introLoaded, mobile, isRotating;
+                noShow = introLoaded = mobile = isRotating = false;
 
-            let turretSpeed = 2.5;
-            let driveSpeed = 0.5;
+                let angle, currentRotation, targetRotation;
+                angle = currentRotation = targetRotation = 0;
 
-            /* Elements */
+                let turretSpeed = 2.5;
+                let driveSpeed = 0.5;
 
-            /*ALERTS*/
+                /* Elements */
 
-            const rotateScreen = document.getElementById('rotateScreen');
-            const noShowRotate = document.getElementById('noShowRotate');
+                /*ALERTS*/
 
-            /*INTRO*/
-            const elements = document.querySelectorAll('.introAnimation');
-            const introElement = document.getElementById('intro');
-            const startButton = document.getElementById('start');
+                const rotateScreen = document.getElementById('rotateScreen');
+                const noShowRotate = document.getElementById('noShowRotate');
 
-            /*GAME*/
+                /*INTRO*/
+                const elements = document.querySelectorAll('.introAnimation');
+                const introElement = document.getElementById('intro');
+                const startButton = document.getElementById('start');
 
-            const game = document.getElementById('game');
+                /*GAME*/
 
-            /*LOBBY*/
-            const goToShop = document.getElementById('goToShop');
-            const lobby = document.getElementById('lobby');
-            const lobbyArea = document.getElementById('lobbyArea');
-            const startTankGame = document.getElementById('startTankGame');
+                const game = document.getElementById('game');
 
-            /*SHOP*/
-            const shop = document.getElementById('shop');
-            const beginGame = document.getElementById('startGameAfterShop');
-            const upgradeOptions = document.getElementById('upgradeOptions');
-            const upgradeTitle = document.querySelector('.upgradeTitle');
-            const upgradeButtons = document.querySelector('.upgradeButtons');
+                /*LOBBY*/
+                const goToShop = document.getElementById('goToShop');
+                const lobby = document.getElementById('lobby');
+                const lobbyArea = document.getElementById('lobbyArea');
+                const startTankGame = document.getElementById('startTankGame');
 
-            /*TANK*/
-            const onlineJoystick = document.getElementById('onlineJoystick');
-            const shootingOnlineJoystick = document.getElementById('shootingOnlineJoystick');
-            const tankBody = document.getElementById('tankBody');
-            const tankTurret = document.getElementById('tankTurret');
+                /*SHOP*/
+                const shop = document.getElementById('shop');
+                const beginGame = document.getElementById('startGameAfterShop');
+                const upgradeOptions = document.getElementById('upgradeOptions');
+                const upgradeTitle = document.querySelector('.upgradeTitle');
+                const upgradeButtons = document.querySelector('.upgradeButtons');
 
-            /* INTRO */
-            /* Start Game from Intro Screen */
-            document.addEventListener('DOMContentLoaded', () => {
-                let delay = 550;
-                elements.forEach((element) => {
-                    setTimeout(() => {
-                        element.classList.add('expanded');
-                        introElement.classList.add('shake');
-                        if (delay === 4550) introLoaded = true;
-                        setTimeout(() => {
-                            introElement.classList.remove('shake');
-                        }, 500);
-                    }, delay);
-                    delay += 1000;
+                /*TANK*/
+                const onlineJoystick = document.getElementById('onlineJoystick');
+                const shootingOnlineJoystick = document.getElementById('shootingOnlineJoystick');
+                const tankBody = document.getElementById('tankBody');
+                const tankTurret = document.getElementById('tankTurret');
+
+                console.log('FINISHED')
+
+
+            /* LOADING ANIMATION AT BEGINNING */
+            console.log('FIRST')
+
+            document.addEventListener("DOMContentLoaded", function() {
+                console.log('ACTUAL SECOND')
+                const resources = [
+                    { type: 'script', src: 'https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js', size: 55.2 },
+                    { type: 'link', href: 'https://unpkg.com/swiper/swiper-bundle.min.css', size: 0.175 },
+                    { type: 'link', href: 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200', size: 0.687 },
+                    { type: 'script', src: 'https://unpkg.com/swiper/swiper-bundle.min.js', size: 6 },
+                ];
+
+                const loadingScreen = document.getElementById('loadingAnimation');
+                const content = document.getElementById('restOfContent');
+                const progressBar = document.getElementById('loadingProgressBarStartup');
+                let totalSize = resources.reduce((acc, resource) => acc + (resource.size || 0), 0);
+                let loadedSize = 0;
+
+                    function updateProgressBar(sizeLoaded) {
+                        loadedSize += sizeLoaded;
+                        const progress = (loadedSize / totalSize) * 100;
+                        progressBar.style.width = progress + '%';
+                        if (progress >= 100) {
+                            setTimeout(() => {
+                                loadingScreen.style.display = 'none';
+                                content.style.display = 'block';
+                                startGame()
+                            }, 500); // Small delay to ensure the progress bar completes its animation
+                        }
+                    }
+
+                    function loadResource(resource) {
+                        return new Promise((resolve, reject) => {
+                            let element;
+                            if (resource.type === 'link') {
+                                element = document.createElement('link');
+                                element.rel = 'stylesheet';
+                                element.href = resource.href;
+                            } else if (resource.type === 'script') {
+                                element = document.createElement('script');
+                                element.src = resource.src;
+                            }
+
+                            element.onload = () => {
+                                updateProgressBar(resource.size || 0);
+                                resolve();
+                            };
+                            element.onerror = reject;
+                            document.head.appendChild(element);
+                        });
+                    }
+
+                    async function loadResources() {
+                        for (const resource of resources) {
+                            try {
+                                await loadResource(resource);
+                            } catch (error) {
+                                console.error(`Failed to load resource: ${resource.href || resource.src}`, error);
+                            }
+                        }
+                    }
+
+                    loadResources();
                 });
-            });
 
-            noShowRotate.addEventListener('click', () => {
-                noShow = true;
-            });
 
-            startButton.addEventListener('click', () => {
-                if (introLoaded) {
-                    introElement.style.setProperty('visibility', 'hidden');
-                    introElement.style.setProperty('opacity', '0');
-                    introElement.style.setProperty('display', 'none');
-                    lobby.style.setProperty('visibility', 'visible');
-                    lobby.style.setProperty('opacity', '1');
-                }
 
-	            let elementHeight = `${(document.body.offsetHeight - upgradeTitle.offsetHeight)}px`
-                upgradeOptions.style.setProperty('height', elementHeight);
-                let upgradeTitleOffsetHeight = `${upgradeTitle.offsetHeight * 0.5}px`
-                beginGame.style.setProperty('height', upgradeTitleOffsetHeight);
-                goToShop.style.setProperty('height', upgradeTitleOffsetHeight);
-            });
 
-            noShowRotate.addEventListener('click', () => {
-                noShow = true;
-            });
 
-            /* SHOP */
-            /* Go back and forth through lobby and shop */
-            goToShop.addEventListener('click', () => {
-                lobbyArea.classList.remove('pageLeft');
-                lobbyArea.classList.remove('pageRight');
-                shop.classList.remove('pageLeft');
-                shop.classList.remove('pageRight');
 
-                lobbyArea.classList.add('pageLeft');
-            });
 
-            beginGame.addEventListener('click', () => {
-                lobbyArea.classList.remove('pageLeft');
-                lobbyArea.classList.remove('pageRight');
-                shop.classList.remove('pageLeft');
-                shop.classList.remove('pageRight');
 
-                shop.classList.add('pageRight');
-            });
 
-            /* Addeventlistener for click in upgrade section */
-            startTankGame.addEventListener('click', () => {
-                lobby.style.setProperty('visibility', 'hidden');
-                lobby.style.setProperty('opacity', '0');
-                lobby.style.setProperty('display', 'none');
-                game.style.setProperty('visibility', 'visible');
-                game.style.setProperty('opacity', '1');
-                startTouchScreenMovement();
-            });
+            function startGame() {
+                    console.log('SECOND')
+                    /* INTRO */
+                    /* Start Game from Intro Screen */
+                        let delay = 550;
+                        elements.forEach((element) => {
+                            setTimeout(() => {
+                                element.classList.add('expanded');
+                                introElement.classList.add('shake');
+                                if (delay === 4550) introLoaded = true;
+                                setTimeout(() => {
+                                    introElement.classList.remove('shake');
+                                }, 500);
+                            }, delay);
+                            delay += 1000;
+                        });
 
-            /* Setting tankBody Dimentions when Screen Resizes */
-            /* OnResize Function */
-            window.onresize = () => {
-	            let elementHeight = `${(document.body.offsetHeight - upgradeTitle.offsetHeight)}px`
-                upgradeOptions.style.setProperty('height', elementHeight);
-                let upgradeTitleOffsetHeight = `${upgradeTitle.offsetHeight * 0.5}px`
-                beginGame.style.setProperty('height', upgradeTitleOffsetHeight);
-                goToShop.style.setProperty('height', upgradeTitleOffsetHeight);
-                if (!noShow) {
+                    noShowRotate.addEventListener('click', () => {
+                        noShow = true;
+                    });
+
+                    startButton.addEventListener('click', () => {
+                        if (introLoaded) {
+                            introElement.style.setProperty('visibility', 'hidden');
+                            introElement.style.setProperty('opacity', '0');
+                            introElement.style.setProperty('display', 'none');
+                            lobby.style.setProperty('visibility', 'visible');
+                            lobby.style.setProperty('opacity', '1');
+                        }
+
+                        let elementHeight = `${(document.body.offsetHeight - upgradeTitle.offsetHeight)}px`
+                        upgradeOptions.style.setProperty('height', elementHeight);
+                        let upgradeTitleOffsetHeight = `${upgradeTitle.offsetHeight * 0.5}px`
+                        beginGame.style.setProperty('height', upgradeTitleOffsetHeight);
+                        goToShop.style.setProperty('height', upgradeTitleOffsetHeight);
+                    });
+
+                    noShowRotate.addEventListener('click', () => {
+                        noShow = true;
+                    });
+
+                    /* SHOP */
+                    /* Go back and forth through lobby and shop */
+                    goToShop.addEventListener('click', () => {
+                        lobbyArea.classList.remove('pageLeft');
+                        lobbyArea.classList.remove('pageRight');
+                        shop.classList.remove('pageLeft');
+                        shop.classList.remove('pageRight');
+
+                        lobbyArea.classList.add('pageLeft');
+                    });
+
+                    beginGame.addEventListener('click', () => {
+                        lobbyArea.classList.remove('pageLeft');
+                        lobbyArea.classList.remove('pageRight');
+                        shop.classList.remove('pageLeft');
+                        shop.classList.remove('pageRight');
+
+                        shop.classList.add('pageRight');
+                    });
+
+                    /* Addeventlistener for click in upgrade section */
+                    startTankGame.addEventListener('click', () => {
+                        lobby.style.setProperty('visibility', 'hidden');
+                        lobby.style.setProperty('opacity', '0');
+                        lobby.style.setProperty('display', 'none');
+                        game.style.setProperty('visibility', 'visible');
+                        game.style.setProperty('opacity', '1');
+                        startTouchScreenMovement();
+                    });
+
+                    /* Setting tankBody Dimentions when Screen Resizes */
+                    /* OnResize Function */
+                    window.onresize = () => {
+                        let elementHeight = `${(document.body.offsetHeight - upgradeTitle.offsetHeight)}px`
+                        upgradeOptions.style.setProperty('height', elementHeight);
+                        let upgradeTitleOffsetHeight = `${upgradeTitle.offsetHeight * 0.5}px`
+                        beginGame.style.setProperty('height', upgradeTitleOffsetHeight);
+                        goToShop.style.setProperty('height', upgradeTitleOffsetHeight);
+                        if (!noShow) {
+                            if (window.matchMedia('(orientation: portrait)').matches) {
+                                rotateScreen.style.visibility = 'visible';
+                                rotateScreen.style.opacity = '1';
+                            }
+
+                            // Check if the screen is landscape
+                            if (window.matchMedia('(orientation: landscape)').matches) {
+                                rotateScreen.style.visibility = 'hidden';
+                                rotateScreen.style.opacity = '0';
+                            }
+                        }
+                    };
+
+                    /* Put Message: "Rotate Screen For Better Experience" */
                     if (window.matchMedia('(orientation: portrait)').matches) {
                         rotateScreen.style.visibility = 'visible';
                         rotateScreen.style.opacity = '1';
                     }
 
-                    // Check if the screen is landscape
                     if (window.matchMedia('(orientation: landscape)').matches) {
                         rotateScreen.style.visibility = 'hidden';
                         rotateScreen.style.opacity = '0';
                     }
-                }
-            };
 
-            /* Put Message: "Rotate Screen For Better Experience" */
-            if (window.matchMedia('(orientation: portrait)').matches) {
-                rotateScreen.style.visibility = 'visible';
-                rotateScreen.style.opacity = '1';
-            }
-
-            if (window.matchMedia('(orientation: landscape)').matches) {
-                rotateScreen.style.visibility = 'hidden';
-                rotateScreen.style.opacity = '0';
-            }
-
-            function initSwiper(direction) {
-        		if (window.swiper) {
-        			window.swiper.destroy(true, true);
-        		}
-
-        		window.swiper = new Swiper('.swiper-container', {
-        			direction: direction,
-        			slidesPerView: 'auto',
-        			spaceBetween: 10,
-        			centeredSlides: true,
-        			freeMode: false, // Disable freeMode to enable snapping
-
-        			on: {
-        				slideChange: function () {
-        					updateSelectedItem(window.swiper.activeIndex);
-        				},
-        			},
-        		});
-        	}
-
-            function updateSelectedItem(index) {
-                const slides = document.querySelectorAll('.swiper-slide');
-                slides.forEach((slide, i) => {
-                    if (i === index) {
-                        slide.classList.add('selected');
-                    } else {
-                        slide.classList.remove('selected');
-                    }
-                });
-            }
-
-            document.querySelectorAll('.swiper-slide').forEach((slide, index) => {
-                slide.addEventListener('click', () => {
-                    window.swiper.slideTo(index);
-                    updateSelectedItem(index);
-                });
-            });
-
-            function handleOrientationChange() {
-                if (window.matchMedia("(orientation: portrait)").matches) {
-                    initSwiper('horizontal');
-                } else {
-                    initSwiper('vertical');
-                }
-                updateSelectedItem(0)
-            }
-
-            window.addEventListener('resize', handleOrientationChange);
-            window.addEventListener('orientationchange', handleOrientationChange);
-
-            document.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-            });
-
-            handleOrientationChange();
-
-            /* TANK */
-            /* Set animation based on tank movement speed */
-            const MovingTreads = document.querySelectorAll('.movingTread');
-            MovingTreads.forEach((div) => {
-                div.style.animation = `moveTreads ${0.4 / driveSpeed}s linear infinite`;
-            });
-
-            /* Find shortest path for tank body */
-            function getShortestRotationAngle(current, target) {
-                let delta = target - current;
-                delta = ((((delta + 180) % 360) + 540) % 360) - 180;
-                return current + delta;
-            }
-
-            /* Change tank body direction based on keys pressed using code above */
-            function updateTankDirection(exactAngle) {
-                if (typeof exactAngle !== 'undefined') {
-                    angle = getShortestRotationAngle(angle, 90 - exactAngle);
-                    MovingTreads.forEach((div) => {
-                        div.classList.remove('pauseAnimation');
-                    });
-                }
-
-                if (angle !== null) {
-                    tankBody.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
-                }
-            }
-
-            function startTouchScreenMovement() {
-                mobile = true;
-
-                tankBody.style.setProperty('transition', '0.1s');
-                onlineJoystick.style.setProperty('display', 'block');
-                const joystick = nipplejs.create({
-                    zone: onlineJoystick,
-                    shape: 'square',
-                    mode: 'static',
-                    size: (window.innerWidth * 0.12 + window.innerHeight * 0.12) / 2,
-                    position: { left: '50%', bottom: '50%' },
-                    color: '#066c00',
-                    fadeTime: 500,
-                });
-
-                joystick.on('move', function (evt, data) {
-                    if (!(data.force < 0.5)) {
-                        updateTankDirection(data.angle.degree); // Get the angle in degrees
-                    }
-                });
-
-                joystick.on('end', function () {
-                    MovingTreads.forEach((div) => {
-                        div.classList.add('pauseAnimation');
-                    });
-                });
-
-                const shootingjoystick = nipplejs.create({
-                    mode: 'dynamic',
-                    zone: shootingOnlineJoystick,
-                    size: (window.innerWidth * 0.12 + window.innerHeight * 0.12) / 2,
-                    catchDistance: window.innerHeight * 0.2,
-                    color: '#066c00',
-                    fadeTime: 500,
-                });
-
-                shootingjoystick.on('start', function (evt, nipple) {
-                    let onlineJoystick = document.getElementById('onlineJoystick').getBoundingClientRect();
-                    if (nipple.position.x < onlineJoystick.right && nipple.position.y > onlineJoystick.top) {
-                        nipple.destroy();
-                    }
-                });
-
-                shootingjoystick.on('move', function (evt, data) {
-                    if (!(data.force < 0.5)) {
-                        updateRotation(90 - data.angle.degree);
-                    }
-                });
-
-                function normalizeAngle(angle) {
-                    return ((angle % 360) + 360) % 360;
-                }
-                function shootingJoystickAim() {
-                    if (normalizeAngle(currentRotation) !== normalizeAngle(targetRotation)) {
-                        isRotating = true;
-
-                        let normalizedCurrent = normalizeAngle(currentRotation);
-                        let normalizedTarget = normalizeAngle(targetRotation);
-
-                        let diff = normalizeAngle(normalizedTarget - normalizedCurrent);
-                        if (diff > 180) diff -= 360;
-
-                        if (Math.abs(diff) > turretSpeed / 2) {
-                            currentRotation += Math.sign(diff) * (turretSpeed / 2);
-                        } else {
-                            currentRotation = targetRotation;
-                            isRotating = false;
+                    function initSwiper(direction) {
+                        if (window.swiper) {
+                            window.swiper.destroy(true, true);
                         }
 
-                        tankTurret.style.transform = `rotate(${currentRotation}deg)`;
-                    } else if (isRotating) {
-                        isRotating = false;
-                    }
-                    requestAnimationFrame(shootingJoystickAim);
-                }
+                        window.swiper = new Swiper('.swiper-container', {
+                                direction: direction,
+                                slidesPerView: 'auto',
+                                spaceBetween: 10,
+                                centeredSlides: true,
+                                freeMode: false, // Disable freeMode to enable snapping
 
-                requestAnimationFrame(shootingJoystickAim);
+                                on: {
+                                    slideChange: function () {
+                                        updateSelectedItem(window.swiper.activeIndex);
+                                    },
+                                },
+                                });
+                                }
 
-                shootingJoystickAim();
+                                function updateSelectedItem(index) {
+                                    const slides = document.querySelectorAll('.swiper-slide');
+                                    slides.forEach((slide, i) => {
+                                        if (i === index) {
+                                            slide.classList.add('selected');
+                                        } else {
+                                            slide.classList.remove('selected');
+                                        }
+                                    });
+                                }
 
-                shootingjoystick.on('end', function () {
-                    // Shoot When rotation is finished
-                });
+                                document.querySelectorAll('.swiper-slide').forEach((slide, index) => {
+                                    slide.addEventListener('click', () => {
+                                        window.swiper.slideTo(index);
+                                        updateSelectedItem(index);
+                                    });
+                                });
 
-                function updateRotation(newAngle) {
-                    targetRotation = newAngle;
-                }
+                                function handleOrientationChange() {
+                                    if (window.matchMedia("(orientation: portrait)").matches) {
+                                        initSwiper('horizontal');
+                                    } else {
+                                        initSwiper('vertical');
+                                    }
+                                    updateSelectedItem(0)
+                                }
 
-                return updateRotation;
-            }
+                                window.addEventListener('resize', handleOrientationChange);
+                                window.addEventListener('orientationchange', handleOrientationChange);
+
+                                document.addEventListener('contextmenu', function(e) {
+                                    e.preventDefault();
+                                });
+
+                                handleOrientationChange();
+
+                                /* TANK */
+                                /* Set animation based on tank movement speed */
+                                const MovingTreads = document.querySelectorAll('.movingTread');
+                                MovingTreads.forEach((div) => {
+                                    div.style.animation = `moveTreads ${0.4 / driveSpeed}s linear infinite`;
+                                });
+
+                                /* Find shortest path for tank body */
+                                function getShortestRotationAngle(current, target) {
+                                    let delta = target - current;
+                                    delta = ((((delta + 180) % 360) + 540) % 360) - 180;
+                                    return current + delta;
+                                }
+
+                                /* Change tank body direction based on keys pressed using code above */
+                                function updateTankDirection(exactAngle) {
+                                    if (typeof exactAngle !== 'undefined') {
+                                        angle = getShortestRotationAngle(angle, 90 - exactAngle);
+                                        MovingTreads.forEach((div) => {
+                                            div.classList.remove('pauseAnimation');
+                                        });
+                                    }
+
+                                    if (angle !== null) {
+                                        tankBody.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+                                    }
+                                }
+
+                                function startTouchScreenMovement() {
+                                    mobile = true;
+
+                                    tankBody.style.setProperty('transition', '0.1s');
+                                    onlineJoystick.style.setProperty('display', 'block');
+                                    const joystick = nipplejs.create({
+                                        zone: onlineJoystick,
+                                        shape: 'square',
+                                        mode: 'static',
+                                        size: (window.innerWidth * 0.20 + window.innerHeight * 0.20) / 2,
+                                        position: { left: '50%', bottom: '50%' },
+                                        color: '#066c00',
+                                        fadeTime: 500,
+                                    });
+
+                                    joystick.on('move', function (evt, data) {
+                                        if (!(data.force < 0.5)) {
+                                            updateTankDirection(data.angle.degree); // Get the angle in degrees
+                                        }
+                                    });
+
+                                    joystick.on('end', function () {
+                                        MovingTreads.forEach((div) => {
+                                            div.classList.add('pauseAnimation');
+                                        });
+                                    });
+
+                                    const shootingjoystick = nipplejs.create({
+                                        mode: 'dynamic',
+                                        zone: shootingOnlineJoystick,
+                                        size: (window.innerWidth * 0.12 + window.innerHeight * 0.12) / 2,
+                                        catchDistance: window.innerHeight * 0.2,
+                                        color: '#066c00',
+                                        fadeTime: 500,
+                                    });
+
+                                    shootingjoystick.on('start', function (evt, nipple) {
+                                        let onlineJoystick = document.getElementById('onlineJoystick').getBoundingClientRect();
+                                        if (nipple.position.x < onlineJoystick.right && nipple.position.y > onlineJoystick.top) {
+                                            nipple.destroy();
+                                        }
+                                    });
+
+                                    shootingjoystick.on('move', function (evt, data) {
+                                        if (!(data.force < 0.5)) {
+                                            updateRotation(90 - data.angle.degree);
+                                        }
+                                    });
+
+                                    function normalizeAngle(angle) {
+                                        return ((angle % 360) + 360) % 360;
+                                    }
+
+                                    let lastTime = performance.now();
+                                    function shootingJoystickAim(currentTime) {
+                                        let deltaTime = (currentTime - lastTime) / 20; // Convert to seconds
+                                        lastTime = currentTime;
+                                        if (normalizeAngle(currentRotation) !== normalizeAngle(targetRotation)) {
+                                            isRotating = true;
+
+                                            let normalizedCurrent = normalizeAngle(currentRotation);
+                                            let normalizedTarget = normalizeAngle(targetRotation);
+
+                                            let diff = normalizeAngle(normalizedTarget - normalizedCurrent);
+                                            if (diff > 180) diff -= 360;
+
+                                            let maxRotation = turretSpeed * deltaTime;
+
+                                            if (Math.abs(diff) > maxRotation) {
+                                                currentRotation += Math.sign(diff) * maxRotation;
+                                            } else {
+                                                currentRotation = targetRotation;
+                                                isRotating = false;
+                                            }
+
+                                            tankTurret.style.transform = `rotate(${currentRotation}deg)`;
+                                        } else if (isRotating) {
+                                            isRotating = false;
+                                        }
+                                        requestAnimationFrame(shootingJoystickAim);
+                                    }
+
+                                    requestAnimationFrame(shootingJoystickAim);
+
+                                    shootingjoystick.on('end', function () {
+                                        // Shoot When rotation is finished
+                                    });
+
+                                    function updateRotation(newAngle) {
+                                        targetRotation = newAngle;
+                                    }
+
+                                    return updateRotation;
+                                }
+                                }
         </script>
     </body>
 </html>

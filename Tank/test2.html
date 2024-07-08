@@ -1,144 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Full Width Bottom Slider</title>
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-    <style>
-        body, html {
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-}
-
-.swiper-container.horizontal {
-    width: 50%;
-    height: 100px;
-    position: fixed;
-    bottom: 0;
-    left: 25%; /* Center horizontally */
-    background-color: lightgray;
-    padding: 10px; /* Add padding for gap */
-    box-sizing: border-box;
-}
-
-.swiper-container.vertical {
-    width: 100px;
-    height: 50%;
-    position: fixed;
-    top: 25%; /* Center vertically */
-    left: 0;
-    background-color: lightgray;
-    padding: 10px; /* Add padding for gap */
-    box-sizing: border-box;
-}
-
-.swiper-slide {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    color: white;
-    background-color: coral;
-    user-select: none;
-    transition: background-color 0.3s ease;
-    margin: 0 5px; /* Add margin between slides */
-}
-
-.swiper-slide.horizontal {
-    width: calc(100px - 10px); /* Adjust width to account for margin */
-}
-
-.swiper-slide.vertical {
-    height: calc(100px - 10px); /* Adjust height to account for margin */
-}
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gradient Background with White Text</title>
+<style>
+    :root {
+        --dark-green: #006400; /* Example color */
+    }
+    .gradient-text {
+/*        position: relative;*/
+/*        display: inline-block;*/
+        background-image: linear-gradient(grey, grey);
+        background-size: calc(1 * 45%) 100%;
+/*        background-clip: text;*/
+/*        -webkit-background-clip: text;*/
+/*        color: transparent;*/
+    }
+    .gradient-text span {
+/*        position: relative;*/
+/*        background: linear-gradient(to right, white 45%, black 45%);*/
+/*        -webkit-background-clip: text;*/
+/*        -webkit-text-fill-color: transparent;*/
+/*        display: inline-block;*/
+    }
+</style>
 </head>
 <body>
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">Item 1</div>
-            <div class="swiper-slide">Item 2</div>
-            <div class="swiper-slide">Item 3</div>
-            <div class="swiper-slide">Item 4</div>
-        </div>
-    </div>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script>
-        let selectedIndex = 0;
 
-        function initSwiper(direction) {
-            if (window.swiper) {
-                window.swiper.destroy(true, true);
-            }
+<div class="gradient-text">
+    <span>Part of this text is white on a gradient background.</span>
+</div>
 
-            window.swiper = new Swiper('.swiper-container', {
-                direction: direction,
-                slidesPerView: 'auto',
-                spaceBetween: 10,
-                centeredSlides: true,
-                freeMode: false, // Disable freeMode to enable snapping
-                initialSlide: selectedIndex,
-                on: {
-                    slideChange: function () {
-                        selectedIndex = window.swiper.activeIndex;
-                        updateSelectedItem(selectedIndex);
-                    }
-                }
-            });
-
-            // Ensure the selected item is centered and marked as selected
-            updateSelectedItem(selectedIndex);
-            window.swiper.slideTo(selectedIndex, 0);
-        }
-
-        function updateSelectedItem(index) {
-            const slides = document.querySelectorAll('.swiper-slide');
-            slides.forEach((slide, i) => {
-                if (i === index) {
-                    slide.style.backgroundColor = 'darkorange';
-                } else {
-                    slide.style.backgroundColor = 'coral';
-                }
-            });
-        }
-
-        document.querySelectorAll('.swiper-slide').forEach((slide, index) => {
-            slide.addEventListener('click', () => {
-                selectedIndex = index;
-                window.swiper.slideTo(index);
-                updateSelectedItem(index);
-            });
-        });
-
-        function handleOrientationChange() {
-            if (window.matchMedia("(orientation: portrait)").matches) {
-                document.querySelector('.swiper-container').classList.remove('vertical');
-                document.querySelector('.swiper-container').classList.add('horizontal');
-                document.querySelectorAll('.swiper-slide').forEach(slide => {
-                    slide.classList.remove('vertical');
-                    slide.classList.add('horizontal');
-                });
-                initSwiper('horizontal');
-            } else if (window.matchMedia("(orientation: landscape)").matches) {
-                document.querySelector('.swiper-container').classList.remove('horizontal');
-                document.querySelector('.swiper-container').classList.add('vertical');
-                document.querySelectorAll('.swiper-slide').forEach(slide => {
-                    slide.classList.remove('horizontal');
-                    slide.classList.add('vertical');
-                });
-                initSwiper('vertical');
-            }
-        }
-
-        window.addEventListener('resize', handleOrientationChange);
-        window.addEventListener('orientationchange', handleOrientationChange);
-
-        // Initial setup
-        handleOrientationChange();
-        
-    </script>
 </body>
 </html>
