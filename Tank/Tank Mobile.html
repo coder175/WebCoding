@@ -29,6 +29,7 @@
             @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
             .material-symbols-outlined {
+                vertical-align: middle !important;
                 font-variation-settings:
                     'FILL' 0,
                     'wght' 300,
@@ -317,6 +318,7 @@
                 padding-top: 5vh;
                 font-size: calc((10vw + 10vh) / 2);
                 text-align: center;
+                width: 100vw;
             }
 
             #upgrades button {
@@ -361,31 +363,29 @@
                 cursor: pointer;
                 flex-grow: 0;
                 flex-shrink: 0;
+                background-color: var(--lighter-green);
             }
 
-            #upgrades .upgradeOptions .selectWeapon #arrow * {
+            #upgrades .upgradeOptions .selectWeapon #arrow {
                 position: fixed;
+                bottom: 0;
+                display: flex;
+                justify-content: center;
                 rotate: 90deg;
-                height: 5vh;
+                text-align: center;
+                width: 100vw;
+                height: 4vh;
                 font-variation-settings:
                     'FILL' 0,
                     'wght' 700,
                     'GRAD' 200,
                     'opsz' 40;
-                    font-size: calc((6vh + 6vw) / 2);
-            }
-
-            #upgrades .upgradeOptions .selectWeapon #arrow {
-                width: 100vw;
-                position: fixed;
-                bottom: 0;
-                height: 4vh;
-                display: flex;
-                justify-content: center;
+                font-size: calc((6vh + 6vw) / 2);
             }
 
             #upgrades .upgradeOptions .selectWeapon .upgradeButtons button.selected {
-	            border: 0.5vw solid var(--dark-green);
+	            background-color: var(--dark-green);
+                color: white;
             }
 
             #upgrades .upgradeOptions .selectWeapon .upgradeButtons {
@@ -398,30 +398,26 @@
                 gap: 2%;
                 border: 0.05vw dashed black;
                 box-shadow: inset 2vw 0 2vw -2vw var(--grey), inset -2vw 0 2vw -2vw var(--grey);
-                padding: 2%;
+                padding: calc((2vw + 2vh) / 2);
 	            overflow: hidden;
 	            background-color: rgb(245, 245, 245);
             }
 
             @media (orientation: landscape) {
                 #upgrades .upgradeOptions .selectWeapon .upgradeButtons {
-                    height: calc(90vh);
+                    height: calc(90vh - (2vw + 2vh)) !important;
                     border-radius: 5vh;
                     width: calc((10vw + 10vh) / 2);
-		            left: 4vw;
-                    bottom: 0;
+		            left: 5vh;
+                    bottom: 5vh;
                     box-shadow: inset 0 2vw 2vw -2vw var(--grey), inset 0 -2vw 2vw -2vw var(--grey);
                 }
 
-                #upgrades .upgradeOptions .selectWeapon #arrow * {
-                    rotate: 180deg;
-                    width: 5vw;
-                }
-
                 #upgrades .upgradeOptions .selectWeapon #arrow {
+                    rotate: 180deg;
                     height: 100vh;
                     top: 0;
-                    width: 4vw;
+                    width: 3.5vw;
                     align-items: center;
                 }
             }
@@ -660,9 +656,7 @@
                     <!--<span id="rockShooterProgressLabel">4/5</span>-->
                     <!--<progress id="rockShooterTankProgressBar" value="0.8"></progress>-->
                     <div class="selectWeapon">
-                        <div id="arrow">
-                            <span class="material-symbols-outlined">chevron_left</span>
-                        </div>
+                        <span class="material-symbols-outlined" id="arrow">chevron_left</span>
                         <span class="upgradeButtons swiper-container">
                             <span class="swiper-wrapper">
                                 <button class="label swiper-slide">1</button>
