@@ -31,7 +31,7 @@
             .material-symbols-outlined {
                 vertical-align: middle !important;
                 font-variation-settings:
-                    'FILL' 0,
+                    'FILL' 1,
                     'wght' 300,
                     'GRAD' 200,
                     'opsz' 48;
@@ -43,7 +43,7 @@
 	            --darker-green: #055600;
                 --dark-green: #066c00;
                 --light-green: #4caf50;
-	            --lighter-green: #93c572;
+	            --lighter-green: #26cd79;
                 --grey: #747579;
                 --yellow: #cddc39;
                 --u: calc((0.25vw + 0.25vh));
@@ -118,7 +118,8 @@
                 height: 100vh;
                 width: 100vw;
                 margin: 0;
-                overflow: hidden;
+                overflow-x: hidden;
+                overflow-y: auto;
             }
 
             /*------------------------------------------------------------------
@@ -138,7 +139,7 @@
                 padding-top: 20vh;
                 position: absolute;
                 z-index: calc(infinity);
-                background-color: var(--lighter-green);
+                background-color: #26cd79;
             }
 
             #rotateScreen {
@@ -152,7 +153,7 @@
                 text-align: center;
                 padding-top: 20vh;
 	            z-index: 999;
-                background-color: var(--lighter-green); /* Could also try #87ceeb */
+                background-color: #26cd79;
             }
 
             #rotateScreen .label {
@@ -294,6 +295,28 @@
                 opacity: 0;
             }
 
+            #lobby #lobbyArea {
+                transition: transform 0.5s;
+            }
+
+            #lobby #lobbyArea button {
+                font-size: calc((3.5vw + 3.5vh) / 2);
+                position: fixed;
+            }
+
+            #lobby #lobbyArea #startTankGame {
+                width: 30vw;
+                height: 10vh;
+                right: calc((5vw + 5vh) / 2);
+                top: calc(90vh - ((5vw + 5vh) / 2));
+            }
+
+            #lobby #lobbyArea #goToShop {
+                width: 20vw;
+                right: calc((5vw + 5vh) / 2);
+                top: calc((5vw + 5vh) / 2);
+            }
+
             /*------------------------------------------------------------------
             Shop / #shop
             \/ \/ \/ \/ \/
@@ -303,28 +326,45 @@
                 position: fixed;
                 left: 0;
                 top: 0;
+                width: 100vw;
                 height: 100vh;
-                transition: 0.5s;
-                /*                transform: translateX(100%);*/
+                transition: transform 0.5s;
+            }
+
+            .pageRight {
+                transform: translateX(100%);
+            }
+
+            .pageLeft {
+                transform: translateX(-100%);
             }
 
             #shop #startGameAfterShop {
-                left: 40vw;
+                position: absolute;
+                font-size: calc((3.5vw + 3.5vh) / 2);
                 color: white;
                 background-color: var(--dark-green);
+                left: calc((5vw + 5vh) / 2);
+                top: calc((5vw + 5vh) / 2);
             }
 
             #shop .upgradeTitle {
-                padding-top: 5vh;
+                position: absolute;
+                padding-top: calc((5vw + 5vh) / 4);
                 font-size: calc((10vw + 10vh) / 2);
                 text-align: center;
                 width: 100vw;
+                right: 0;
+            }
+
+            #shop #upgradeOptions {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
             }
 
             #shop button {
-                border: 0.15vw dashed var(--darkest-green);
                 width: 20vw;
-                height: 10vh;
                 background-color: rgba(0, 0, 0, 0.3);
                 cursor: pointer;
                 color: black;
@@ -335,26 +375,52 @@
 
             #shop .upgradeOptions .selectWeapon {
                 height: 100%;
+                position: relative;
             }
 
             #shop .upgradeOptions .selectWeapon .content {
 	            width: 100vw;
 	            position: absolute;
 	            right: 0;
-                display: flex;
-                height: 100%;
-                flex-grow: 1;
-                flex-shrink: 1;
+                bottom: 0;
+                justify-content: space-evenly;
+                text-align: center;
+                padding: 0 0.5vw calc(5vh + (2vw + 2vh) + calc((11vw + 11vh) / 2)) 0.5vw;
+                margin-top: 0.5vw;
+                box-sizing: border-box;
+                height: calc(100% - 3vh);
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(30vw, 1fr));
+                gap: 0.5vw;
+                grid-gap: 0;
+                overflow-y: auto;
             }
 
             #shop .upgradeOptions .selectWeapon .content .upgradeTankSection {
-                width: 10vw;
-                height: 10vw;
-                background-color: red;
-                border: 2px solid blue;
+                background-image: linear-gradient(var(--dark-green), var(--dark-green));
+                background-size: calc(1 * (50%)) 100%;
+                background-repeat: no-repeat;
+
+
+                margin: calc((2vw + 2vh) / 2);
+                padding: calc((2vw + 2vh) / 2);
+                box-sizing: border-box;
+                background-color: var(--lighter-green);
+                border: 0.01vw dashed var(--dark-green);
+                text-align: center;
+                font-size: calc((4vw + 4vh) / 2);
+            }
+
+            #shop .upgradeOptions .selectWeapon .content .upgradeTankSection > * {
+                display: block;
+            }
+
+            #shop .upgradeOptions .selectWeapon .content .upgradeTankSection * {
+                color: white;
             }
 
             #shop .upgradeOptions .selectWeapon .upgradeButtons button {
+                border: 0.15vw dashed var(--darkest-green);
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -369,23 +435,6 @@
                 background-color: var(--lighter-green);
             }
 
-            #shop .upgradeOptions .selectWeapon #arrow {
-	            background-color: white;
-                position: fixed;
-                bottom: 0;
-                display: flex;
-                justify-content: center;
-                rotate: 90deg;
-                width: 100vw;
-                height: 4vh;
-                font-variation-settings:
-                    'FILL' 0,
-                    'wght' 700,
-                    'GRAD' 200,
-                    'opsz' 40;
-                font-size: calc((6vh + 6vw) / 2);
-            }
-
             #shop .upgradeOptions .selectWeapon .upgradeButtons button.selected {
 	            background-color: var(--dark-green);
                 color: white;
@@ -393,8 +442,9 @@
 
             #shop .upgradeOptions .selectWeapon .upgradeButtons {
                 width: 80vw;
+                display: flex;
                 position: fixed;
-	            left: 8vw;
+                left: calc((100vw - (80vw + (2vw + 2vh))) / 2);
 	            bottom: 4vh;
 	            border-radius: 5vw;
                 cursor: grab;
@@ -406,27 +456,84 @@
 	            background-color: rgb(245, 245, 245);
             }
 
+            #shop .upgradeOptions .selectWeapon #arrowRight {
+	            display: none;
+            }
+
+            #shop .upgradeOptions .selectWeapon #arrowUp {
+                    position: fixed;
+                    bottom: 0;
+                    display: flex;
+                    justify-content: center;
+                    width: 100vw;
+                    height: 4vh;
+		            text-align: left;
+                    align-items: center;
+            }
+
+            #shop .upgradeOptions .selectWeapon #arrowUp * {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 20vw;
+                font-size: 7vw;
+                font-variation-settings:
+                    'FILL' 1,
+                    'wght' 700,
+                    'GRAD' 200,
+                    'opsz' 40;
+            }
+
             @media (orientation: landscape) {
 	            #shop .upgradeOptions .selectWeapon .content {
 		            width: calc(100vw - ((11vw + 11vh) / 2) - ((2vw + 2vh) / 2) - 8vw);
+                    padding: 0.5vw;
 	            }
 
                 #shop .upgradeOptions .selectWeapon .upgradeButtons {
                     height: calc(90vh - (2vw + 2vh)) !important;
                     border-radius: 5vh;
-                    width: calc((10vw + 10vh) / 2);
+                    width: calc((11vw + 11vh) / 2);
 		            left: 5vh;
                     bottom: 5vh;
                     box-shadow: inset 0 2vw 2vw -2vw var(--grey), inset 0 -2vw 2vw -2vw var(--grey);
                 }
 
-                #shop .upgradeOptions .selectWeapon #arrow {
-		            font-size: 4vh;
-                    rotate: 180deg;
+                #shop .upgradeOptions .selectWeapon #arrowRight {
+                    position: fixed;
+                    display: flex;
+                    justify-content: center;
+                    align-self: center;
                     height: 100vh;
                     top: 0;
-                    width: 3.5vw;
+                    width: 3vw;
 		            text-align: left;
+                    align-items: center;
+                }
+
+                #shop .upgradeOptions .selectWeapon #arrowRight * {
+                    display: flex;
+                    height: 20vh;
+                    font-size: 7vh;
+                    align-items: center;
+                    justify-content: center;
+                    font-variation-settings:
+                        'FILL' 1,
+                        'wght' 700,
+                        'GRAD' 200,
+                        'opsz' 40;
+                }
+
+                #shop .upgradeOptions .selectWeapon #arrowUp {
+	               display: none;
+                }
+
+                #shop #startGameAfterShop {
+                    left: calc((((11vw + 11vh) / 2) + ((2vw + 2vh) / 2) + 4vw) + (5vw + 5vh) / 2);
+                }
+
+                #shop .upgradeTitle {
+                    width: calc(100vw - ((11vw + 11vh) / 2) - ((2vw + 2vh) / 2) - 4vw);
                 }
             }
 
@@ -627,7 +734,7 @@
             </div>
             <div id="rotateScreen">
                 <div class="label">FOR A BETTER EXPERIENCE, ROTATE YOUR SCREEN</div>
-                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" viewBox="302.05 440.29 479.95 837.51">
+                <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" viewBox="302.05 440.29 479.95 837.51">
                     <g transform="translate(0.000000,1920.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
                         <path d="M4176 14766 c-24 -20 -37 -39 -33 -47 3 -8 78 -99 166 -203 88 -105 159 -191 158 -193 -2 -1 -48 7 -102 18 -140 29 -368 23 -500 -14 -171 -48 -296 -112 -437 -226 -337 -271 -487 -746 -366 -1159 l13 -43 47 43 47 43 -14 70 c-21 102 -19 272 5 381 42 203 129 364 274 510 209 210 469 313 756 299 85 -4 228 -29 242 -43 4 -4 -78 -78 -183 -166 -104 -87 -189 -161 -189 -165 0 -3 15 -24 34 -46 31 -36 35 -38 52 -25 77 62 530 444 531 449 3 6 -445 544 -456 548 -3 1 -24 -13 -45 -31z"></path>
                         <path d="M4030 13378 c-30 -6 -62 -15 -70 -22 -8 -6 -28 -18 -44 -26 -45 -23 -141 -120 -160 -162 -9 -21 -20 -38 -24 -38 -4 0 -16 -35 -25 -77 -16 -73 -17 -238 -17 -2480 0 -1741 3 -2417 11 -2455 35 -163 178 -309 339 -345 69 -15 2617 -18 2722 -3 87 13 166 59 246 145 34 36 62 71 62 77 0 6 6 19 13 27 8 9 21 48 31 86 15 64 16 273 16 2472 0 1753 -3 2416 -11 2455 -35 162 -179 309 -341 347 -61 14 -2667 13 -2748 -1z m2723 -289 c33 -20 66 -56 78 -87 5 -13 9 -75 9 -138 l0 -114 -1432 2 -1433 3 -3 95 c-3 94 10 170 28 170 6 0 10 7 10 15 0 8 12 22 28 32 15 10 29 20 32 24 3 4 14 9 25 12 11 3 607 4 1325 3 1181 -1 1308 -3 1333 -17z m87 -2514 l0 -1895 -1432 2 -1433 3 -3 1880 c-1 1034 0 1886 3 1893 3 9 300 12 1435 12 l1430 0 0 -1895z m0 -2299 l0 -125 -49 -50 c-39 -40 -57 -51 -92 -56 -24 -3 -620 -5 -1324 -3 -1389 3 -1297 -1 -1353 56 -39 41 -52 87 -52 192 0 53 3 100 7 103 3 4 649 7 1435 7 l1428 0 0 -124z"></path>
@@ -653,18 +760,77 @@
         </div>
 
         <div id="lobby">
-            <div id="shop">
+            <div id="lobbyArea">
+                <button id="goToShop">
+                    SHOP
+                    <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
+                </button>
+
+                <button id="startTankGame">
+                    START
+                    <span class="material-symbols-outlined">keyboard_double_arrow_right</span>
+                </button>
+            </div>
+            <div id="shop" class="pageRight">
                 <div class="upgradeTitle">SHOP</div>
                 <button id="startGameAfterShop">
-                    START
-                    <span class="material-symbols-outlined">trending_flat</span>
+                    <span class="material-symbols-outlined">keyboard_double_arrow_left</span>
+                    LOBBY
                 </button>
                 <div class="upgradeOptions" id="upgradeOptions">
                     <!--Upgrade Types: Movement Speed, Turret Speed, Armor, Maxiumum Ammunition, Visibility, Projectile Speed, etc, etc-->
                     <!--<span id="rockShooterProgressLabel">4/5</span>-->
                     <!--<progress id="rockShooterTankProgressBar" value="0.8"></progress>-->
                     <div class="selectWeapon">
-                        <span class="material-symbols-outlined" id="arrow">chevron_left</span>
+                        <div class="content">
+                            <div class="upgradeTankSection">
+                                <span class="label">AMMO</span>
+                                <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
+                            </div>
+                            <div class="upgradeTankSection">
+                                <span class="label">ATTACK STRENGTH</span>
+                                <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
+                            </div>
+                            <div class="upgradeTankSection">
+                                <span class="label">BLAST RADIUS</span>
+                                <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
+                            </div>
+                            <div class="upgradeTankSection" id="upgradeArmor">
+                                <span class="label">ARMOR</span>
+                                <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
+                            </div>
+                            <div class="upgradeTankSection" id="upgradeSpeed">
+                                <span class="label">SPEED</span>
+                                <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
+                            </div>
+                            <div class="upgradeTankSection" id="upgradeTurretSpeed">
+                                <span class="label">TURRET SPEED</span>
+                                <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
+                            </div>
+                            <div class="upgradeTankSection" id="upgradeVisibility">
+                                <span class="label">VISIBILITY</span>
+                                <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
+                            </div>
+                            <div class="upgradeTankSection" id="upgradeProjectileSpeed">
+                                <span class="label">PROJECTILE SPEED</span>
+                                <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
+                            </div>
+                            <!-- More Projectile Upgrade = More Projectile Distance -->
+                            <div class="upgradeTankSection" id="upgradeFortune">
+                                <span class="label">Fortune</span>
+                                <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
+                            </div>
+                            <div class="upgradeTankSection" id="upgradeReloadSpeed">
+                                <span class="label">Reload Speed</span>
+                                <span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
+                            </div>
+                            <div class="upgradeTankSection" id="upgradeMaxAmmo">
+                                <span class="label">Max Ammo</span>
+                                <span class="upgradeCost">15<span class="material-symbols-outlined">diamond</span></span>
+                            </div>
+                        </div>
+                        <div id="arrowRight"><span class="material-symbols-outlined">chevron_right</span></div>
+                        <div id="arrowUp"><span class="material-symbols-outlined">keyboard_arrow_up</span></div>
                         <span class="upgradeButtons swiper-container">
                             <span class="swiper-wrapper">
                                 <button class="label swiper-slide">1</button>
@@ -685,18 +851,6 @@
                                 <!-- MINES -->
                             </span>
                         </span>
-                        <div class="content">
-                            <div class="upgradeTankSection" id="upgradeArmor">ARMOR</div>
-                            <div class="upgradeTankSection" id="upgradeSpeed">SPEED</div>
-                            <div class="upgradeTankSection" id="upgradeTurretSpeed">TURRET SPEED</div>
-                            <div class="upgradeTankSection" id="upgradeVisibility">VISIBILITY</div>
-                            <div class="upgradeTankSection" id="upgradeProjectileSpeed">PROJECTILE SPEED</div>
-                            <!-- More Projectile Upgrade = More Projectile Distance -->
-                            <div class="upgradeTankSection" id="upgradeFortune">Fortune</div>
-                            <div class="upgradeTankSection" id="upgradeReloadSpeed">ReloadSpeed</div>
-                            <div class="upgradeTankSection" id="upgradeMaxAmmo">Max Ammo</div>
-                            ARMOR, SPEED, TURRET SPEED, VISIBILITY, PROJECTILE SPEED (AND MORE PROJECTILE DISTANCE), FORTUNE, RELOAD SPEED, MAX AMMO, WEAPON UPGRADES
-                        </div>
                     </div>
                 </div>
             </div>
@@ -770,10 +924,13 @@
             const game = document.getElementById('game');
 
             /*LOBBY*/
-
+            const goToShop = document.getElementById('goToShop');
             const lobby = document.getElementById('lobby');
+            const lobbyArea = document.getElementById('lobbyArea');
+            const startTankGame = document.getElementById('startTankGame');
 
             /*SHOP*/
+            const shop = document.getElementById('shop');
             const beginGame = document.getElementById('startGameAfterShop');
             const upgradeOptions = document.getElementById('upgradeOptions');
             const upgradeTitle = document.querySelector('.upgradeTitle');
@@ -815,8 +972,11 @@
                     lobby.style.setProperty('opacity', '1');
                 }
 
-	            let elementHeight = `${(document.body.offsetHeight - beginGame.offsetHeight - upgradeTitle.offsetHeight)}px`
+	            let elementHeight = `${(document.body.offsetHeight - upgradeTitle.offsetHeight)}px`
                 upgradeOptions.style.setProperty('height', elementHeight);
+                let upgradeTitleOffsetHeight = `${upgradeTitle.offsetHeight * 0.5}px`
+                beginGame.style.setProperty('height', upgradeTitleOffsetHeight);
+                goToShop.style.setProperty('height', upgradeTitleOffsetHeight);
             });
 
             noShowRotate.addEventListener('click', () => {
@@ -824,8 +984,27 @@
             });
 
             /* SHOP */
-            /* Addeventlistener for click in upgrade section */
+            /* Go back and forth through lobby and shop */
+            goToShop.addEventListener('click', () => {
+                lobbyArea.classList.remove('pageLeft');
+                lobbyArea.classList.remove('pageRight');
+                shop.classList.remove('pageLeft');
+                shop.classList.remove('pageRight');
+
+                lobbyArea.classList.add('pageLeft');
+            });
+
             beginGame.addEventListener('click', () => {
+                lobbyArea.classList.remove('pageLeft');
+                lobbyArea.classList.remove('pageRight');
+                shop.classList.remove('pageLeft');
+                shop.classList.remove('pageRight');
+
+                shop.classList.add('pageRight');
+            });
+
+            /* Addeventlistener for click in upgrade section */
+            startTankGame.addEventListener('click', () => {
                 lobby.style.setProperty('visibility', 'hidden');
                 lobby.style.setProperty('opacity', '0');
                 lobby.style.setProperty('display', 'none');
@@ -837,8 +1016,11 @@
             /* Setting tankBody Dimentions when Screen Resizes */
             /* OnResize Function */
             window.onresize = () => {
-	            let elementHeight = `${(document.body.offsetHeight - beginGame.offsetHeight - upgradeTitle.offsetHeight)}px`
+	            let elementHeight = `${(document.body.offsetHeight - upgradeTitle.offsetHeight)}px`
                 upgradeOptions.style.setProperty('height', elementHeight);
+                let upgradeTitleOffsetHeight = `${upgradeTitle.offsetHeight * 0.5}px`
+                beginGame.style.setProperty('height', upgradeTitleOffsetHeight);
+                goToShop.style.setProperty('height', upgradeTitleOffsetHeight);
                 if (!noShow) {
                     if (window.matchMedia('(orientation: portrait)').matches) {
                         rotateScreen.style.visibility = 'visible';
