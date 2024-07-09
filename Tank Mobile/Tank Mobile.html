@@ -24,13 +24,26 @@
 			\/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
 			------------------------------------------------------------------*/
 
+			@font-face {
+			  font-family: 'Material Symbols Outlined';
+			  font-style: normal;
+			  font-weight: 700;
+			}
+
 			.material-symbols-outlined {
+			  font-family: 'Material Symbols Outlined';
+			  font-weight: normal;
+			  font-style: normal;
+			  line-height: 1;
+			  letter-spacing: normal;
+			  text-transform: none;
+			  display: inline-block;
+			  white-space: nowrap;
+			  word-wrap: normal;
+			  direction: ltr;
+			  -webkit-font-feature-settings: 'liga';
+			  -webkit-font-smoothing: antialiased;
 				vertical-align: middle !important;
-				font-variation-settings:
-					'FILL' 1,
-					'wght' 300,
-					'GRAD' 200,
-					'opsz' 48;
 				font-size: calc((3vw + 3vh) / 2);
 			}
 
@@ -141,7 +154,7 @@
 				text-align: center;
 				padding-top: 20vh;
 				position: absolute;
-				z-index: calc(infinity);
+				z-index: 9999;
 				background-color: #26cd79;
 			}
 
@@ -170,20 +183,13 @@
 				text-align: center;
 			}
 
-			#rotateScreen button {
+			#rotateScreen .noThanks {
+				left: 37.5vw;
 				position: fixed;
 				width: 25vw;
 				height: 10vh;
 				bottom: 10vh;
 				font-size: calc((3vw + 3vh) / 2);
-			}
-
-			#rotateScreen .noThanks {
-				left: 18vw;
-			}
-
-			#rotateScreen .neverShow {
-				right: 18vw;
 			}
 
 			/*------------------------------------------------------------------
@@ -198,6 +204,51 @@
 
 				100% {
 					transform: translateY(calc((var(--u) * 2.26)));
+				}
+			}
+
+			@keyframes loadTitle {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+
+			@keyframes shake {
+				0% {
+					transform: translate(0.4vw, 0.4vw) rotate(0deg);
+				}
+				10% {
+					transform: translate(-0.4vw, -0.8vw) rotate(-2deg);
+				}
+				20% {
+					transform: translate(-1.2vw, 0px) rotate(2deg);
+				}
+				30% {
+					transform: translate(1.2vw, 0.8vw) rotate(0deg);
+				}
+				40% {
+					transform: translate(0.4vw, -0.4vw) rotate(2deg);
+				}
+				50% {
+					transform: translate(-0.4vw, 0.8vw) rotate(-2deg);
+				}
+				60% {
+					transform: translate(-1.2vw, 0.4vw) rotate(0deg);
+				}
+				70% {
+					transform: translate(1.2vw, 0.4vw) rotate(-2deg);
+				}
+				80% {
+					transform: translate(-0.4vw, -0.4vw) rotate(2deg);
+				}
+				90% {
+					transform: translate(0.4vw, 0.8vw) rotate(0deg);
+				}
+				100% {
+					transform: translate(0.4vw, -0.8vw) rotate(-2deg);
 				}
 			}
 
@@ -218,12 +269,13 @@
 				transition: opacity 0.5s;
 				width: 100vw;
 				height: 100vh;
-				background: #ffffff;
+				background-color: white;
 				display: flex;
 				align-items: center;
 				justify-content: center;
 				flex-direction: column;
-				z-index: calc(infinity);
+				z-index: 99999999;
+				animation: loadTitle 2s, shake 0.5s ease-in-out;
 			}
 
 			#intro #title {
@@ -238,9 +290,9 @@
 			}
 
 			#intro #container .start {
-				position: relative;
+				position: absolute;
+				top: 0;
 				width: 30vw;
-				top: calc((3vw + 3vh) / 2);
 				left: 35vw;
 				height: 10vh;
 				font-size: calc((3vw + 3vh) / 2);
@@ -248,24 +300,28 @@
 
 
 			#intro #container {
+				position: relative;
 				width: 80%;
 				background-color: #f3f3f3;
-				border-radius: 10px;
+				border-radius: calc((1vw + 1vh) / 2);
 				overflow: hidden;
+				margin-bottom: 16vh;
 			}
 
 			#intro #container.nowButton {
 				width: 100% !important;
 				background-color: transparent !important;
 				border-radius: 0 !important;
-				overflow: none !important;
+				overflow: auto !important;
+				height: 10vh !important;
+				margin-bottom: 8vh !important;
 			}
 
 			#intro #container #loadingProgressBarStartup {
 				transition: 0.5s;
 				width: 0;
 				height: 2vh;
-				background-color: #4caf50;
+				background-color: var(--lighter-green);
 			}
 
 			/*------------------------------------------------------------------
@@ -461,11 +517,6 @@
 				justify-content: center;
 				width: 20vw;
 				font-size: 7vw;
-				font-variation-settings:
-					'FILL' 1,
-					'wght' 700,
-					'GRAD' 200,
-					'opsz' 40;
 			}
 
 			@media (orientation: landscape) {
@@ -503,11 +554,6 @@
 					font-size: 7vh;
 					align-items: center;
 					justify-content: center;
-					font-variation-settings:
-						'FILL' 1,
-						'wght' 700,
-						'GRAD' 200,
-						'opsz' 40;
 				}
 
 				#shop .upgradeOptions .selectWeapon #arrowUp {
@@ -740,8 +786,7 @@
 							<path d="M7713 8272 l-43 -37 15 -74 c22 -101 20 -274 -4 -386 -73 -351 -321 -633 -660 -751 -177 -62 -412 -71 -580 -22 l-44 13 179 150 c98 83 186 157 196 165 16 14 15 18 -21 58 l-38 43 -259 -216 c-142 -119 -267 -225 -277 -234 -17 -17 -8 -29 208 -287 124 -148 230 -270 234 -272 5 -1 27 13 49 31 l41 35 -170 202 c-93 112 -168 204 -167 206 2 1 27 -4 57 -12 318 -82 694 -1 957 207 279 221 434 540 434 897 0 122 -36 323 -58 322 -4 -1 -26 -18 -49 -38z"></path>
 						</g>
 					</svg>
-					<button onclick="this.parentElement.style.scale = '0'" class="noThanks">NO THANKS</button>
-					<button onclick="this.parentElement.style.scale = '0'" id="noShowRotate" class="neverShow">NEVER SHOW</button>
+					<button onclick="this.parentElement.style.visibility = 'hidden'" class="noThanks">NO THANKS</button>
 				</div>
 			</div>
 
@@ -766,48 +811,48 @@
 						<!--<progress id="rockShooterTankProgressBar" value="0.8"></progress>-->
 						<div class="selectWeapon">
 							<div class="content">
-								<div class="upgradeTankSection">
+								<div class="upgradeTankSection" id="currentAmmo">
 									<span class="label">AMMO</span>
 									<span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
 								</div>
-								<div class="upgradeTankSection">
+								<div class="upgradeTankSection" id="strength">
 									<span class="label">ATTACK STRENGTH</span>
 									<span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
 								</div>
-								<div class="upgradeTankSection">
+								<div class="upgradeTankSection" id="blastRadius">
 									<span class="label">BLAST RADIUS</span>
 									<span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
 								</div>
-								<div class="upgradeTankSection" id="upgradeArmor">
+								<div class="upgradeTankSection" id="armor">
 									<span class="label">ARMOR</span>
 									<span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
 								</div>
-								<div class="upgradeTankSection" id="upgradeSpeed">
+								<div class="upgradeTankSection" id="speed">
 									<span class="label">SPEED</span>
 									<span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
 								</div>
-								<div class="upgradeTankSection" id="upgradeTurretSpeed">
+								<div class="upgradeTankSection" id="turretSpeed">
 									<span class="label">TURRET SPEED</span>
 									<span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
 								</div>
-								<div class="upgradeTankSection" id="upgradeVisibility">
+								<div class="upgradeTankSection" id="visibility">
 									<span class="label">VISIBILITY</span>
 									<span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
 								</div>
-								<div class="upgradeTankSection" id="upgradeProjectileSpeed">
+								<div class="upgradeTankSection" id="projectileSpeed">
 									<span class="label">PROJECTILE SPEED</span>
 									<span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
 								</div>
 								<!-- More Projectile Upgrade = More Projectile Distance -->
-								<div class="upgradeTankSection" id="upgradeFortune">
+								<div class="upgradeTankSection" id="fortune">
 									<span class="label">Fortune</span>
 									<span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
 								</div>
-								<div class="upgradeTankSection" id="upgradeReloadSpeed">
+								<div class="upgradeTankSection" id="reloadSpeed">
 									<span class="label">Reload Speed</span>
 									<span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
 								</div>
-								<div class="upgradeTankSection" id="upgradeMaxAmmo">
+								<div class="upgradeTankSection" id="maxAmmo">
 									<span class="label">Max Ammo</span>
 									<span class="upgradeCost">15<span class="material-symbols-outlined">diamond</span></span>
 								</div>
@@ -880,8 +925,8 @@
 		<script>
 		    function s() {
 		        /* Variables */
-		        let noShow, introLoaded, mobile, isRotating;
-		        noShow = introLoaded = mobile = isRotating = false;
+		        let introLoaded, mobile;
+		        introLoaded = mobile = isRotating = false;
 
 		        let angle, currentRotation, targetRotation;
 		        angle = currentRotation = targetRotation = 0;
@@ -894,10 +939,8 @@
 		        /*ALERTS*/
 
 		        const rotateScreen = document.getElementById("rotateScreen");
-		        const noShowRotate = document.getElementById("noShowRotate");
 
 		        /*INTRO*/
-		        const elements = document.querySelectorAll(".introAnimation");
 		        const introElement = document.getElementById("intro");
 		        const startButton = document.getElementById("start");
 
@@ -928,28 +971,18 @@
 
 		        /* INTRO */
 
-		        noShowRotate.addEventListener("click", () => {
-		            noShow = true;
-		        });
-
 		        startButton.addEventListener("click", () => {
-		            if (introLoaded) {
-		                introElement.style.setProperty("visibility", "hidden");
-		                introElement.style.setProperty("opacity", "0");
-		                introElement.style.setProperty("display", "none");
-		                lobby.style.setProperty("visibility", "visible");
-		                lobby.style.setProperty("opacity", "1");
-		            }
+                introElement.style.setProperty("visibility", "hidden");
+                introElement.style.setProperty("opacity", "0");
+                introElement.style.setProperty("display", "none");
+                lobby.style.setProperty("visibility", "visible");
+                lobby.style.setProperty("opacity", "1");
 
-		            let elementHeight = `${document.body.offsetHeight - upgradeTitle.offsetHeight}px`;
-		            upgradeOptions.style.setProperty("height", elementHeight);
-		            let upgradeTitleOffsetHeight = `${upgradeTitle.offsetHeight * 0.5}px`;
-		            beginGame.style.setProperty("height", upgradeTitleOffsetHeight);
-		            goToShop.style.setProperty("height", upgradeTitleOffsetHeight);
-		        });
-
-		        noShowRotate.addEventListener("click", () => {
-		            noShow = true;
+	            let elementHeight = `${document.body.offsetHeight - upgradeTitle.offsetHeight}px`;
+	            upgradeOptions.style.setProperty("height", elementHeight);
+	            let upgradeTitleOffsetHeight = `${upgradeTitle.offsetHeight * 0.5}px`;
+	            beginGame.style.setProperty("height", upgradeTitleOffsetHeight);
+	            goToShop.style.setProperty("height", upgradeTitleOffsetHeight);
 		        });
 
 		        /* SHOP */
@@ -990,18 +1023,16 @@
 		            let upgradeTitleOffsetHeight = `${upgradeTitle.offsetHeight * 0.5}px`;
 		            beginGame.style.setProperty("height", upgradeTitleOffsetHeight);
 		            goToShop.style.setProperty("height", upgradeTitleOffsetHeight);
-		            if (!noShow) {
-		                if (window.matchMedia("(orientation: portrait)").matches) {
-		                    rotateScreen.style.visibility = "visible";
-		                    rotateScreen.style.opacity = "1";
-		                }
+	                if (window.matchMedia("(orientation: portrait)").matches) {
+	                    rotateScreen.style.visibility = "visible";
+	                    rotateScreen.style.opacity = "1";
+	                }
 
-		                // Check if the screen is landscape
-		                if (window.matchMedia("(orientation: landscape)").matches) {
-		                    rotateScreen.style.visibility = "hidden";
-		                    rotateScreen.style.opacity = "0";
-		                }
-		            }
+	                // Check if the screen is landscape
+	                if (window.matchMedia("(orientation: landscape)").matches) {
+	                    rotateScreen.style.visibility = "hidden";
+	                    rotateScreen.style.opacity = "0";
+	                }
 		        };
 
 		        /* Put Message: "Rotate Screen For Better Experience" */
@@ -1035,6 +1066,16 @@
 		            });
 		        }
 
+				function updateUpgrades(currentProgress) {
+					const upgradeSection = ['currentAmmo', 'strength', 'blastRadius', 'armor', 'speed', 'turretSpeed', 'visibility', 'projectileSpeed', 'fortune', 'reloadSpeed', 'maxAmmo']
+					let upgradeSectionLength = upgradeSection.length;
+
+					for(let i = 0; i < upgradeSectionLength; i++) {
+						console.log(currentProgress[i])
+						document.getElementById(upgradeSection[i]).style.backgroundSize = `calc( 50% ) 100%`;
+					}
+				}
+
 		        function updateSelectedItem(index) {
 		            const slides = document.querySelectorAll(".swiper-slide");
 		            slides.forEach((slide, i) => {
@@ -1044,6 +1085,7 @@
 		                    slide.classList.remove("selected");
 		                }
 		            });
+					updateUpgrades([1, 4], [1, 5], [3, 5], [2, 4], [1, 6], [3, 5], [1, 4], [5, 6], [4, 4], [1, 6], [3, 7]);
 		        }
 
 		        document.querySelectorAll(".swiper-slide").forEach((slide, index) => {
