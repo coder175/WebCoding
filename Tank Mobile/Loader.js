@@ -1,11 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
     const resources = [
-        {type: 'link', href: 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,1,200', size: 0.679},
         {type: 'script', src: 'https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js', size: 38},
         {type: 'link', href: 'https://unpkg.com/swiper/swiper-bundle.min.css', size: 18},
         {type: 'script', src: 'https://unpkg.com/swiper/swiper-bundle.min.js', size: 147},
         {type: 'font', href: 'https://fonts.gstatic.com/s/materialsymbolsoutlined/v195/kJF4BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzazHD_dY40KH8nGzv3fz_VFU22ZZLsYEpzC_1hCs5Y0J1Llf.woff2', size: 762}
     ];
+
+//    Find file size with this website: https://www.aconvert.com/
 
     const loadingScreenContainer = document.getElementById('container');
     const progressBar = document.getElementById('loadingProgressBarStartup');
@@ -39,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         s();
                     });
                 }
-            }, 500); // Small delay to ensure the progress bar completes its animation
+            }, 1000); // Small delay to ensure the progress bar completes its animation
         }
     }
 
