@@ -154,7 +154,7 @@
 				text-align: center;
 				padding-top: 20vh;
 				position: absolute;
-				z-index: 9999;
+				z-index: 999999;
 				background-color: #26cd79;
 			}
 
@@ -252,7 +252,7 @@
 				}
 			}
 
-			@media screen and (min-aspect-ratio: 4.3/1), (max-aspect-ratio: 0.4/1) {
+			@media screen and (min-aspect-ratio: 3.8/1), (max-aspect-ratio: 0.5/1) {
 				#NotCompatable {
 					visibility: visible;
 					opacity: 1;
@@ -274,7 +274,7 @@
 				align-items: center;
 				justify-content: center;
 				flex-direction: column;
-				z-index: 99999999;
+				z-index: 99999;
 				animation: loadTitle 2s, shake 0.5s ease-in-out;
 			}
 
@@ -344,10 +344,9 @@
 			}
 
 			#lobby #lobbyArea #startTankGame {
-				width: 30vw;
-				height: 10vh;
+				position: absolute;
+				width: calc(100vw - (5vw + 5vh));
 				right: calc((5vw + 5vh) / 2);
-				top: calc(90vh - ((5vw + 5vh) / 2));
 			}
 
 			#lobby #lobbyArea #goToShop {
@@ -364,9 +363,9 @@
 				top: calc((5vw + 5vh) / 2);
 				width: calc((40vw + 40vh) / 2);
 				height: calc((10vw + 10vh) / 2);
-				border-top: calc(0.1vw + 0.1vh) solid var(--dark-green);
-				border-left: calc(0.1vw + 0.1vh) solid var(--dark-green);
-				border-right: calc(0.1vw + 0.1vh) solid var(--dark-green);
+				border: none;
+				padding-top: calc((1vh + 1vw) / 2);
+				padding-left: calc((1vh + 1vw) / 2);
 				border-top-right-radius: 0.3vw;
 				border-top-left-radius: 0.3vw;
 				background-color: rgba(38, 205, 122, 0.5);
@@ -387,11 +386,21 @@
 			  color: var(--dark-green);
 			}
 
-			#lobby #lobbyArea #userName:active {
-				border-top: calc(0.1vw + 0.1vh) solid var(--darkest-green);
-				border-left: calc(0.1vw + 0.1vh) solid var(--darkest-green);
-				border-right: calc(0.1vw + 0.1vh) solid var(--darkest-green);
-				border-bottom: calc(0.3vw + 0.3vh) solid var(--dark-green);
+			#lobby #lobbyArea #userName:focus {
+				border-top: calc(0.1vw + 0.1vh) solid var(--dark-green);
+				border-left: calc(0.1vw + 0.1vh) solid var(--dark-green);
+				border-right: calc(0.1vw + 0.1vh) solid var(--dark-green);
+			}
+
+			#lobby #lobbyArea #openBox {
+				width: 20vw;
+				right: calc((5vw + 5vh) / 2);
+			}
+
+
+			#lobby #lobbyArea #openBox #chestSVG {
+				height: calc((3.5vw + 3.5vh) / 2);
+				vertical-align: middle;
 			}
 			/*------------------------------------------------------------------
             Shop / #shop
@@ -480,7 +489,6 @@
 				padding: calc((2vw + 2vh) / 2);
 				box-sizing: border-box;
 				background-color: #22b86d;
-				border: 0.01vw dashed var(--dark-green);
 				text-align: center;
 				font-size: calc((4vw + 4vh) / 2);
 				min-height: calc(11vh + 11vw);
@@ -570,23 +578,21 @@
 
 
 			#shop #currentMoney {
+				box-sizing: border-box;
+			    -moz-box-sizing: border-box;
+			    -webkit-box-sizing: border-box;
 				width: 20vw;
-				border: 0.15vw solid var(--dark-green);
+				border: 0.3vw solid var(--dark-green);
 				text-align: center;
 				position: fixed;
 				right: calc((5vw + 5vh) / 2);
 				top: calc((5vw + 5vh) / 2);
 				font-size: calc((4vw + 4vh) / 2);
 				border-radius: 0.5vw;
-				background-color: var(--dark-green);
 				display: flex;
 				justify-content: center;
 				align-content: center;
 				flex-direction: column;
-			}
-
-			#shop #currentMoney * {
-				color: white;
 			}
 
 			@media (orientation: landscape) {
@@ -631,11 +637,15 @@
 				}
 
 				#shop #startGameAfterShop {
-					left: calc((((11vw + 11vh) / 2) + ((2vw + 2vh) / 2) + 4vw) + (5vw + 5vh) / 2);
+					left: calc((((13vw + 13vh) / 2) + ((2vw + 2vh) / 2) + 4vw) + (5vw + 5vh) / 2);
 				}
 
 				#shop .upgradeTitle {
 					width: calc(100vw - ((11vw + 11vh) / 2) - ((2vw + 2vh) / 2) - 4vw);
+				}
+
+				#lobby #lobbyArea #startTankGame {
+					width: 30vw;
 				}
 			}
 
@@ -863,10 +873,15 @@
 			<div id="lobby">
 				<div id="lobbyArea">
                     <label>
-                        <input type="text" id="userName" placeholder="TYPE YOUR NAME">
+                        <input type="text" id="userName" placeholder="TYPE YOUR NAME" maxlength="20">
                     </label>
                     <button id="goToShop">
 						SHOP<span class="material-symbols-outlined">keyboard_double_arrow_right</span>
+					</button>
+
+					<button id="openBox">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="-0.5 -0.5 16 16" fill="currentColor" id="chestSVG"><desc>Treasure Chest Streamline Icon: https://streamlinehq.com</desc><path d="M11.175 1.9875H3.825c-2.0287441406249997 0.002173828125 -3.67283203125 1.646255859375 -3.675 3.675v6.3c0 0.579919921875 0.470080078125 1.0500234375000002 1.05 1.05h12.6c0.579919921875 0.0000234375 1.05 -0.470080078125 1.05 -1.05V5.6625c-0.0021679687499999998 -2.0287441406249997 -1.646255859375 -3.6728261718749997 -3.675 -3.675Zm2.625 3.675v0.525h-2.1V3.09c1.2213984375 0.25113281249999997 2.0984765625 1.3255546875000002 2.1 2.5725000000000002Zm-5.775 2.625h-1.05V6.1875h1.05Zm-1.575 1.05h2.1c0.289951171875 0 0.525 -0.235048828125 0.525 -0.525v-1.575h1.575v4.725H4.35v-4.725h1.575v1.575c0 0.28995703125 0.23504296875 0.5250117187500001 0.525 0.525Zm2.625 -3.15v-0.525c0 -0.28993945312499997 -0.23506054687500003 -0.52498828125 -0.525 -0.525h-2.1c-0.28995703125 -0.00001171875 -0.525 0.23504296875 -0.525 0.525v0.525H4.35V3.0375h6.3v3.15ZM3.3 3.09V6.1875H1.2v-0.525c0.0015234374999999998 -1.2469453124999998 0.8786015625 -2.3213671875 2.1 -2.5725000000000002ZM1.2 7.2375h2.1v4.725H1.2Zm12.6 4.725h-2.1v-4.725h2.1v4.725Z" stroke-width="1"></path></svg>
+						UNLOCK
 					</button>
 
 					<button id="startTankGame">
@@ -890,6 +905,10 @@
 						<!--<progress id="rockShooterTankProgressBar" value="0.8"></progress>-->
 						<div class="selectWeapon">
 							<div class="content">
+								<div class="upgradeTankSection" id="currentWeapon">
+									<span class="label">WEAPON</span>
+									<span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
+								</div>
 								<div class="upgradeTankSection" id="currentAmmo">
 									<span class="label">AMMO</span>
 									<span class="upgradeCost">15 <span class="material-symbols-outlined">diamond</span></span>
@@ -935,33 +954,32 @@
 									<span class="label">Max Ammo</span>
 									<span class="upgradeCost">15<span class="material-symbols-outlined">diamond</span></span>
 								</div>
+								<div class="upgradeTankSection" id="waterProofing">
+									<span class="label">WATER RESISTANCE</span>
+									<span class="upgradeCost">15<span class="material-symbols-outlined">diamond</span></span>
+								</div>
 							</div>
 							<div id="arrowRight"><span class="material-symbols-outlined">chevron_right</span></div>
 							<div id="arrowUp"><span class="material-symbols-outlined">keyboard_arrow_up</span></div>
 							<span class="upgradeButtons swiper-container">
 								<span class="swiper-wrapper">
-									<button class="label swiper-slide">1</button>
-									<!-- ROCK CANNON -->
-									<button class="label swiper-slide">2</button>
-									<!-- MINIGUN -->
-									<button class="label swiper-slide">2</button>
-									<!-- TASER -->
-									<button class="label swiper-slide">3</button>
-									<!-- FLAMETHROWER -->
-									<button class="label swiper-slide">3</button>
-									<!-- RICOCHET -->
-									<button class="label swiper-slide">4</button>
-									<!-- ROCKET -->
-									<button class="label swiper-slide">5</button>
-									<!-- BOMB -->
-									<button class="label swiper-slide">6</button>
-									<!-- SHOCK -->
-									<button class="label swiper-slide">7</button>
-									<!-- MACHINE GUN -->
-									<button class="label swiper-slide">8</button>
-									<!-- RAILGUN -->
-									<button class="label swiper-slide">8</button>
-									<!-- MINES -->
+									<button class="label swiper-slide" id='rockCannon'>1</button> <!-- ROCK CANNON -->
+									<button class="label swiper-slide" id='minigun'>2</button> <!-- MINIGUN -->
+									<button class="label swiper-slide" id='taser'>3</button> <!-- TASER -->
+									<button class="label swiper-slide" id='flamethrower'>4</button> <!-- FLAMETHROWER -->
+									<button class="label swiper-slide" id='richochet'>5</button> <!-- RICOCHET -->
+									<button class="label swiper-slide" id='rocket'>6</button> <!-- ROCKET -->
+									<button class="label swiper-slide" id='bomb'>7</button> <!-- BOMB -->
+									<button class="label swiper-slide" id='shock'>8</button> <!-- SHOCK -->
+									<button class="label swiper-slide" id='machineGun'>9</button> <!-- MACHINE GUN -->
+									<button class="label swiper-slide" id='railGun'>10</button> <!-- RAILGUN -->
+									<button class="label swiper-slide" id='mines'>11</button> <!-- MINES -->
+									<button class="label swiper-slide" id='sniper'>12</button> <!-- SNIPER -->
+									<button class="label swiper-slide" id='grenade'>13</button> <!-- GRENADE -->
+									<button class="label swiper-slide" id='miniTank'>14</button> <!-- EXPLOSIVE MINI TANKS -->
+									<button class="label swiper-slide" id='oilTank'>15</button> <!-- OIL TANK -->
+									<button class="label swiper-slide" id='ram'>16</button> <!-- RAM -->
+									<button class="label swiper-slide" id='invisible'>17</button> <!-- INVISIBILITY -->
 								</span>
 							</span>
 						</div>
@@ -1010,7 +1028,7 @@
 		<script>
 			function s() {
 				/* Variables */
-				let introLoaded, mobile;
+				let introLoaded, mobile, isRotating, currentMoneyAmount;
 				introLoaded = mobile = isRotating = false;
 
 				let angle, currentRotation, targetRotation;
@@ -1018,20 +1036,27 @@
 
 				let turretSpeed = 2.5;
 				let driveSpeed = 0.5;
-				let tankUpgrades = [
-					[[100, 100], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1]], // ROCK CANNON
-					[[20, 100] , [1, 2], [1, 2], [1, 2], [1, 2], [1, 2], [1, 2], [1, 2], [1, 2], [1, 2], [1, 2]], // MINIGUN
-					[[20, 100] , [1, 3], [1, 3], [1, 3], [1, 3], [1, 3], [1, 3], [1, 3], [1, 3], [1, 3], [1, 3]], // TASER
-					[[20, 100] , [1, 4], [2, 4], [1, 4], [1, 4], [1, 4], [1, 4], [3, 4], [1, 4], [1, 4], [1, 4]], // FLAMETHROWER
-					[[20, 100] , [1, 5], [1, 5], [1, 4], [1, 6], [1, 5], [1, 4], [1, 6], [1, 4], [1, 6], [1, 7]], // RICOCHET
-					[[20, 100] , [1, 5], [1, 5], [1, 4], [1, 6], [1, 5], [1, 4], [1, 6], [1, 4], [1, 6], [1, 7]], // ROCKET
-					[[20, 100] , [1, 5], [1, 5], [1, 4], [1, 6], [1, 5], [1, 4], [1, 6], [1, 4], [1, 6], [1, 7]], // BOMB
-					[[20, 100] , [1, 5], [1, 5], [1, 4], [1, 6], [3, 5], [1, 4], [4, 6], [1, 4], [1, 6], [1, 7]], // SHOCK
-					[[20, 100] , [1, 5], [1, 5], [1, 4], [1, 6], [1, 5], [1, 4], [1, 6], [1, 4], [1, 6], [1, 7]], // MACHINE GUN
-					[[20, 100] , [1, 5], [1, 5], [1, 4], [1, 6], [1, 5], [1, 4], [1, 6], [1, 4], [1, 6], [1, 7]], // RAILGUN
-					[[20, 100] , [1, 5], [1, 5], [1, 4], [1, 6], [1, 5], [1, 4], [1, 6], [1, 4], [1, 6], [1, 7]], // MINES
-				]
-				// currentAmmo strength blastRadius armor speed turretSpeed visibility projectileSpeed fortune reloadSpeed maxAmmo
+				let tankUpgrades =
+					[
+						[['rockCannon'],   [[100, 100],[100, 100], [1, 1], [0, 0], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1]]], // ROCK CANNON
+						[['minigun'],      [[20, 100] ,[20, 100] , [1, 2], [0, 0], [1, 2], [1, 2], [1, 2], [1, 2], [1, 2], [1, 2], [1, 2], [1, 2], [1, 2]]], // MINIGUN
+						[['taser'],        [[20, 100] ,[20, 100] , [1, 3], [0, 0], [1, 3], [1, 3], [1, 3], [1, 3], [1, 3], [1, 3], [1, 3], [1, 3], [1, 3]]], // TASER
+						[['flamethrower'], [[20, 100] ,[20, 100] , [1, 4], [0, 0], [1, 4], [1, 4], [1, 4], [1, 4], [3, 4], [1, 4], [1, 4], [1, 4], [1, 4]]], // FLAMETHROWER
+						[['richochet'],    [[20, 100] ,[20, 100] , [1, 5], [0, 0], [1, 4], [1, 6], [1, 5], [1, 4], [1, 6], [1, 4], [1, 6], [1, 7], [1, 7]]], // RICOCHET
+						[['rocket'],       [[20, 100] ,[20, 100] , [1, 5], [1, 5], [1, 4], [1, 6], [1, 5], [1, 4], [1, 6], [1, 4], [1, 6], [1, 7], [1, 7]]], // ROCKET
+						[['bomb'],         [[20, 100] ,[20, 100] , [1, 5], [1, 5], [1, 4], [1, 6], [1, 5], [1, 4], [1, 6], [1, 4], [1, 6], [1, 7], [1, 7]]], // BOMB
+						[['shock'],        [[20, 100] ,[20, 100] , [1, 5], [0, 0], [1, 4], [1, 6], [3, 5], [1, 4], [4, 6], [1, 4], [1, 6], [1, 7], [1, 7]]], // SHOCK
+						[['machineGun'],   [[20, 100] ,[20, 100] , [1, 5], [0, 0], [1, 4], [1, 6], [1, 5], [1, 4], [1, 6], [1, 4], [1, 6], [1, 7], [1, 7]]], // MACHINE GUN
+						[['railGun'],      [[20, 100] ,[20, 100] , [1, 5], [0, 0], [1, 4], [1, 6], [1, 5], [1, 4], [1, 6], [1, 4], [1, 6], [1, 7], [1, 7]]], // RAILGUN
+						[['mines'],        [[20, 100] ,[20, 100] , [1, 5], [1, 4], [1, 4], [1, 6], [1, 5], [1, 4], [1, 6], [1, 4], [1, 6], [1, 7], [1, 7]]], // MINES
+						[['sniper'],       [[20, 100] ,[20, 100] , [1, 5], [1, 4], [1, 4], [1, 6], [1, 5], [1, 4], [1, 6], [1, 4], [1, 6], [1, 7], [1, 7]]], // SNIPER
+						[['grenade'],      [[20, 100] ,[20, 100] , [1, 5], [1, 4], [1, 4], [1, 6], [1, 5], [1, 4], [1, 6], [1, 4], [1, 6], [1, 7], [1, 7]]], // GRENADE
+						[['miniTank'],     [[20, 100] ,[20, 100] , [1, 5], [1, 4], [1, 4], [1, 6], [1, 5], [1, 4], [1, 6], [1, 4], [1, 6], [1, 7], [1, 7]]], // EXPLOSIVE MINI TANKS
+						[['oilTank'],      [[20, 100] ,[20, 100] , [1, 5], [1, 4], [1, 4], [1, 6], [1, 5], [1, 4], [1, 6], [1, 4], [1, 6], [1, 7], [1, 7]]], // OIL TANK
+						[['ram'],          [[20, 100] ,[20, 100] , [1, 5], [1, 4], [1, 4], [1, 6], [1, 5], [1, 4], [1, 6], [1, 4], [1, 6], [1, 7], [1, 7]]], // RAM
+						[['invisible'],    [[20, 100] ,[20, 100] , [1, 5], [1, 4], [1, 4], [1, 6], [1, 5], [1, 4], [1, 6], [1, 4], [1, 6], [1, 7], [1, 7]]], // INVISIBILITY
+						]
+				// currentWeapon currentAmmo strength blastRadius armor speed turretSpeed visibility projectileSpeed fortune reloadSpeed maxAmmo waterProofing
 
 		        /* Elements */
 
@@ -1052,13 +1077,13 @@
 		        const lobby = document.getElementById("lobby");
 		        const lobbyArea = document.getElementById("lobbyArea");
 		        const startTankGame = document.getElementById("startTankGame");
+				const openBox = document.getElementById('openBox');
 
 		        /*SHOP*/
 		        const shop = document.getElementById("shop");
 		        const beginGame = document.getElementById("startGameAfterShop");
 		        const upgradeOptions = document.getElementById("upgradeOptions");
 		        const upgradeTitle = document.querySelector(".upgradeTitle");
-		        const upgradeButtons = document.querySelector(".upgradeButtons");
 				const currentMoney = document.getElementById('currentMoney');
 
 		        /*TANK*/
@@ -1082,6 +1107,11 @@
 	            beginGame.style.setProperty("height", upgradeTitleOffsetHeight);
 	            goToShop.style.setProperty("height", upgradeTitleOffsetHeight);
 				currentMoney.style.setProperty('height', upgradeTitleOffsetHeight);
+				openBox.style.setProperty('height', upgradeTitleOffsetHeight);
+				openBox.style.top = `${(window.innerHeight * 0.05 + window.innerWidth * 0.05) + upgradeTitle.offsetHeight * 0.5}px`;
+				startTankGame.style.setProperty('height', `${upgradeTitle.offsetHeight * 0.5 * 1.25}px`);
+				startTankGame.style.setProperty('height', upgradeTitleOffsetHeight);
+				startTankGame.style.top = `${((window.innerHeight - upgradeTitle.offsetHeight * 0.5) - ((0.05 * window.innerHeight + 0.05 * window.innerWidth) / 2))}px`;
 		        });
 
 		        /* SHOP */
@@ -1123,6 +1153,10 @@
 		            beginGame.style.setProperty("height", upgradeTitleOffsetHeight);
 		            goToShop.style.setProperty("height", upgradeTitleOffsetHeight);
 					currentMoney.style.setProperty('height', upgradeTitleOffsetHeight);
+					openBox.style.setProperty('height', upgradeTitleOffsetHeight);
+					openBox.style.top = `${(window.innerHeight * 0.05 + window.innerWidth * 0.05) + upgradeTitle.offsetHeight * 0.5}px`;
+					startTankGame.style.setProperty('height', `${upgradeTitle.offsetHeight * 0.5 * 1.25}px`);
+                    startTankGame.style.top = `${((window.innerHeight - upgradeTitle.offsetHeight * 0.5 * 1.25) - ((0.05 * window.innerHeight + 0.05 * window.innerWidth) / 2))}px`;
 					setTimeout(() => {
 						if (window.matchMedia("(orientation: portrait)").matches) {
 		                    rotateScreen.style.visibility = "visible";
@@ -1171,12 +1205,19 @@
 		        }
 
 				function updateUpgrades(currentProgress) {
-					const upgradeSection = ['currentAmmo', 'strength', 'blastRadius', 'armor', 'speed', 'turretSpeed', 'visibility', 'projectileSpeed', 'fortune', 'reloadSpeed', 'maxAmmo']
+					const upgradeSection = ['currentWeapon', 'currentAmmo', 'strength', 'blastRadius', 'armor', 'speed', 'turretSpeed', 'visibility', 'projectileSpeed', 'fortune', 'reloadSpeed', 'maxAmmo', 'waterProofing']
 					let upgradeSectionLength = currentProgress.length;
 					for(let i = 0; i < upgradeSectionLength; i++) {
+						const currentElement = document.getElementById(upgradeSection[i])
 						const [first, second] = currentProgress[i];
-						const percentage = (first / second) * 100;
-						document.getElementById(upgradeSection[i]).style.setProperty('background-size', `${percentage}% 7%`);
+						if(first === 0 && second === 0) {
+							currentElement.style.setProperty('display', 'none');
+						} else {
+							const percentage = (first / second) * 100;
+							currentElement.style.setProperty('display', 'block');
+							currentElement.style.setProperty('background-size', `${percentage}% 7%`);
+						}
+
 					}
 				}
 
@@ -1185,10 +1226,15 @@
 		            slides.forEach((slide, i) => {
 		                if (i === index) {
 		                    slide.classList.add("selected");
+							let len = slides.length;
+							for(let x = 0; x < len; x++) {
+								if(document.getElementById(tankUpgrades[x][0][0]) === document.getElementById(slide.id)) {
+									updateUpgrades(tankUpgrades[x][1]);
+								}
+							}
 		                } else {
 		                    slide.classList.remove("selected");
 		                }
-						updateUpgrades(tankUpgrades[index]);
 		            });
 		        }
 
