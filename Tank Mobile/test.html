@@ -1,48 +1,35 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
-        <style>
-.octagon {
-  width: 100px;
-    height: 100px;
-    background: orange;
-    position: relative;
-  }
 
-  .octagon:before {
-     content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-bottom: 29px solid orange;
-    border-left: 29px solid rgb(24,24,24);
-    border-right: 29px solid rgb(24,24,24);
-    width: 42px;
-    height: 0;
-  }
-  .octagon:after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border-top: 29px solid orange;
-    border-left: 29px solid rgb(24,24,24);
-    border-right: 29px solid rgb(24,24,24);
-    width: 42px;
-    height: 0;
-  }.octagon {
-    width: 100px;
-    height: 100px;
-    background: orange;
-    position: relative;
-  }
-        </style>
-    </head>
-    <body>
-        <div class="octagon"></div>
-    </body>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0">
+	<title>Clip-Path Polygon Border with Inset Shadow</title>
+	<style>
+    #diamond-shield {
+      width: 0;
+      height: 0;
+      border: 50px solid orange;
+      border-bottom: 20px solid red;
+      position: relative;
+      top: -50px;
+    }
+    #diamond-shield:after {
+      content: '';
+      position: absolute;
+      left: -50px;
+      top: 20px;
+      width: 0;
+      height: 0;
+      border: 50px solid blue;
+      border-top: 70px solid red;
+    }
+	</style>
+</head>
+
+<body>
+<div id="diamond-shield"></div>
+</body>
+
 </html>
