@@ -56,7 +56,7 @@
 				--grey: #747579;
 				--yellow: #cddc39;
 				--orange: #d2592c;
-				--u: calc((1.5vw + 1.5vh)); /* NEEDS TO BE .3vw + .3vh */
+				--u: calc((0.3vw + 0.3vh)); /* NEEDS TO BE .3vw + .3vh */
 			}
 
 			@font-face {
@@ -926,11 +926,11 @@
 			}
 
 			.rocket1 {
-				width: calc((var(--u) * 2.5));
-				height: calc((var(--u) * 9));
+				width: calc((var(--u) * 4));
+				height: calc((var(--u) * 12));
 				background-color: var(--orange);
-				left: calc((var(--u) * -1.25));
-				top: calc((var(--u) * -4.7));
+				left: calc((var(--u) * -2));
+				top: calc((var(--u) * -7.7));
 				border-radius: calc((var(--u) * 0.4)) !important;
 				border-bottom-left-radius: 0 !important;
 				border-bottom-right-radius: 0 !important;
@@ -939,17 +939,28 @@
 			}
 
 			.rocket2 {
-				width: calc((var(--u) * 5));
-				height: calc((var(--u) * 4));
+				width: calc((var(--u) * 7));
+				height: calc((var(--u) * 4.5));
 				border-radius: calc((var(--u) * 0.4)) !important;
-				left: calc((var(--u) * -2.5));
-				top: calc((var(--u) * 0.3));
+				left: calc((var(--u) * -3.5));
+				top: calc((var(--u) * -0.2));
 				background-color: #953e1f;
 				box-shadow: none !important;
 				clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 				z-index: -1;
 			}
-			
+
+			.rocket3 {
+				width: calc((var(--u) * 4));
+				height: calc((var(--u) * 2.5));
+				border-radius: calc((var(--u) * 0.4)) !important;
+				left: calc((var(--u) * -2));
+				top: calc((var(--u) * -9.9));
+				background-color: #953e1f;
+				box-shadow: none !important;
+				clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+				z-index: -1;
+			}
 
 			.rico2 *, .rico2.outer {
 				width: calc((var(--u) * 2));
@@ -1642,9 +1653,8 @@
 						<div class="rocket1"></div>
 						<div class="rocket2"></div>
 						<div class="rocket3"></div>
-						<div class="rocket4"></div>
-						<div class="rocket5"></div>
 					</div>
+				</div>
 			</div>
 		</div>
 		<script src="./Loader.js"></script>
