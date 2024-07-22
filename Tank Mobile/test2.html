@@ -19,23 +19,23 @@
 <body>
     <div id="game-container"></div>
     <script>
-const config = {
-    type: Phaser.AUTO,
-    width: 800,
-    height: 600,
-    parent: 'game-container',
-    physics: {
-        default: 'arcade',
-        arcade: {
-            debug: true
-        }
-    },
-    scene: {
-        preload: preload,
-        create: create,
-        update: update
-    }
-};
+        const config = {
+	        type: Phaser.AUTO,
+	        width: 800,
+	        height: 600,
+	        parent: 'game-container',
+	        physics: {
+		        default: 'arcade',
+		        arcade: {
+			        debug: true
+		        }
+	        },
+	        scene: {
+		        preload: preload,
+		        create: create,
+		        update: update
+	        }
+        };
 
 const game = new Phaser.Game(config);
 
@@ -51,6 +51,7 @@ let borders;
 let directionDegree = 0; // Initialize the direction in degrees
 
 function create() {
+
     // Create the tank
     tank = this.physics.add.sprite(400, 300, 'tank');
     tank.setCollideWorldBounds(true);

@@ -2086,6 +2086,91 @@
 
 		            return updateRotation;
 		        }
+
+				/* PhaserJS in use */
+				const config = {
+			        type: Phaser.AUTO,
+			        width: window.innerWidth,
+			        height: window.innerHeight,
+			        parent: 'tank',
+			        physics: {
+				        default: 'arcade',
+				        arcade: {
+					        debug: true
+				        }
+			        },
+			        scene: {
+				        preload: preload,
+				        create: create,
+				        update: update
+			        }
+		        };
+
+				const gameScreen = new Phaser.Game(config);
+
+				function preload() {
+				    this.load.image('tank', 'path/to/tank.png');
+				    this.load.image('rock', 'path/to/rock.png');
+				    this.load.image('border', 'path/to/border.png'); // Add a border image
+				}
+
+				let tankElement;
+				let rocksTest;
+				let bordersTest;
+				let directionDegreeTest = 0; // Initialize the direction in degrees
+
+				function create() {
+					tankElement = document.getElementById('tank');
+
+				    // Create the tank
+//				    tankTest = this.physics.add.sprite(400, 300, 'tank');
+//				    tankTest.setCollideWorldBounds(true);
+
+				    // Create rocks
+				    rocksTest = this.physics.add.staticGroup();
+				    rocksTest.create(600, 400, 'rock');
+				    rocksTest.create(500, 500, 'rock');
+				    // Add more rocks as needed
+
+				    // Add collision between the tank and rocks
+				    this.physics.add.collider(tankTest, rocksTest);
+
+				    // Create game walls (borders)
+					bordersTest = this.physics.add.staticGroup();
+					bordersTest.create(400, 0, 'border').setScale(800, 2).refreshBody(); // Top border
+					bordersTest.create(400, 600, 'border').setScale(800, 2).refreshBody(); // Bottom border
+					bordersTest.create(0, 300, 'border').setScale(2, 600).refreshBody(); // Left border
+					bordersTest.create(800, 300, 'border').setScale(2, 600).refreshBody(); // Right border
+
+				    // Add collision between the tank and borders
+				    this.physics.add.collider(tankTest, bordersTest);
+
+				    // Create custom div with children elements
+				    const customDiv = this.add.dom(400, 300).createFromHTML(`
+				        <div style="width: 100px; height: 100px; background: lightblue;">
+				            <div style="width: 50px; height: 50px; background: red;"></div>
+				            <div style="width: 50px; height: 50px; background: green;"></div>
+				        </div>
+				    `);
+
+				    this.cameras.main.startFollow(tankTest, true, 0.08, 0.08);
+
+				    // Simulate joystick direction change (for testing)
+				    this.input.keyboard.on('keydown-D', () => { directionDegreeTest += 10; }); // Increase angle by 10 degrees
+				    this.input.keyboard.on('keydown-A', () => { directionDegreeTest -= 10; }); // Decrease angle by 10 degrees
+				}
+
+				function update() {
+				    const speed = 160; // Speed of the tank
+
+				    // Convert degree to radians for Phaser's velocity calculations
+				    const radian = Phaser.Math.DegToRad(directionDegreeTest);
+				    const velocityX = Math.cos(radian) * speed;
+				    const velocityY = Math.sin(radian) * speed;
+
+				    tankElement.setVelocity(velocityX, velocityY);
+				    tankElement.rotation = radian - Math.PI / 2; // Rotate the tank sprite to face the direction of movement
+				}
 		    }
 		</script>
 	</body>
