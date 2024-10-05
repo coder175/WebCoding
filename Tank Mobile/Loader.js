@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const resources = [
-        {type: 'script', src: 'https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js', size: 38},
+        {type: 'script', src: 'https://cdn.jsdelivr.net/npm/nipplejs@0.10.2/dist/nipplejs.min.js', size: 38},
         {type: 'link', href: 'https://unpkg.com/swiper/swiper-bundle.min.css', size: 18},
         {type: 'script', src: 'https://unpkg.com/swiper/swiper-bundle.min.js', size: 147},
         {type: 'font', href: 'https://fonts.gstatic.com/s/materialsymbolsoutlined/v195/kJF4BvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oDMzByHX9rA6RzazHD_dY40KH8nGzv3fz_VFU22ZZLsYEpzC_1hCs5Y0J1Llf.woff2', size: 762},
