@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tank Game</title>
+    <style>
+        #game-container {
+            width: 800px;
+            height: 600px;
+            border: 1px solid black;
+            position: relative;
+            overflow: hidden;
+        }
+        .tank {
+            width: 50px;
+            height: 50px;
+            background-color: green;
+            position: absolute;
+        }
+        .rock {
+            width: 50px;
+            height: 50px;
+            background-color: gray;
+            position: absolute;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.80.1/phaser.min.js"></script>
+</head>
+<body>
+    <div id="game-container"></div>
+    <script>
+        // Phaser game configuration
+const config = {
+    type: Phaser.AUTO,
+    width: 800,
+    height: 600,
+    parent: 'game-container',
+    physics: {
+        default: 'matter',
+        matter: {
+            debug: true,
+            gravity: { y: 0 }
+        }
+    },
+    scene: {
+        preload: preload,
+        create: create,
+        update: update
+    }
+};
+
+const game = new Phaser.Game(config);
+
+let tank;
+let rocks;
+let cursors;
+
+function preload() {
+    // Preload assets if any (none in this case)
+}
+
+function create() {
+    // Add tank
+    tank = this.matter.add.rectangle(400, 300, 50, 50, { 
+        render: { fillStyle: 'green' }
+    });
+
+    // Add rocks
+    rocks = [];
+    let positions = [
+        { x: 200, y: 150 },
+        { x: 600, y: 400 },
+        { x: 300, y: 500 }
+    ];
+    positions.forEach(pos => {
+        let rock = this.matter.add.rectangle(pos.x, pos.y, 50, 50, { 
+            isStatic: true,
+            render: { fillStyle: 'gray' }
+        });
+        rocks.push(rock);
+    });
+
+    // Add keyboard controls
+    cursors = this.input.keyboard.createCursorKeys();
+    this.input.keyboard.addKeys('W,S,A,D');
+}
+
+function update() {
+    const speed = 5;
+
+    if (cursors.left.isDown || this.input.keyboard.keys[65].isDown) {
+        Matter.Body.setVelocity(tank, { x: -speed, y: tank.velocity.y });
+    } else if (cursors.right.isDown || this.input.keyboard.keys[68].isDown) {
+        Matter.Body.setVelocity(tank, { x: speed, y: tank.velocity.y });
+    }
+
+    if (cursors.up.isDown || this.input.keyboard.keys[87].isDown) {
+        Matter.Body.setVelocity(tank, { x: tank.velocity.x, y: -speed });
+    } else if (cursors.down.isDown || this.input.keyboard.keys[83].isDown) {
+        Matter.Body.setVelocity(tank, { x: tank.velocity.x, y: speed });
+    }
+}
+
+    </script>
+</body>
+</html>
