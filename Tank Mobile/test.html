@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tank Game with Phaser</title>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Hide scrollbars */
+            width: 100%;
+            height: 100%;
+        }
+        #game-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .html-tank, .html-rock {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            z-index: 10;
+        }
+        .html-tank {
+            background-color: green;
+            border-radius: 5px;
+        }
+        .html-rock {
+            background-color: gray;
+            border-radius: 50%;
+        }
+        #html-grid {
+            position: absolute;
+            z-index: 1; /* Behind tank and rocks */
+            background-image: url('https://wallpapers.com/images/hd/checkered-background-n1w6lx9q84urkvvq.jpg'); /* Replace with the correct path to your grid image */
+            background-size: cover;
+            width: 1600px; /* Match the world bounds width */
+            height: 1200px; /* Match the world bounds height */
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <!-- HTML grid background -->
+        <div id="html-grid"></div>
+        <!-- HTML tank element -->
+        <div id="html-tank" class="html-tank"></div>
+        <!-- Container for HTML rock elements -->
+        <div id="html-rocks"></div>
+    </div>
+    <script>
+        const config = {
+            type: Phaser.AUTO,
+            width: window.innerWidth, // Full window width
+            height: window.innerHeight, // Full window height
+            parent: 'game-container',
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    debug: false
+                }
+            },
+            scene: {
+                preload: preload,
+                create: create,
+                update: update
+            },
+            scale: {
+                mode: Phaser.Scale.RESIZE, // Dynamically resize the game
+                autoCenter: Phaser.Scale.CENTER_BOTH // Center the game in the window
+            }
+        };
+
+        const game = new Phaser.Game(config);
+
+        let tank;
+        let cursors;
+        let rocks;
+        let htmlTank; // HTML tank element
+        let htmlRocks = []; // Array to store HTML elements for rocks
+        let htmlGrid; // HTML grid element
+        const elementSize = 40; // Both the Phaser sprite and HTML elements have a 40x40 size
+
+        function preload() {
+            // No need to preload anything for the tank sprite (we will hide it)
+        }
+
+        function create() {
+            // Set world bounds larger than the game view
+            this.physics.world.setBounds(0, 0, 1600, 1200); // A large world (1600x1200)
+
+            // Create the tank sprite (invisible, for logic)
+            tank = this.physics.add.sprite(400, 300, null); // Invisible tank
+            tank.setCollideWorldBounds(true); // Prevent the tank from going outside the world
+            tank.body.setSize(elementSize, elementSize); // Set the tank's physics body size
+
+            // Camera follows the tank
+            this.cameras.main.startFollow(tank);
+
+            // Create static group of rocks (obstacles)
+            rocks = this.physics.add.staticGroup();
+            let rock1 = rocks.create(600, 600, null); // Invisible rock
+            let rock2 = rocks.create(800, 400, null); // Invisible rock
+            let rock3 = rocks.create(1000, 700, null); // Invisible rock
+            // Add more rocks as needed
+
+            // Add HTML rock elements for each rock
+            let rockPositions = [{ x: 600, y: 600 }, { x: 800, y: 400 }, { x: 1000, y: 700 }];
+            const htmlRocksContainer = document.getElementById('html-rocks');
+
+            rockPositions.forEach((pos, index) => {
+                let rockDiv = document.createElement('div');
+                rockDiv.classList.add('html-rock');
+                htmlRocksContainer.appendChild(rockDiv);
+                htmlRocks.push({ element: rockDiv, position: pos });
+            });
+
+            // Add collision between the tank and the rocks
+            this.physics.add.collider(tank, rocks);
+
+            // Set up keyboard input for movement
+            cursors = this.input.keyboard.createCursorKeys();
+
+            // Make the camera's boundaries match the world's boundaries
+            this.cameras.main.setBounds(0, 0, 1600, 1200); // Match the world bounds
+
+            // Reference to the HTML tank element
+            htmlTank = document.getElementById('html-tank');
+
+            // Reference to the HTML grid element
+            htmlGrid = document.getElementById('html-grid');
+        }
+
+        function update() {
+            let speed = 750; // Speed of the tank movement
+            let velocityX = 0;
+            let velocityY = 0;
+
+            // Check input for movement
+            if (cursors.left.isDown) {
+                velocityX = -speed;
+            } else if (cursors.right.isDown) {
+                velocityX = speed;
+            }
+
+            if (cursors.up.isDown) {
+                velocityY = -speed;
+            } else if (cursors.down.isDown) {
+                velocityY = speed;
+            }
+
+            // Normalize the velocity to maintain constant speed in all directions
+            if (velocityX !== 0 && velocityY !== 0) {
+                velocityX *= Math.SQRT1_2;
+                velocityY *= Math.SQRT1_2;
+            }
+
+            // Set the tank's velocity
+            tank.setVelocity(velocityX, velocityY);
+
+            // Update the HTML tank element's position to follow the tank sprite
+            const cameraOffset = this.cameras.main.getWorldPoint(0, 0); // Offset for the camera
+            htmlTank.style.left = `${tank.x - cameraOffset.x - elementSize / 2}px`;
+            htmlTank.style.top = `${tank.y - cameraOffset.y - elementSize / 2}px`;
+
+            // Update the position of HTML elements for rocks
+            htmlRocks.forEach((htmlRock, index) => {
+                let rock = rocks.getChildren()[index]; // Get corresponding rock from Phaser
+                htmlRock.element.style.left = `${rock.x - cameraOffset.x - elementSize / 2}px`;
+                htmlRock.element.style.top = `${rock.y - cameraOffset.y - elementSize / 2}px`;
+            });
+
+            // Update the HTML grid element's position to follow the camera
+            htmlGrid.style.left = `${-cameraOffset.x}px`;
+            htmlGrid.style.top = `${-cameraOffset.y}px`;
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            game.scale.resize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
