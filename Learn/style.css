@@ -88,6 +88,7 @@ body {
         width: 0;
     }
 }
+
 @-webkit-keyframes show {
     0% {
         width: 65%;
@@ -97,6 +98,7 @@ body {
         width: 0;
     }
 }
+
 @-moz-keyframes show {
     0% {
         width: 65%;
@@ -106,6 +108,7 @@ body {
         width: 0;
     }
 }
+
 @-ms-keyframes show {
     0% {
         width: 65%;
@@ -115,6 +118,7 @@ body {
         width: 0;
     }
 }
+
 @-o-keyframes show {
     0% {
         width: 65%;
@@ -133,7 +137,7 @@ section {
 nav {
     -webkit-backdrop-filter: blur(7px);
     backdrop-filter: blur(7px);
-     background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.2);
     flex-direction: row;
     align-content: center;
     justify-content: space-evenly;
@@ -159,6 +163,7 @@ nav div div {
 nav .right {
     flex-grow: 3;
 }
+
 nav div i {
     color: var(--main-color);
     font-size: 3vw !important;

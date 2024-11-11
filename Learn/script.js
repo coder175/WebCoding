@@ -1,5 +1,6 @@
 const phrases = ['How the first printing press became', 'Other stuff']
 let round = 0
+
 function type() {
     document.getElementById('caret').style.opacity = '1'
     let phrs = phrases[round].split('');
@@ -10,9 +11,12 @@ function type() {
     }
     setTimeout(() => {
         blink(8)
-        setTimeout(() => { del() }, 4500);
+        setTimeout(() => {
+            del()
+        }, 4500);
     }, phrs.length * 100);
 }
+
 function del() {
     document.getElementById('caret').style.opacity = '1'
     let phrsLen = phrases[round].split('');
@@ -25,10 +29,14 @@ function del() {
     else round = 0
     setTimeout(() => {
         blink(4)
-        setTimeout(() => { type() }, 2500);
+        setTimeout(() => {
+            type()
+        }, 2500);
     }, phrsLen.length * 70);
 }
+
 let rtime = 0
+
 function blink(stime) {
     let c = document.getElementById('caret');
     let interval = setInterval(function () {
@@ -40,8 +48,11 @@ function blink(stime) {
         c.style.opacity = (c.style.opacity === '0' ? '1' : '0');
     }, 500);
 }
+
 setTimeout(() => {
-    setTimeout(() => { type() }, 500);
+    setTimeout(() => {
+        type()
+    }, 500);
     document.getElementById('restOfBody').style.visibility = 'visible';
     document.getElementById('restOfBody').style.opacity = '1';
 }, 1500);
