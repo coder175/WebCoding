@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D Array Editor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+
+        h2, h3 {
+            color: #333;
+        }
+
+        #inputArray, #outputArray {
+            width: 100%;
+            max-width: 500px;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+            font-family: monospace;
+        }
+
+        #grid {
+            display: grid;
+            gap: 2px;
+            margin-top: 15px;
+            background-color: #ddd;
+            padding: 5px;
+            border-radius: 10px;
+        }
+
+        .cell {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+            transition: transform 0.1s ease;
+        }
+
+        .cell:hover {
+            transform: scale(1.1);
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+
+<h2>2D Array Editor</h2>
+<textarea id="inputArray" rows="10" cols="50" placeholder="Paste the array here"></textarea>
+<button onclick="loadArray()">Load Array</button>
+
+<div id="grid"></div>
+
+<h3>Edited Array</h3>
+<textarea id="outputArray" rows="10" cols="50" placeholder="Your edited array will appear here"></textarea>
+
+<script>
+    let mapArray = [];
+    const colors = ['#D2B48C', '#4CAF50', '#888', '#222', '#fff', '#2196F3', '#fff'];
+    let currentHoveredCell = null;
+
+    function loadArray() {
+        try {
+            mapArray = JSON.parse(document.getElementById('inputArray').value);
+            generateGrid();
+        } catch (e) {
+            alert('Invalid array format. Please enter a valid 2D array.');
+        }
+    }
+
+    function generateGrid() {
+        const grid = document.getElementById('grid');
+        grid.innerHTML = '';
+        grid.style.gridTemplateColumns = `repeat(${mapArray[0].length}, 1fr)`;
+
+        mapArray.forEach((row, rowIndex) => {
+            row.forEach((cell, colIndex) => {
+                const cellDiv = document.createElement('div');
+                cellDiv.className = 'cell';
+                cellDiv.style.backgroundColor = colors[cell] || '#000000';
+                cellDiv.onmouseover = () => currentHoveredCell = { rowIndex, colIndex, cellDiv };
+                cellDiv.onmouseleave = () => currentHoveredCell = null;
+                grid.appendChild(cellDiv);
+            });
+        });
+
+        updateOutputArray();
+    }
+
+    function updateOutputArray() {
+        const formattedArray = mapArray.map(row => JSON.stringify(row)).join(',\n');
+        document.getElementById('outputArray').value = `[\n${formattedArray}\n]`;
+    }
+
+    document.addEventListener('keydown', (event) => {
+        if (currentHoveredCell && event.key >= '0' && event.key <= '6') {
+            const value = parseInt(event.key);
+            const { rowIndex, colIndex, cellDiv } = currentHoveredCell;
+
+            mapArray[rowIndex][colIndex] = value;
+            cellDiv.style.backgroundColor = colors[value];
+
+            updateOutputArray();
+        }
+    });
+</script>
+
+</body>
+</html>
