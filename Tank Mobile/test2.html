@@ -1,105 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Circular Slider</title>
+    <meta charset="utf-8" />
+    <title>Swiper demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+
     <style>
+        html,
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
-        }
-        .slider {
             position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            height: 100%;
+        }
+
+        body {
+            background: #eee;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
+
+        swiper-container {
             width: 100%;
-            max-width: 400px;
-            height: 200px;
+            height: 100%;
         }
-        .slider-item {
-            position: absolute;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            width: 80px;
-            height: 80px;
-            background-color: #8BC34A;
-            border-radius: 50%;
+
+        swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 16px;
-            font-weight: bold;
-            color: white;
-            opacity: 0.6;
         }
-        .slider-item.active {
-            transform: scale(1.5);
-            opacity: 1;
-            z-index: 10;
-        }
-        .slider-item.left {
-            transform: translateX(-120px) scale(0.8);
-        }
-        .slider-item.right {
-            transform: translateX(120px) scale(0.8);
+
+        swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     </style>
 </head>
+
 <body>
-<div class="slider">
-    <div class="slider-item left">1</div>
-    <div class="slider-item active">2</div>
-    <div class="slider-item right">3</div>
-</div>
 
-<script>
-    const items = document.querySelectorAll('.slider-item');
+<swiper-container class="mySwiper" loop="true" pagination="true" pagination-clickable="true" space-between="30"
+                  slides-per-view="3">
+    <swiper-slide>Slide 1</swiper-slide>
+    <swiper-slide>Slide 2</swiper-slide>
+    <swiper-slide>Slide 3</swiper-slide>
+</swiper-container>
 
-    let activeIndex = 1;
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 
-    function updateSlider() {
-        items.forEach((item, index) => {
-            item.classList.remove('active', 'left', 'right');
-
-            if (index === activeIndex) {
-                item.classList.add('active');
-            } else if (index === (activeIndex - 1 + items.length) % items.length) {
-                item.classList.add('left');
-            } else {
-                item.classList.add('right');
-            }
-        });
-    }
-
-    function swipe(direction) {
-        if (direction === 'left') {
-            activeIndex = (activeIndex + 1) % items.length;
-        } else {
-            activeIndex = (activeIndex - 1 + items.length) % items.length;
-        }
-        updateSlider();
-    }
-
-    document.addEventListener('swiped-left', () => swipe('left'));
-    document.addEventListener('swiped-right', () => swipe('right'));
-
-    updateSlider();
-
-    // For testing with clicks
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') swipe('right');
-        if (e.key === 'ArrowRight') swipe('left');
-    });
-</script>
-
-<!-- Swipe detection library -->
-<script src="https://unpkg.com/@jaames/gesture-events"></script>
 </body>
+
 </html>
