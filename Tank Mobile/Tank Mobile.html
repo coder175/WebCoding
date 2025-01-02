@@ -1295,9 +1295,9 @@
 			left: 10vw;
 			width: calc((23vw + 23vh) / 2);
 			height: calc((23vw + 23vh) / 2);
+			display: none;
 			z-index: 10;
 			background-color: rgba(76, 175, 80, 0.5);
-			border: 0.2vw solid rgba(71, 163, 74, 0.5);
 			border-radius: 50%;
 		}
 
@@ -1309,7 +1309,6 @@
 			bottom: 10vh;
 			z-index: 5;
 			background-color: rgba(229, 57, 53, 0.5);
-			border: 0.2vw solid rgba(227, 40, 35, 0.5);
 			border-radius: 50%;
 		}
 
@@ -1320,28 +1319,6 @@
 
 		div.back {
 			opacity: 0 !important;
-		}
-
-		#onlineJoystickMiddle {
-			position: absolute;
-			bottom: 18.6vh;
-			left: 16.1vw;
-			width: calc((9vw + 9vh) / 2);
-			height: calc((9vw + 9vh) / 2);
-			z-index: 9;
-			background-color: rgba(71, 163, 74, 0.8);
-			border-radius: 50%;
-		}
-
-		#shootingOnlineJoystickMiddle {
-			position: absolute;
-			width: calc((9vw + 9vh) / 2);
-			height: calc((9vw + 9vh) / 2);
-			bottom: 18.6vh;
-			right: 16.1vw;
-			z-index: 4;
-			background-color: rgba(227, 40, 35, 0.5);
-			border-radius: 50%;
 		}
 	</style>
 </head>
@@ -1732,8 +1709,6 @@
 		</div>
 		<div id="tank">
 			<div id="joystickContainer">
-				<div id="onlineJoystickMiddle"></div>
-				<div id="shootingOnlineJoystickMiddle"></div>
 				<div id="onlineJoystick"></div>
 				<div id="shootingOnlineJoystick"></div>
 			</div>
@@ -2238,8 +2213,8 @@
 		let worldY = 0;
 		let vw = window.innerWidth / 100;
 		let vh = window.innerHeight / 100;
-		let normalSpeed = 0.1 * ((vw + vh) / 2) * ZOOM;
-		let slideSpeed = 0.08 * ((vw + vh) / 2) * ZOOM;
+		let normalSpeed = 0.2 * ((vw + vh) / 2) * ZOOM;
+		let slideSpeed = 0.18 * ((vw + vh) / 2) * ZOOM;
 		const control = 0.3;
 
 		let velocityX = 0;
@@ -2323,8 +2298,8 @@
 
 			vw = newVw;
 			vh = newVh;
-			normalSpeed = 0.1 * ((vw + vh) / 2) * ZOOM;
-			slideSpeed = 0.08 * ((vw + vh) / 2) * ZOOM;
+			normalSpeed = 0.2 * ((vw + vh) / 2) * ZOOM;
+			slideSpeed = 0.18 * ((vw + vh) / 2) * ZOOM;
 
 			playerBounds.width = 3 * ((vw + vh) / 2) * ZOOM;
 			playerBounds.height = 3 * ((vw + vh) / 2) * ZOOM;
