@@ -136,7 +136,7 @@
 			width: 100vw;
 			margin: 0;
 			overflow-x: hidden;
-			overflow-y: auto;
+			overflow-y: hidden;
 		}
 
 		/*------------------------------------------------------------------
@@ -742,6 +742,51 @@
 			background: transparent;
 			transform: translate(-50%, -50%);
 			z-index: 2;
+		}
+
+		.slider {
+			z-index: 5;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: absolute;
+			top: 15%;
+			right: -20%;
+			transform: translate(-50%, -50%);
+			width: calc(25vw + 25vh);
+			height: calc(25vw + 25vh);
+			overflow: hidden;
+		}
+		.element-container {
+			position: relative;
+			width: 0;
+			height: 0;
+		}
+		.element {
+			position: absolute;
+			text-align: center;
+			transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+			font-size: 2.5vh;
+			color: white;
+			background: rgba(255, 255, 255, 0.1);
+			border: 0.25vh solid rgba(255, 255, 255, 0.3);
+			border-radius: 1.5vh;
+			padding: 2vh;
+			width: 10vh;
+			height: 10vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.3);
+		}
+		.element.selected.dragging {
+			transform: scale(1.5);
+			background: rgba(255, 255, 255, 0.3);
+			border-color: white;
+			box-shadow: 0 1vh 2vh rgba(255, 255, 255, 0.5);
+		}
+		.element:not(.selected) {
+			opacity: 0.6;
 		}
 
 		.rock {
@@ -1707,6 +1752,15 @@
 			<div id="world"></div>
 			<div id="mainPlayer"></div>
 		</div>
+		<div id="sliderParent">
+			<div class="slider" id="sliderArea">
+				<div class="element-container" id="elementContainer">
+					<div class="element" data-index="0">1</div>
+					<div class="element" data-index="1">2</div>
+					<div class="element" data-index="2">3</div>
+				</div>
+			</div>
+		</div>
 		<div id="tank">
 			<div id="joystickContainer">
 				<div id="onlineJoystick"></div>
@@ -2161,6 +2215,65 @@
 			return updateRotation;
 		}
 	}
+
+
+	const sliderArea = document.getElementById('sliderArea');
+	const elements = document.querySelectorAll('.element');
+	const elementCount = elements.length;
+	let selectedIndex = 0;
+	let startX = 0;
+	let currentX = 0;
+	let isDragging = false;
+	let rotationAngle = 180;
+	const anglePerElement = 360 / elementCount;
+	const radius = (window.innerWidth * 0.5 + window.innerHeight * 0.5) * 0.1;
+	const swipeSensitivity = 0.75;
+
+	function updateSlider() {
+		elements.forEach((element, index) => {
+			const angle = ((index - selectedIndex + elementCount) % elementCount) * anglePerElement + rotationAngle;
+			const radian = (angle * Math.PI) / 180;
+			const x = Math.sin(radian) * radius;
+			const y = Math.cos(radian) * radius * -1;
+			const scale = isDragging && angle % 360 === 0 ? 1.5 : 1;
+			element.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+			element.classList.toggle('selected', scale > 1);
+		});
+	}
+
+	sliderArea.addEventListener('touchstart', (e) => {
+		if (e.touches.length > 1) return;
+		startX = e.touches[0].clientX;
+		currentX = startX;
+		isDragging = true;
+		updateSlider();
+	});
+
+	sliderArea.addEventListener('touchmove', (e) => {
+		if (!isDragging) return;
+		currentX = e.touches[0].clientX;
+		const deltaX = currentX - startX;
+		let newRotation = (deltaX / sliderArea.clientWidth) * 360 / swipeSensitivity;
+		if (Math.abs(newRotation) > anglePerElement) {
+			newRotation = Math.sign(newRotation) * anglePerElement;
+		}
+		rotationAngle = newRotation;
+		updateSlider();
+	});
+
+	sliderArea.addEventListener('touchend', () => {
+		if (!isDragging) return;
+		isDragging = false;
+		const direction = rotationAngle > 0 ? -1 : 1;
+		if (Math.abs(rotationAngle) > anglePerElement / 2) {
+			selectedIndex = (selectedIndex + direction + elementCount) % elementCount;
+		}
+		rotationAngle = 0;
+		updateSlider();
+	});
+
+	// Initialize slider
+	updateSlider();
 
 
 
